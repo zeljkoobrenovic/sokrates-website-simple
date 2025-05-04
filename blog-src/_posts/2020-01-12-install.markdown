@@ -1,0 +1,60 @@
+---
+layout: post
+title:  "Appendix: Installation"
+date:   2020-05-25 19:12:01 +0100
+author: by Željko Obrenović (zeljkoobrenovic.com)
+permalink: install
+icon: install
+excerpt: "You can install and run Sokrates in three ways. First, you can download the Sokrates command-line interface JAR file. Second, you can download the Sokrates Explorer JAR file. Lastly, you can build it from scratch from the Sokrates' GitHub repository."
+---
+
+## Installation: JAR files
+
+### Command Line Interface
+
+COMMAND LINE JAR
+DOWNLOAD: [sokrates-LATEST.jar](https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar) (38 MB)
+
+Simple usage example (to analyze Junit4):
+
+{% highlight bash %}
+git clone https://github.com/junit-team/junit4
+cd junit4
+
+java -jar sokrates-LATEST.jar init
+java -jar sokrates-LATEST.jar generateReports
+
+open _sokrates/reports/html/index.html
+{% endhighlight %}
+
+### Explorer
+
+DOWNLOAD: [sokrates-explorer-0.9.jar](https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-0.9.jar) (78 MB)
+
+NOTE: require JavaFX (download it and install it from openjfx.io)
+
+   java --module-path $JAVAFX_HOME/lib --add-modules=javafx.controls,javafx.web -jar sokrates-explorer-0.9.jar
+
+
+## Source Code
+
+Sokrates is an open-source project, released under the [GNU Affero General Public License v3.0](https://github.com/zeljkoobrenovic/sokrates/blob/master/LICENSE).
+
+To build a project from source code, go to the root of the project, and run the following command:
+<pre>
+mvn clean install
+</pre>
+
+The build will create two jar files:
+
+* the [command line interface JAR](https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar) in the **cli/target** folder
+* the [interactive explorer JAR](https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-0.9.jar) in the **codeexplorer/target** folder
+
+Prerequirements:
+* Java 8+
+* Maven
+
+
+
+
+

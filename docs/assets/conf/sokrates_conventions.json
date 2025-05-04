@@ -1,0 +1,386 @@
+{
+  "extensions": {
+    "onlyInclude": [],
+    "alwaysExclude": []
+  },
+  "maxLineLength": 1000,
+  "ignoreStandardScopingConventions": false,
+  "removeStandardConcerns": false,
+  "ignoredFilesConventions": [
+    {
+      "pathPattern": ".*/prettify[.]js",
+      "contentPattern": "",
+      "exception": false,
+      "note": ""
+    },
+    {
+      "pathPattern": ".*/jboss/jboss\\-eap/standalone/deployments/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": ""
+    },
+    {
+      "pathPattern": ".*/www/html/http/static/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": ""
+    },
+    {
+      "pathPattern": ".*/assets/lib/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Library"
+    },
+    {
+      "pathPattern": ".*/(vuejs|js/lib)/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": ""
+    },
+    {
+      "pathPattern": ".*/ext[-]js/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "ExtJS library"
+    },
+    {
+      "pathPattern": ".*/assets/lib/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Library"
+    },
+    {
+      "pathPattern": ".*/ext[-]all.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "ExtJS library"
+    },
+    {
+      "pathPattern": ".*[-]debug[.]js",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Dev build"
+    },
+    {
+      "pathPattern": ".*/webapp/static/js/lib/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "3rd party JS libraries"
+    },
+    {
+      "pathPattern": ".*/webapp-static/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "3rd party JS libraries"
+    },
+    {
+      "pathPattern": ".*/ThirdParty/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "3rd library libraries"
+    },
+    {
+      "pathPattern": ".*/node[-]binary/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "ExtJS library"
+    },
+    {
+      "pathPattern": ".*/sokrates_conventions[.]json",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Sokrates scoping conventions"
+    },
+    {
+      "pathPattern": ".*[.][0-9]+",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Binary files (e.g. multipart archives)"
+    },
+    {
+      "pathPattern": ".*/sokrates_conventions[.]json",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Sokrates analysis config file"
+    },
+    {
+      "pathPattern": ".*[.]txt",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Text files"
+    },
+    {
+      "pathPattern": ".*/src/autoact-grails-plugins/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Grails plugin files"
+    },
+    {
+      "pathPattern": ".*/require[-]jquery[.]js",
+      "contentPattern": "",
+      "exception": false,
+      "note": "JS library"
+    },
+    {
+      "pathPattern": ".*/less[-]1[.]1[.]5[.]js",
+      "contentPattern": "",
+      "exception": false,
+      "note": "JS library"
+    },
+    {
+      "pathPattern": ".*/webapp/static/extjs/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "JS library"
+    },
+    {
+      "pathPattern": ".*/webapp/resources/js/lib/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "JS library"
+    },
+    {
+      "pathPattern": ".*/js/library/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "JS library"
+    },
+    {
+      "pathPattern": ".*/static/js/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "JS library"
+    },
+    {
+      "pathPattern": ".*/bundle[.]js",
+      "contentPattern": "",
+      "exception": false,
+      "note": "JS library"
+    },
+    {
+      "pathPattern": ".*/(css|scss|jsf)/lib/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Library"
+    },
+    {
+      "pathPattern": ".*/bootstrap[-].*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Library"
+    },
+    {
+      "pathPattern": ".*/mdp[-]price[-]api2/notebooks/.*[.](html)",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Generated HTML"
+    },
+    {
+      "pathPattern": ".*[.]slides[.](html)",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Generated HTML"
+    },
+    {
+      "pathPattern": ".*venv/(lib|lib64)/python.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "3rd party Python libraries"
+    },
+    {
+      "pathPattern": ".*Modules/External/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "External iOS libraries."
+    }
+  ],
+  "testFilesConventions": [
+    {
+      "pathPattern": "",
+      "contentPattern": ".*/simpletest/.*",
+      "exception": false,
+      "note": ""
+    },
+    {
+      "pathPattern": ".*[-]testcontent.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": ""
+    },
+    {
+      "pathPattern": ".*/sites/all/libraries/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": ""
+    },
+    {
+      "pathPattern": ".*/src/it/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Integration tests"
+    },
+    {
+      "pathPattern": ".*/mock[-].*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Mocks"
+    },
+    {
+      "pathPattern": ".*(/|[-])selenium/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Selenium tests"
+    },
+    {
+      "pathPattern": ".*UnitTests/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Tests"
+    },
+    {
+      "pathPattern": ".*TestUtils/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Tests"
+    }
+  ],
+  "generatedFilesConventions": [
+    {
+      "pathPattern": ".*/static-frontend/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Static frontend files"
+    }
+  ],
+  "buildAndDeploymentFilesConventions": [
+    {
+      "pathPattern": ".*/src/main/webapp/resources/js/dev/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "JS-Dev files"
+    },
+    {
+      "pathPattern": ".*/node[-]dev/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "JS-Dev files"
+    },
+    {
+      "pathPattern": ".*/[.]mvn/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": "JS-Dev files"
+    }
+  ],
+  "otherFilesConventions": [
+    {
+      "pathPattern": ".*/assets/scss/bootstrap/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": ""
+    },
+    {
+      "pathPattern": ".*/sites/all/themes/(ember|bootstrap)/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": ""
+    },
+    {
+      "pathPattern": ".*/sites/all/libraries/.*",
+      "contentPattern": "",
+      "exception": false,
+      "note": ""
+    },
+    {
+      "pathPattern": ".*[.](xml|xsd|robot|sql|pgsql|dashboard|profile|ipynb|raml|avsc|al)",
+      "contentPattern": "",
+      "exception": false,
+      "note": "Configuration and data files"
+    }
+  ],
+  "concerns": [
+  ],
+  "ignoreContributors": [
+    "commited[-]by[-]bot.*",
+    "jenkins.*",
+    "root[@].*",
+    "bot[@].*",
+    "noreply[@].*",
+    "idontknow[@].*",
+    ".*GITHUBBOT.*",
+    ".*\\[bot\\].*",
+    "[=][@].*",
+    ".*[.]github[@].*",
+    ".*[-]bot[@].*",
+    "None",
+    "git[@].*", 
+    "github[@].*", 
+    ".*[.]git[-].*" , 
+    ".*[.]git[@].*",
+    "clubify[@].*",
+    "travis.*"
+  ],
+  "analysis": {
+    "skipDuplication": false,
+    "skipDependencies": true,
+    "cacheSourceFiles": false,
+    "locDuplicationThreshold": 900000,
+    "maxLineLength": 1000,
+    "maxTopListSize": 20,
+    "analyzerOverrides": [],
+    "customHtmlReportHeaderFragment" : "<!-- Global site tag (gtag.js) - Google Analytics -->\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-129891352-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n\n    function gtag() {\n      dataLayer.push(arguments);\n    }\n\n    gtag('js', new Date());\n    gtag('config', 'UA-129891352-1');\n  </script>"
+  },
+    "fileHistoryAnalysis" : {
+    "importPath" : "../git-history.txt",
+    "ignoreContributors" : [ ],
+    "transformContributorEmails" : [  ]
+  },
+  "componentsFolderDepth": 1,
+  "minComponentsCount": 6,
+  "logoLink": "data:image/png;base64,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",
+  "ignoreStandardControls": true,
+  "goalsAndControls": [
+    {
+      "goal": "Keep the system simple and easy to change",
+      "description": "Aim at keeping the system size modest (less than 200,000 LOC is good), duplication low (less than 5% is good), files small (no files longer than 1000 LOC is good), and units simple (no units with more than 25 decision points is good).",
+      "controls": [
+        {
+          "metric": "LINES_OF_CODE_MAIN",
+          "description": "Total number of lines of main code",
+          "desiredRange": {
+            "min": "0",
+            "max": "200000",
+            "tolerance": "50000"
+          }
+        },
+        {
+          "metric": "DUPLICATION_PERCENTAGE",
+          "description": "System duplication",
+          "desiredRange": {
+            "min": "0",
+            "max": "5",
+            "tolerance": "5"
+          }
+        },
+        {
+          "metric": "VERY_HIGH_RISK_FILE_SIZE_COUNT",
+          "description": "The number of very large files",
+          "desiredRange": {
+            "min": "0",
+            "max": "0",
+            "tolerance": "5"
+          }
+        },
+        {
+          "metric": "CONDITIONAL_COMPLEXITY_VERY_HIGH_RISK_COUNT",
+          "description": "Number of very complex units",
+          "desiredRange": {
+            "min": "0",
+            "max": "0",
+            "tolerance": "5"
+          }
+        }
+      ]
+    }
+  ]
+}

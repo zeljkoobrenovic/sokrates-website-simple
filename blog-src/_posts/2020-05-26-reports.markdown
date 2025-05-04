@@ -1,0 +1,210 @@
+---
+layout: post
+title:  "Begin With the End in Mind: Sokrates Reports"
+date:   2020-05-25 19:12:01 +0100
+author: by Željko Obrenović (zeljkoobrenovic.com)
+permalink: reports
+icon: reports
+excerpt: "Before we zoom into the details of Sokrates, let's first see what insights Sokrates can give you. Sokrates makes visible the size, complexity, and coupling of software. More specifically, Sokrates generates several views on your source code, describing the overall source code characteristics, duplication, components, dependencies, conditional complexity, etc."
+---
+
+Before we zoom into the details of Sokrates, let's first see what insights Sokrates can give you. Sokrates makes visible the size, complexity, and coupling of software. More specifically, Sokrates generates several views on your source code, describing the overall source code characteristics, duplication, components, dependencies, conditional complexity, etc.
+
+Sokrates' reports are the result of Sokrates' analyses.  The reports shed light on your source code from different angles, answering different sets of questions. Sokrates generates the following reports:
+* source code overview report,
+* duplication report,
+* logical decomposition report,
+* concerns report
+* file size report,
+* file change history report,
+* unit size report
+* conditional complexity report,
+* metrics report,
+* trends report,
+* landscape report.
+
+<br/>
+### Source Code Overview Report
+
+![](assets/images/icons/overview.svg)
+
+The Sokrates' Overview report presents the basic facts about your source code and Sokrates analysis, answering the following two questions:
+
+* Which files are includes in and excluded from the analysis?
+* How are files classified (main, test, build, generated...)?
+
+To learn more:
+* See an [example of a Sokrates Overview Report](https://d3axxy9bcycpv7.cloudfront.net/java/junit4/reports/html/SourceCodeOverview.html).
+* Learn more about [how Sokrates scopes the files](scoping).
+
+
+<br/>
+### Duplication Report
+
+![](assets/images/icons/duplication.svg)
+
+The Sokrates duplication report presents the duplicates in your code, answering the following questions:
+* How much duplication is there overall?
+* How is duplication distributed per file type?
+* How is duplication distributed per logical decomposition (i.e., per component)?
+* How much of duplication is there between the components?
+* What are the biggest duplicates?
+* What are the most frequently duplicated pieces of code?
+
+To learn more:
+* See an [example of a Sokrates Duplication Report](https://d3axxy9bcycpv7.cloudfront.net/java/junit4/reports/html/Duplication.html).
+* Learn more about [how Sokrates calculates duplication](duplication).
+
+
+<br/>
+### Components and Dependencies Report
+
+![](assets/images/icons/code_organization.svg)
+
+Logical decomposition is a representation of the source code organization, where each file needs to end up in only one logical component. The Sokrates visualizes the components and dependencies among them, answering the following questions:
+
+* What logical decompositions have you defined?
+* How many components are they in each logical decomposition?
+* How big are the components? What are the most prominent or smallest components?
+* What are the dependencies among the components? Where are they?
+
+To learn more:
+* See an example of a [Sokrates Components and Dependencies Report](https://d3axxy9bcycpv7.cloudfront.net/java/junit4/reports/html/Components.html).
+* Learn more about [how Sokrates analyzes logical decompositions](logical-decomposition).
+
+
+<br/>
+### Concerns Report
+
+![](assets/images/icons/concerns.svg)
+
+Concerns are any aspects of a software system that can be identified thourgh patterns in code.
+
+Sokrates analyses concerns, answering the following questions:
+* How many concerns have you defined?
+* How many files are in each concern? How many lines of code?
+* Is there an overlap between concerns (the same file being in multiple concerns)? How much of the overlay is there (number of files, lines of code)?
+
+To learn more:
+* See an example of a [Sokrates Concerns Report](https://d3axxy9bcycpv7.cloudfront.net/java/sokrates/reports/html/Concerns.html).
+* Learn more about [how Sokrates analyzes concerns](concerns).
+
+
+
+<br/>
+### File Size Report
+
+![](assets/images/icons/file_size.svg)
+
+Sokrates measures the file size in lines of code, excluding empty lines and comments. Sokrates then classifies files in five categories based on their size (lines of code): 1-100 (very small files), 101-200 (small files), 200-500 (medium size files), 501-1000 (long files), 1001+ (very long files). Sokrates report then answers the following questions:
+* What is the overall file size distributions?
+* What is the file size distributions per file type?
+* What is the file size distributions per component?
+* What are the longest files?
+
+To learn more:
+* See an example of a [Sokrates File Size report](https://d3axxy9bcycpv7.cloudfront.net/java/junit4/reports/html/FileSize.html).
+* Learn more about [how Sokrates analyzes file size](file-size).
+
+
+<br/>
+### File History Report
+
+![](assets/images/icons/file_history.svg)
+
+Sokrates looks at the history of file changes to understand the frequency of changes, age of files, and recency. Sokrates report then answers the following questions:
+* What is the overall distribution of frequency of changes, file age, and recent updates?
+* What is the distribution of frequency of changes, file age, and recent updates per file type?
+* What is the distribution of frequency of changes, file age, and recent updates per component?
+* What are the most frequently changed files?
+* What are the oldest files?
+* What are the most recent changed files?
+* What files have not been changed files?
+
+To learn more:
+* See an example of a [Sokrates File History report](https://d3axxy9bcycpv7.cloudfront.net/java/junit4/reports/html/FileHistory.html).
+* Learn more about [how Sokrates analyzes file history](history).
+
+
+<br/>
+### Unit Size Report
+
+![](assets/images/icons/units.svg)
+
+Sokrates measures the unit size in lines of code, excluding empty lines and comments. Sokrates classifies units in five categories based on their size (lines of code): 1-10 (very small units), 11-20 (small units), 20-50 (medium size units), 51-100 (long units), 101+ (very long units). Sokrates report then answers the following questions:
+* What is the overall unit size distributions?
+* What is the unit size distributions per file type?
+* What is the unit size distributions per component?
+* What are the longest units?
+
+To learn more:
+* See an example of a [Sokrates Unit Size report](https://d3axxy9bcycpv7.cloudfront.net/java/junit4/reports/html/UnitSize.html).
+* Learn more about [how Sokrates analyzes units](units).
+
+
+<br/>
+### Conditional Complexity Report
+
+![](assets/images/icons/conditional.svg)
+
+Conditional complexity (also known as cyclomatic complexity) is a software metric (measurement) used to indicate the program's complexity. It is a quantitative measure of the number of linearly independent paths through a program's source code (so called McCabe index). Sokrates measures conditional complexity at the unit level (e.g., methods, functions, procedures), classifying units in five categories based on the measured McCabe index: 1-5 (simple units), 6-10 (medium complex units), 11-25 (complex units), 26+ (very complex units). Sokrates report then answers the following questions:
+* What is the overall conditional complexity distribution?
+* What is the conditional complexity distribution per file type?
+* What is the conditional complexity distribution per component?
+* What are the units with the highest conditional complexity?
+
+To learn more:
+* See an example of a [Sokrates Conditional Complexity report](https://d3axxy9bcycpv7.cloudfront.net/java/junit4/reports/html/ConditionalComplexity.html).
+* Learn more about [how Sokrates analyzes units](units).
+
+
+<br/>
+### Detailed Metrics Report
+
+![](assets/images/icons/metrics.svg)
+
+The metrics table is a list of name-value pairs, a linearized list of all Sokrates aggregated measurements. A Sokrates' metrics report lists all metrics and their current values.
+
+A list of all measurements.
+
+To learn more:
+* See an example of a [Sokrates Metrics report](https://d3axxy9bcycpv7.cloudfront.net/java/junit4/reports/html/Metrics.html).
+* Learn more about [how Sokrates works with metrics](metrics).
+
+
+<br/>
+### Trend Report
+
+![](assets/images/icons/trend.svg)
+
+The trend report shows the difference in metrics between the latest measurements and previous reference measurements.
+
+To learn more:
+* See an [example of a Sokrates Trend report](https://d3axxy9bcycpv7.cloudfront.net/java/junit4/reports/html/Trend.html).
+* Learn more about [how Sokrates analyzes trends](units).
+
+
+
+<br/>
+### Goals & Controls Report
+
+![](assets/images/icons/goal.svg)
+
+In Sokrates, you can define traffic lights like controls. For each of the metrics that Sokrates measures, you can specify a control with the threshold and tolerance. Sokrates will then generate a report labeling each control as OK (green), tolerant (yellow), or failed (red).
+
+To learn more:
+* See an example of a [Sokrates Controls report](https://d3axxy9bcycpv7.cloudfront.net/java/junit5/reports/html/Controls.html).
+* Learn more about [how Sokrates analyzes goals and controls](controls).
+
+
+<br/>
+## Landscape Report
+
+![](assets/images/icons/landscape.png)
+
+
+The Socrates landscape analysis a utility that aggregates and indexes the results of Sokrates analyses, providing a centralized and uniform on the results of multiple Sokrates projects. The report is a "landscape" because it draws a map of all projects that you want to view from one place.
+
+To learn more:
+* See an example of a [Sokrates Landscape report](https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html).
+* Learn more about [how Sokrates creates the landscape report](landscape).

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Scoping | Examined Line: The Art of Source Code Analysis with Sokrates</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Scoping" />
+<meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Scoping defines which parts of source code you want to analyze in detail and which parts to ignore. The code that developers wrote manually is the most important. It contains critical content for understanding the system’s unique structure, logic, and team’s design decisions." />
+<meta property="og:description" content="Scoping defines which parts of source code you want to analyze in detail and which parts to ignore. The code that developers wrote manually is the most important. It contains critical content for understanding the system’s unique structure, logic, and team’s design decisions." />
+<link rel="canonical" href="/book/scoping" />
+<meta property="og:url" content="/book/scoping" />
+<meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/scoping","headline":"Scoping","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/scoping"},"description":"Scoping defines which parts of source code you want to analyze in detail and which parts to ignore. The code that developers wrote manually is the most important. It contains critical content for understanding the system’s unique structure, logic, and team’s design decisions.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/book/">Examined Line: The Art of Source Code Analysis with Sokrates</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-129891352-1');
+</script>
+
+
+<style>
+
+    #markdown-toc::before {
+        content: "Contents";
+        font-weight: bold;
+        font-size: 110%;
+        margin-left: 176px;
+        padding-bottom: 30px;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #markdown-toc ul {
+        list-style: decimal;
+    }
+
+    #markdown-toc {
+        border: 1px solid #aaa;
+        padding: 1.5em;
+        padding-left: 2.5em;
+        list-style: decimal;
+        display: inline-block;
+        margin: 0;
+    }
+</style>
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Scoping</h1>
+        <p class="post-meta">
+            <time class="dt-published" datetime="2020-05-25T20:12:01+02:00" itemprop="datePublished">May 25, 2020
+            </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
+                                                                                          itemprop="name">by Željko Obrenović (zeljkoobrenovic.com)</span></span></p>
+    </header>
+
+    <div class="post-content e-content" itemprop="articleBody">
+        <p><em>“How many things can I do without!”</em> ― Socrates, Momentos</p>
+
+<p>When analyzing source code, you need to be strict in what you want to analyze and reject the rest. Otherwise, you will also end up publishing big, complex, and useless reports. The code that developers wrote manually is the most important. It contains critical content for understanding the system’s unique structure, logic, and team’s design decisions. While there are exceptions, another code and files are usually irrelevant for understanding the system’s unique aspects. Sokrates performs the scoping in two steps. First, it conducts a broad relevance scoping, based on the source code file extensions and a set of configurable ignore patterns. Then it zooms in the filtered files and classifies it into main ones and secondary ones.</p>
+
+<p>Like a journal editor, when analyzing source code, you need to be strict in what you want to analyze and reject the rest. Otherwise, you will also end up publishing big, complex, and useless reports.</p>
+
+<p>When I examine a software system, the code that developers wrote manually is the most important for me. It contains critical content for understanding the system’s unique structure, logic, and team’s design decisions. While there are exceptions, another code and files are usually irrelevant for understanding the system’s unique aspects.</p>
+
+<p>Sokrates performs the scoping in two steps:</p>
+
+<ul>
+  <li>First, it conducts a broad relevance scoping, based on the source code file extensions and a set of configurable ignore patterns.</li>
+  <li>Then it zooms in the filtered files and classifies it into main ones and secondary ones.</li>
+</ul>
+
+<h3 id="broad-relevance-scoping">Broad Relevance Scoping</h3>
+
+<p>The first use of scoping in Sokrates is to answer the questions: what is relevant for us? And what we can safely ignore?</p>
+
+<p>In the context of the source code analysis defining appropriate scope is crucial but frequently surprisingly tricky to answer. The question of relevance is essential because your source code resides within complex file structures, mixed with configuration files and third-party code. Developers working on a project wrote some of these files. But other files may be boilerplate configuration created by the tools you use, and you may not even know that these files exist. Some programs, even without your knowledge, may generate part of a codebase. And in big projects, there may be files that no one knows why and how they ended up there. And no one dares to touch. Software project folders also contain binary data, such as images, or compiled artifacts.</p>
+
+<p>Sokrates performs such scoping based on two input parameters:</p>
+
+<ul>
+  <li>A list of file extensions that you want to include in your analysis. Sokrates “whitelists” extensions that are relevant, and ignores all others. In this way, Sokrates eliminates irrelevant binary and other non-textual files from the analysis scope. Sokrates provides a list of ignored files that you can use to double-check the scope.</li>
+  <li>A list of ignoring expressions to further clean up the files with relevant extensions. In this way, you can ignore third-party code, generated files, test data, or other artifacts that may be needed to build and ship your product, but you do not maintain manually.</li>
+</ul>
+
+<p>The following image illustrates the process of broad relevance scoping:</p>
+
+<p><img src="assets/images/sokrates/scoping-broad.png" alt="" />
+<em><strong>Figure 1</strong>: Sokrates performs a broad relevance scoping in two steps. First, Sokrates filters out files with irrelevant extensions, based on ‘whitelisted’ relevant extensions. Then, Sokrates performs additional filtering based on a set of ignoring rules.”</em></p>
+
+<p>The following fragment illustrates a configuration of Sokrates broad scoping rules:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+   </span><span class="nl">"extensions"</span><span class="p">:[</span><span class="w">
+      </span><span class="s2">"java"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"html"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"css"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"js"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"xml"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"json"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"md"</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nl">"ignore"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/node_modules/.*"</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">"npm 3rd party libraries"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>Sokrates’ relevance scoping is similar to the ignore rules that version control systems (e.g., Git, SVN) use to prevent checking-in of irrelevant content. In general, a good practice is that a version control system should contain only manually created and edited files. It should not include the data that can be automatically created or downloaded during a build process (e.g., third-party libraries, or generated items).</p>
+
+<p>There are many reasons why you shall use a version control system. But for the analysis of source code, one key benefit is that it usually contains only or mainly the relevant files. Of course, a version control system cannot enforce the prevention of checking in of unnecessary files. I have frequently found lots of data that should not be there, in one case, including gigabytes of videos from a company social activities. So even if you start your analysis from code in a version control system, you may still need to exclude some files as irrelevant for an examination.</p>
+
+<p>After you have done this broad scoping, Sokrates has a list of all relevant files. This list serves as an input for the next phase of scoping: a classification of filtered files into primary and secondary categories.</p>
+
+<h3 id="analytical-focus-scoping">Analytical Focus Scoping</h3>
+
+<p>A “scope” is an even more interesting word as instrument names frequently include “scope” as a suffix. Think about a telescope, microscope, endoscope. My favorite word in this category is a macroscope, which I first encountered while reading Katy Bonner’s article on building tools that promote a “vision  of the whole.”</p>
+
+<p>Sokrates is a type of instrument for inspecting source code, a sort of “codoscope.” Like with any other instrument, you get the best results if you focus on some parts.</p>
+
+<p>For analysis purposes, Sokrates separate files in scope into several categories: main, test, generated, deployment and build, and other. The main scope is primary. It is analyzed in detail. Other scopes are secondary, included in the overview reports context, but not analyzed in depth.</p>
+
+<p><img src="assets/images/sokrates/scoping-classification.png" alt="" />
+<em><strong>Figure 2:</strong> For analysis purposes, Sokrates separate files in scope into several categories: primary or main code and secondary code (test, generated, deployment and build, and other).”</em></p>
+
+<p>The main category contains all manually created source code files that define the logic and structure of the system running in production. Sokrates uses the main files as input for other analyses: logical decomposition, concerns, duplication, file size, unit size, and cyclomatic complexity.</p>
+
+<p>Test source code files are used only for testing of the product. You usually do not deploy these files to production.</p>
+
+<p>Build and deployment source code contain data and logic needed to run the build and deployment process.</p>
+
+<p>Generated source code files are automatically generated files that developers have not changed manually after generation.</p>
+
+<p>Sokrates classifies source code files into primary and scondary scopes based on classification rules. The following fragment illustrates a configuration of Sokrates classification rules:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+   </span><span class="nl">"main"</span><span class="p">:{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"main"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nl">"test"</span><span class="p">:{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/src/test/.*"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">"Test files"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nl">"generated"</span><span class="p">:{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"generated"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[ ]*//.*THIS IS (A )?GENERATED FILE.*"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"include"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nl">"buildAndDeployment"</span><span class="p">:{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"build and deployment"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/pom[.]xml"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">"Maven configuration"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/package[.]json"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">"npm configuration"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nl">"other"</span><span class="p">:{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"other"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/[.]md"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">"Development documentation"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>You can play with the scoping. If you want to get the detailed analysis of test code, for instance, you can scope test files as your main code.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+   </span><span class="nl">"main"</span><span class="p">:{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"main"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/src/test/.*"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<h3 id="automatic-scoping">Automatic Scoping</h3>
+
+<p>Sokrates implements the init command, which scopes the system as much as possible automatically, based on standard conventions for programming languages and frameworks. Sokrates uses the several hundreds of such scoping conventions (for details, see <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/scoping/ScopingConventions.java">the ScopingConventions.java file</a> and (ExtensionGroupExtractor.java)[https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/ExtensionGroupExtractor.java] in the Sokrates code repository).</p>
+
+<p>If you know other conventions, please let me know. Or better, change the ScopingConventions.java life, and send me a pull request.</p>
+
+<h3 id="scoping-as-a-form-of-analysis">Scoping As a Form of Analysis</h3>
+
+<p>Scoping in Sokrates is usually a preparation for follow up analysis. Such preparation ensures that we do not analyze irrelevant content, as well as that we properly separate primary from secondary code.</p>
+
+<p>But scoping can sometimes offer a surprisingly deep level of insights about a codebase, even without any additional analyses. These are some of the questions that I have asked in my projects with often quite insightful answer:</p>
+
+<ul>
+  <li>Why do you have so little test code?</li>
+  <li>Why do you keep generated code with the rest of the code?</li>
+  <li>Why are 3rd party libraries in your code folder? Have you manually changed these libraries?</li>
+  <li>Why do you have so much of style (CSS) code, compared to HTML and Javascript code?</li>
+</ul>
+
+<p>When it comes to knowing your code, understanding the scope of your codebase is crucial.</p>
+
+    </div><a class="u-url" href="/book/scoping" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/book/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Examined Line: The Art of Source Code Analysis with Sokrates</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Examined Line: The Art of Source Code Analysis with Sokrates</li><li><a class="u-email" href="mailto:zeljko.obren@gmail.com">zeljko.obren@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.linkedin.com/in/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.twitter.com/zeljko_obren"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zeljko_obren</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A collection of articles on source code analysis with Sokrates.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

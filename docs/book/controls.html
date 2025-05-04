@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Controls | Examined Line: The Art of Source Code Analysis with Sokrates</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Controls" />
+<meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In Sokrates, you can define traffic lights like controls. For each of the metrics that Sokrates measures, you can specify a monitor with the threshold and tolerance. Sokrates will then generate a report labeling each control with one of the following states. OK (green) means that the measured value is below the threshold. Tolerant (yellow) means that the measured value is above the threshold but within the tolerance range. Failed (red) means that the measured value is above the threshold and the tolerance level." />
+<meta property="og:description" content="In Sokrates, you can define traffic lights like controls. For each of the metrics that Sokrates measures, you can specify a monitor with the threshold and tolerance. Sokrates will then generate a report labeling each control with one of the following states. OK (green) means that the measured value is below the threshold. Tolerant (yellow) means that the measured value is above the threshold but within the tolerance range. Failed (red) means that the measured value is above the threshold and the tolerance level." />
+<link rel="canonical" href="/book/controls" />
+<meta property="og:url" content="/book/controls" />
+<meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/controls","headline":"Controls","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/controls"},"description":"In Sokrates, you can define traffic lights like controls. For each of the metrics that Sokrates measures, you can specify a monitor with the threshold and tolerance. Sokrates will then generate a report labeling each control with one of the following states. OK (green) means that the measured value is below the threshold. Tolerant (yellow) means that the measured value is above the threshold but within the tolerance range. Failed (red) means that the measured value is above the threshold and the tolerance level.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/book/">Examined Line: The Art of Source Code Analysis with Sokrates</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-129891352-1');
+</script>
+
+
+<style>
+
+    #markdown-toc::before {
+        content: "Contents";
+        font-weight: bold;
+        font-size: 110%;
+        margin-left: 176px;
+        padding-bottom: 30px;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #markdown-toc ul {
+        list-style: decimal;
+    }
+
+    #markdown-toc {
+        border: 1px solid #aaa;
+        padding: 1.5em;
+        padding-left: 2.5em;
+        list-style: decimal;
+        display: inline-block;
+        margin: 0;
+    }
+</style>
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Controls</h1>
+        <p class="post-meta">
+            <time class="dt-published" datetime="2020-05-25T20:12:01+02:00" itemprop="datePublished">May 25, 2020
+            </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
+                                                                                          itemprop="name">by Željko Obrenović (zeljkoobrenovic.com)</span></span></p>
+    </header>
+
+    <div class="post-content e-content" itemprop="articleBody">
+        <p>In Sokrates, you can define traffic lights like controls. For each of the metrics that Sokrates measures, you can specify a control with the threshold and tolerance. Sokrates will then generate a report labeling each control with one of the following states:</p>
+<ul>
+  <li>OK (green) the measured value is below the threshold</li>
+  <li>tolerant (yellow) the measured value is above the threshold but within the tolerance range</li>
+  <li>failed (red), the measured value is above the threshold and the tolerance level.</li>
+</ul>
+
+<p><img src="assets/images/sokrates/usage-goals.png" alt="" /></p>
+
+<p><strong>Figure 1:</strong> <em>The goals-and-controls mode, a simplified analyze-and-reflect mode, where you can replace the reflect part with a set of clearly defined traffic lights like controls. For each of the metrics that Sokrates measures, you can specify a control with the threshold and tolerance. And then react when the measurements are out of safe range.</em></p>
+
+<p>For instance, let’s assume that we have defined a control for duplication, setting the threshold to 5% and the tolerance level to 2%. If the measured duplication level is 4%, Sokrotes will label the control as OK (green). For the measured duplication level of 8%, Sokrates will label the control as failed (red). If the measured duplication is 6%, Sokrates will mark the controls as tolerant (yellow).</p>
+
+<h3 id="configuring-controls">Configuring Controls</h3>
+
+<p>You configure controls as a part of a Sokrates <a href="configuration">JSON configuration file</a>, as a part of the goalsAndControls section. You can define multiple goals, each associated with one or more controls.</p>
+
+<p>The following example code fragment is taken from the <a href="">JUnit5 Sokrates configuration file</a>:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="nl">"goalsAndControls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"goal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Keep the system simple and easy to change"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aim at keeping the system size modest (less than 200,000 LOC is good), duplication low (less than 5% is good), files small (no files longer than 1000 LOC is good), and units simple (no units with more than 25 decision points is good)."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"controls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LINES_OF_CODE_MAIN"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total number of lines of main code"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"desiredRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tolerance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20000"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DUPLICATION_PERCENTAGE"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System duplication"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"desiredRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tolerance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NUMBER_OF_FILES_1001_PLUS"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The number of very large files"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"desiredRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tolerance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONDITIONAL_COMPLEXITY_DISTRIBUTION_26_PLUS_COUNT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Number of very complex units"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"desiredRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tolerance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p><strong>Figure 2:</strong> <em>A fragment of a Sokrates configuration file describing the controls.</em></p>
+
+<h3 id="controls-report">Controls Report</h3>
+
+<p>Based on the configured values, the Sokrates will generate an HTML report, as well as the text file with the analysis results (by default stored in “_sokrates/reports/data/text/controls.txt”).</p>
+
+<p>The example of a Sokrates controls HTML report you can <a href="https://d3axxy9bcycpv7.cloudfront.net/java/junit5/reports/html/Controls.html">find here</a>.</p>
+
+<p><img src="assets/images/sokrates/ceontrol-report.png" alt="" /></p>
+
+<p><strong>Figure 3:</strong> <em>A screenshot from a Sokrates controls report. For each control metric, the measured value is compared with a defined range and tolerance.</em></p>
+
+<p>The equivalent text data file you can <a href="https://d3axxy9bcycpv7.cloudfront.net/java/junit5/reports/data/text/controls.txt">find here</a>.</p>
+
+<figure class="highlight"><pre><code class="language-txt" data-lang="txt">goal: Keep the system simple and easy to change
+control metric: LINES_OF_CODE_MAIN
+status: OK
+desired range: [0 - 200000] ±20000
+value: 24088
+description: Total number of lines of main code
+
+goal: Keep the system simple and easy to change
+control metric: DUPLICATION_PERCENTAGE
+status: FAILED
+desired range: [0 - 5] ±1
+value: 10.077475219323231
+description: System duplication
+
+goal: Keep the system simple and easy to change
+control metric: NUMBER_OF_FILES_1001_PLUS
+status: OK
+desired range: [0 - 0] ±1
+value: 0
+description: The number of very large files
+
+goal: Keep the system simple and easy to change
+control metric: CONDITIONAL_COMPLEXITY_DISTRIBUTION_26_PLUS_COUNT
+status: OK
+desired range: [0 - 0] ±1
+value: 0
+description: Number of very complex units</code></pre></figure>
+
+<p><strong>Figure 4:</strong> <em>A content of a textual data file about controls that Sokrates export.</em></p>
+
+
+    </div><a class="u-url" href="/book/controls" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/book/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Examined Line: The Art of Source Code Analysis with Sokrates</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Examined Line: The Art of Source Code Analysis with Sokrates</li><li><a class="u-email" href="mailto:zeljko.obren@gmail.com">zeljko.obren@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.linkedin.com/in/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.twitter.com/zeljko_obren"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zeljko_obren</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A collection of articles on source code analysis with Sokrates.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

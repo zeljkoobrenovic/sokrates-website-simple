@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Sokrates Analysis Overview | Examined Line: The Art of Source Code Analysis with Sokrates</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Sokrates Analysis Overview" />
+<meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Sokrates processes source code in multiple stages, some of which are optional. The analysis starts with scoping, continuing through an examination of individual files and units, ending with an aggregation of results and export of reports." />
+<meta property="og:description" content="Sokrates processes source code in multiple stages, some of which are optional. The analysis starts with scoping, continuing through an examination of individual files and units, ending with an aggregation of results and export of reports." />
+<link rel="canonical" href="/book/processing" />
+<meta property="og:url" content="/book/processing" />
+<meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/processing","headline":"Sokrates Analysis Overview","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/processing"},"description":"Sokrates processes source code in multiple stages, some of which are optional. The analysis starts with scoping, continuing through an examination of individual files and units, ending with an aggregation of results and export of reports.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/book/">Examined Line: The Art of Source Code Analysis with Sokrates</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-129891352-1');
+</script>
+
+
+<style>
+
+    #markdown-toc::before {
+        content: "Contents";
+        font-weight: bold;
+        font-size: 110%;
+        margin-left: 176px;
+        padding-bottom: 30px;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #markdown-toc ul {
+        list-style: decimal;
+    }
+
+    #markdown-toc {
+        border: 1px solid #aaa;
+        padding: 1.5em;
+        padding-left: 2.5em;
+        list-style: decimal;
+        display: inline-block;
+        margin: 0;
+    }
+</style>
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Sokrates Analysis Overview</h1>
+        <p class="post-meta">
+            <time class="dt-published" datetime="2020-05-25T20:12:01+02:00" itemprop="datePublished">May 25, 2020
+            </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
+                                                                                          itemprop="name">by Željko Obrenović (zeljkoobrenovic.com)</span></span></p>
+    </header>
+
+    <div class="post-content e-content" itemprop="articleBody">
+        <p><em>“Sir Francis Bacon told a story, perhaps apocryphal, that illustrated just how empiricism was lost during the Middle Ages. The story was that a meeting of monks was taking place and the monks were <strong>hotly debating the issue of how many teeth were in the mouth of a horse.</strong> The problem was that they could not find the answer anywhere in Aristotle’s work. Then, a young monk, perhaps at his first such meeting, timidly suggested that, because they had all come to the meeting on horseback, that <strong>one way to get the answer would be simply to go outside and count.</strong> Bacon went on to say that the young monk was expelled from the meeting!”</em></p>
+
+<p>In my career as a developer, architect, and analyst, I was frequently thinking about the anecdote from Sir Francis Bacon. Many discussions on software engineering are opinion-driven; while often answers are there in source code or other data, just someone has to look at the facts. And frequently, you only need to count things, without sophisticated statistical or machine-learning processing.</p>
+
+<p>Sokrates aims at helping you reliably and efficiently get the basic data about your source code. Sokrates analyses are not extremely complex. In essence, Sokrates splits your code in small-block and counts and aggregates and connects constructs found in the code. In this section, I present the overview of Sokrates analysis, and in the follow-up sections, I describe each of these stages in more detail.</p>
+
+<h3 id="analysis-stages">Analysis Stages</h3>
+
+<p>Sokrates analysis approach consists of the following stages:</p>
+
+<ul>
+  <li>Scoping,</li>
+  <li>Classifying files (logical decomposition, and concerns),</li>
+  <li>Enriching the file data with history information (optional)</li>
+  <li>Code cleaning,</li>
+  <li>File-level measurements,</li>
+  <li>Unit-level measurements,</li>
+  <li>Complex measurements (duplication and dependencies),</li>
+  <li>Aggregation of measurements,</li>
+  <li>Trend analysis (optional), and</li>
+  <li>Export of data to reports, explorers, and data files.</li>
+</ul>
+
+<p><img src="assets/images/sokrates/analytics-processing-details.png" alt="" /></p>
+
+<p><em><strong>Figure 1:</strong> The overview of Sokrates processing. Sokrates processes source code in multiple stages, some of which are optional. The analysis starts with scoping, continuing through an examination of individual files and units, ending with an aggregation of results and export of reports.</em></p>
+
+<h3 id="scoping">Scoping</h3>
+
+<p>Firstly Sokrates scopes the project files ignoring irrelevant files and classifying the relevant files into primary and secondary ones.</p>
+
+<p>To learn more:</p>
+<ul>
+  <li><a href="scoping">Scoping</a></li>
+</ul>
+
+<h3 id="classifying-files">Classifying Files</h3>
+
+<p>To structure analysis, reporting, and explorations, Sokrates creates multiples views on the source code: logical decompositions and concerns. Each view is a list of files, with a name and with potential relations to other views.</p>
+
+<p>To learn more:</p>
+<ul>
+  <li><a href="logical-decomposition">Logical Decompositions</a></li>
+  <li><a href="concerns">concerns</a></li>
+</ul>
+
+<h3 id="optionally-enriching-the-file-data-with-history-information">Optionally Enriching the File Data with History Information</h3>
+
+<p>Optionally, you can import data about file change histories (dates at which developers have updated each file), and associated them with each file.</p>
+
+<p>To learn more:</p>
+<ul>
+  <li><a href="history">File-Level Measurements: History</a></li>
+</ul>
+
+<h3 id="code-cleaning">Code Cleaning</h3>
+
+<p>To simplify analyses and improve their reliability Sokrates, remove some pieces of code prior to measurements. Such code cleaning includes removing comments, empty lines, and long string constants.</p>
+
+<p>To learn more:</p>
+<ul>
+  <li><a href="cleaning">Code Cleaning</a></li>
+</ul>
+
+<h3 id="file-level-analyses">File-Level Analyses</h3>
+
+<p>For each file, Sokrates measurements their size and analyses their change history.</p>
+
+<p>To learn more:</p>
+<ul>
+  <li><a href="file-size">File-Level Measurements: File Size</a></li>
+  <li><a href="history">File-Level Measurements: History</a></li>
+</ul>
+
+<h3 id="unit-level-analyses">Unit-Level Analyses</h3>
+
+<p>Most of Sokrates’ analyses are at the level of a whole file. Sokrates also goes a level deeper, at a so-called unit level. Depending on a language, a unit can be a method, function, or procedure. For each unit, Sokrates measurements their size and conditional complexity.</p>
+
+<p>To learn more:</p>
+<ul>
+  <li><a href="units">Unit-Level Measurements</a></li>
+</ul>
+
+<h3 id="advanced-measurements">Advanced Measurements</h3>
+
+<p>After getting the basic measurements, Sokrates performs a set of more complex and computationally intensive cross-file analyses to identify dependencies and duplication among files and components.</p>
+
+<p>To learn more:</p>
+<ul>
+  <li><a href="duplication">Duplication Analysis</a></li>
+  <li><a href="dependencies">Finding Dependencies based on Text Patterns</a></li>
+  <li><a href="dependencies-alt">Finding Dependencies through Duplication and Change History</a></li>
+</ul>
+
+<h3 id="aggregating-results--trend-analysis">Aggregating Results &amp; Trend Analysis</h3>
+
+<p>After Sokrates has all the data at the file level and lists of duplicates and dependencies, it then proceeds with aggregating results. Sokrates aggregates data at the overall project level as well as at the level of components and concerns. For dependencies, duplication, and file change history, Sokrates also identifies links between components. These links show couplings between components, duplication between them, as well as their temporal coupling (the number of days when developers have changed two components simultaneously).</p>
+
+<p>Optionally Sokrates compares the current results with the previous ones to get the trends.</p>
+
+<p>To learn more:</p>
+<ul>
+  <li><a href="aggregation">Aggregating Measurements</a></li>
+  <li><a href="metrics">Metrics</a></li>
+  <li><a href="controls">Goals &amp; Controls</a></li>
+  <li><a href="trends">Trends</a></li>
+</ul>
+
+<h3 id="exporting-the-data">Exporting the Data</h3>
+
+<p>With basic and aggregated data ready, Sokrates then</p>
+<ul>
+  <li>generates standard reports, providing a templates based story about measured data, enriched with visuals combining basic chart, Graphviz diagrams,  SVG images, and few 3D visualizations.</li>
+  <li>provides an interactive explorer to browse quickly, search and visualize all the data, and</li>
+  <li>store all the data into simple text and JSON files if you want to analyze them further using your tools.</li>
+</ul>
+
+<p>To learn more:</p>
+<ul>
+  <li><a href="reports">Sokrates Reports</a></li>
+  <li><a href="explorer">Sokrates Explorer</a></li>
+</ul>
+
+    </div><a class="u-url" href="/book/processing" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/book/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Examined Line: The Art of Source Code Analysis with Sokrates</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Examined Line: The Art of Source Code Analysis with Sokrates</li><li><a class="u-email" href="mailto:zeljko.obren@gmail.com">zeljko.obren@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.linkedin.com/in/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.twitter.com/zeljko_obren"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zeljko_obren</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A collection of articles on source code analysis with Sokrates.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

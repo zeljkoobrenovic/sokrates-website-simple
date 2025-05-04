@@ -1,0 +1,105 @@
+<div class="" style="">
+    <div class="section" style="">
+        <div style="margin: 10px 10px 10px 10px;">
+            <h2 class="title">Configuration File for Project Analyses</h2>
+            <ul>
+                <li> Sokrates project analysis configuration is defined in a JSON file.</li>
+                <li>You can use the <span class="inline-code">init</span> command to generate default file for your project (see Download tab for
+                    details).
+                </li>
+                <li>The default location of the configuration file is <span class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/config.json&nbsp;</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/data/config.json" target="_blank"> See an example of a
+                        Sokrates configuration file ⤇ </a></li>
+                </ul>
+                <li>Based on this configuration Sokrates will generate a number of reports. The default reports folders is <span
+                        class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/reports/&nbsp;</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/html/index.html" target="_blank"> See an example of a
+                        Sokrates report ⤇ </a></li>
+                </ul>
+                <li> To learn more about details of the configuration file see the <a
+                        href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/core/CodeConfiguration.java"
+                        target="_blank">configuration file structure definition (in Java)</a>.
+                </li>
+            </ul>
+        </div>
+        <div>
+            <img src="book/assets/images/sokrates/config-overview.png" style="width: 640px" class="card">
+        </div>
+    </div>
+    <div class="section" style="">
+        <div style="margin: 10px 10px 10px 10px;"><h2 class="title">Configuration File for a Landscape Analysis</h2>
+            <ul>
+                <li> Sokrates landscape analysis configuration is defined in two JSON files: config.json and config-tags.json.</li>
+                <li>You can use the <span class="inline-code">updateLandscape</span> command to generate default files.</li>
+                <ul>
+                    <li>java -jar sokrates.jar updateLandscape [options]</li>
+                </ul>
+                <li>The default location of the configuration files is <span class="inline-code">&lt;your-project&gt;/_sokrates_landscape/</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Tomcat/_sokrates_landscape/config.json" target="_blank"> See an example
+                        of a Sokrates landscape configuration file ⤇ </a></li>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Tomcat/_sokrates_landscape/config-tags.json" target="_blank"> See an
+                        example of a Sokrates landscape tags configuration file ⤇ </a></li>
+                </ul>
+                <li>Based on this configuration Sokrates will generate a number the landscape reports. The default reports folders is <span
+                        class="inline-code">&lt;your-project&gt;/_sokrates_landscape/reports/</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank"> See an example of a
+                        Sokrates landscape report ⤇ </a></li>
+                </ul>
+                <li> To learn more about details of the configuration file see the <a
+                        href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/landscape/LandscapeConfiguration.java"
+                        target="_blank">configuration file structure definition (in Java)</a>.
+                </li>
+            </ul>
+        </div>
+        <div>
+            <img src="book/assets/images/sokrates/cmd-init-landscape.png" style="width: 640px" class="card">
+        </div>
+    </div>
+    <div class="section">
+        <h2 class="title">Configuring the Analysis Initialization</h2>
+        <ul>
+            <li>The <span class="inline-code">init</span> command creates a configuration file for project analyses. Without any parameters, this
+                command uses the standard conventions to generate a project analysis configuration.
+            </li>
+            <li>You can also use your own custom conventions to initialize projects and create new configuration files:
+                <ul>
+                    <li><pre style="background-color: #dedede; padding: 4px">    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span
+                            style="background-color: yellow">createConventionsFile</span>
+    # edit the 'analysis_conventions.json' file to define your custom conventions
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init -conventionsFile analysis_conventions.json</span></pre>
+                    </li>
+                    <li><a href="assets/conf/sokrates_conventions.json" target="_blank">See example of a custom conventions file</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul style="margin-top: 24px;">
+            <li>The <span class="inline-code">exportStandardConventions</span> command exports Sokrates conventions to a JSON file that you can
+                use as inspiration for your custom conventions:
+            </li>
+            <ul>
+                <li>
+                    <pre style="background-color: #dedede;">    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span class="inline-code">exportStandardConventions</span></pre>
+                </li>
+                <li><a href="assets/conf/standard_analysis_conventions.json" target="_blank">See example of a standard_analysis_conventions.json
+                    file</a></li>
+            </ul>
+        </ul>
+        <ul style="margin-top: 24px;">
+            <li> To learn more about details of the configuration file see the <a
+                    href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/scoping/custom/CustomScopingConventions.java"
+                    target="_blank">configuration file structure definition (in Java)</a>.
+            </li>
+        </ul>
+        <div>
+            <img src="book/assets/images/sokrates/cmd-init.png" style="width: 640px" class="card">
+        </div>
+    </div>
+</div>

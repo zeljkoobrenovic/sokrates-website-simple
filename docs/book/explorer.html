@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Appendix: Sokrates Explorer | Examined Line: The Art of Source Code Analysis with Sokrates</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Appendix: Sokrates Explorer" />
+<meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Sokrates Explorer centralizes configuration, running of commands, and preview of analysis results in one tool. Explorer has a graphical user interface with a configuration editor, code preview panels, and several additional features that facilitate free exploration of code. With Explorer, you can almost instantly see how a change in a setting, e.g., adding a new rule for detecting test files, impacts the analysis results." />
+<meta property="og:description" content="Sokrates Explorer centralizes configuration, running of commands, and preview of analysis results in one tool. Explorer has a graphical user interface with a configuration editor, code preview panels, and several additional features that facilitate free exploration of code. With Explorer, you can almost instantly see how a change in a setting, e.g., adding a new rule for detecting test files, impacts the analysis results." />
+<link rel="canonical" href="/book/explorer" />
+<meta property="og:url" content="/book/explorer" />
+<meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/explorer","headline":"Appendix: Sokrates Explorer","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/explorer"},"description":"Sokrates Explorer centralizes configuration, running of commands, and preview of analysis results in one tool. Explorer has a graphical user interface with a configuration editor, code preview panels, and several additional features that facilitate free exploration of code. With Explorer, you can almost instantly see how a change in a setting, e.g., adding a new rule for detecting test files, impacts the analysis results.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/book/">Examined Line: The Art of Source Code Analysis with Sokrates</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-129891352-1');
+</script>
+
+
+<style>
+
+    #markdown-toc::before {
+        content: "Contents";
+        font-weight: bold;
+        font-size: 110%;
+        margin-left: 176px;
+        padding-bottom: 30px;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #markdown-toc ul {
+        list-style: decimal;
+    }
+
+    #markdown-toc {
+        border: 1px solid #aaa;
+        padding: 1.5em;
+        padding-left: 2.5em;
+        list-style: decimal;
+        display: inline-block;
+        margin: 0;
+    }
+</style>
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Appendix: Sokrates Explorer</h1>
+        <p class="post-meta">
+            <time class="dt-published" datetime="2020-05-25T20:12:01+02:00" itemprop="datePublished">May 25, 2020
+            </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
+                                                                                          itemprop="name">by Željko Obrenović (zeljkoobrenovic.com)</span></span></p>
+    </header>
+
+    <div class="post-content e-content" itemprop="articleBody">
+        <p>To support explorative mode, I have built as a part of Sokrates tools the <a href="explorer">Explorer</a> a tool with a graphical user interface that consists of a configuration editor, code preview panels, and several additional features that facilitate free explorations fo code. Explorer centralizes configuration, running of commands, and preview of analysis results in one tool. With Explorer, you can almost instantly see how a change in a setting, e.g., adding a new rule for detecting test files, impacts the analysis results.</p>
+
+<p>See a 5 minutes video on using <a href="explorer">Sokrates Explorer</a> to analyze source code of JUnit4:</p>
+
+<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/kdLcUEqGXl0" style="max-width: 1024px" width="100%"></iframe>
+
+<p><br />
+<br /></p>
+<h2 id="main-panel">Main Panel</h2>
+
+<p>Explorer’s main panel includes a configuration editor, scopes browsers, file preview and console. The configuration editor is a <a href="https://ace.c9.io/">Ace.js</a> JSON editor with standard code editor features code formatting, syntax highlighting, code folding features, search and replace features. A file preview panel shows files in a read only mode.</p>
+
+<p><img src="assets/images/sokrates/explorer.png" alt="" />
+<em><strong>Figure 1:</strong> Explorer’s main panel includes a configuration editor, scopes browsers, file preview and console.</em></p>
+
+<p><br /></p>
+<h2 id="toolbar">Toolbar</h2>
+
+<p>The toolbar located above the configuration editor offers shortcuts to frequently used commands:</p>
+<ul>
+  <li>creating a new project</li>
+  <li>opening an existing project (you need to select a Sokrates configuration file)</li>
+  <li>the <strong>updateConfig</strong> <a href="cli">command</a></li>
+  <li>reload browsers and file preview panels after you change the configuration in the editor</li>
+  <li>the <strong>generateReports</strong> <a href="cli">command</a></li>
+</ul>
+
+<p><img src="assets/images/sokrates/explorer-config-editor.png" alt="" /></p>
+
+<p><em><strong>Figure 2:</strong> The toolbar located above the configuration editor offers shortcuts to frequently used commands.</em></p>
+
+<p><br /></p>
+<h2 id="browsing-and-previewing">Browsing and Previewing</h2>
+
+<p>With scope browsers, you can select a scope of interest, get a sorted list of all files in the scope, and preview the content of files.</p>
+
+<p><img src="assets/images/sokrates/explorer-browsing.png" alt="" /></p>
+
+<p><em><strong>Figure 3:</strong> With scope browsers, you can select a scope of interest, get a sorted list of all files in the scope, and preview the content of files.</em></p>
+
+<p>Scope browsers offer three types of scopes: extensions, logical components, and concerns.</p>
+
+<p><img src="assets/images/sokrates/explorer-browsing-scopes.png" alt="" /></p>
+
+<p><em><strong>Figure 4:</strong> Scope browsers offer three types of scopes: extensions, logical components, and concerns.</em></p>
+
+<p><br /></p>
+<h2 id="creating-new-projects">Creating New Projects</h2>
+
+<p>A new project dialog facilitates creation of new Sokrates projects. To create a new Sokrates project, you need to select the source code root, and extension that you want to include in analyses.</p>
+
+<p><img src="assets/images/sokrates/explorer-new-project.png" alt="" /></p>
+
+<p><em><strong>Figure 5:</strong> A new project dialog. To create a new Sokrates project, you need to select the source code root, and extension that you want to include in analyses.</em></p>
+
+<h2 id="text-search">Text Search</h2>
+
+<p>When browsing scopes, you can do a full text regex-based searches. Explorer will then display the number of hits per file, and in a in a file prview the lines that match your query.</p>
+
+<p><img src="assets/images/sokrates/explorer-search.png" alt="" /></p>
+
+<p><em><strong>Figure 6:</strong> When browsing scopes, you can do a full text regex-based searches. Explorer will then display the number of hits per file, and in a in a file prview the lines that match your query.</em></p>
+
+<p>Explorer can also show you basic statistic about your search, such as a number of found regex pattern instances.</p>
+
+<p><img src="assets/images/sokrates/explorer-search-stats.png" alt="" /></p>
+
+<p><em><strong>Figure 7:</strong> Explorer can also show you basic statistic about your search, such as a number of found regex pattern instances.</em></p>
+
+<p>With explorer you can also visualize found text instances as dependencies. Explorer can display a link between a component in which the text instance is found and that instance (as a target components). Optionally, you can also clean and transfrom the found text before the visualization.</p>
+
+<p><img src="assets/images/sokrates/explorer-search-dependencies.png" alt="" /></p>
+
+<p><em><strong>Figure 8:</strong> With explorer you can also visualize found text instances as dependencies. Explorer can display a link between a component in which the text instance is found and that instance (as a target components). Optionally, you can also clean and transfrom the found text before the visualization.</em></p>
+
+<h2 id="duplication-exploration">Duplication Exploration</h2>
+
+<p>When browsing scopes, you can get an overview of duplication within this scope. The duplication dialog shows you the overall duplication level, as well as all duplicates, which you explore and preview.</p>
+
+<p><img src="assets/images/sokrates/explorer-duplication.png" alt="" /></p>
+
+<p><em><strong>Figure 9:</strong> When browsing scopes, you can get an overview of duplication within this scope. The duplication dialog shows you the overall duplication level, as well as all duplicates, which you explore and preview.</em></p>
+
+<h2 id="units-exploration">Units Exploration</h2>
+
+<p>When browsing scopes, you can get an overview of units within this scope. The units dialog shows you the overall unit size and conditional complexity distribution, as well as all units, which you explore and preview.</p>
+
+<p><img src="assets/images/sokrates/explorer-units.png" alt="" /></p>
+
+<p><em><strong>Figure 10:</strong> When browsing scopes, you can get an overview of units within this scope. The units dialog shows you the overall unit size and conditional complexity distribution, as well as all units, which you explore and preview.</em></p>
+
+<h2 id="adding-manual-findings">Adding Manual Findings</h2>
+
+<p>When previewing a file, you can select any piece of code, and add it to the list of manula findings. These findings are stored in _sokrates/findings/findings.txt. Sokrates also generates a reports based on these findings.</p>
+
+<p><img src="assets/images/sokrates/explorer-add-finding.png" alt="" /></p>
+
+<p><em><strong>Figure 11:</strong> When previewing a file, you can select any piece of code, and add it to the list of manula findings. These findings are stored in _sokrates/findings/findings.txt. Sokrates also generates a reports based on these findings.</em></p>
+
+<h2 id="auto-scroll">Auto Scroll</h2>
+
+<p>When previewing a file, you can switch on the auto-scroll mode. In this mode, every file you open will automatically scroll down until the end (simulating a repetitive page down key press). You can configure the speed of scrolling via the pause between each scroll step.
+<img src="assets/images/sokrates/explorer-auto-scroll.png" alt="" /></p>
+
+<p><em><strong>Figure 12:</strong> When previewing a file, you can switch on the auto-scroll mode. In this mode, every file you open will automatically scroll down until the end (simulating a repetitive page down key press). You can configure the speed of scrolling via the pause between each scroll step.</em></p>
+
+<h2 id="other-features">Other Features</h2>
+
+<p>You can export to the clipboard data from any table in Explorer.</p>
+
+<p><img src="assets/images/sokrates/explorer-export-table-data.png" alt="" /></p>
+
+<p><em><strong>Figure 13:</strong> You can export to the clipboard data from any table in Explorer.</em></p>
+
+
+    </div><a class="u-url" href="/book/explorer" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/book/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Examined Line: The Art of Source Code Analysis with Sokrates</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Examined Line: The Art of Source Code Analysis with Sokrates</li><li><a class="u-email" href="mailto:zeljko.obren@gmail.com">zeljko.obren@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.linkedin.com/in/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.twitter.com/zeljko_obren"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zeljko_obren</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A collection of articles on source code analysis with Sokrates.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

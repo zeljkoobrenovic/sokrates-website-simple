@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Unit-Level Measurements | Examined Line: The Art of Source Code Analysis with Sokrates</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Unit-Level Measurements" />
+<meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Depending on a language, a unit can be a method, function procedure. Sokrates measures two things about each unit: size and conditional complexity." />
+<meta property="og:description" content="Depending on a language, a unit can be a method, function procedure. Sokrates measures two things about each unit: size and conditional complexity." />
+<link rel="canonical" href="/book/units" />
+<meta property="og:url" content="/book/units" />
+<meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/units","headline":"Unit-Level Measurements","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/units"},"description":"Depending on a language, a unit can be a method, function procedure. Sokrates measures two things about each unit: size and conditional complexity.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/book/">Examined Line: The Art of Source Code Analysis with Sokrates</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-129891352-1');
+</script>
+
+
+<style>
+
+    #markdown-toc::before {
+        content: "Contents";
+        font-weight: bold;
+        font-size: 110%;
+        margin-left: 176px;
+        padding-bottom: 30px;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #markdown-toc ul {
+        list-style: decimal;
+    }
+
+    #markdown-toc {
+        border: 1px solid #aaa;
+        padding: 1.5em;
+        padding-left: 2.5em;
+        list-style: decimal;
+        display: inline-block;
+        margin: 0;
+    }
+</style>
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Unit-Level Measurements</h1>
+        <p class="post-meta">
+            <time class="dt-published" datetime="2020-05-25T20:12:01+02:00" itemprop="datePublished">May 25, 2020
+            </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
+                                                                                          itemprop="name">by Željko Obrenović (zeljkoobrenovic.com)</span></span></p>
+    </header>
+
+    <div class="post-content e-content" itemprop="articleBody">
+        <p>Most of Sokrates’ analyses are at the level of a whole file. Sokrates also goes a level deeper, at a so-called unit level.</p>
+
+<p>Depending on a language, a unit can be a method, function procedure. I normally define a unit as the smallest reusable piece of code. These pieces of code are frequently associated with unit tests. The following figure shows four units, two in Java, and two C#:</p>
+
+<p><img src="assets/images/sokrates/unit-examples.png" alt="" /></p>
+
+<p><em><strong>Figure 1:</strong> Examples of four units, two in a fragment from Java file and two in a fragment from a C# file.</em></p>
+
+<h2 id="unit-level-analysis">Unit-Level Analysis</h2>
+
+<p>Sokrates extracts units from files in several steps. Firstly, Sokrates cleans each file’s content to eliminate comments, and other elements, such as long string constants, simplifying a follow-up parsing of code. After that, Sokrates applies a set of language-specific heuristics to identify start and end lines for each unit. You can look in Sokrates code at GitHub the exact details of unit extraction heuristics.</p>
+
+<p><img src="assets/images/sokrates/units-processing.png" alt="" /></p>
+
+<p><em><strong>Figure 2:</strong> An overview of Sokrates’ unit processing. To simplify processing, Sokrates first cleans the code. Then Sokrates extract units and measures their size and conditional complexity. Sokrates further aggregates the duplicates, and presents the data in reports or in Sokrates Explorer.</em></p>
+
+<p>Sokrates generates two reports with unit-level measurements: a unit size report and a conditional complexity report.</p>
+
+<p>A Sokrates unit size report then answers the following questions:</p>
+<ul>
+  <li>What is the overall unit size distributions?</li>
+  <li>What is the unit size distributions per file type?</li>
+  <li>What is the unit size distributions per component?</li>
+  <li>What are the longest units?</li>
+</ul>
+
+<p>An example of a <a href="https://d3axxy9bcycpv7.cloudfront.net/java/tomcat/reports/html/UnitSize.html">unit size report you can find here</a>.</p>
+
+<p>A Sokrates unit size report then answers the following questions:</p>
+<ul>
+  <li>What is the overall conditional complexity distribution?</li>
+  <li>What is the conditional complexity distribution per file type?</li>
+  <li>What is the conditional complexity distribution per component?</li>
+  <li>What are the units with the highest conditional complexity?</li>
+</ul>
+
+<p>An example of a <a href="https://d3axxy9bcycpv7.cloudfront.net/java/tomcat/reports/html/ConditionalComplexity.html">conditional complexity report you can find here</a>.</p>
+
+<h2 id="unit-measurements">Unit Measurements</h2>
+
+<p>Sokrates measures two things about each unit:</p>
+<ul>
+  <li>a unit’s size</li>
+  <li>a units’ conditional complexity</li>
+</ul>
+
+<h3 id="unit-size">Unit Size</h3>
+
+<p>The unit size represents the number of lines in each unit, excluding comments and empty lines, and including the start and end lines of a unit.</p>
+
+<p>After counting lines, Sokrates then classifies units five categories based on their size (see Figure 3 for an example):</p>
+<ul>
+  <li>very small units (1-10 lines of code)</li>
+  <li>small units (11-20 lines of code)</li>
+  <li>medium size units (21-50 lines of code)</li>
+  <li>long units (51-100 lines of code) and</li>
+  <li>very long (101+ lines of code)</li>
+</ul>
+
+<p><img src="assets/images/sokrates/unit-size-3d.png" alt="" /></p>
+
+<p><em><strong>Figure 3:</strong> A 3D view of all units color-coded by size category (from the <a href="https://d3axxy9bcycpv7.cloudfront.net/java/commons-lang/reports/html/UnitSize.html">Apache Commons-Lang unit size report</a>). Each block is one unit. The height of the block represents the file unit size in lines of code. The color of the unit represents its unit size category (green=0-20, yellow=21-50, orange=51-100, red=101+).</em></p>
+
+<h3 id="conditional-complexity">Conditional Complexity</h3>
+
+<p>Sokrates measures the conditional complexity following the <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">cyclomatic complexity method</a> developed by Thomas J. McCabe, Sr. in 1976. In a nutshell, this method goes as follows:</p>
+<ul>
+  <li>each unit has by default the McCabe index of one, as there is always at least one path through the unit.</li>
+  <li>for every conditional statement found in the code (e.g., ifs, loops, switches), the number is increased by one.</li>
+</ul>
+
+<p>For example, a unit with only one IF statement has a conditional complexity of two.</p>
+
+<p>Figure 4 shows a more complex example, with conditional complexity value of six (one by <strong>default</strong> + one <strong>for</strong> statement + four <strong>if</strong> statements).</p>
+
+<p><img src="assets/images/sokrates/unit-example-1.png" alt="" /></p>
+
+<p><em><strong>Figure 4:</strong> An example unit from the <a href="https://d3axxy9bcycpv7.cloudfront.net/java/junit5/reports/html/index.html">JUnit5 project</a>.</em></p>
+
+<p>After measuring card trend complexity, Sokrates then classifies units into five categories (see Figure 5 for an example):</p>
+<ul>
+  <li>very simple units (1-5)</li>
+  <li>simple units (6-10)</li>
+  <li>medium couples units (11-25)</li>
+  <li>couples units (26-50)</li>
+  <li>very couples units (51+)</li>
+</ul>
+
+<p><img src="assets/images/sokrates/unit-complexity-3d.png" alt="" /></p>
+
+<p><em><strong>Figure 5:</strong> A 3D view of all units color-coded by conditional complexity (from the <a href="https://d3axxy9bcycpv7.cloudfront.net/java/commons-lang/reports/html/ConditionalComplexity.html">Apache Commons-Lang conditional complexity report</a>). Each block is one unit. The height of the block represents the file unit size in lines of code. The color of the unit represents its conditional complexity category (green=0-5, yellow=6-10, orange=11-25, red=26+).</em></p>
+
+<h2 id="heuristics-for-units-extraction">Heuristics for Units Extraction</h2>
+
+<p>Sokrates does not implement full feature lexers and parsers for language analyses. Instead, Sokrates applies simple, heuristic string manipulation techniques to identify and extract interesting code pieces, including units.</p>
+
+<p>While each language has its specifics, we can group Sokrates heuristic techniques into two categories:</p>
+<ul>
+  <li>a balanced brackets heuristic</li>
+  <li>a proper formatting heuristic</li>
+</ul>
+
+<p>Sokrates applies a balanced brackets heuristic for C- style languages, such as Java, C#, or JavaScript. In such languages, it is possible to identify the end line of a unit by only looking for a closing bracket, e.g.,”}”. Of course, you first need to identify the start marker of a unit. Sokrates identifies the stars of a unit by using language-specific regex-based rules. Sokrates then looks for the end bracket, taking onto account internal code blocks of code, e.g., loops, which may use the same start and end brackets as a unit. I call the method “balanced” as we need to find the closing bracket of a unit so that the total number of opening and closing brackets within the unit are equal, e.g., in balance. To simplify processing following the balanced brackets method, Sokrates also do additional preparations and code clearings, e.g., remove the content of string constants, as such content my contain closing brackets and opening brackets.</p>
+
+<p>The unit extraction based on proper formatting heuristic assumes that developers or their IDEs have formatted the code according to usual coding standards. In particular, Sokrates assumes that lines of code in embedded blocks have more white spaces at the beginning of each line than the blocks in which they reside. For instance, in Visual Basic, if a file is formatted correctly, the start and end lines of functions and procedures (VB units) have the same whitespaces at the beginning of lines. The code within these functions and procedures, excluding empty lines and comments, should have more white spaces as the beginning of their lines. Once we know the unit’s start line, we can find the end line by merely looking for the first non-empty line with the same amount of leading whitespaces.</p>
+
+<p>For concrete details, again, take a look at the Sokrates’ GitHub repository.</p>
+
+<h2 id="to-probe-further">To Probe Further</h2>
+
+<p>To learn more about units, unit size, and conditional complexity, the Sokrates recommends the following resources:</p>
+
+<ul>
+  <li><a href="https://www.amazon.com/dp/0132350882/">Clean Code: A Handbook of Agile Software Craftsmanship</a>, by Robert Martin
+    <ul>
+      <li><em>“The first rule of functions is that they should be small. The second rule of functions is that they should be smaller than that. Functions should not be 100 lines long. Functions should hardly ever be 20 lines long.”</em></li>
+    </ul>
+  </li>
+  <li><a href="https://blog.codinghorror.com/code-smells/">Coding Smells</a>, codinghorror.com
+    <ul>
+      <li><em>“All other things being equal, a shorter method is easier to read, easier to understand, and easier to troubleshoot. Refactor long methods into smaller methods if you can.”</em></li>
+    </ul>
+  </li>
+  <li><a href="https://martinfowler.com/bliki/FunctionLength.html">Function Length</a>, MartinFowler.com
+    <ul>
+      <li><em>“If you have to spend effort into looking at a fragment of code to figure out what it’s doing, then you should extract it into a function and name the function after that ‘what’.”</em></li>
+    </ul>
+  </li>
+  <li><a href="https://softwareengineering.stackexchange.com/questions/133404/what-is-the-ideal-length-of-a-method-for-you">Stack Overflow Discussion on Unit Size</a>, stackoverflow.com
+    <ul>
+      <li><em>“Use common sense, stick to small function sizes in most instances, but don’t be dogmatic about it if you have a genuinely good reason to make an unusually big function.”</em></li>
+    </ul>
+  </li>
+  <li><a href="https://sourcemaking.com/refactoring/simplifying-conditional-expressions">Simplifying Conditional Expressions</a>, sourcemaking.com</li>
+  <li><a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity</a>, wikipedia.org</li>
+</ul>
+
+    </div><a class="u-url" href="/book/units" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/book/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Examined Line: The Art of Source Code Analysis with Sokrates</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Examined Line: The Art of Source Code Analysis with Sokrates</li><li><a class="u-email" href="mailto:zeljko.obren@gmail.com">zeljko.obren@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.linkedin.com/in/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.twitter.com/zeljko_obren"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zeljko_obren</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A collection of articles on source code analysis with Sokrates.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

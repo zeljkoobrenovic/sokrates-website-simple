@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Using Sokrates | Examined Line: The Art of Source Code Analysis with Sokrates</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Using Sokrates" />
+<meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="You can use Sokrates in four modes: the analyze and reflect mode, the interactive explorations mode, the traffic lights mode, the software architecture documentation mode" />
+<meta property="og:description" content="You can use Sokrates in four modes: the analyze and reflect mode, the interactive explorations mode, the traffic lights mode, the software architecture documentation mode" />
+<link rel="canonical" href="/book/usage" />
+<meta property="og:url" content="/book/usage" />
+<meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/usage","headline":"Using Sokrates","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/usage"},"description":"You can use Sokrates in four modes: the analyze and reflect mode, the interactive explorations mode, the traffic lights mode, the software architecture documentation mode","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/book/">Examined Line: The Art of Source Code Analysis with Sokrates</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-129891352-1');
+</script>
+
+
+<style>
+
+    #markdown-toc::before {
+        content: "Contents";
+        font-weight: bold;
+        font-size: 110%;
+        margin-left: 176px;
+        padding-bottom: 30px;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #markdown-toc ul {
+        list-style: decimal;
+    }
+
+    #markdown-toc {
+        border: 1px solid #aaa;
+        padding: 1.5em;
+        padding-left: 2.5em;
+        list-style: decimal;
+        display: inline-block;
+        margin: 0;
+    }
+</style>
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Using Sokrates</h1>
+        <p class="post-meta">
+            <time class="dt-published" datetime="2020-05-25T20:12:01+02:00" itemprop="datePublished">May 25, 2020
+            </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
+                                                                                          itemprop="name">by Željko Obrenović (zeljkoobrenovic.com)</span></span></p>
+    </header>
+
+    <div class="post-content e-content" itemprop="articleBody">
+        <p>In a nutshell, Sokrates is a exploration and feedback giving tool, that can help you to understand you code, reflect and discuss its findings, and take actions based on the findings.</p>
+
+<p>You can use Sokrates in four modes:</p>
+<ul>
+  <li>the analyze and reflect mode</li>
+  <li>the interactive explorations mode</li>
+  <li>the traffic lights mode</li>
+  <li>the software architecture documentation mode</li>
+</ul>
+
+<h3 id="analyze-and-reflect">Analyze and Reflect</h3>
+
+<p>The analyze and reflect mode has two phases:</p>
+
+<ul>
+  <li>the initial configuration phase, where we are configuring Sokrates to make sure that we analyze the right code, and that we have useful views on the code</li>
+  <li>the frequent running of the Sokrates analyses to see the states and changes in code.</li>
+</ul>
+
+<p>Sokrates does not directly gives you advice on what to changes in you code. Rather, it provides you practical insights into the interesting pieces of code that may requires some action. For instance, Sokrates will give you clear pointers to highly duplicated code, cyclic dependencies, very long files, or very complex units. However, it is up to you to define an action plan and to make a decision if you want to do something about the findings.</p>
+
+<p>Based on the reflection, you may also decide to re-configure the Sokrates to get better view on your code. The example may be adding or excluding file extensions, or adding an additional logical decomposition, ot, for instance, zoom into a big component to see its sub-components and their dependencies.</p>
+
+<p><img src="assets/images/sokrates/analytics-big-picture.png" alt="" />
+<strong>Figure 1:</strong> <em>The analyze-and-reflect mode. In the initial configuration phase, we need to properly configure Sokrates to ensure that we analyze the right code and have useful views on it. After that, you can run Sokrates as frequently as you want to see the state of your system. And then use the results of analysis to make decision what to do, eventually changing the code.</em></p>
+
+<p>You can use Sokrates ad-hoc or in weekly rythm to see trends and take actions. For instance, I have been using Sokrates as part of bi-weekly sprint reviews. You can configure Sokrates to run as a part of you continuous delivery pipeline. If you are refactoring code, you can also ad-hoc re-run Sokrates to see how are you progressing.</p>
+
+<h3 id="interactive-explorations">Interactive Explorations</h3>
+
+<blockquote>
+  <p>“I drink a lot of coffee before I go to sleep so I can dream faster. I can dream like when they put <a href="https://youtu.be/ATrmW5s2PiU">a camera on the Indy 500 … when they put a camera in the car</a>, and it’s just whipping by like that. Dream after dream after dream after dream. People ask me the next day, “What did you dream about?” I say, “I don’t have time. I don’t have time to tell you this.”” — <a href="https://youtu.be/pBa-2nXCc7g?t=68">Coffee and Cigarettes (2003)</a></p>
+</blockquote>
+
+<p>My favorite way of using Sokrates is exploration. In an explorative mode configuring of Sokrates and processing based on the configuration are tightly coupled.</p>
+
+<p>To support explorative mode, I have built as a part of Sokrates tools the <a href="explorer">Explorer</a> a tool with a graphical user interface that consists of a configuration editor, code preview panels, and several additional features that facilitate free explorations fo code. Explorer centralizes configuration, running of commands, and preview of analysis results in one tool. With Explorer, you can almost instantly see how a change in a setting, e.g., adding a new rule for detecting test files, impacts the analysis results.</p>
+
+<p><img src="assets/images/sokrates/analytics-explorations.png" alt="" /></p>
+
+<p><strong>Figure 2:</strong> <em>Explorer centralizes configuration, running of commands, and preview of analysis results in one tool. With Explorer, feedback loops are short as you can almost instantly see how a change in a setting, e.g., adding a new rule for detecting test files, impacts the analysis results.</em></p>
+
+<p>Explorer also includes many features for manual, free form explorations, for instance, efficient regex code searches. If you find some interesting piece of code, you can also highlight it and add it to your manual findings. A more detailed description of Explorer you can find in <a href="explorer">Appendix: Sokrates Explorer</a>.</p>
+
+<p>Explorer is the most useful in initial phases of analysis, when you are discovering the patterns in your source code, as well as during the reconfiguration of the project.</p>
+
+<h3 id="goals-and-controls">Goals and Controls</h3>
+
+<p>In the end, you can also use Sokrates in a more simplified analyze-and-reflect mode, where you can replace the reflect part with a set of clearly defined traffic lights like controls. For each of the metrics that Sokrates measures, you can specify a control with the threshold and tolerance. Sokrates will then generate a report labeling each control with one of the following states:</p>
+<ul>
+  <li>OK (green) the measured value is below the threshold</li>
+  <li>tolerant (yellow) the measured value is above the threshold but within the tolerance range</li>
+  <li>failed (red), the measured value is above the threshold and the tolerance level.</li>
+</ul>
+
+<p><img src="assets/images/sokrates/usage-goals.png" alt="" /></p>
+
+<p><strong>Figure 3:</strong> <em>The goals-and-controls mode, a simplified analyze-and-reflect mode, where you can replace the reflect part with a set of clearly defined traffic lights like controls. For each of the metrics that Sokrates measures, you can specify a control with the threshold and tolerance. And then react when the measurements are out of safe range.</em></p>
+
+<p>For instance, let’s assume that we have defined a control for duplication, setting the threshold to 5% and the tolerance level to 2%. If the measured duplication level is 4%, Sokrotes will label the control as OK (green). For the measured duplication level of 8%, Sokrates will label the control as failed (red). If the measured duplication is 6% Sokrates will mark the controls as tolerant (yellow).</p>
+
+<p>The example of a Sokrates controls report you can <a href="https://d3axxy9bcycpv7.cloudfront.net/java/junit5/reports/html/Controls.html">find here</a>.</p>
+
+<h3 id="software-architecture-documentation-tool">Software Architecture Documentation Tool</h3>
+
+<p>While the main power of Sokrates lies in pragmatic source code analyses, your can also use Sokrates as a software documentation tool. On the one hand you can look at the Sokrates configuration file as a mere input for analysis. On the other hand, this configuration file encodes the patterns used in source code to classifiy files, define components and concerns.</p>
+
+<p>As a documentation tool, Sokrates follows several premises (borrowing last two from Grady Booch):</p>
+
+<ul>
+  <li>Any software architecture documentation disconnected from source code is doomed to become outdated and useless quickly.</li>
+  <li>The best formal and unambiguous specification of a software-intensive system is its executable code.</li>
+  <li>However, executable code as a specification is insufficient for visualizing, reasoning about, understanding, and communicating about that system.</li>
+</ul>
+
+<p>Sokrates provides a pragmatic way to describe critical elements of software architectures and connect them explicitly to the source code. Based on a formal description of different software architecture aspects, Sokrates generates reports and visualization to help you reason, understand, and communicate about the software system.</p>
+
+<p>Learn more on Sokrates configuration file <a href="configuring">in a separate section</a>.</p>
+
+    </div><a class="u-url" href="/book/usage" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/book/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Examined Line: The Art of Source Code Analysis with Sokrates</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Examined Line: The Art of Source Code Analysis with Sokrates</li><li><a class="u-email" href="mailto:zeljko.obren@gmail.com">zeljko.obren@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.linkedin.com/in/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.twitter.com/zeljko_obren"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zeljko_obren</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A collection of articles on source code analysis with Sokrates.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

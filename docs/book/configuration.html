@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Appendix: Sokrates Configuration File | Examined Line: The Art of Source Code Analysis with Sokrates</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Appendix: Sokrates Configuration File" />
+<meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Sokrates configuration is a JSON file. You can use create this file manually from scratch, or use the init command to generate a default file for your project." />
+<meta property="og:description" content="Sokrates configuration is a JSON file. You can use create this file manually from scratch, or use the init command to generate a default file for your project." />
+<link rel="canonical" href="/book/configuration" />
+<meta property="og:url" content="/book/configuration" />
+<meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/configuration","headline":"Appendix: Sokrates Configuration File","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/configuration"},"description":"Sokrates configuration is a JSON file. You can use create this file manually from scratch, or use the init command to generate a default file for your project.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/book/">Examined Line: The Art of Source Code Analysis with Sokrates</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-129891352-1');
+</script>
+
+
+<style>
+
+    #markdown-toc::before {
+        content: "Contents";
+        font-weight: bold;
+        font-size: 110%;
+        margin-left: 176px;
+        padding-bottom: 30px;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #markdown-toc ul {
+        list-style: decimal;
+    }
+
+    #markdown-toc {
+        border: 1px solid #aaa;
+        padding: 1.5em;
+        padding-left: 2.5em;
+        list-style: decimal;
+        display: inline-block;
+        margin: 0;
+    }
+</style>
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Appendix: Sokrates Configuration File</h1>
+        <p class="post-meta">
+            <time class="dt-published" datetime="2020-05-25T20:12:01+02:00" itemprop="datePublished">May 25, 2020
+            </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
+                                                                                          itemprop="name">by Željko Obrenović (zeljkoobrenovic.com)</span></span></p>
+    </header>
+
+    <div class="post-content e-content" itemprop="articleBody">
+        <h3 id="configuration-file-for-individual-projects">Configuration File for Individual Projects</h3>
+
+<p>Sokrates configuration is defined in a JSON file (<a href="https://d3axxy9bcycpv7.cloudfront.net/java/tomcat/config.json">see an example here</a>).</p>
+
+<p>You can use the <strong>init</strong> command to generate default file for your project.</p>
+
+<p>The default location of the configuration file is  <your-project>/_sokrates/config.json</your-project></p>
+
+<p>Based on this configuration Sokrates will generate a number of <a href="reports">reports</a>. The default reports folders is  <your-project>/_sokrates/reports/</your-project></p>
+
+<p><img src="assets/images/sokrates/config-overview.png" alt="" /></p>
+
+<p><em><strong>Figure 1</strong>: The Sokrates’ configuration file describes how Sokrates should view and analyze the source code.</em>.</p>
+
+<p>The configuration file has several sections, you can use to:</p>
+<ul>
+  <li>describe your project with a name, logo, summary text, and to add external links</li>
+  <li><a href="scoping">define the scope</a>, including the location of the source code root, file extensions and files to analyze, ignored files, files classification, defining what is main code, test code, generated code, build &amp; deployment code, or other code…</li>
+  <li>identify <a href="logical-decomposition">logical decompositions</a>: one or more ways to looks at components in the system</li>
+  <li>define <a href="concerns">concerns</a>: aspects of a software system that cannot be cleanly decomposed from the rest of the system</li>
+  <li>set goals and controls: define measurements and alarms to keep your system within the desired values</li>
+  <li>provide analysis reference points: for comparison and trend analysis</li>
+  <li>add summary findings: manually added one-line insights and notes</li>
+  <li>perform advanced configuration: meta-rules for components, concerns and dependencies</li>
+</ul>
+
+<h3 id="description-of-the-project">Description of the project</h3>
+
+<p>Describes your project with a name, logo, summary text, and to add external links.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"metadata"</span><span class="p">:{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Sokrates"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="s2">"A pragmatic source code analyzer."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"logoLink"</span><span class="p">:</span><span class="s2">"https://sokrat.org/assets/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"links"</span><span class="p">:[</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"label"</span><span class="p">:</span><span class="s2">"sokrat.org"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"href"</span><span class="p">:</span><span class="s2">"https://sokrat.org/"</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<h2 id="define-the-scope">Define the scope</h2>
+
+<p><a href="scoping">Defines the scope</a>, including the location of the source code root, file extensions and files to analyze, ignored files, files classification, defining what is main code, test code, generated code, build &amp; deployment code, or other code.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+</span><span class="nl">"srcRoot"</span><span class="p">:</span><span class="s2">".."</span><span class="p">,</span><span class="w">
+</span><span class="nl">"extensions"</span><span class="p">:[</span><span class="w">
+  </span><span class="s2">"java"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"html"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"xml"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"md"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"txt"</span><span class="w">
+</span><span class="p">],</span><span class="w">
+</span><span class="nl">"ignore"</span><span class="p">:[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/node_modules/.*"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/target/.*"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">"Compiled files"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li>For analysis purposes Sokrates separate files in scope into several categories: main, test, generated, deployment and build, and other.</li>
+  <li>The main category contains all manually created source code files that are being used in the production.</li>
+  <li>Files in the main category are used as input for other analyses: logical decomposition, concerns, duplication, file size, unit size, and conditional complexity.</li>
+  <li>Test source code files are used only for testing of the product. These files are normally not deployed to production.</li>
+  <li>Build and deployment source code files are used to configure or support build and deployment process.</li>
+  <li>Generated source code files are automatically generated files that have not been manually changed after generation.</li>
+  <li>While a source code folder may contain a number of files, Sokrates is primarily interested in the source code files that are being written and maintained by developers.</li>
+  <li>Files containing binaries, documentation, or third-party libraries, for instance, are excluded from analysis. The exception are third-party libraries that have been changed by developers.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"main"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sourceFileFilters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"exception"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sourceFileFilters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*/[Tt]est/.*"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"exception"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test files"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"generated"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"generated"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sourceFileFilters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nl">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"buildAndDeployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build and deployment"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sourceFileFilters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nl">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"other"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"other"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sourceFileFilters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nl">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<h3 id="define-logical-decompositions-one-or-more-ways-to-looks-at-components-in-the-system">Define logical decompositions: one or more ways to looks at components in the system</h3>
+
+<p>Identifies <a href="logical-decomposition">logical decompositions</a>: one or more ways to looks at components in the system.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+   </span><span class="nl">"logicalDecompositions"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"primary"</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"scope"</span><span class="p">:</span><span class="s2">"main"</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"filters"</span><span class="p">:[</span><span class="w">
+
+         </span><span class="p">],</span><span class="w">
+         </span><span class="nl">"componentsFolderDepth"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"components"</span><span class="p">:[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+               </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Logging"</span><span class="p">,</span><span class="w">
+               </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                     </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/LoggingService/.*"</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"exception"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+                  </span><span class="p">},</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                     </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/LogQueueProbe/.*"</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"exception"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+                  </span><span class="p">},</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                     </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*/Logging/.*"</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"exception"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+               </span><span class="p">],</span><span class="w">
+               </span><span class="nl">"files"</span><span class="p">:[</span><span class="w">
+
+               </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">],</span><span class="w">
+         </span><span class="nl">"metaComponents"</span><span class="p">:[</span><span class="w">
+
+         </span><span class="p">],</span><span class="w">
+         </span><span class="nl">"includeRemainingFiles"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"dependenciesFinder"</span><span class="p">:{</span><span class="w">
+            </span><span class="nl">"useBuiltInDependencyFinders"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"rules"</span><span class="p">:[</span><span class="w">
+
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"metaRules"</span><span class="p">:[</span><span class="w">
+
+            </span><span class="p">]</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nl">"renderingOptions"</span><span class="p">:{</span><span class="w">
+            </span><span class="nl">"orientation"</span><span class="p">:</span><span class="s2">"TB"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nl">"includeExternalComponents"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"duplicationLinkThreshold"</span><span class="p">:</span><span class="mi">50</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<h3 id="define-concerns-aspects-of-a-software-system-that-cannot-be-cleanly-decomposed-from-the-rest-of-the-system">Define concerns: aspects of a software system that cannot be cleanly decomposed from the rest of the system</h3>
+
+<p>Defines <a href="concerns">concerns</a>: aspects of a software system that cannot be cleanly decomposed from the rest of the system.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+   </span><span class="nl">"concernGroups"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"general"</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"concerns"</span><span class="p">:[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+               </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"exception handling"</span><span class="p">,</span><span class="w">
+               </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                     </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">".*[.]java"</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">".* try </span><span class="se">\\</span><span class="s2">{.*"</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+               </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+               </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"logging"</span><span class="p">,</span><span class="w">
+               </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                     </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">"import .*logging[.]Log.*"</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+               </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+               </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"file operations"</span><span class="p">,</span><span class="w">
+               </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                     </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">"import .*java[.]io[.]File.*"</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+               </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+               </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"javafx"</span><span class="p">,</span><span class="w">
+               </span><span class="nl">"sourceFileFilters"</span><span class="p">:[</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                     </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="s2">"import javafx.*"</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"include"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+               </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<h3 id="set-goals-and-controls-define-measurements-and-alarms-to-keep-your-system-within-the-desired-values">Set goals and controls: define measurements and alarms to keep your system within the desired values</h3>
+
+<p>Sets goals and controls: define measurements and alarms to keep your system within the desired values.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"goalsAndControls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"goal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Keep the system simple and easy to change"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aim at keeping the system size modest (less than 200,000 LOC is good), duplication low (less than 5% is good), files small (no files longer than 1000 LOC is good), and units simple (no units with more than 25 decision points is good)."</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"controls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LINES_OF_CODE_MAIN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total number of lines of main code"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"desiredRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200000"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"tolerance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20000"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DUPLICATION_PERCENTAGE"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System duplication"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"desiredRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"tolerance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NUMBER_OF_FILES_1001_PLUS"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The number of very large files"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"desiredRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"tolerance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONDITIONAL_COMPLEXITY_DISTRIBUTION_26_PLUS_COUNT"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Number of very complex units"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"desiredRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"tolerance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<h3 id="provide-analysis-reference-points-for-comparison-and-trend-analysis">Provide analysis reference points: for comparison and trend analysis</h3>
+
+<p>Controls enable you to set alarms for any of the Sokrates metrics. An alarm is defined with a desired range and tolerance.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+   </span><span class="nl">"compareResultsWith"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"analysisResultsPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"history/start/analysisResults.json"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<h3 id="add-summary-findings-manually-added-one-line-insights-and-notes">Add summary findings: manually added one-line insights and notes</h3>
+
+<p>Optional few bullets to summarize the systems.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"summaryFindings"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"note 1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"note 2"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<h3 id="perform-advanced-configuration-meta-rules-for-components-concerns-and-dependencies">Perform advanced configuration: meta-rules for components, concerns and dependencies</h3>
+
+<p>One of the most powerful features of Sokrates is the possibility to use <a href="sstl">Sokrates String Transformation Language</a> to define meta rules to define components, concerns and dependencies.</p>
+
+<p>A meta rule is a search pattern (content and/or path) combined with the string operations to process found string to get the name that to define a component, concern or a dependency to a component.</p>
+
+<p>Meta rules can be used in logical decompositions (the metaComponents field), dependency finders (the metaRules field), and in concerns (the metaConcerns field)</p>
+
+<p>The following <a href="sstl">SSTL</a> operations are supported:</p>
+
+<ul>
+  <li>extract (regex1, regex2,…)</li>
+  <li>replace (regex, replaceString)</li>
+  <li>append (text)</li>
+  <li>prepend (text)</li>
+  <li>trim</li>
+  <li>tolowercase</li>
+  <li>touppercase</li>
+</ul>
+
+<p>Example (components and dependencies finder with meta rules):</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"logicalDecompositions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package level"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nl">"componentsFolderDepth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"components"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nl">"metaComponents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*[.]java"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package nl[.]obren[.]sokrates[.].*"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"content"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"ignoreComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"nameOperations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extract"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                </span><span class="s2">"nl[.]obren[.]sokrates[.][a-zA-Z0-9_]+[.][a-zA-Z0-9_]+"</span><span class="w">
+                            </span><span class="p">]</span><span class="w">
+                        </span><span class="p">},</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replace"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                </span><span class="s2">"nl[.]obren[.]sokrates[.]"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">""</span><span class="w">
+                            </span><span class="p">]</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"includeRemainingFiles"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"dependenciesFinder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"useBuiltInDependencyFinders"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="nl">"metaRules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*[.]java"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"import nl[.]obren[.]sokrates[.].*"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"content"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"ignoreComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"nameOperations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extract"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                    </span><span class="s2">"nl[.]obren[.]sokrates[.][a-zA-Z0-9_]+[.][a-zA-Z0-9_]+"</span><span class="w">
+                                </span><span class="p">]</span><span class="w">
+                            </span><span class="p">},</span><span class="w">
+                            </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replace"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                    </span><span class="s2">"nl[.]obren[.]sokrates[.]"</span><span class="p">,</span><span class="w">
+                                    </span><span class="s2">""</span><span class="w">
+                                </span><span class="p">]</span><span class="w">
+                            </span><span class="p">}</span><span class="w">
+                        </span><span class="p">]</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"renderingOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"orientation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TB"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>Example (concerns with meta rules):</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"concernGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"java technology"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"concerns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"metaConcerns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"import[ ]+java[.].*"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"content"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"ignoreComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"nameOperations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extract"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                </span><span class="s2">"java[.][a-zA-Z0-9_]+"</span><span class="w">
+                            </span><span class="p">]</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+
+    </div><a class="u-url" href="/book/configuration" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/book/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Examined Line: The Art of Source Code Analysis with Sokrates</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Examined Line: The Art of Source Code Analysis with Sokrates</li><li><a class="u-email" href="mailto:zeljko.obren@gmail.com">zeljko.obren@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.linkedin.com/in/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.twitter.com/zeljko_obren"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zeljko_obren</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A collection of articles on source code analysis with Sokrates.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

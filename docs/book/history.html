@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>File-Level Measurements: File Age Analysis | Examined Line: The Art of Source Code Analysis with Sokrates</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="File-Level Measurements: File Age Analysis" />
+<meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="File history analysis takes as an input the list of dates on which source code files changes and studies these dates to understand how frequently developers have changed the files, how old the files are, and how recently developers have updated them." />
+<meta property="og:description" content="File history analysis takes as an input the list of dates on which source code files changes and studies these dates to understand how frequently developers have changed the files, how old the files are, and how recently developers have updated them." />
+<link rel="canonical" href="/book/history" />
+<meta property="og:url" content="/book/history" />
+<meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/history","headline":"File-Level Measurements: File Age Analysis","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/history"},"description":"File history analysis takes as an input the list of dates on which source code files changes and studies these dates to understand how frequently developers have changed the files, how old the files are, and how recently developers have updated them.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/book/">Examined Line: The Art of Source Code Analysis with Sokrates</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-129891352-1');
+</script>
+
+
+<style>
+
+    #markdown-toc::before {
+        content: "Contents";
+        font-weight: bold;
+        font-size: 110%;
+        margin-left: 176px;
+        padding-bottom: 30px;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #markdown-toc ul {
+        list-style: decimal;
+    }
+
+    #markdown-toc {
+        border: 1px solid #aaa;
+        padding: 1.5em;
+        padding-left: 2.5em;
+        list-style: decimal;
+        display: inline-block;
+        margin: 0;
+    }
+</style>
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">File-Level Measurements: File Age Analysis</h1>
+        <p class="post-meta">
+            <time class="dt-published" datetime="2020-05-25T20:12:01+02:00" itemprop="datePublished">May 25, 2020
+            </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
+                                                                                          itemprop="name">by Željko Obrenović (zeljkoobrenovic.com)</span></span></p>
+    </header>
+
+    <div class="post-content e-content" itemprop="articleBody">
+        <p>File change analysis takes as an input the list of dates on which source code files changes, and analyses these dates to understand how frequently developers have changed the files, how old are the files, and how recently developers have updated them.</p>
+
+<p>Sokrates cannot itself get the dates of file changes from the source code files and folders. You need to provide a data changes list as a textual file and configure the link to this file in the Sokrates configuration file (you need to enter the path to this file in the field “filesAgeImportPath” in the analysis section of the configuration file).</p>
+
+<p>Sokrates uses as a convention the output that you can generate using git command-line tools. The following command is
+ recommended for creating the list of changes for Sokrates analysis:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">java <span class="nt">-jar</span> sokrates-LATEST.jar extractGitHistory</code></pre></figure>
+
+<p><img src="assets/images/sokrates/history-git-ls-files.png" alt="" /></p>
+
+<p><em><strong>Figure 1:</strong> Extracting the history of file changes with git commands.</em></p>
+
+<p>The previous command assumes that you are running it in the root of your source code project and that your source code project is a proper git repository (i.e., there should be a .git subfolder in the root folder of your project).</p>
+
+<p>The command generates a textual file named <strong>git-history.txt</strong>. The following fragment illustrates the format of this file:</p>
+
+<figure class="highlight"><pre><code class="language-txt" data-lang="txt">date       email          commit id                                path
+2020-08-18 user@email.com 41c4f5676a3645872d62541d301aca3a20ac6a4f cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-07-09 user@email.com d41b874bc3a29f20f6673a463cbdd9a324f74f67 cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-07-09 user@email.com b1a2ccd041ae515ea432bcf3d327acc938d8c8e3 cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-07-06 user@email.com f6c80d9ede62d6281a1fbacfc9118d33b74a4247 cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-07-05 user@email.com ae1a0d2cb31470a983fbe8c30003317181b14f23 cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-07-04 user@email.com f6754747d765df3e6b1a2af67923e396a0cc3aef cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-07-04 user@email.com 5bea89f5e87772944e836871eb0a988408e9c6c2 cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-06-14 user@email.com fae3e2934fc0df5d779671f05e1f0685cf1adf7a cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-06-07 user@email.com b7c0e1cb48b03c22f9002b620389e8af40ea684f cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-06-06 user@email.com 68a6ec8df5e4b0dc4421930d2bd7c71f5f33f258 cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-05-18 user@email.com cff81f4b4e05ce19c5ba81fe47c06fba83bb5cdf cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-05-17 user@email.com 8a79078a674c042b0b57cc3fd7179243fd3e82cc cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2020-01-02 user@email.com ec1922c44222244530db0dc8f6306368c5cd39d4 cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2019-12-15 user@email.com 14997b6634411b5f0b96410be49b8d901196d42e cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java
+2019-12-15 user@email.com 7f4a5cd8ebc9c5aa7f0a6c9714c970cfa035b82c cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java</code></pre></figure>
+
+<p><em><strong>Figure 2:</strong> The example content from a file with a history of file changes. The first 26 characters describe the date and time of a change. After that follows the file path relative to the source code root.</em></p>
+
+<p>Each line in the file represents one change of one file. The first 26 characters of each line represent the date and time of a file update (e.g., a git commit). Sokrates currently uses only the date part of this string and ignores the time. The rest of the line contains the relative path to the file.</p>
+
+<p>While the command we used to generate a history file is a git specific command, Sokrates itself does not have any git dependencies. If you create this file using another tool, respecting the described format of each line, Sokrates will work with it.</p>
+
+<p>After you have generated the input file and configured Sokrates, you can create reports on file changes. A Sokrates file history report answers the following questions:</p>
+<ul>
+  <li>What is the overall distribution of frequency of changes, file age, and recent updates?</li>
+  <li>What is the distribution of frequency of changes, file age, and recent updates per file type?</li>
+  <li>What is the distribution of frequency of changes, file age, and recent updates per component?</li>
+  <li>What are the most frequently changed files?</li>
+  <li>What are the oldest files?</li>
+  <li>What are the most recent changed files?</li>
+  <li>What files have not been changed files?</li>
+</ul>
+
+<p>The example of this report you can <a href="https://d3axxy9bcycpv7.cloudfront.net/java/tomcat/reports/html/FileHistory.html">find here</a>.</p>
+
+<p><img src="assets/images/sokrates/history-report-generation.png" alt="" /></p>
+
+<p><em><strong>Figure 3:</strong> Based on the history file, Sokrates generates special reports, data files, and additional configurations for further zooming into the details of file changes.</em></p>
+
+<p>Sokrates provides three types of analyses on file changes:</p>
+<ul>
+  <li><strong>file changes frequency</strong>,</li>
+  <li><strong>file age</strong>,</li>
+  <li><strong>file recency</strong>.</li>
+</ul>
+
+<p><strong>The Sokrates’ file changes frequency analysis</strong> identifies the most and least frequently changed files. Sokrates uses five categories to group files: files changed five or fewer times, files changed 6 to 20 times, files changed 21 to 50 times, files changed 51 to 100 times, and files changed over 100 times.</p>
+
+<p><img src="assets/images/sokrates/history-report-example-1.png" alt="" /></p>
+
+<p><em><strong>Figure 4:</strong> A fragment of a Sokrates file change history report, displaying the distribution of recorded file updates (in days with at least one update, multiple updates on one day count as one).</em></p>
+
+<p><strong>The Sokrates’ file age analysis</strong> looks when the file creation date, assuming that the oldest date of the file update is its creation date. Sokrates groups files in the following five categories according to their age: less than a month old, one to three months old, three to six months old, six to 12 months old, and more than a year old.</p>
+
+<p><img src="assets/images/sokrates/history-report-example-2.png" alt="" /></p>
+
+<p><em><strong>Figure 5:</strong> A fragment of a Sokrates file change history report, displaying the distribution of file ages (based on the dates of the first update).</em></p>
+
+<p><strong>The Sokrates’ file changes frequency analysis</strong> looks at the latest date fo file change. Sokrates groups files in the following five categories according to the recency of their changes: files changes in the past month, files changes one to three months ago, files changed three to six months ago, files changed six to 12 months ago, and files changed more than a year ago.</p>
+
+<p><img src="assets/images/sokrates/history-report-example-3.png" alt="" /></p>
+
+<p><em><strong>Figure 6:</strong> A fragment of a Sokrates file change history report, displaying the distribution of file update recency (based on the dates of last update).</em></p>
+
+<p>Once you have an overview of files in their age, freshness, or update frequency categories, it may be interesting to compare the quality of code in these categories. Sokrates facilitates this process, creating the configuration files that you can use to automatically analyze source code so that each of the discussed categories is visible as a logical component. You can see if there are differences in code quality between files that are more or less frequently charged, older and new code, and so on. Sokrates creates three such configuration files in the <strong>_sokrates/reports/data/extra_analysis</strong> folder:</p>
+
+<ul>
+  <li><strong>config_by_file_change_frequency.json</strong>, configuring analysis so that componentization follows the frequency of file updates,</li>
+  <li><strong>config_by_file_age.json</strong>, configuring analysis so that componentization follows the age of files, and</li>
+  <li><strong>config_by_file_freshness.json</strong>, configuring analysis so that componentization follows the last modification date of files.</li>
+</ul>
+
+
+    </div><a class="u-url" href="/book/history" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/book/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Examined Line: The Art of Source Code Analysis with Sokrates</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Examined Line: The Art of Source Code Analysis with Sokrates</li><li><a class="u-email" href="mailto:zeljko.obren@gmail.com">zeljko.obren@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.linkedin.com/in/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.twitter.com/zeljko_obren"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zeljko_obren</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A collection of articles on source code analysis with Sokrates.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

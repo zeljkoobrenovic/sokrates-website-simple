@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Finding Dependencies based on Text Patterns | Examined Line: The Art of Source Code Analysis with Sokrates</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Finding Dependencies based on Text Patterns" />
+<meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Sokrates analyses dependencies through simple text patterns searches." />
+<meta property="og:description" content="Sokrates analyses dependencies through simple text patterns searches." />
+<link rel="canonical" href="/book/dependencies" />
+<meta property="og:url" content="/book/dependencies" />
+<meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/dependencies","headline":"Finding Dependencies based on Text Patterns","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/dependencies"},"description":"Sokrates analyses dependencies through simple text patterns searches.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/book/">Examined Line: The Art of Source Code Analysis with Sokrates</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-129891352-1');
+</script>
+
+
+<style>
+
+    #markdown-toc::before {
+        content: "Contents";
+        font-weight: bold;
+        font-size: 110%;
+        margin-left: 176px;
+        padding-bottom: 30px;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #markdown-toc ul {
+        list-style: decimal;
+    }
+
+    #markdown-toc {
+        border: 1px solid #aaa;
+        padding: 1.5em;
+        padding-left: 2.5em;
+        list-style: decimal;
+        display: inline-block;
+        margin: 0;
+    }
+</style>
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Finding Dependencies based on Text Patterns</h1>
+        <p class="post-meta">
+            <time class="dt-published" datetime="2020-05-25T20:12:01+02:00" itemprop="datePublished">May 25, 2020
+            </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
+                                                                                          itemprop="name">by Željko Obrenović (zeljkoobrenovic.com)</span></span></p>
+    </header>
+
+    <div class="post-content e-content" itemprop="articleBody">
+        <p><em>“And a thing is not seen because it is visible, but conversely, visible because it is seen”</em> ― Socrates</p>
+
+<p>Sokrates analyses dependencies through simple text patterns searches. Such dependency analyses are not as detailed as the ones provided by specialized software tools.</p>
+
+<p>Sokrates focuses on finding dependencies between components and is not concerned with more detailed insights. There are are two main reasons for this. First, dependencies among the components are, from an architectural standpoint, the most relevant ones. While it may be interesting to know all dependencies between individual files or between units, what I miss the most in practice is the big picture, and Sokrates focuses exclusively on the big picture. Moreover, once when you understand the big picture, you can reliably obtain more detailed dependency data from your IDEs and code editors. Second, by concentrating on finding only the dependencies among components, you can simplify analysis and use simple heuristics with high accuracy.</p>
+
+<p>Sokrates’ pattern-based dependency analysis requires the existence of easily identifiable textual patterns that both, uniquely connect files in a shared component, and are present in places where there is a link, a dependency, to another component. Consequently, if such patterns do not exist if they are not unique or are challenging to find, you may not be able to identify the dependencies reliably.</p>
+
+<p>While limited at the detail level, the pattern-based identification of the dependencies is an extremely flexible and powerful mechanism that I have been using daily for years and with great success. For most languages, such analysis can replicate the level of accuracy that a more advanced and sophisticated static-code analysis tools analysis offer. But, if used wisely and with care, it also has some additional features, going beyond static code analysis tools. Such features include the possibility to identify dependencies entities defined in text constants or comments, such as dependencies to websites, APIs, or database tables, that regular classical static code analysis tools do not cover.</p>
+
+<p>Sokrates uses pattern-based dependency analysis in two places. The first place is the internal built-in dependency finders. Sokrates has several built-in dependency finders for mainstream programming languages so that you can get a basic dependency analysis of these languages for them without any extra configuration. The second place is a manual configuration, where you can define your own dependency finders based on the Sokrates pattern-based mechanisms. If a programming language supports build-in dependency finders, you can still use your custom dependency finders, and switch off the built-in ones.</p>
+
+<h2 id="build-in-pattern-based-dependency-finders">Build-in Pattern-Based Dependency Finders</h2>
+
+<p>For several common languages, Sokrates includes the build-in pattern-based dependency finders. You can switch these build-in finders and use your own configured finders. Here, I’ll describe a few heuristics used to define patter dependencies in Sokrates build-in dependency finders.</p>
+
+<p>The following pattern-based heuristics are used in languages where files are organized in explicitly defined packages, modules or namespaces (e.g., Java, C#, Go, Scala, PHP, Groovy, Kotlin, Perl, Ruby, D):</p>
+
+<ul>
+  <li>The Sokrates analysis assumes that the names of packages, modules or namespaces are present in source files, and are unique among components (e.g., two components do not contain the same package, module or namespace), If the same package, module or namespace is defined in two or more components, then Sokrates analysis may generate false positives.</li>
+  <li>Sokrates looks for component patterns: modules or namespaces definitions, generally at the beginning of the file. Sokrates then extract the full name of a package, module, or namespace and uses it as one of the identifiers for a component.</li>
+  <li>Sokrates then looks for dependencies by looking for import statements to packages, modules, or namespaces. If the full name in the import statement can be found in package statements on the other component, then Sokrates adds a dependency to that component.</li>
+</ul>
+
+<p>Figure 1 illustrates the working od a Java build-in dependency finder.</p>
+
+<p><img src="assets/images/sokrates/dependencies-built-in-java-details.png" alt="" />
+<img src="assets/images/sokrates/dependencies-built-in-aggregated.png" alt="" /></p>
+
+<p><em><strong>Figure 1:</strong> An overview of the build-in Java pattern-based dependency extractor. Sokrates uses Java package definitions as patterns to connect components. The number on the link represents the number of files that contain a pattern that represents a dependent component (in our case a package name).</em></p>
+
+<h2 id="custom-dependency-finders">Custom Dependency Finders</h2>
+
+<p>You can use a configuration object within the logical decomposition section of the configuration file to define a custom dependency finder. This custom dependency finder section enables you to set a string transformation scripts that takes as an input a path or a line of file content and transforms the input string into a name. If this name matches the name of any component, then Sokrates creates a link between the file and the component. If the name does not match any component names, Sokrates treats the name as the name of an external component. Sokrates displays the names of external components with grey color, to distinguish them from internal components.</p>
+
+<h3 id="custom-dependency-finders-linking-path-based-componentization-to-path-based-include-statements">Custom Dependency Finders: Linking Path-Based Componentization to Path-Based Include Statements</h3>
+
+<p>With the Sokrates configuration file, you can define your own pattern based dependency finders using the <a href="sstl">Sokrates String Transformation Language (SSTL)</a>. The key to this approach is defining a string transformation that maps a path or content of a file to a name of a component. For instance, let’s assume that we have a project with the following source code folders (Figure 2).</p>
+
+<pre>
+src/
+  vs/
+    base/
+      browser/
+      common/
+      node/
+      parts/
+      worker/
+</pre>
+
+<p><em><strong>Figure 2:</strong> An example folder structure taken from the VS Code project.</em></p>
+
+<p>Let’s also assume that we have componentized this project based on the folder depth at level 3 (src/vs/base/*). Figure 3 shows the componentization that, for our example, creates five components.</p>
+
+<p><img src="assets/images/sokrates/dependecies-patterns-components.png" alt="" /></p>
+
+<p><em><strong>Figure 3:</strong> The fragment of Sokrates report displaying the result of the folder-depth based componentization (level 3) of the source code structure described in Figure 2.</em></p>
+
+<p>The files in this folder are TypeScript files, and they import other TypesScript file vai import statement that user path-based referencing. I have identified the following convention that we can use to connect files from one component to files in other components:</p>
+<ul>
+  <li>look for all files with path like “.<em>[.]ts” AND content like “import .</em>from ‘vs/base.*”</li>
+  <li>for each file matching the previous criteria, extract, from the matched content lines, the following regex pattern “base(/[a-zA-Z0-9_]+|)”</li>
+  <li>in the extracted string replace “base(/)?” with “” (empty string)</li>
+</ul>
+
+<p>Figure 4 shows the JSON from the Sokrates configuration file the described steps.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"dependenciesFinder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"useBuiltInDependencyFinders"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nl">"metaRules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*[.]ts"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"import .*from 'vs/base.*"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"content"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"ignoreComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"nameOperations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extract"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"base(/[a-zA-Z0-9_]+|)"</span><span class="w">
+                        </span><span class="p">]</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replace"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"base(/)?"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">""</span><span class="w">
+                        </span><span class="p">]</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p><em><strong>Figure 4:</strong> A fragment of a <a href="https://d3axxy9bcycpv7.cloudfront.net/ts/vscode/config.json">Sokrates configuration file</a> defining a pattern-based dependency finder.</em></p>
+
+<p>When applied to the files, this leads to the dependency diagram shown in Figure 5 (the key is to transform import statements lines to get a string that matches the names of components obtained by path-based componentization).</p>
+
+<p><img src="assets/images/sokrates/dependencies-patterns-path.png" alt="" /></p>
+
+<p><em><strong>Figure 5:</strong> A visualization of measured dependencies.</em></p>
+
+<p>Sokrates also stores the evidence, actual content fragment that Sokrates used to define a dependency. Figure 6 shows the details of the “browser – common” dependencies.</p>
+
+<pre>
+from: browser
+to: common
+evidence:
+ - file: "src/vs/base/browser/browser.ts"
+   contains "import { Emitter, Event } from 'vs/base/common/event';"
+
+from: browser
+to: common
+evidence:
+ - file: "src/vs/base/browser/canIUse.ts"
+   contains "import * as platform from 'vs/base/common/platform';"
+
+from: browser
+to: common
+evidence:
+ - file: "src/vs/base/browser/contextmenu.ts"
+   contains "import { IAction, IActionRunner } from 'vs/base/common/actions';"
+
+from: browser
+to: common
+evidence:
+ - file: "src/vs/base/browser/dnd.ts"
+   contains "import { Disposable } from 'vs/base/common/lifecycle';"
+
+from: browser
+to: common
+evidence:
+ - file: "src/vs/base/browser/dom.ts"
+   contains "import { TimeoutTimer } from 'vs/base/common/async';"
+
+...
+
+</pre>
+
+<p><em><strong>Figure 6:</strong> A fragment of a Sokrates’ details file for dependencies from Figure 4. The file lists each dependency, as well as the content due to which Sokrates has decided to create a dependency.</em></p>
+
+<h3 id="custom-dependency-finders-linking-namespace-componentization-to-namespace-import-statements">Custom Dependency Finders: Linking Namespace Componentization to Namespace Import Statements</h3>
+
+<p>You can implement your own dependencies finder in a similar way as Sokrates implements package based built-in finders. For that purpose you need to define two things in a Sokrates configuration file:</p>
+<ul>
+  <li>a componentization based on file content (the name of a component is derived based on a file content)</li>
+  <li>a dependency finder based on a file content (the name of a dependant component is derived based on a file content)</li>
+</ul>
+
+<p>An example that I show here illustrates how to define these two elements for Java project, where a Java package is used as a component name. Figure 7 shows a fragment from a Sokrates configuration file illustrating dynamic componentization, where the name of a component in which a file is derived from the package name in which the file resides. Figure 8 shows another fragment from a Sokrates configuration file illustrating how to derive dependencies based on import statements to packages so that the name of components in dependencies matches the names of components from the componentization.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*[.]java"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package nl[.]obren[.]sokrates[.].*"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"content"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ignoreComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nameOperations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extract"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"nl[.]obren[.]sokrates[.][a-zA-Z0-9_]+[.][a-zA-Z0-9_]+"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replace"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"nl[.]obren[.]sokrates[.]"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">""</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p><em><strong>Figure 7:</strong> A fragment of a Sokrates configuration file defining component from Java package statements.</em></p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*[.]java"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"import nl[.]obren[.]sokrates[.].*"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"content"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ignoreComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nameOperations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extract"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"nl[.]obren[.]sokrates[.][a-zA-Z0-9_]+[.][a-zA-Z0-9_]+"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replace"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"nl[.]obren[.]sokrates[.]"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">""</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p><em><strong>Figure 8:</strong> A fragment of a Sokrates configuration file defining links to components from Java import statements.</em></p>
+
+<p>Figure 9 shows the resulting dependency graph based on the configuration from Figures 7 and 8 when applied on the Sokrates source code.</p>
+
+<p><img src="assets/images/sokrates/dependecies-sokrates-custom.png" alt="" /></p>
+
+<p><em><strong>Figure 9:</strong> The resulting dependency graph based on the configuration from Figure 7 and 8.</em></p>
+
+<h3 id="custom-dependency-finders-identifying-external-links">Custom Dependency Finders: Identifying External Links</h3>
+
+<p>You can also use custom dependency finders to find links to external components, such as external sites, APIs, or database tables. If Sokrates custom dependency finder gets the name of the component that does not match the component names defined in componentization, then Sokrates renders this “non-existent” component as external (grey color on dependency graphs). For example, while analyzing the VS Code project, we used this feature to find links to GitHub repositories from which VS code has reused the grammar or other programming language settings. Code this purpose we have defined a simple dependency finder, with the following script (Figure 10 shows the JSON fragment of this script implementing this logic)</p>
+<ul>
+  <li>find files with content like “.<em>github[.]com/[a-zA-Z0-9-_]+/[a-zA-Z0-9-_]+.</em>”</li>
+  <li>from the matching content line extract (“github[.]com/[a-zA-Z0-9-_]+/[a-zA-Z0-9-_]+”)</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"dependenciesFinder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"useBuiltInDependencyFinders"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nl">"metaRules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"pathPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"contentPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*github[.]com/[a-zA-Z0-9</span><span class="se">\\</span><span class="s2">-_]+/[a-zA-Z0-9</span><span class="se">\\</span><span class="s2">-_]+.*"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"content"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"ignoreComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"nameOperations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extract"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"github[.]com/[a-zA-Z0-9</span><span class="se">\\</span><span class="s2">-_]+/[a-zA-Z0-9</span><span class="se">\\</span><span class="s2">-_]+"</span><span class="w">
+                        </span><span class="p">]</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p><em><strong>Figure 10:</strong> A A fragment of the <a href="https://d3axxy9bcycpv7.cloudfront.net/ts/vscode/config.json">VS Code Sokrates configuration file</a> defining a dependency finder for links to external GitHub projects.</em></p>
+
+<p>Figure 11 shows the resulting dependency graph, and Figure 12 shows a few samples of Sokrates evidence for dependencies.</p>
+
+<p><img src="assets/images/sokrates/dependencies-patterns-dynamic-dependencies.png" alt="" /></p>
+
+<p><em><strong>Figure 11:</strong> A visualization of the measured GitHub project dependencies in the VS Code project. The measurements extract links from VS Code comments.</em></p>
+
+<p><a href="https://d3axxy9bcycpv7.cloudfront.net/ts/vscode/reports/html/Components.html">VS Code Components and Dependecies</a></p>
+
+<pre>
+from: extensions/html-language-features
+to: github.com/Microsoft/vscode-html-languageservice
+evidence:
+ - file: "extensions/html-language-features/package.nls.json"
+   contains "  "html.customData.desc": "A list of relative file paths pointing to JSON files following the [custom data format](https://github.com/Microsoft/vscode-html-languageservice/blob/master/docs/customData.md).\n\nVS Code loads custom data on startup to enhance its HTML support for the custom HTML tags, attributes and attribute values you specify in the JSON files.\n\nThe file paths are relative to workspace and only workspace folder settings are considered.","
+
+from: extensions/html-language-features
+to: github.com/Microsoft/vscode-html-languageservice
+evidence:
+ - file: "extensions/html-language-features/schemas/package.schema.json"
+   contains "              "markdownDescription": "A list of relative file paths pointing to JSON files following the [custom data format](https://github.com/Microsoft/vscode-html-languageservice/blob/master/docs/customData.md).\n\nVS Code loads custom data on startup to enhance its HTML support for the custom HTML tags, attributes and attribute values you specify in the JSON files.\n\nThe file paths are relative to workspace and only workspace folder settings are considered.","
+</pre>
+
+<p><em><strong>Figure 12:</strong> A fragment of a Sokrates’ details file for dependencies from Figure 11. The file lists each dependency, as well as the content due to which Sokrates has decided to create a dependency.</em></p>
+
+
+    </div><a class="u-url" href="/book/dependencies" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/book/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Examined Line: The Art of Source Code Analysis with Sokrates</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Examined Line: The Art of Source Code Analysis with Sokrates</li><li><a class="u-email" href="mailto:zeljko.obren@gmail.com">zeljko.obren@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.linkedin.com/in/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.twitter.com/zeljko_obren"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zeljko_obren</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A collection of articles on source code analysis with Sokrates.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

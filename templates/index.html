@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sokrates</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <style>
+        ${import style.css}
+    </style>
+    <script>
+        function openTab(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</head>
+<body style="margin: 20px">
+<table>
+    <tr>
+        <td>
+            <img src="assets/logo.png" class="logo">
+        </td>
+        <td style="padding-left: 32px">
+            <div style="font-size: 330%; font-weight: bold; margin-bottom: 12px">SOKRATES</div>
+            <div style="color: #a0a0a0; font-size: 150%">Polyglot source code examination tool</div>
+        </td>
+    </tr>
+</table>
+<div style="margin-top: 32px">
+    <div class="tab">
+        <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">HOME</button>
+        <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">INSTALL & USE</button>
+        <button id="config_tab" class="tablinks" onclick="openTab(event, 'config')">CONFIGURATION</button>
+        <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">EXAMPLES</button>
+        <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">FEATURES</button>
+        <button id="articles_tab" class="tablinks" onclick="openTab(event, 'articles')">ARTICLES</button>
+    </div>
+
+    <div id="home" class="tabcontent" style="display: block">
+        ${import home.html}
+    </div>
+
+    <div id="install" class="tabcontent">
+        ${import install.html}
+    </div>
+
+    <div id="config" class="tabcontent">
+        ${import config.html}
+    </div>
+
+    <div id="examples" class="tabcontent">
+        ${import examples.html}
+    </div>
+
+    <div id="features" class="tabcontent">
+        ${import features.html}
+    </div>
+
+    <div id="articles" class="tabcontent">
+        ${import articles.html}
+    </div>
+</div>
+<script>
+    const data = ${data};
+
+    let div = document.createElement('div');
+    document.body.appendChild(div);
+
+    let html = '';
+
+    div.outerHTML = html;
+
+</script>
+
+</body>
+</html>

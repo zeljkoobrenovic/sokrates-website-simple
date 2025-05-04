@@ -1,0 +1,149 @@
+<div class="card">
+    <h1>SOURCE CODE</h1>
+    <ul style="font-size: 120%">
+        <li><p><a href="https://github.com/zeljkoobrenovic/sokrates"
+                  target="_blank">github.com/zeljkoobrenovic/sokrates</a>
+        </p></li>
+    </ul>
+</div>
+
+<div>
+    <div class="card">
+        <h1>PRE-REQUIREMENTS</h1>
+        <ul>
+            <li>Java runtime</li>
+            <li><a href="https://graphviz.org/" target="_blank">Graphviz</a></li>
+            <ul>
+                <li>Sokrates automatically looks for Graphviz dot program at the following locations: "/opt/local/bin/dot", "/usr/local/bin/dot", "/usr/bin/dot",
+                    "c:\Program Files\Graphviz\dot.exe", "c:\Program Files (x86)\Graphviz\dot.exe"
+                </li>
+                <li>If on your machine Graphviz dot is installed on another location, you can provide that location to Sokrates by defining the GRAPHVIZ_DOT system variable.</li>
+            </ul>
+            <li>Optional set the <b>SOKRATES_ANALYSIS_DATE</b> system variable (in the YYYY-MM-dd format) to define the reference date for commit history analyses.
+                By default, Sokrates uses the current date to calculate the number of commits and contributors in different periods relative to the reference date
+                (e.g. past 30 days, past 90 days, past year).
+            </li>
+            <li>If you want to run Sokrates in a Docker container, see <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/dockerfile">Sokrates Dockerfile</a></li>
+        </ul>
+    </div>
+    <div class="card">
+        <h1>COMMAND LINE INTERFACE (CLI) JAR</h1>
+        <p>DOWNLOAD: <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">sokrates-LATEST.jar</a>
+            (40 MB)</p>
+        <div class="card">
+            <h3 style="background-color: #ededed; padding: 4px"><b>Command Line Usage:</b></h3>
+            <div style="" class="section">
+<pre style="">
+Usage: java -jar sokrates.jar &lt;command> &lt;options>
+
+Help: java -jar sokrates.jar &lt;command> -help
+
+Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
+
+* init: Creates a new Sokrates analysis configuration file based on standard and optional custom conventions
+   - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-help]
+
+* generateReports: Generates Sokrates reports based on the analysis configuration
+   - options: [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-internalGraphviz] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+
+* updateLandscape: Updates or creates a Sokrates landscape report, aggregating results of multiple analyses
+   - options: [-analysisRoot &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+
+* updateConfig: Updates an analysis configuration file and completes missing fields
+   - options: [-confFile &lt;arg>] [-skipComplexAnalyses] [-setCacheFiles &lt;arg>] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-help]
+
+* extractGitHistory: Extract a git history in a format used by Sokrates and saves it in the git-history.txt file
+   - options: [-analysisRoot &lt;arg>] [-help]
+
+* createConventionsFile: Create a new analysis conventions file and saves it in &lt;current-folder>/analysis_conventions.json
+
+* exportStandardConventions: Export standard Sokrates analysis convention to &lt;current-folder>/standard_analysis_conventions.json.
+
+* extractGitSubHistory: A utility function to split a git history file (git-history.txt) into smaller ones based on a commit file path prefix, removing the prefix from file path in split files
+   - options: [-prefix &lt;arg>] [-analysisRoot &lt;arg>] [-help]
+</pre>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div><b>CLI Usage Example 1. Analyze a single projects (Junit4): </b></div>
+            <div style="width: 100%; overflow-x: auto">
+    <pre style="background-color: #dedede; padding: 4px">
+    git clone https://github.com/junit-team/junit4
+    cd junit4
+
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">extractGitHistory</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">generateReports</span>
+
+    open _sokrates/reports/html/index.html
+  </pre>
+                <div><b>CLI Usage Example 2. Analyze multiple projects and create a landscape page that summarizes data from
+                    these
+                    two analyses:</b></div>
+                <pre style="background-color: #dedede; padding: 4px">
+    git clone https://github.com/junit-team/junit4
+    cd junit4
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">extractGitHistory</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">generateReports</span>
+
+    cd ..
+
+    git clone https://github.com/junit-team/junit5
+    cd junit5
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">extractGitHistory</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">generateReports</span>
+
+    cd ..
+
+    mkdir landscape
+    mv junit4/_sokrates landscape/junit4
+    mv junit5/_sokrates landscape/junit5
+
+    rm -rf junit4
+    rm -rf junit5
+
+    cd landscape
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">updateLandscape</span>
+
+    open _sokrates_landscape/index.html
+  </pre>
+                <div><b>CLI Usage Example 3. Analyzing a project using custom configurations:</b></div>
+                <div style="width: 100%; overflow-x: auto">
+    <pre style="background-color: #dedede; padding: 4px">
+    git clone https://github.com/junit-team/junit5
+    cd junit5
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">extractGitHistory</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span
+            style="background-color: yellow">createConventionsFile</span>
+    # edit the 'analysis_conventions.json' file to define your custom conventions
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init -conventionsFile analysis_conventions.json</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">generateReports</span>
+  </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h1>BIG SCALE ANALYSES: LANDSCAPE ANALYSIS OF ALL REPOSITORIES IN A GITHUB ORG</h1>
+        If you want to perform landscape analyses of all repositories in a GitHub organization, take a look at this project <a href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis"
+                                                                                                                               target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis</a>
+    </div>
+    <div class="card">
+        <h1>VISUAL EXPLORER</h1>
+        <p>DOWNLOAD: <a
+                href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-LATEST.jar">sokrates-explorer-LATEST.jar</a>
+            (78 MB)</p>
+        <p><b>NOTE: require JavaFX (download it and install it from <a ref="https://openjfx.io/">openjfx.io</a>)</b></p>
+        <div style="width: 100%; overflow-x: auto">
+    <pre>
+   java --module-path $JAVAFX_HOME/lib --add-modules=javafx.controls,javafx.web -jar sokrates-explorer-LATEST.jar
+  </pre>
+        </div>
+        <br/>
+        <img src="assets/explorer.png" style="width: 100%; max-width: 1024px">
+    </div>
+</div>

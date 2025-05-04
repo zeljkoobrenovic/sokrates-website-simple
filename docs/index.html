@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sokrates</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <style>
+        body {
+    font-family: Quicksand, Vollkorn, Ubuntu, Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+}
+
+.section {
+    margin: 10px;
+    border: 2px dashed lightgrey;
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+.inline-code {
+    background-color: lightyellow;
+    font-family: monospace;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+
+.logo {
+    height: 120px;
+    width: 120px;
+    border: 1px solid rgb(222, 222, 222);
+    border-radius: 50%;
+}
+
+@media (max-width: 800px) {
+    .card {
+        border: 1px solid lightgrey;
+        background-color: rgba(0, 0, 0, 0.01);
+        margin: 16px 6px 6px 6px;
+        padding: 10px;
+        width: calc(100% - 38px);
+        display: inline-block;
+        background-color: white;
+    }
+}
+
+@media (min-width: 801px) {
+    .card {
+        border: 1px solid lightgrey;
+        background-color: rgba(0, 0, 0, 0.01);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 14px;
+        padding: 16px;
+        width: calc(100% - 70px);
+        display: inline-block;
+        background-color: white;
+        border-radius: 8px;
+    }
+}
+
+.home-card {
+    border: 1px solid lightgrey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 0px;
+    padding: 16px;
+    width: calc(100% - 60px);
+    display: inline-block;
+    background-color: white;
+    border-radius: 8px;
+}
+
+h1 {
+    margin-top: 10px;
+    font-size: 180%;
+}
+    </style>
+    <script>
+        function openTab(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</head>
+<body style="margin: 20px">
+<table>
+    <tr>
+        <td>
+            <img src="assets/logo.png" class="logo">
+        </td>
+        <td style="padding-left: 32px">
+            <div style="font-size: 330%; font-weight: bold; margin-bottom: 12px">SOKRATES</div>
+            <div style="color: #a0a0a0; font-size: 150%">Polyglot source code examination tool</div>
+        </td>
+    </tr>
+</table>
+<div style="margin-top: 32px">
+    <div class="tab">
+        <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">HOME</button>
+        <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">INSTALL & USE</button>
+        <button id="config_tab" class="tablinks" onclick="openTab(event, 'config')">CONFIGURATION</button>
+        <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">EXAMPLES</button>
+        <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">FEATURES</button>
+        <button id="articles_tab" class="tablinks" onclick="openTab(event, 'articles')">ARTICLES</button>
+    </div>
+
+    <div id="home" class="tabcontent" style="display: block">
+        <div style="margin: 0px">
+  <p class="card">
+    <i style=" font-size: 24px">"Talk is expensive. Show me the code."</i><br><br><span style="font-size: 20px">― <b style="font-size: 20px">Željko Obrenović</b></span></p>
+  <div class="card">
+    <h1>What is Sokrates?</h1>
+    <ul style="padding-left: 20px">
+      <li>
+        Sokrates is a tool built by <b><a href="https://zeljkoobrenovic.com">Željko Obrenović</a></b>.
+        It implements his vision on how to document and analyze software architectures of complex systems.
+      </li>
+      <li>
+        Sokrates is provides a pragmatic, inexpensive way to extract rich data from any source code repositories. No need for long interviews and workshops. Just show the code.
+      </li>
+      <li>Sokrates can help you to understand your code by making visible the size, complexity, and
+        coupling of software, as well all people interactions and team topologies.
+      </li>
+      <li style="margin-top: 12px" *ngIf="!isSmallScreen">Sokrates borrows ideas from <b><a
+        href="https://queue.acm.org/detail.cfm?id=945136">code spelunking</a></b> tool,
+        in particular <a href="https://en.wikipedia.org/wiki/Grep">grep</a>, adding structure on top of regex source
+        code
+        searches.
+      </li>
+    </ul>
+  </div>
+  <br/>
+
+  <div class="card">
+    <h1>Sokrates in 5 minutes</h1>
+    <div style="display: inline-block; margin-right: 20px">
+      <p>See a 5 minutes video on using Sokrates CLI to analyze source code of Sokrates:</p>
+      <div>
+        <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/ZybfJQ8Ob7g"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+    </div>
+    <div style="display: inline-block;">
+      <p>See a 5 minutes video on using Sokrates Explorer to analyze source code of JUnit4:</p>
+      <div>
+        <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/kdLcUEqGXl0"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h1>Background</h1>
+    <div>
+      <p>Sokrates looks on the source code from a perspective of maintenance, making visible the size, complexity and
+        coupling of software.</p>
+
+      <p>For more details see my O'Reilly Video Training (from my time at Software Improvement Group):
+        <b><a href="https://player.oreilly.com/videos/9781491950791">Building Maintainable Software</a></b> (4 hours),
+        and
+        O'Reilly Webcast: <b><a href="https://www.oreilly.com/pub/e/3535">Building Maintainable Software</a></b>
+        (1 hour, together with <a href="https://www.linkedin.com/in/rob-van-der-leek-66596962/">Rob van der Leek</a>).
+      </p>
+      <p>
+        The fragment of my training video on building maintainable software is freely avaliable at Youtube:<br/><br/>
+        <iframe style="max-width: 560px" width="100%" height="315"
+                src="https://www.youtube.com/embed/8k14k3q5zDs?start=334" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+    </div>
+
+    <div id="install" class="tabcontent">
+        <div class="card">
+    <h1>SOURCE CODE</h1>
+    <ul style="font-size: 120%">
+        <li><p><a href="https://github.com/zeljkoobrenovic/sokrates"
+                  target="_blank">github.com/zeljkoobrenovic/sokrates</a>
+        </p></li>
+    </ul>
+</div>
+
+<div>
+    <div class="card">
+        <h1>PRE-REQUIREMENTS</h1>
+        <ul>
+            <li>Java runtime</li>
+            <li><a href="https://graphviz.org/" target="_blank">Graphviz</a></li>
+            <ul>
+                <li>Sokrates automatically looks for Graphviz dot program at the following locations: "/opt/local/bin/dot", "/usr/local/bin/dot", "/usr/bin/dot",
+                    "c:\Program Files\Graphviz\dot.exe", "c:\Program Files (x86)\Graphviz\dot.exe"
+                </li>
+                <li>If on your machine Graphviz dot is installed on another location, you can provide that location to Sokrates by defining the GRAPHVIZ_DOT system variable.</li>
+            </ul>
+            <li>Optional set the <b>SOKRATES_ANALYSIS_DATE</b> system variable (in the YYYY-MM-dd format) to define the reference date for commit history analyses.
+                By default, Sokrates uses the current date to calculate the number of commits and contributors in different periods relative to the reference date
+                (e.g. past 30 days, past 90 days, past year).
+            </li>
+            <li>If you want to run Sokrates in a Docker container, see <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/dockerfile">Sokrates Dockerfile</a></li>
+        </ul>
+    </div>
+    <div class="card">
+        <h1>COMMAND LINE INTERFACE (CLI) JAR</h1>
+        <p>DOWNLOAD: <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">sokrates-LATEST.jar</a>
+            (40 MB)</p>
+        <div class="card">
+            <h3 style="background-color: #ededed; padding: 4px"><b>Command Line Usage:</b></h3>
+            <div style="" class="section">
+<pre style="">
+Usage: java -jar sokrates.jar &lt;command> &lt;options>
+
+Help: java -jar sokrates.jar &lt;command> -help
+
+Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
+
+* init: Creates a new Sokrates analysis configuration file based on standard and optional custom conventions
+   - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-help]
+
+* generateReports: Generates Sokrates reports based on the analysis configuration
+   - options: [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-internalGraphviz] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+
+* updateLandscape: Updates or creates a Sokrates landscape report, aggregating results of multiple analyses
+   - options: [-analysisRoot &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+
+* updateConfig: Updates an analysis configuration file and completes missing fields
+   - options: [-confFile &lt;arg>] [-skipComplexAnalyses] [-setCacheFiles &lt;arg>] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-help]
+
+* extractGitHistory: Extract a git history in a format used by Sokrates and saves it in the git-history.txt file
+   - options: [-analysisRoot &lt;arg>] [-help]
+
+* createConventionsFile: Create a new analysis conventions file and saves it in &lt;current-folder>/analysis_conventions.json
+
+* exportStandardConventions: Export standard Sokrates analysis convention to &lt;current-folder>/standard_analysis_conventions.json.
+
+* extractGitSubHistory: A utility function to split a git history file (git-history.txt) into smaller ones based on a commit file path prefix, removing the prefix from file path in split files
+   - options: [-prefix &lt;arg>] [-analysisRoot &lt;arg>] [-help]
+</pre>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div><b>CLI Usage Example 1. Analyze a single projects (Junit4): </b></div>
+            <div style="width: 100%; overflow-x: auto">
+    <pre style="background-color: #dedede; padding: 4px">
+    git clone https://github.com/junit-team/junit4
+    cd junit4
+
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">extractGitHistory</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">generateReports</span>
+
+    open _sokrates/reports/html/index.html
+  </pre>
+                <div><b>CLI Usage Example 2. Analyze multiple projects and create a landscape page that summarizes data from
+                    these
+                    two analyses:</b></div>
+                <pre style="background-color: #dedede; padding: 4px">
+    git clone https://github.com/junit-team/junit4
+    cd junit4
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">extractGitHistory</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">generateReports</span>
+
+    cd ..
+
+    git clone https://github.com/junit-team/junit5
+    cd junit5
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">extractGitHistory</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">generateReports</span>
+
+    cd ..
+
+    mkdir landscape
+    mv junit4/_sokrates landscape/junit4
+    mv junit5/_sokrates landscape/junit5
+
+    rm -rf junit4
+    rm -rf junit5
+
+    cd landscape
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">updateLandscape</span>
+
+    open _sokrates_landscape/index.html
+  </pre>
+                <div><b>CLI Usage Example 3. Analyzing a project using custom configurations:</b></div>
+                <div style="width: 100%; overflow-x: auto">
+    <pre style="background-color: #dedede; padding: 4px">
+    git clone https://github.com/junit-team/junit5
+    cd junit5
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">extractGitHistory</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span
+            style="background-color: yellow">createConventionsFile</span>
+    # edit the 'analysis_conventions.json' file to define your custom conventions
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init -conventionsFile analysis_conventions.json</span>
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">generateReports</span>
+  </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h1>BIG SCALE ANALYSES: LANDSCAPE ANALYSIS OF ALL REPOSITORIES IN A GITHUB ORG</h1>
+        If you want to perform landscape analyses of all repositories in a GitHub organization, take a look at this project <a href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis"
+                                                                                                                               target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis</a>
+    </div>
+    <div class="card">
+        <h1>VISUAL EXPLORER</h1>
+        <p>DOWNLOAD: <a
+                href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-LATEST.jar">sokrates-explorer-LATEST.jar</a>
+            (78 MB)</p>
+        <p><b>NOTE: require JavaFX (download it and install it from <a ref="https://openjfx.io/">openjfx.io</a>)</b></p>
+        <div style="width: 100%; overflow-x: auto">
+    <pre>
+   java --module-path $JAVAFX_HOME/lib --add-modules=javafx.controls,javafx.web -jar sokrates-explorer-LATEST.jar
+  </pre>
+        </div>
+        <br/>
+        <img src="assets/explorer.png" style="width: 100%; max-width: 1024px">
+    </div>
+</div>
+
+    </div>
+
+    <div id="config" class="tabcontent">
+        <div class="" style="">
+    <div class="section" style="">
+        <div style="margin: 10px 10px 10px 10px;">
+            <h2 class="title">Configuration File for Project Analyses</h2>
+            <ul>
+                <li> Sokrates project analysis configuration is defined in a JSON file.</li>
+                <li>You can use the <span class="inline-code">init</span> command to generate default file for your project (see Download tab for
+                    details).
+                </li>
+                <li>The default location of the configuration file is <span class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/config.json&nbsp;</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/data/config.json" target="_blank"> See an example of a
+                        Sokrates configuration file ⤇ </a></li>
+                </ul>
+                <li>Based on this configuration Sokrates will generate a number of reports. The default reports folders is <span
+                        class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/reports/&nbsp;</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/html/index.html" target="_blank"> See an example of a
+                        Sokrates report ⤇ </a></li>
+                </ul>
+                <li> To learn more about details of the configuration file see the <a
+                        href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/core/CodeConfiguration.java"
+                        target="_blank">configuration file structure definition (in Java)</a>.
+                </li>
+            </ul>
+        </div>
+        <div>
+            <img src="book/assets/images/sokrates/config-overview.png" style="width: 640px" class="card">
+        </div>
+    </div>
+    <div class="section" style="">
+        <div style="margin: 10px 10px 10px 10px;"><h2 class="title">Configuration File for a Landscape Analysis</h2>
+            <ul>
+                <li> Sokrates landscape analysis configuration is defined in two JSON files: config.json and config-tags.json.</li>
+                <li>You can use the <span class="inline-code">updateLandscape</span> command to generate default files.</li>
+                <ul>
+                    <li>java -jar sokrates.jar updateLandscape [options]</li>
+                </ul>
+                <li>The default location of the configuration files is <span class="inline-code">&lt;your-project&gt;/_sokrates_landscape/</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Tomcat/_sokrates_landscape/config.json" target="_blank"> See an example
+                        of a Sokrates landscape configuration file ⤇ </a></li>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Tomcat/_sokrates_landscape/config-tags.json" target="_blank"> See an
+                        example of a Sokrates landscape tags configuration file ⤇ </a></li>
+                </ul>
+                <li>Based on this configuration Sokrates will generate a number the landscape reports. The default reports folders is <span
+                        class="inline-code">&lt;your-project&gt;/_sokrates_landscape/reports/</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank"> See an example of a
+                        Sokrates landscape report ⤇ </a></li>
+                </ul>
+                <li> To learn more about details of the configuration file see the <a
+                        href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/landscape/LandscapeConfiguration.java"
+                        target="_blank">configuration file structure definition (in Java)</a>.
+                </li>
+            </ul>
+        </div>
+        <div>
+            <img src="book/assets/images/sokrates/cmd-init-landscape.png" style="width: 640px" class="card">
+        </div>
+    </div>
+    <div class="section">
+        <h2 class="title">Configuring the Analysis Initialization</h2>
+        <ul>
+            <li>The <span class="inline-code">init</span> command creates a configuration file for project analyses. Without any parameters, this
+                command uses the standard conventions to generate a project analysis configuration.
+            </li>
+            <li>You can also use your own custom conventions to initialize projects and create new configuration files:
+                <ul>
+                    <li><pre style="background-color: #dedede; padding: 4px">    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span
+                            style="background-color: yellow">createConventionsFile</span>
+    # edit the 'analysis_conventions.json' file to define your custom conventions
+    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init -conventionsFile analysis_conventions.json</span></pre>
+                    </li>
+                    <li><a href="assets/conf/sokrates_conventions.json" target="_blank">See example of a custom conventions file</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul style="margin-top: 24px;">
+            <li>The <span class="inline-code">exportStandardConventions</span> command exports Sokrates conventions to a JSON file that you can
+                use as inspiration for your custom conventions:
+            </li>
+            <ul>
+                <li>
+                    <pre style="background-color: #dedede;">    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span class="inline-code">exportStandardConventions</span></pre>
+                </li>
+                <li><a href="assets/conf/standard_analysis_conventions.json" target="_blank">See example of a standard_analysis_conventions.json
+                    file</a></li>
+            </ul>
+        </ul>
+        <ul style="margin-top: 24px;">
+            <li> To learn more about details of the configuration file see the <a
+                    href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/scoping/custom/CustomScopingConventions.java"
+                    target="_blank">configuration file structure definition (in Java)</a>.
+            </li>
+        </ul>
+        <div>
+            <img src="book/assets/images/sokrates/cmd-init.png" style="width: 640px" class="card">
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    <div id="examples" class="tabcontent">
+        <div>
+    <h1>Examples: Sokrates Analyses of Big Projects and Whole GitHub Organizations</h1>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/linux/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/linux.png" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Linux Source Code Landscape</div>
+            <div style="font-size: 90%; color: black"><b>23</b> MLOC, <b>17,000</b> contributors, <b>330K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/logo.png" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Apache Software Foundation (ASF) Projects</div>
+            <div style="font-size: 90%; color: black"><b>1,100</b>+ repos, <b>100</b> MLOC, <b>24,000</b> contributors, <b>2M</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/amzn/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/amzn.png" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Amazon's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>2,700</b> repos, <b>60</b> MLOC, <b>13,000</b> contributors, <b>600K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/google/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/google.png" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Google's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>1,000</b> repos, <b>40</b> MLOC, <b>12,000+</b> contributors, <b>1.2M</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/meta/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/meta.png" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Facebook/Meta's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>150</b> repos, <b>37</b> MLOC, <b>14,000</b> contributors, <b>900K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/microsoft/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/microsoft.png" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Microsoft's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>2,500</b> repos, <b>47</b> MLOC, <b>18,000</b> contributors, <b>1.2M</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/github/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="https://avatars.githubusercontent.com/github" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">GitHub's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>200</b> repos, <b>2</b> MLOC, <b>4,400</b> contributors, <b>1.2M</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/twitter/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/twitter.png" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Twitter's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>60</b> repos, <b>850</b> KLOC, <b>1,000</b> contributors, <b>45K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/spotify/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/spotify.png" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Spotify's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>100+</b> repos, <b>1.7</b> MLOC, <b>2,000+</b> contributors, <b>95K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/apple/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/apple.jpeg" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Apple's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>100</b> repos, <b>4.5</b> MLOC, <b>1,700</b> contributors, <b>200K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/uber/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="https://avatars.githubusercontent.com/uber" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Uber's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>80</b> repos, <b>1.1</b> MLOC, <b>1,200</b> contributors, <b>48K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/netflix/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="https://avatars.githubusercontent.com/netflix" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Netflix's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>70</b> repos, <b>1.6</b> MLOC, <b>2,000</b> contributors, <b>80K</b> commits</div>
+        </a>
+    </div>
+    <div style="margin: 12px; padding: 3px; margin-bottom: 50px">
+        <b><u>NOTE</u></b>: If you want to perform similar landscape analyses of all repositories in a GitHub organization, take a look at this project <a
+            href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis</a>
+    </div>
+
+    <h1>Examples: Sokrates Analyses of Individual Repositories</h1>
+
+    <div class="ng-star-inserted">
+        <div class="card">
+            <img style="width: 48px; height: 48px; object-fit: contain"
+                 src="https://d3axxy9bcycpv7.cloudfront.net/assets/logos/tomcat.png">
+            <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
+                <div style="font-size: 120%; font-weight: bold">Tomcat</div>
+            </div>
+            <div><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/html/index.html">View Sokrates documentation</a> ⤇</div>
+        </div>
+        <div class="card">
+            <img style="width: 48px; height: 48px; object-fit: contain"
+                 src="https://d3axxy9bcycpv7.cloudfront.net/assets/logos/kafka.png">
+            <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
+                <div style="font-size: 120%; font-weight: bold">Apache Kafka</div>
+            </div>
+            <div><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/asf/kafka/kafka/html/index.html">View Sokrates documentation</a> ⤇</div>
+        </div>
+        <div class="card">
+            <img style="width: 48px; height: 48px; object-fit: contain"
+                 src="https://d3axxy9bcycpv7.cloudfront.net/assets/logos/activemq.png">
+            <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
+                <div style="font-size: 120%; font-weight: bold">ActiveMQ</div>
+            </div>
+            <div><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/asf/activemq/activemq/html/index.html">View Sokrates documentation</a> ⤇</div>
+        </div>
+    </div>
+</div>
+    </div>
+
+    <div id="features" class="tabcontent">
+        <div style="transform: none;">
+    <div>
+        <div class="card">
+            <h2><img src="assets/icons/overview.svg"
+                     style="width: 58px; vertical-align: middle"> Source Code Overview</h2>
+            <ul>
+                <li>For analysis purposes Sokrates separate files in scope into several categories: main, test, generated, deployment and build, and other.</li>
+                <li>The <b>main</b> category contains all <b>manually</b> created source code files that are being used in
+                    the <b>production</b>.
+                </li>
+                <li>Files in the <b>main</b> category are used as input for other analyses: logical decomposition, concerns, duplication, file
+                    size, unit size, and cyclomatic complexity.
+                </li>
+                <li><b>Test</b> source code files are used only for testing of the product. These files are normally not deployed to production.
+                </li>
+                <li><b>Build and deployment</b> source code files are used to configure or support build and deployment process.</li>
+                <li><b>Generated</b> source code files are automatically generated files that have not been manually changed after generation.
+                </li>
+                <li>While a source code folder may contain a number of files, Sokrates is primarily interested in the source code files that are being written and
+                    maintained by developers.
+                </li>
+                <li>Files containing binaries, documentation, or third-party libraries, for instance, are excluded from analysis. The exception are third-party
+                    libraries that have been changed by developers.
+                </li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/SourceCodeOverview.html" target="_blank"> See an
+                    example of a Sokrates Source Code Overview report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/duplication.svg"
+                     style="width: 58px; vertical-align: middle"> Duplication</h2>
+            <ul>
+                <li>For duplication, Sokrates look at places in code where there are six or more lines of code that are exactly the same.</li>
+                <li>Before duplication is calculated, the code is cleaned to remove empty lines, comments, and frequently duplicated constructs such as imports.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/Duplication.html" target="_blank"> See an example of a
+                    Sokrates Duplication report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/dependencies.svg"
+                     style="width: 58px; vertical-align: middle"> Logical Decomposition: Components and Dependencies
+            </h2>
+            <p><b>Logical decomposition</b> is a representation of the organization of the <b>main</b> source code, where
+                every and each file is put in exactly one <b>logical component</b>.</p>
+            <ul>
+                <li>A software system can have <b>one</b> or <b>more</b> logical decompositions.</li>
+                <li>A logical decomposition can be defined in two ways.</li>
+                <li>First approach is based on the <b>folders structure</b>. Components are mapped to folders at defined <b>folder
+                    depth</b> relative to the source code root.
+                </li>
+                <li>Second approach is based on <b>explicit</b> definition of each component. In such explicit definitions, components are
+                    explicitly <b>named</b> and their files are selected based on explicitly defined path and content <b>filters</b>.
+                </li>
+                <li>A logical decomposition is considered <b>invalid</b> if a file is selected into <b>two or more
+                    components</b>.This constraint is introduced in order to facilitate measuring of <b>dependencies</b> among components.
+                </li>
+                <li>Files not assigned to any component are put into a special "<b>Unclassified</b>" component.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/java/sokrates/reports/html/Components.html" target="_blank"> See an example of
+                    a Sokrates Components and Dependencies report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/concerns.svg"
+                     style="width: 58px; vertical-align: middle"> Features of Interest</h2>
+            <ul>
+                <li>Features of interests are cross-curring concerns of a software system that can be identified thourgh patterns in code.</li>
+                <li>A single fetaure of interest may be present in multiple files. One source code file may contain multiple concerns.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/FeaturesOfInterest.html" target="_blank"> See an
+                    example of a Sokrates Features of Interest report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/files.svg" style="width: 58px; vertical-align: middle">
+                File Size</h2>
+            <ul>
+                <li>File size measurements show the distribution of size of files.</li>
+                <li>Files are classified in four categories based on their size (lines of code): 1-200 (small files), 200-500 (medium size files), 501-1000 (long
+                    files), 1001+ (very long files).
+                </li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/FileSize.html" target="_blank"> See an example of a
+                    Sokrates File Size report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/units.svg" style="width: 58px; vertical-align: middle">
+                Unit Size</h2>
+            <ul>
+                <li>Unit size measurements show the distribution of size of units of code (methods, functions...).</li>
+                <li>Units are classified in four categories based on their size (lines of code): 1-20 (small units), 20-50 (medium size units), 51-100 (long units),
+                    101+ (very long units).
+                </li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/UnitSize.html" target="_blank"> See an example of a
+                    Sokrates Unit Size report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/conditional.svg"
+                     style="width: 58px; vertical-align: middle"> Conditional Complexity </h2>
+            <ul>
+                <li>Conditional complexity (also known as cyclomatic complexity) is a software metric (measurement), used to indicate the complexity of a program. It
+                    is a quantitative measure of the number of linearly independent paths through a program's source code.
+                </li>
+                <li>Conditional complexity is measured at the unit level (methods, functions...).</li>
+                <li>Units are classified in four categories based on the measured McCabe index: 1-5 (simple units), 6-10 (medium complex units), 11-25 (complex units),
+                    26+ (very complex units).
+                </li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/ConditionalComplexity.html" target="_blank"> See an
+                    example of a Sokrates Conditional Complexity report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/conditional.svg"
+                     style="width: 58px; vertical-align: middle"> File Age </h2>
+            <ul>
+                <li>File age measurements show the distribution of file ages (days since the first commit) and the recency of file updates (days since the latest
+                    commit).
+                </li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/FileAge.html" target="_blank"> See an example of a
+                    Sokrates File Age report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/conditional.svg"
+                     style="width: 58px; vertical-align: middle"> File Change Frequency (Churn) </h2>
+            <ul>
+                <li>File change frequency (churn) measurements show the distribution of the number of file updates (days with at least one commit).</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/FileChangeFrequency.html" target="_blank"> See an
+                    example of a Sokrates File Change Frequency report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/file_history.svg"
+                     style="width: 58px; vertical-align: middle"> Temporal Dependencies</h2>
+            <ul>
+                <li>A temporal dependency occurs when a developer changes two or more files at the same time (in the same commit).</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/FileTemporalDependencies.html" target="_blank"> See an
+                    example of a Sokrates Temporal Dependencies report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/metrics.svg" style="width: 58px; vertical-align: middle">
+                Detailed Metrics</h2>
+            <ul>
+                <li>A list of all measurements.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/Metrics.html" target="_blank"> See an example of a
+                    Sokrates Metrics report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/trend.svg" style="width: 58px; vertical-align: middle">
+                Trend</h2>
+            <ul>
+                <li>Trend report shows difference in metric between the latest measurements and previous reference measurements.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/Trend.html" target="_blank"> See an example of a
+                    Sokrates Trend report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/goal.svg" style="width: 58px; vertical-align: middle">
+                Goals &amp; Controls</h2>
+            <ul>
+                <li>A semaphore-like controls, to get warnings based on the range or metric values.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Airflow/airflow/html/Controls.html" target="_blank"> See an example of a
+                    Sokrates Controls report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>Supported Languages</h2>
+            <p>Any textual file can be analyzed in Sokrates with standard analyses (empty lines cleaning, source code overview, duplication, file size, file age, file
+                change frequency, temporal dependencies, committers &amp; contributions, features of interest, findings, metrics, controls).</p>
+            <p>For several popular languages Sokrates provides more in-depth analyses:</p>
+            <div style="width: 100%; overflow-x: auto">
+                <table>
+                    <th style="text-align: left">Language</th>
+                    <th style="text-align: left">Units Analysis</th>
+                    <th style="text-align: left">Dependencies</th>
+                    <th style="text-align: left">Extensions</th>
+                    <th style="text-align: left">Details</th>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Abap</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.abap</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">AdabasNatural</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.nsd .nsh .nsn .nsm .nsp</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">CSharp</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.cs .csx .cake</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">CStyle</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.c .idc .cats</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Cfg</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.cfg</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">ClojureLang</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.cljscm .wisp .cl2 .hl .clj .rg .boot .cljc .cljx .cljs .hic .edn</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Cpp</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.ipp .cc .h .hpp .cp .m .hh .c++ .hxx .tpp .mm .cpp .re .cxx .dart .h++ .tcc .inl .ino</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Css</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.css</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">D</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.d .di</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Dbc</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.dbc</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">GoLang</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.v .go</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Gradle</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.gradle</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Groovy</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.grt .gvy .groovy .gtpl</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Hack</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.hack</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Html</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.ascx .jsx .haml .mustache .htm .ashx .razor .erb .asmx .vue .aspx .soy .mtml .njk .deface .phtml .st .asp
+                            .jinja .handlebars .vbhtml .jinja2 .hbs .xhtml .axd .rtml .hhi .cshtml .xht .ecr .html .asax .eex
+                        </td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Java</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.ck .j .java .uc</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">JavaScript</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.jsb .jsm .cy .pac .es .xsjslib .jake .gs .cjs .sjs .js .es6 .xsjs .frag ._js .njs .ssjs .bones .jscad .jsfl
+                        </td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Json</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.sublime-mousemap .sublime-theme .sublime-menu .webmanifest .json .tfstate.backup .geojson .sublime-commands
+                            .yyp .avsc .sublime_session .tfstate .sublime-workspace .gltf .sublime_metrics .json5 .sublime-macro .sublime-project .jsonc .webapp .ice .jsonl .har .topojson
+                            .jsonld .yy .mcmeta .sublime-completions .sublime-settings .sublime-build .jsoniq .sublime-keymap .JSON-tmLanguage
+                        </td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Jsp</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.jsp .gsp</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Julia</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.jl</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Kotlin</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.ktm .kts .kt</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Less</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.less</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Lua</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.wlua .rbxs .rockspec .p8 .nse .pd_lua .lua</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">ObjectPascal</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.dfm .p .pas .dpr .pascal .lpr</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Perl</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.al .t .ph .pl .plx .pm .psgi .perl</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Php</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.aw .php .php4 .php5 .php3 .phpt .phps .ctp .inc</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">PlSql</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.plsql .pck .pkb .pks .plb .pls</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Puppet</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.pp</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Python</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.numpyw .pyde .xpy .wsgi .eb .gn .smk .gyp .rpy .pytb .py .numsc .numpy .gypi .lmi .py3 .pxd .pxi .pyi .pyp
+                            .pyt .pyx .pyw .tac
+                        </td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">R</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.rda .r .rds .rdata .rd .rsx</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Ruby</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.rbi .rbw .rbx .podspec .god .gemspec .rbuild .watchr .ruby .rb .eye .ru .builder .rabl .jbuilder .thor .mspec
+                            .rake
+                        </td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Rust</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.rlib .in .rs</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Sass</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.sass</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Scala</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.sbt .kojo .sc .scala</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Scss</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.scss</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Shell</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.ksh .zsh .tool .sh .bats .tmux .bash .command</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Sql</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.viw .bdy .fnc .tpb .tps .spc .trg .cql .sql .mysql .prc .vw .tab .udf .ddl</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Swift</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.swift</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Thrift</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.thrift</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">TypeScript</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.tsx .ts</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">VisualBasic</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.bas .frm .cls .frx .ctl .vb .vba .vbs</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Xml</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.xmi .xml .sch .axml .csdef .glade .gml .gmx .wsdl .nuspec .cscfg .xsp-config .xquery .ct .rdf .xpl .xql .xqm
+                            .vcxproj .xacro .xqy .csproj .mxml .xsd .xsl .ivy .cproject .xproc .x3d .wsf .xul .tml .shproj .xproj .admx .ccproj .odd .adml .fsproj .wixproj .scxml .psc1
+                            .targets .ncl .pluginspec .dita .workflow .sublime-snippet .wxi .wxl .wxs .xliff .fxml .ditamap .stTheme .jelly .dotsettings .clixml .ant .tmTheme .xslt .csl
+                            .pt .ccxml .builds .pkgproj .natvis .storyboard .sfproj .vsixmanifest .rss .tmSnippet .launch .xaml .nproj .ui .dll.config .ux .grxml .zcml .tmPreferences
+                            .xspec .tmLanguage .filters .xq .vbproj .mod .osm .srdf .props .ps1xml .depproj .kml .jsproj .plist .tmCommand .proj .ndproj .ditaval .owl .xml.dist .xib
+                            .mdpolicy .iml .mjml .vxml .vstemplate .urdf .resx .xlf .vssettings
+                        </td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Yaml</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.sed .syntax .reek .rviz .mir .tf .yaml .sublime-syntax .yaml-tmlanguage .yml</td>
+                        <td><a href="javascript:void(0)">Details...</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    <div id="articles" class="tabcontent">
+        <div class="section" style="padding: 30px">
+    <div style="transform: none;"><br style="">
+        <h1 style="margin-top: -12px">The Sokrates Book</h1>
+        <div _nghost-kxy-c10="" style="">
+            <div style="vertical-align: top; padding-top: 0">
+                <ul>
+                    <li>I am working on a book about Sokrates: <a href="https://sokrates.dev/book/" target="_blank">
+                        <b>Examined Line: The Art of Source Code Analysis with Sokrates</b>. </a></li>
+                    <li>You can <a href="https://sokrates.dev/book/" target="_blank"><b>read the draft of the book</b></a>
+                        online.
+                    </li>
+                    <li>The book is about 70% complete (an not polished).</li>
+                </ul>
+            </div>
+            <div style=" margin-left: 38px; "><a href="https://sokrates.dev/book/" style="margin: 0; padding: 0" target="_blank">
+                <img src="assets/book.png"
+                     style="max-width: 300px; width: calc(100%); margin: 0; margin: 4px 4px 0px 4px; padding: 0"></a>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+<script>
+    const data = [{"title": "asf", "folder": "asf", "projects": [{"name": "Tomcat", "description": "An open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies.", "logoLink": "https://d3axxy9bcycpv7.cloudfront.net/assets/logos/tomcat.png", "links": [{"label": "Github Repo", "href": "https://github.com/apache/tomcat"}], "id": "Tomcat/tomcat"}, {"name": "Apache Kafka", "description": "A unified, high-throughput, low-latency platform for handling real-time data feeds.", "logoLink": "https://d3axxy9bcycpv7.cloudfront.net/assets/logos/kafka.png", "links": [{"label": "Homepage", "href": "https://kafka.apache.org/"}], "id": "Other/kafka"}, {"name": "ActiveMQ", "description": "A high performance Apache 2.0 licensed Message Broker and JMS 1.1 implementation.", "logoLink": "https://d3axxy9bcycpv7.cloudfront.net/assets/logos/activemq.png", "links": [{"label": "ActiveMQ", "href": "https://github.com/apache/activemq"}], "id": "ActiveMQ/activemq"}]}];
+
+    let div = document.createElement('div');
+    document.body.appendChild(div);
+
+    let html = '';
+
+    div.outerHTML = html;
+
+</script>
+
+</body>
+</html>

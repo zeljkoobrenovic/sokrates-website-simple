@@ -1,0 +1,43 @@
+---
+layout: post
+title:  "Get Your Hands Dirty"
+date:   2020-05-25 19:12:01 +0100
+author: by Željko Obrenović (zeljkoobrenovic.com)
+permalink: hands-on
+icon: hands_on
+excerpt: "To learn how to use Sokrates, like with any software tools or programming languages, you need to do some hands-on work. Install Sokrates, and use this to analyze your code."
+---
+
+To learn how to use Sokrates, like with any software tools or programming languages, you need to do some hands-on work. [Install Sokrates](install), and use this to analyze your code. For instance, Figure 1 illustrates how to create an initial analysis. This analysis will generate an initial configuration file under **_sokrates/config.json**, and reports under the **_sokrates/reports/html** folder. Explore these artifacts to get a basic familiarity with Sokrates projects.
+
+{% highlight sh %}
+    git clone https://github.com/junit-team/junit5
+    cd junit5
+    java -jar sokrates-LATEST.jar extractGitHistory
+
+    java -jar sokrates-LATEST.jar init
+    java -jar sokrates-LATEST.jar generateReports
+
+    open _sokrates/reports/html/index.html
+{% endhighlight %}
+
+
+<br/>
+See a 5 minutes video on using [Sokrates CLI](cli) to analyze source code of Sokrates:
+
+<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="480" src="https://www.youtube.com/embed/ZybfJQ8Ob7g" style="max-width: 1024px" width="100%"></iframe>
+
+<br/>
+<br/>
+See a 5 minutes video on using [Sokrates Explorer](explorer) to analyze source code of JUnit4:
+
+
+<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/kdLcUEqGXl0" style="max-width: 1024px" width="100%"></iframe>
+
+<br/>
+<br/>
+
+The [Sokrates website](https://www.sokrates.dev/) provides a gallery with the results of analyses of 66 open-source projects in 24 programming languages. Each project includes both the results of Sokrates analyses as well as a configuration file used to configure the analysis.
+
+![](assets/images/sokrates/sokrates-gallery.png)
+***Figure 1:** The screenshot of the Sokrates' gallery. The gallery is a collection of Sokrates' projects, with the analysis of popular open-source projects.*

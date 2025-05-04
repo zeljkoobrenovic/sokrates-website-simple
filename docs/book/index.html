@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Examined Line: The Art of Source Code Analysis with Sokrates | A collection of articles on source code analysis with Sokrates.</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A collection of articles on source code analysis with Sokrates." />
+<meta property="og:description" content="A collection of articles on source code analysis with Sokrates." />
+<link rel="canonical" href="/book/" />
+<meta property="og:url" content="/book/" />
+<meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
+<script type="application/ld+json">
+{"url":"/book/","headline":"Examined Line: The Art of Source Code Analysis with Sokrates","name":"Examined Line: The Art of Source Code Analysis with Sokrates","description":"A collection of articles on source code analysis with Sokrates.","@type":"WebSite","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/book/">Examined Line: The Art of Source Code Analysis with Sokrates</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-129891352-1');
+</script>
+
+
+<div class="home"><p><img src="assets/images/sokrates/the_death_of_socrates.jpg" alt="Under the hood" /></p>
+
+<h1 style="margin-top:60px; margin-bottom: 20px; font-weight: bold">Intro</h1>
+  <ul class="post-list"><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/sokrates.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/philosophy">
+                Background: Sokrates Philosophy
+              </a>
+            </h3>
+            <i>"Know your code! The unexamined code is not worth maintaining." Sokrates helps you understand your code by making visible the size, complexity, and coupling of software.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/usage.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/usage">
+                Using Sokrates
+              </a>
+            </h3>
+            <i>You can use Sokrates in four modes: the analyze and reflect mode, the interactive explorations mode, the traffic lights mode, the software architecture documentation mode</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/reports.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/reports">
+                Begin With the End in Mind: Sokrates Reports
+              </a>
+            </h3>
+            <i>Before we zoom into the details of Sokrates, let's first see what insights Sokrates can give you. Sokrates makes visible the size, complexity, and coupling of software. More specifically, Sokrates generates several views on your source code, describing the overall source code characteristics, duplication, components, dependencies, conditional complexity, etc.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/hands_on.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/hands-on">
+                Get Your Hands Dirty
+              </a>
+            </h3>
+            <i>To learn how to use Sokrates, like with any software tools or programming languages, you need to do some hands-on work. Install Sokrates, and use this to analyze your code.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><h1 style="margin-top:90px; margin-bottom: 20px; font-weight: bold">Configuring and Scoping</h1><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/configuring.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/configuring">
+                Sokrates Configuration File
+              </a>
+            </h3>
+            <i>Sokrates analyses take two inputs: the actual source code, including all folders and files, and a configuration file, which describes how Sokrates should view and analyze the source code.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/scoping.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/scoping">
+                Scoping
+              </a>
+            </h3>
+            <i>Scoping defines which parts of source code you want to analyze in detail and which parts to ignore. The code that developers wrote manually is the most important. It contains critical content for understanding the system's unique structure, logic, and team's design decisions.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/logical-decomposition.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/logical-decomposition">
+                Logical Decompositions
+              </a>
+            </h3>
+            <i>Logical decomposition is a view on the organization of the main source code. In a logical decomposition, you define components and rules to include files in the components so that each file ends in exactly one component.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/concerns.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/concerns">
+                Concerns
+              </a>
+            </h3>
+            <i>Concerns are any aspects of a software system that can be identified thourgh patterns in code.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><h1 style="margin-top:90px; margin-bottom: 20px; font-weight: bold">Sokrates' System Analyses</h1><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/process.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/processing">
+                Sokrates Analysis Overview
+              </a>
+            </h3>
+            <i>Sokrates processes source code in multiple stages, some of which are optional. The analysis starts with scoping, continuing through an examination of individual files and units, ending with an aggregation of results and export of reports.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/cleaning.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/cleaning">
+                Code Cleaning
+              </a>
+            </h3>
+            <i>As the first step in its analysis, Sokrates cleans the code to simplify analyses and to improve their reliability. Cleaning includes removal of comments, empty lines, and long string constants.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/file-size.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/file-size">
+                File-Level Measurements: File Size
+              </a>
+            </h3>
+            <i>Sokrates measures the size of the file in lines of code, ignoring empty lines and comments.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/file-history.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/history">
+                File-Level Measurements: File Age Analysis
+              </a>
+            </h3>
+            <i>File history analysis takes as an input the list of dates on which source code files changes and studies these dates to understand how frequently developers have changed the files, how old the files are, and how recently developers have updated them.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/file-history.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/history">
+                File-Level Measurements: File Change Frequency Analysis
+              </a>
+            </h3>
+            <i>File history analysis takes as an input the list of dates on which source code files changes and studies these dates to understand how frequently developers have changed the files, how old the files are, and how recently developers have updated them.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/file-history.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/history">
+                File-Level Measurements: Temporal Dependencies Analysis
+              </a>
+            </h3>
+            <i>File history analysis takes as an input the list of dates on which source code files changes and studies these dates to understand how frequently developers have changed the files, how old the files are, and how recently developers have updated them.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/file-history.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/history">
+                File-Level Measurements: Temporal Dependencies Analysis
+              </a>
+            </h3>
+            <i>File history analysis takes as an input the list of dates on which source code files changes and studies these dates to understand how frequently developers have changed the files, how old the files are, and how recently developers have updated them.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/units.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/units">
+                Unit-Level Measurements
+              </a>
+            </h3>
+            <i>Depending on a language, a unit can be a method, function procedure. Sokrates measures two things about each unit: size and conditional complexity.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/duplication.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/duplication">
+                Duplication Analysis
+              </a>
+            </h3>
+            <i>For duplication, Sokrates look at places in code where there are six or more lines of code that are the same.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/dependecies-pattern.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/dependencies">
+                Finding Dependencies based on Text Patterns
+              </a>
+            </h3>
+            <i>Sokrates analyses dependencies through simple text patterns searches.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/dependencies-duplication.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/dependencies-alt">
+                Finding Dependencies through Duplication and Change History
+              </a>
+            </h3>
+            <i>Sokrates introduces two additional dependency measurements: dependency based on duplication between files and dependencies based on the history of file changes.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/aggregate.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/aggregation">
+                Aggregating Measurements
+              </a>
+            </h3>
+            <i>Sokrates performs aggregation at three levels: the overall project level, the file type level (based on file extension), and the logical decomposition level.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/metrics-table.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/metrics">
+                Metrics Table
+              </a>
+            </h3>
+            <i>The metrics table is a list of name-value pairs, a linearized list of all Sokrates aggregated measurements. Sokrates employs the metrics table to define goals and controls and in trend analyses.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/controls.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/controls">
+                Controls
+              </a>
+            </h3>
+            <i>In Sokrates, you can define traffic lights like controls. For each of the metrics that Sokrates measures, you can specify a monitor with the threshold and tolerance. Sokrates will then generate a report labeling each control with one of the following states. OK (green) means that the measured value is below the threshold. Tolerant (yellow) means that the measured value is above the threshold but within the tolerance range. Failed (red) means that the measured value is above the threshold and the tolerance level.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/trends.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/trends">
+                Trend Analysis
+              </a>
+            </h3>
+            <i>Trend analysis shows the difference between values measured at different times, comparing the results of the current analysis with previous reports.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><h1 style="margin-top:90px; margin-bottom: 20px; font-weight: bold">Landscape Analysis</h1><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/landscape.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/landscape">
+                Landscape Analysis Overview
+              </a>
+            </h3>
+            <i>The Sokrates landscape analysis aggregates and indexes the Sokrates project analysis reports,  providing a centralized and uniform view on multiple Sokrates projects. </i>
+          </td>
+        </tr>
+      </table>
+    </li><li><h1 style="margin-top:90px; margin-bottom: 20px; font-weight: bold">Appendixes</h1><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/regex.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/regex">
+                Appendix: Regular Expressions
+              </a>
+            </h3>
+            <i>You cannot efficiently use Sokrates if you do not know at least the basics of regular expressions. Sokrates uses regular expressions for two purposes: to filter and classify files, extract and manipulate text, name components, or identify dependencies.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/transformation.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/sstl">
+                Appendix: Sokrates String Transformation Language (SSTL)
+              </a>
+            </h3>
+            <i>The Sokrates String Transformation Language (SSTL) is a simple embedded programming language enabling you to transform a phrase extracted from a file path or file content into another string. You can use SSTL to define the names of components and identify dependencies among the components.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/install.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/install">
+                Appendix: Installation
+              </a>
+            </h3>
+            <i>You can install and run Sokrates in three ways. First, you can download the Sokrates command-line interface JAR file. Second, you can download the Sokrates Explorer JAR file. Lastly, you can build it from scratch from the Sokrates' GitHub repository.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/configuration-file.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/configuration">
+                Appendix: Sokrates Configuration File
+              </a>
+            </h3>
+            <i>Sokrates configuration is a JSON file. You can use create this file manually from scratch, or use the init command to generate a default file for your project.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/cli.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/cli">
+                Appendix: Command Line Interface (CLI)
+              </a>
+            </h3>
+            <i>Sokrates command-line interface (CLI) includes five commands: init, generateReports, updateConfig, initLandscape, and updateLandscape.</i>
+          </td>
+        </tr>
+      </table>
+    </li><li><span class="post-meta">&nbsp;</span>
+      <table>
+        <tr>
+          <td style="width: 80px">
+            <img src="assets/images/icons/explorer.png" style="width: 80px;">
+          </td>
+          <td>
+            <h3>
+              <a class="post-link" href="/book/explorer">
+                Appendix: Sokrates Explorer
+              </a>
+            </h3>
+            <i>Sokrates Explorer centralizes configuration, running of commands, and preview of analysis results in one tool. Explorer has a graphical user interface with a configuration editor, code preview panels, and several additional features that facilitate free exploration of code. With Explorer, you can almost instantly see how a change in a setting, e.g., adding a new rule for detecting test files, impacts the analysis results.</i>
+          </td>
+        </tr>
+      </table>
+    </li></ul>
+
+  <p class="feed-subscribe">
+    <a href="/book/feed.xml">
+      <svg class="svg-icon orange">
+        <use xlink:href="/book/assets/minima-social-icons.svg#rss"></use>
+      </svg>
+      <span>Subscribe</span>
+    </a>
+  </p></div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/book/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Examined Line: The Art of Source Code Analysis with Sokrates</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Examined Line: The Art of Source Code Analysis with Sokrates</li><li><a class="u-email" href="mailto:zeljko.obren@gmail.com">zeljko.obren@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.linkedin.com/in/zeljkoobrenovic"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zeljkoobrenovic</span></a></li><li><a href="https://www.twitter.com/zeljko_obren"><svg class="svg-icon"><use xlink:href="/book/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zeljko_obren</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A collection of articles on source code analysis with Sokrates.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

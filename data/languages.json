@@ -1,0 +1,921 @@
+[
+  {
+    "extensions": [
+      "bas",
+      "frm",
+      "cls",
+      "frx",
+      "ctl",
+      "vb",
+      "vba",
+      "vbs"
+    ],
+    "name": "VisualBasicAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "abap"
+    ],
+    "name": "AbapAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "less"
+    ],
+    "name": "LessAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "v",
+      "go"
+    ],
+    "name": "GoLangAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Basic heuristic dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "plsql",
+      "pck",
+      "pkb",
+      "pks",
+      "plb",
+      "pls"
+    ],
+    "name": "PlSqlAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Advanced heuristic dependency analysis (based on package names)"
+    ]
+  },
+  {
+    "extensions": [
+      "scss"
+    ],
+    "name": "ScssAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "css"
+    ],
+    "name": "CssAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "al",
+      "t",
+      "ph",
+      "pl",
+      "plx",
+      "pm",
+      "psgi",
+      "perl"
+    ],
+    "name": "PerlAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Basic heuristic dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "viw",
+      "bdy",
+      "fnc",
+      "tpb",
+      "tps",
+      "spc",
+      "trg",
+      "cql",
+      "sql",
+      "mysql",
+      "prc",
+      "vw",
+      "tab",
+      "udf",
+      "ddl"
+    ],
+    "name": "SqlAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "ksh",
+      "zsh",
+      "tool",
+      "sh",
+      "bats",
+      "tmux",
+      "bash",
+      "command"
+    ],
+    "name": "ShellAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "c",
+      "idc",
+      "cats"
+    ],
+    "name": "CStyleAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "sass"
+    ],
+    "name": "SassAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "sed",
+      "syntax",
+      "reek",
+      "rviz",
+      "mir",
+      "tf",
+      "yaml",
+      "sublime-syntax",
+      "yaml-tmlanguage",
+      "yml"
+    ],
+    "name": "YamlAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "swift"
+    ],
+    "name": "SwiftAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "dbc"
+    ],
+    "name": "DbcAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "ascx",
+      "jsx",
+      "haml",
+      "mustache",
+      "htm",
+      "ashx",
+      "razor",
+      "erb",
+      "asmx",
+      "vue",
+      "aspx",
+      "soy",
+      "mtml",
+      "njk",
+      "deface",
+      "phtml",
+      "st",
+      "asp",
+      "jinja",
+      "handlebars",
+      "vbhtml",
+      "jinja2",
+      "hbs",
+      "xhtml",
+      "axd",
+      "rtml",
+      "hhi",
+      "cshtml",
+      "xht",
+      "ecr",
+      "html",
+      "asax",
+      "eex"
+    ],
+    "name": "HtmlAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Advanced heuristic dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "aw",
+      "php",
+      "php4",
+      "php5",
+      "php3",
+      "phpt",
+      "phps",
+      "ctp",
+      "inc"
+    ],
+    "name": "PhpAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Basic heuristic dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "nsd",
+      "nsh",
+      "nsn",
+      "nsm",
+      "nsp"
+    ],
+    "name": "AdabasNaturalAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "jl"
+    ],
+    "name": "JuliaAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "ck",
+      "j",
+      "java",
+      "uc"
+    ],
+    "name": "JavaAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Advanced heuristic dependency analysis (based on package names)"
+    ]
+  },
+  {
+    "extensions": [
+      "jsb",
+      "jsm",
+      "cy",
+      "pac",
+      "es",
+      "xsjslib",
+      "jake",
+      "gs",
+      "cjs",
+      "sjs",
+      "js",
+      "es6",
+      "xsjs",
+      "frag",
+      "_js",
+      "njs",
+      "ssjs",
+      "bones",
+      "jscad",
+      "jsfl"
+    ],
+    "name": "JavaScriptAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "cs",
+      "csx",
+      "cake"
+    ],
+    "name": "CSharpAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Advanced heuristic dependency analysis (based on namespace heuristics)"
+    ]
+  },
+  {
+    "extensions": [
+      "pp"
+    ],
+    "name": "PuppetAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "sbt",
+      "kojo",
+      "sc",
+      "scala"
+    ],
+    "name": "ScalaAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Basic heuristic dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "thrift"
+    ],
+    "name": "ThriftAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "gradle"
+    ],
+    "name": "GradleAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Basic heuristic dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "cljscm",
+      "wisp",
+      "cl2",
+      "hl",
+      "clj",
+      "rg",
+      "boot",
+      "cljc",
+      "cljx",
+      "cljs",
+      "hic",
+      "edn"
+    ],
+    "name": "ClojureLangAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "numpyw",
+      "pyde",
+      "xpy",
+      "wsgi",
+      "eb",
+      "gn",
+      "smk",
+      "gyp",
+      "rpy",
+      "pytb",
+      "py",
+      "numsc",
+      "numpy",
+      "gypi",
+      "lmi",
+      "py3",
+      "pxd",
+      "pxi",
+      "pyi",
+      "pyp",
+      "pyt",
+      "pyx",
+      "pyw",
+      "tac"
+    ],
+    "name": "PythonAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Basic heuristic dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "dfm",
+      "p",
+      "pas",
+      "dpr",
+      "pascal",
+      "lpr"
+    ],
+    "name": "ObjectPascalAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "rbi",
+      "rbw",
+      "rbx",
+      "podspec",
+      "god",
+      "gemspec",
+      "rbuild",
+      "watchr",
+      "ruby",
+      "rb",
+      "eye",
+      "ru",
+      "builder",
+      "rabl",
+      "jbuilder",
+      "thor",
+      "mspec",
+      "rake"
+    ],
+    "name": "RubyAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "Basic heuristic dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "hack"
+    ],
+    "name": "HackAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "sublime-mousemap",
+      "sublime-theme",
+      "sublime-menu",
+      "webmanifest",
+      "json",
+      "tfstate.backup",
+      "geojson",
+      "sublime-commands",
+      "yyp",
+      "avsc",
+      "sublime_session",
+      "tfstate",
+      "sublime-workspace",
+      "gltf",
+      "sublime_metrics",
+      "json5",
+      "sublime-macro",
+      "sublime-project",
+      "jsonc",
+      "webapp",
+      "ice",
+      "jsonl",
+      "har",
+      "topojson",
+      "jsonld",
+      "yy",
+      "mcmeta",
+      "sublime-completions",
+      "sublime-settings",
+      "sublime-build",
+      "jsoniq",
+      "sublime-keymap",
+      "JSON-tmLanguage"
+    ],
+    "name": "JsonAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "rda",
+      "r",
+      "rds",
+      "rdata",
+      "rd",
+      "rsx"
+    ],
+    "name": "RAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "wlua",
+      "rbxs",
+      "rockspec",
+      "p8",
+      "nse",
+      "pd_lua",
+      "lua"
+    ],
+    "name": "LuaAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "xmi",
+      "xml",
+      "sch",
+      "axml",
+      "csdef",
+      "glade",
+      "gml",
+      "gmx",
+      "wsdl",
+      "nuspec",
+      "cscfg",
+      "xsp-config",
+      "xquery",
+      "ct",
+      "rdf",
+      "xpl",
+      "xql",
+      "xqm",
+      "vcxproj",
+      "xacro",
+      "xqy",
+      "csproj",
+      "mxml",
+      "xsd",
+      "xsl",
+      "ivy",
+      "cproject",
+      "xproc",
+      "x3d",
+      "wsf",
+      "xul",
+      "tml",
+      "shproj",
+      "xproj",
+      "admx",
+      "ccproj",
+      "odd",
+      "adml",
+      "fsproj",
+      "wixproj",
+      "scxml",
+      "psc1",
+      "targets",
+      "ncl",
+      "pluginspec",
+      "dita",
+      "workflow",
+      "sublime-snippet",
+      "wxi",
+      "wxl",
+      "wxs",
+      "xliff",
+      "fxml",
+      "ditamap",
+      "stTheme",
+      "jelly",
+      "dotsettings",
+      "clixml",
+      "ant",
+      "tmTheme",
+      "xslt",
+      "csl",
+      "pt",
+      "ccxml",
+      "builds",
+      "pkgproj",
+      "natvis",
+      "storyboard",
+      "sfproj",
+      "vsixmanifest",
+      "rss",
+      "tmSnippet",
+      "launch",
+      "xaml",
+      "nproj",
+      "ui",
+      "dll.config",
+      "ux",
+      "grxml",
+      "zcml",
+      "tmPreferences",
+      "xspec",
+      "tmLanguage",
+      "filters",
+      "xq",
+      "vbproj",
+      "mod",
+      "osm",
+      "srdf",
+      "props",
+      "ps1xml",
+      "depproj",
+      "kml",
+      "jsproj",
+      "plist",
+      "tmCommand",
+      "proj",
+      "ndproj",
+      "ditaval",
+      "owl",
+      "xml.dist",
+      "xib",
+      "mdpolicy",
+      "iml",
+      "mjml",
+      "vxml",
+      "vstemplate",
+      "urdf",
+      "resx",
+      "xlf",
+      "vssettings"
+    ],
+    "name": "XmlAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "ktm",
+      "kts",
+      "kt"
+    ],
+    "name": "KotlinAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Basic heuristic dependency analysis (based on imports and package statements)"
+    ]
+  },
+  {
+    "extensions": [
+      "d",
+      "di"
+    ],
+    "name": "DAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "jsp",
+      "gsp"
+    ],
+    "name": "JspAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "cfg"
+    ],
+    "name": "CfgAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "No unit size analysis",
+      "No conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "rlib",
+      "in",
+      "rs"
+    ],
+    "name": "RustAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "grt",
+      "gvy",
+      "groovy",
+      "gtpl"
+    ],
+    "name": "GroovyAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Basic heuristic dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "ipp",
+      "cc",
+      "h",
+      "hpp",
+      "cp",
+      "m",
+      "hh",
+      "c++",
+      "hxx",
+      "tpp",
+      "mm",
+      "cpp",
+      "re",
+      "cxx",
+      "dart",
+      "h++",
+      "tcc",
+      "inl",
+      "ino"
+    ],
+    "name": "CppAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "Advanced heuristic dependency analysis"
+    ]
+  },
+  {
+    "extensions": [
+      "tsx",
+      "ts"
+    ],
+    "name": "TypeScriptAnalyzer",
+    "featuresDescription": [
+      "All basic standard analyses supported (source code overview, duplication, file size, concerns, findings, metrics, controls)",
+      "Advanced code cleaning (empty lines and comments removed for LOC calculations, additional cleaning for duplication calculations)",
+      "Unit size analysis",
+      "Conditional complexity analysis",
+      "No dependency analysis"
+    ]
+  }
+]

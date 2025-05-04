@@ -1,0 +1,48 @@
+---
+layout: post
+title:  "Metrics Table"
+date:   2020-05-25 19:12:01 +0100
+author: by Željko Obrenović (zeljkoobrenovic.com)
+permalink: metrics
+icon: metrics-table
+excerpt: "The metrics table is a list of name-value pairs, a linearized list of all Sokrates aggregated measurements. Sokrates employs the metrics table to define goals and controls and in trend analyses."
+---
+The metrics table is a list of name-value pairs, a linearized list of all Sokrates aggregated measurements.
+
+Sokrates exports two types of metrics:
+ - the static, project-level metrics. These static metrics have the same name in every Sokrates protect.
+ - derived metrics, where names of a metric are defined based on the names of logical decompositions, components, concerns, or file extensions.
+
+## Static Metrics
+
+Static metrics describe the overall system values, such as lines of code in main or test code, or a number of files in the main code. The following table shows some of these metrics:
+
+![](assets/images/sokrates/metrics-table.png)
+
+***Figure 1:** The screenshot from the Sokrates metrics report, showing some of the static metrics.*
+
+
+## Derived Metrics
+
+Derived metrics are dynamic. Their number and names depend on the number and names of components, concerns, and file extensions. The following table shows several of these derived metrics.
+
+![](assets/images/sokrates/metrics-table-derived.png)
+
+***Figure 2:** The screenshot from the Sokrates metrics report, showing some of the dynamic metrics, where names of metrics depend on component names and file extensions.*
+
+These metrics are logical decomposition specific, and Sokrates derives the names of these metrics using these patterns:
+
+* NUMBER_OF_FILES_DECOMPOSITION_&lt;LOGICAL_DECOMPOSITION&gt;_&lt;COMPONENT&gt;
+* LINES_OF_CODE_DECOMPOSITION_&lt;LOGICAL_DECOMPOSITION&gt;_&lt;COMPONENT&gt;
+* NUMBER_OF_FILES_DECOMPOSITION_&lt;LOGICAL_DECOMPOSITION&gt;_&lt;COMPONENT&gt;_EXT_&lt;EXTENSION&gt;
+* LINES_OF_CODE_DECOMPOSITION_&lt;LOGICAL_DECOMPOSITION&gt;_&lt;COMPONENT&gt;_EXT_&lt;EXTENSION&gt;
+
+
+## Using Metrics
+
+Sokrates exports all metrics as text, JSON, and HTML files. You can then use these lists for your own processing.
+
+In addition to exporting the list of metrics, Sokrates employs these metrics at two other places:
+* to define goals and controls. For any metric, you can define the desired range and tolerance and let Sokrates signal if the metric values are in the desired range.
+* in trend analyses, where you can compare the values of a metric in time
+
