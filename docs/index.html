@@ -17,6 +17,7 @@
     padding: 10px;
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    display: inline-block;
 }
 
 .inline-code {
@@ -128,8 +129,8 @@ h1 {
         <td>
             <img src="assets/logo.png" class="logo">
         </td>
-        <td style="padding-left: 32px">
-            <div style="font-size: 330%; font-weight: bold; margin-bottom: 12px">SOKRATES</div>
+        <td style="padding-left: 18px">
+            <div style="font-size: 360%; font-weight: bold; margin-bottom: 12px">SOKRATES</div>
             <div style="color: #a0a0a0; font-size: 150%">Polyglot source code examination tool</div>
         </td>
     </tr>
@@ -146,73 +147,89 @@ h1 {
 
     <div id="home" class="tabcontent" style="display: block">
         <div style="margin: 0px">
-  <p class="card">
-    <i style=" font-size: 24px">"Talk is expensive. Show me the code."</i><br><br><span style="font-size: 20px">― <b style="font-size: 20px">Željko Obrenović</b></span></p>
-  <div class="card">
-    <h1>What is Sokrates?</h1>
-    <ul style="padding-left: 20px">
-      <li>
-        Sokrates is a tool built by <b><a href="https://zeljkoobrenovic.com">Željko Obrenović</a></b>.
-        It implements his vision on how to document and analyze software architectures of complex systems.
-      </li>
-      <li>
-        Sokrates is provides a pragmatic, inexpensive way to extract rich data from any source code repositories. No need for long interviews and workshops. Just show the code.
-      </li>
-      <li>Sokrates can help you to understand your code by making visible the size, complexity, and
-        coupling of software, as well all people interactions and team topologies.
-      </li>
-      <li style="margin-top: 12px" *ngIf="!isSmallScreen">Sokrates borrows ideas from <b><a
-        href="https://queue.acm.org/detail.cfm?id=945136">code spelunking</a></b> tool,
-        in particular <a href="https://en.wikipedia.org/wiki/Grep">grep</a>, adding structure on top of regex source
-        code
-        searches.
-      </li>
-    </ul>
-  </div>
-  <br/>
+    <p class="card">
+        <i style=" font-size: 24px">"Talk is expensive. Show me the code."</i><br><br><span style="font-size: 20px">― <b style="font-size: 20px">Željko Obrenović</b></span></p>
+    <div class="card">
+        <h1>What is Sokrates?</h1>
+        <ul style="padding-left: 20px">
+            <li>
+                Sokrates is a tool built by <b><a href="https://zeljkoobrenovic.com">Željko Obrenović</a></b>.
+                It implements his vision on how to document and analyze software architectures of complex systems.
+            </li>
+            <li>
+                Sokrates is provides a pragmatic, inexpensive way to extract rich data from any source code repositories. No need for long interviews and workshops. Just show the code.
+            </li>
+            <li>Sokrates can help you to understand your code by making visible the size, complexity, and
+                coupling of software, as well all people interactions and team topologies.
+            </li>
+            <li style="margin-top: 12px" *ngIf="!isSmallScreen">Sokrates borrows ideas from <b><a
+                    href="https://queue.acm.org/detail.cfm?id=945136">code spelunking</a></b> tool,
+                in particular <a href="https://en.wikipedia.org/wiki/Grep">grep</a>, adding structure on top of regex source
+                code
+                searches.
+            </li>
+        </ul>
+    </div>
+    <div class="card">
+        <br/>
+        <h1>Recent examples of complex Sokrates analyses:</h1>
+        <div class="section" style="width: 500px; margin-bottom: 50px; ">
+            <a href="https://d3axxy9bcycpv7.cloudfront.net/aws/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                <div><img src="https://avatars.githubusercontent.com/aws" style="height: 90px"></div>
+                <div style="font-size: 140%; font-weight: bold">AWS Source Code Landscape</div>
+                <div style="font-size: 90%; color: black"><b>284</b> repos, <b>58</b> MLOC, <b>15,000</b> contributors, <b>477K</b> commits</div>
+            </a>
+        </div>
+        <div class="section" style="width: 500px; margin-bottom: 50px; ">
+            <a href="https://d3axxy9bcycpv7.cloudfront.net/netflix/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                <div><img src="https://avatars.githubusercontent.com/netflix" style="height: 90px"></div>
+                <div style="font-size: 140%; font-weight: bold">Netflix's OSS Projects</div>
+                <div style="font-size: 90%; color: black"><b>70</b> repos, <b>1.6</b> MLOC, <b>2,000</b> contributors, <b>80K</b> commits</div>
+            </a>
+        </div>
+    </div>
+    <div class="card">
+        <h1>Sokrates in 5 minutes</h1>
+        <div style="display: inline-block; margin-right: 20px">
+            <p>See a 5 minutes video on using Sokrates CLI to analyze source code of Sokrates:</p>
+            <div>
+                <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/ZybfJQ8Ob7g"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+        <div style="display: inline-block;">
+            <p>See a 5 minutes video on using Sokrates Explorer to analyze source code of JUnit4:</p>
+            <div>
+                <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/kdLcUEqGXl0"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h1>Background</h1>
+        <div>
+            <p>Sokrates looks on the source code from a perspective of maintenance, making visible the size, complexity and
+                coupling of software.</p>
 
-  <div class="card">
-    <h1>Sokrates in 5 minutes</h1>
-    <div style="display: inline-block; margin-right: 20px">
-      <p>See a 5 minutes video on using Sokrates CLI to analyze source code of Sokrates:</p>
-      <div>
-        <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/ZybfJQ8Ob7g"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-      </div>
+            <p>For more details see my O'Reilly Video Training (from my time at Software Improvement Group):
+                <b><a href="https://player.oreilly.com/videos/9781491950791">Building Maintainable Software</a></b> (4 hours),
+                and
+                O'Reilly Webcast: <b><a href="https://www.oreilly.com/pub/e/3535">Building Maintainable Software</a></b>
+                (1 hour, together with <a href="https://www.linkedin.com/in/rob-van-der-leek-66596962/">Rob van der Leek</a>).
+            </p>
+            <p>
+                The fragment of my training video on building maintainable software is freely avaliable at Youtube:<br/><br/>
+                <iframe style="max-width: 560px" width="100%" height="315"
+                        src="https://www.youtube.com/embed/8k14k3q5zDs?start=334" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </p>
+        </div>
     </div>
-    <div style="display: inline-block;">
-      <p>See a 5 minutes video on using Sokrates Explorer to analyze source code of JUnit4:</p>
-      <div>
-        <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/kdLcUEqGXl0"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <h1>Background</h1>
-    <div>
-      <p>Sokrates looks on the source code from a perspective of maintenance, making visible the size, complexity and
-        coupling of software.</p>
-
-      <p>For more details see my O'Reilly Video Training (from my time at Software Improvement Group):
-        <b><a href="https://player.oreilly.com/videos/9781491950791">Building Maintainable Software</a></b> (4 hours),
-        and
-        O'Reilly Webcast: <b><a href="https://www.oreilly.com/pub/e/3535">Building Maintainable Software</a></b>
-        (1 hour, together with <a href="https://www.linkedin.com/in/rob-van-der-leek-66596962/">Rob van der Leek</a>).
-      </p>
-      <p>
-        The fragment of my training video on building maintainable software is freely avaliable at Youtube:<br/><br/>
-        <iframe style="max-width: 560px" width="100%" height="315"
-                src="https://www.youtube.com/embed/8k14k3q5zDs?start=334" frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-      </p>
-    </div>
-  </div>
 
 </div>
 
@@ -482,7 +499,44 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
 
     <div id="examples" class="tabcontent">
         <div>
-    <h1>Examples: Sokrates Analyses of Big Projects and Whole GitHub Organizations</h1>
+    <h1>Recent Examples: Sokrates Analyses of Big Projects and Whole GitHub Organizations</h1>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/aws/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="https://avatars.githubusercontent.com/aws" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">AWS Source Code Landscape</div>
+            <div style="font-size: 90%; color: black"><b>284</b> repos, <b>58</b> MLOC, <b>15,000</b> contributors, <b>477K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/netflix/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="https://avatars.githubusercontent.com/netflix" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Netflix's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>70</b> repos, <b>1.6</b> MLOC, <b>2,000</b> contributors, <b>80K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/spotify/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/spotify.png" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Spotify's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>100+</b> repos, <b>1.7</b> MLOC, <b>2,000+</b> contributors, <b>95K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/uber/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="https://avatars.githubusercontent.com/uber" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Uber's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>80</b> repos, <b>1.1</b> MLOC, <b>1,200</b> contributors, <b>48K</b> commits</div>
+        </a>
+    </div>
+    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/twitter/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/twitter.png" style="height: 90px"></div>
+            <div style="font-size: 140%; font-weight: bold">Twitter's OSS Projects</div>
+            <div style="font-size: 90%; color: black"><b>60</b> repos, <b>850</b> KLOC, <b>1,000</b> contributors, <b>45K</b> commits</div>
+        </a>
+    </div>
+
+    <h1>Older Examples</h1>
     <div class="card" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/linux/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="assets/logos/linux.png" style="height: 90px"></div>
@@ -533,38 +587,10 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
         </a>
     </div>
     <div class="card" style="width: 500px; margin-bottom: 50px; ">
-        <a href="https://d3axxy9bcycpv7.cloudfront.net/twitter/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-            <div><img src="assets/logos/twitter.png" style="height: 90px"></div>
-            <div style="font-size: 140%; font-weight: bold">Twitter's OSS Projects</div>
-            <div style="font-size: 90%; color: black"><b>60</b> repos, <b>850</b> KLOC, <b>1,000</b> contributors, <b>45K</b> commits</div>
-        </a>
-    </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
-        <a href="https://d3axxy9bcycpv7.cloudfront.net/spotify/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-            <div><img src="assets/logos/spotify.png" style="height: 90px"></div>
-            <div style="font-size: 140%; font-weight: bold">Spotify's OSS Projects</div>
-            <div style="font-size: 90%; color: black"><b>100+</b> repos, <b>1.7</b> MLOC, <b>2,000+</b> contributors, <b>95K</b> commits</div>
-        </a>
-    </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/apple/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="assets/logos/apple.jpeg" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Apple's OSS Projects</div>
             <div style="font-size: 90%; color: black"><b>100</b> repos, <b>4.5</b> MLOC, <b>1,700</b> contributors, <b>200K</b> commits</div>
-        </a>
-    </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
-        <a href="https://d3axxy9bcycpv7.cloudfront.net/uber/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-            <div><img src="https://avatars.githubusercontent.com/uber" style="height: 90px"></div>
-            <div style="font-size: 140%; font-weight: bold">Uber's OSS Projects</div>
-            <div style="font-size: 90%; color: black"><b>80</b> repos, <b>1.1</b> MLOC, <b>1,200</b> contributors, <b>48K</b> commits</div>
-        </a>
-    </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
-        <a href="https://d3axxy9bcycpv7.cloudfront.net/netflix/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-            <div><img src="https://avatars.githubusercontent.com/netflix" style="height: 90px"></div>
-            <div style="font-size: 140%; font-weight: bold">Netflix's OSS Projects</div>
-            <div style="font-size: 90%; color: black"><b>70</b> repos, <b>1.6</b> MLOC, <b>2,000</b> contributors, <b>80K</b> commits</div>
         </a>
     </div>
     <div style="margin: 12px; padding: 3px; margin-bottom: 50px">
@@ -1147,17 +1173,6 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
 </div>
     </div>
 </div>
-<script>
-    const data = [{"title": "asf", "folder": "asf", "projects": [{"name": "Tomcat", "description": "An open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies.", "logoLink": "https://d3axxy9bcycpv7.cloudfront.net/assets/logos/tomcat.png", "links": [{"label": "Github Repo", "href": "https://github.com/apache/tomcat"}], "id": "Tomcat/tomcat"}, {"name": "Apache Kafka", "description": "A unified, high-throughput, low-latency platform for handling real-time data feeds.", "logoLink": "https://d3axxy9bcycpv7.cloudfront.net/assets/logos/kafka.png", "links": [{"label": "Homepage", "href": "https://kafka.apache.org/"}], "id": "Other/kafka"}, {"name": "ActiveMQ", "description": "A high performance Apache 2.0 licensed Message Broker and JMS 1.1 implementation.", "logoLink": "https://d3axxy9bcycpv7.cloudfront.net/assets/logos/activemq.png", "links": [{"label": "ActiveMQ", "href": "https://github.com/apache/activemq"}], "id": "ActiveMQ/activemq"}]}];
-
-    let div = document.createElement('div');
-    document.body.appendChild(div);
-
-    let html = '';
-
-    div.outerHTML = html;
-
-</script>
 
 </body>
 </html>

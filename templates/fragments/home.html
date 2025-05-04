@@ -1,70 +1,86 @@
 <div style="margin: 0px">
-  <p class="card">
-    <i style=" font-size: 24px">"Talk is expensive. Show me the code."</i><br><br><span style="font-size: 20px">― <b style="font-size: 20px">Željko Obrenović</b></span></p>
-  <div class="card">
-    <h1>What is Sokrates?</h1>
-    <ul style="padding-left: 20px">
-      <li>
-        Sokrates is a tool built by <b><a href="https://zeljkoobrenovic.com">Željko Obrenović</a></b>.
-        It implements his vision on how to document and analyze software architectures of complex systems.
-      </li>
-      <li>
-        Sokrates is provides a pragmatic, inexpensive way to extract rich data from any source code repositories. No need for long interviews and workshops. Just show the code.
-      </li>
-      <li>Sokrates can help you to understand your code by making visible the size, complexity, and
-        coupling of software, as well all people interactions and team topologies.
-      </li>
-      <li style="margin-top: 12px" *ngIf="!isSmallScreen">Sokrates borrows ideas from <b><a
-        href="https://queue.acm.org/detail.cfm?id=945136">code spelunking</a></b> tool,
-        in particular <a href="https://en.wikipedia.org/wiki/Grep">grep</a>, adding structure on top of regex source
-        code
-        searches.
-      </li>
-    </ul>
-  </div>
-  <br/>
+    <p class="card">
+        <i style=" font-size: 24px">"Talk is expensive. Show me the code."</i><br><br><span style="font-size: 20px">― <b style="font-size: 20px">Željko Obrenović</b></span></p>
+    <div class="card">
+        <h1>What is Sokrates?</h1>
+        <ul style="padding-left: 20px">
+            <li>
+                Sokrates is a tool built by <b><a href="https://zeljkoobrenovic.com">Željko Obrenović</a></b>.
+                It implements his vision on how to document and analyze software architectures of complex systems.
+            </li>
+            <li>
+                Sokrates is provides a pragmatic, inexpensive way to extract rich data from any source code repositories. No need for long interviews and workshops. Just show the code.
+            </li>
+            <li>Sokrates can help you to understand your code by making visible the size, complexity, and
+                coupling of software, as well all people interactions and team topologies.
+            </li>
+            <li style="margin-top: 12px" *ngIf="!isSmallScreen">Sokrates borrows ideas from <b><a
+                    href="https://queue.acm.org/detail.cfm?id=945136">code spelunking</a></b> tool,
+                in particular <a href="https://en.wikipedia.org/wiki/Grep">grep</a>, adding structure on top of regex source
+                code
+                searches.
+            </li>
+        </ul>
+    </div>
+    <div class="card">
+        <br/>
+        <h1>Recent examples of complex Sokrates analyses:</h1>
+        <div class="section" style="width: 500px; margin-bottom: 50px; ">
+            <a href="https://d3axxy9bcycpv7.cloudfront.net/aws/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                <div><img src="https://avatars.githubusercontent.com/aws" style="height: 90px"></div>
+                <div style="font-size: 140%; font-weight: bold">AWS Source Code Landscape</div>
+                <div style="font-size: 90%; color: black"><b>284</b> repos, <b>58</b> MLOC, <b>15,000</b> contributors, <b>477K</b> commits</div>
+            </a>
+        </div>
+        <div class="section" style="width: 500px; margin-bottom: 50px; ">
+            <a href="https://d3axxy9bcycpv7.cloudfront.net/netflix/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                <div><img src="https://avatars.githubusercontent.com/netflix" style="height: 90px"></div>
+                <div style="font-size: 140%; font-weight: bold">Netflix's OSS Projects</div>
+                <div style="font-size: 90%; color: black"><b>70</b> repos, <b>1.6</b> MLOC, <b>2,000</b> contributors, <b>80K</b> commits</div>
+            </a>
+        </div>
+    </div>
+    <div class="card">
+        <h1>Sokrates in 5 minutes</h1>
+        <div style="display: inline-block; margin-right: 20px">
+            <p>See a 5 minutes video on using Sokrates CLI to analyze source code of Sokrates:</p>
+            <div>
+                <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/ZybfJQ8Ob7g"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+        <div style="display: inline-block;">
+            <p>See a 5 minutes video on using Sokrates Explorer to analyze source code of JUnit4:</p>
+            <div>
+                <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/kdLcUEqGXl0"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h1>Background</h1>
+        <div>
+            <p>Sokrates looks on the source code from a perspective of maintenance, making visible the size, complexity and
+                coupling of software.</p>
 
-  <div class="card">
-    <h1>Sokrates in 5 minutes</h1>
-    <div style="display: inline-block; margin-right: 20px">
-      <p>See a 5 minutes video on using Sokrates CLI to analyze source code of Sokrates:</p>
-      <div>
-        <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/ZybfJQ8Ob7g"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-      </div>
+            <p>For more details see my O'Reilly Video Training (from my time at Software Improvement Group):
+                <b><a href="https://player.oreilly.com/videos/9781491950791">Building Maintainable Software</a></b> (4 hours),
+                and
+                O'Reilly Webcast: <b><a href="https://www.oreilly.com/pub/e/3535">Building Maintainable Software</a></b>
+                (1 hour, together with <a href="https://www.linkedin.com/in/rob-van-der-leek-66596962/">Rob van der Leek</a>).
+            </p>
+            <p>
+                The fragment of my training video on building maintainable software is freely avaliable at Youtube:<br/><br/>
+                <iframe style="max-width: 560px" width="100%" height="315"
+                        src="https://www.youtube.com/embed/8k14k3q5zDs?start=334" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </p>
+        </div>
     </div>
-    <div style="display: inline-block;">
-      <p>See a 5 minutes video on using Sokrates Explorer to analyze source code of JUnit4:</p>
-      <div>
-        <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/kdLcUEqGXl0"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <h1>Background</h1>
-    <div>
-      <p>Sokrates looks on the source code from a perspective of maintenance, making visible the size, complexity and
-        coupling of software.</p>
-
-      <p>For more details see my O'Reilly Video Training (from my time at Software Improvement Group):
-        <b><a href="https://player.oreilly.com/videos/9781491950791">Building Maintainable Software</a></b> (4 hours),
-        and
-        O'Reilly Webcast: <b><a href="https://www.oreilly.com/pub/e/3535">Building Maintainable Software</a></b>
-        (1 hour, together with <a href="https://www.linkedin.com/in/rob-van-der-leek-66596962/">Rob van der Leek</a>).
-      </p>
-      <p>
-        The fragment of my training video on building maintainable software is freely avaliable at Youtube:<br/><br/>
-        <iframe style="max-width: 560px" width="100%" height="315"
-                src="https://www.youtube.com/embed/8k14k3q5zDs?start=334" frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-      </p>
-    </div>
-  </div>
 
 </div>
