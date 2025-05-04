@@ -9,6 +9,7 @@
     <style>
         body {
     font-family: Quicksand, Vollkorn, Ubuntu, Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+    line-height: 1.3em;
 }
 
 .section {
@@ -130,7 +131,7 @@ h1 {
             <img src="assets/logo.png" class="logo">
         </td>
         <td style="padding-left: 18px">
-            <div style="font-size: 360%; font-weight: bold; margin-bottom: 12px">SOKRATES</div>
+            <div style="font-size: 360%; font-weight: bold; margin-bottom: 32px">SOKRATES</div>
             <div style="color: #a0a0a0; font-size: 150%">Polyglot source code examination tool</div>
         </td>
     </tr>
@@ -147,7 +148,7 @@ h1 {
 
     <div id="home" class="tabcontent" style="display: block">
         <div style="margin: 0px">
-    <p class="card">
+    <p style="padding: 22px">
         <i style=" font-size: 24px">"Talk is expensive. Show me the code."</i><br><br><span style="font-size: 20px">― <b style="font-size: 20px">Željko Obrenović</b></span></p>
     <div class="card">
         <h1>What is Sokrates?</h1>
@@ -171,16 +172,15 @@ h1 {
         </ul>
     </div>
     <div class="card">
-        <br/>
         <h1>Recent examples of complex Sokrates analyses:</h1>
-        <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <div class="section" style="width: 500px; margin-bottom: 50px; ">
             <a href="https://d3axxy9bcycpv7.cloudfront.net/aws/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
                 <div><img src="https://avatars.githubusercontent.com/aws" style="height: 90px"></div>
                 <div style="font-size: 140%; font-weight: bold">AWS Source Code Landscape</div>
                 <div style="font-size: 90%; color: black"><b>284</b> repos, <b>58</b> MLOC, <b>15,000</b> contributors, <b>477K</b> commits</div>
             </a>
         </div>
-        <div class="card" style="width: 500px; margin-bottom: 50px; ">
+        <div class="section" style="width: 500px; margin-bottom: 50px; ">
             <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
                 <div><img src="https://avatars.githubusercontent.com/openai" style="height: 90px"></div>
                 <div style="font-size: 140%; font-weight: bold">OpenAI's OSS Projects</div>
@@ -211,24 +211,26 @@ h1 {
     </div>
     <div class="card">
         <h1>Background</h1>
-        <div>
-            <p>Sokrates looks on the source code from a perspective of maintenance, making visible the size, complexity and
-                coupling of software.</p>
+        <ul>
+            <li>Sokrates looks on the source code from a perspective of maintenance, making visible the size, complexity and
+                coupling of software.</li>
 
-            <p>For more details see my O'Reilly Video Training (from my time at Software Improvement Group):
+            <li>Sokrates is one of several open-source tools we frequently used when implementing <a target="_blank" href="https://grounded-architecture.io/analytics">Grounded Architecture Lightweight Architectural Analytics</a></li>
+
+            <li>For more details see my O'Reilly Video Training (from my time at Software Improvement Group):
                 <b><a href="https://player.oreilly.com/videos/9781491950791">Building Maintainable Software</a></b> (4 hours),
                 and
                 O'Reilly Webcast: <b><a href="https://www.oreilly.com/pub/e/3535">Building Maintainable Software</a></b>
                 (1 hour, together with <a href="https://www.linkedin.com/in/rob-van-der-leek-66596962/">Rob van der Leek</a>).
-            </p>
-            <p>
+            </li>
+            <li>
                 The fragment of my training video on building maintainable software is freely avaliable at Youtube:<br/><br/>
                 <iframe style="max-width: 560px" width="100%" height="315"
                         src="https://www.youtube.com/embed/8k14k3q5zDs?start=334" frameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
-            </p>
-        </div>
+            </li>
+        </ul>
     </div>
 
 </div>
@@ -517,42 +519,42 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
             href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws</a>.
     </div>
     <h1>Recent Examples: Sokrates Analyses of Big Projects and Whole GitHub Organizations</h1>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/aws/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="https://avatars.githubusercontent.com/aws" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">AWS Source Code Landscape</div>
             <div style="font-size: 90%; color: black"><b>284</b> repos, <b>58</b> MLOC, <b>15,000</b> contributors, <b>477K</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="https://avatars.githubusercontent.com/openai" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">OpenAI's OSS Projects</div>
             <div style="font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors, <b>9K</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/netflix/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="https://avatars.githubusercontent.com/netflix" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Netflix's OSS Projects</div>
             <div style="font-size: 90%; color: black"><b>42</b> repos, <b>1.5</b> MLOC, <b>844</b> contributors, <b>38K</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/spotify/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="assets/logos/spotify.png" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Spotify's OSS Projects</div>
             <div style="font-size: 90%; color: black"><b>72+</b> repos, <b>800</b> KLOC, <b>1,100+</b> contributors, <b>41K</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/uber/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="https://avatars.githubusercontent.com/uber" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Uber's OSS Projects</div>
             <div style="font-size: 90%; color: black"><b>30</b> repos, <b>1.4</b> MLOC, <b>650</b> contributors, <b>22K</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/twitter/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="assets/logos/twitter.png" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Twitter's OSS Projects</div>
@@ -561,56 +563,56 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
     </div>
 
     <h1>Older Examples</h1>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/linux/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="assets/logos/linux.png" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Linux Source Code Landscape</div>
             <div style="font-size: 90%; color: black"><b>23</b> MLOC, <b>17,000</b> contributors, <b>330K</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/logo.png" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Apache Software Foundation (ASF) Projects</div>
             <div style="font-size: 90%; color: black"><b>1,100</b>+ repos, <b>100</b> MLOC, <b>24,000</b> contributors, <b>2M</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/amzn/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="assets/logos/amzn.png" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Amazon's OSS Projects</div>
             <div style="font-size: 90%; color: black"><b>2,700</b> repos, <b>60</b> MLOC, <b>13,000</b> contributors, <b>600K</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/google/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="assets/logos/google.png" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Google's OSS Projects</div>
             <div style="font-size: 90%; color: black"><b>1,000</b> repos, <b>40</b> MLOC, <b>12,000+</b> contributors, <b>1.2M</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/meta/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="assets/logos/meta.png" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Facebook/Meta's OSS Projects</div>
             <div style="font-size: 90%; color: black"><b>150</b> repos, <b>37</b> MLOC, <b>14,000</b> contributors, <b>900K</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/microsoft/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="assets/logos/microsoft.png" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Microsoft's OSS Projects</div>
             <div style="font-size: 90%; color: black"><b>2,500</b> repos, <b>47</b> MLOC, <b>18,000</b> contributors, <b>1.2M</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/github/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="https://avatars.githubusercontent.com/github" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">GitHub's OSS Projects</div>
             <div style="font-size: 90%; color: black"><b>200</b> repos, <b>2</b> MLOC, <b>4,400</b> contributors, <b>1.2M</b> commits</div>
         </a>
     </div>
-    <div class="card" style="width: 500px; margin-bottom: 50px; ">
+    <div class="section" style="width: 500px; margin-bottom: 50px; ">
         <a href="https://d3axxy9bcycpv7.cloudfront.net/apple/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
             <div><img src="assets/logos/apple.jpeg" style="height: 90px"></div>
             <div style="font-size: 140%; font-weight: bold">Apple's OSS Projects</div>
@@ -621,7 +623,7 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
     <h1>Examples: Sokrates Analyses of Individual Repositories</h1>
 
     <div class="ng-star-inserted">
-        <div class="card">
+        <div class="section">
             <img style="width: 48px; height: 48px; object-fit: contain"
                  src="https://d3axxy9bcycpv7.cloudfront.net/assets/logos/tomcat.png">
             <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
@@ -629,7 +631,7 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
             </div>
             <div><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/html/index.html">View Sokrates documentation</a> ⤇</div>
         </div>
-        <div class="card">
+        <div class="section">
             <img style="width: 48px; height: 48px; object-fit: contain"
                  src="https://d3axxy9bcycpv7.cloudfront.net/assets/logos/kafka.png">
             <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
@@ -637,7 +639,7 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
             </div>
             <div><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/asf/kafka/kafka/html/index.html">View Sokrates documentation</a> ⤇</div>
         </div>
-        <div class="card">
+        <div class="section">
             <img style="width: 48px; height: 48px; object-fit: contain"
                  src="https://d3axxy9bcycpv7.cloudfront.net/assets/logos/activemq.png">
             <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
