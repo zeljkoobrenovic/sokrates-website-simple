@@ -71,6 +71,7 @@
         vertical-align: top;
         font-size: 90%;
         font-size: 90%;
+        overflow: hidden;
     }
 
 
@@ -84,6 +85,7 @@
         background-color: white;
         border-radius: 8px;
         font-size: 90%;
+        overflow: hidden;
     }
 
     .tabcontent {
@@ -91,6 +93,11 @@
         padding: 4px;
         border: 1px solid #ccc;
         border-top: none;
+        overflow: hidden;
+    }
+
+    pre {
+        overflow: hidden;
     }
 }
 
@@ -904,7 +911,7 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
                     Sokrates Controls report ⤇ </a></li>
             </ul>
         </div>
-        <div class="card">
+        <div class="card hide-on-mobile">
             <h2>Supported Languages</h2>
             <p>Any textual file can be analyzed in Sokrates with standard analyses (empty lines cleaning, source code overview, duplication, file size, file age, file
                 change frequency, temporal dependencies, committers &amp; contributions, features of interest, findings, metrics, controls).</p>
