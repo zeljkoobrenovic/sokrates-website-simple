@@ -54,8 +54,6 @@ The **generatesReports** command generates HTML reports and exports data files.
          -reportMetrics                generate only the metrics overview report (stored in <outputFolder>/html/Metrics.html)
          -reportControls               generate only the controls report (stored in <outputFolder>/html/Controls.html)
          -reportFindings               generate only the findings report (stored in <outputFolder>/html/Findings.html)
-         -internalGraphviz             use internal Graphviz library (by default external dot program is used, you may specify
-                                       the external dot path via the system variable GRAPHVIZ_DOT)
 {% endhighlight %}
 
 ![](assets/images/sokrates/cmd-generate-reports.png)

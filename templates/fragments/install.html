@@ -12,13 +12,6 @@
         <h1>PRE-REQUIREMENTS</h1>
         <ul>
             <li>Java runtime</li>
-            <li><a href="https://graphviz.org/" target="_blank">Graphviz</a></li>
-            <ul>
-                <li>Sokrates automatically looks for Graphviz dot program at the following locations: "/opt/local/bin/dot", "/usr/local/bin/dot", "/usr/bin/dot",
-                    "c:\Program Files\Graphviz\dot.exe", "c:\Program Files (x86)\Graphviz\dot.exe"
-                </li>
-                <li>If on your machine Graphviz dot is installed on another location, you can provide that location to Sokrates by defining the GRAPHVIZ_DOT system variable.</li>
-            </ul>
             <li>Optional set the <b>SOKRATES_ANALYSIS_DATE</b> system variable (in the YYYY-MM-dd format) to define the reference date for commit history analyses.
                 By default, Sokrates uses the current date to calculate the number of commits and contributors in different periods relative to the reference date
                 (e.g. past 30 days, past 90 days, past year).
@@ -61,7 +54,7 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
    - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-help]
 
 * generateReports: Generates Sokrates reports based on the analysis configuration
-   - options: [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-internalGraphviz] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+   - options: [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
 * updateLandscape: Updates or creates a Sokrates landscape report, aggregating results of multiple analyses
    - options: [-analysisRoot &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]

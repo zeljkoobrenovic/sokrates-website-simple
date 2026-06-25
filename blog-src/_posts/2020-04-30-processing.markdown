@@ -111,7 +111,7 @@ To learn more:
 ### Exporting the Data
 
 With basic and aggregated data ready, Sokrates then
-* generates standard reports, providing a templates based story about measured data, enriched with visuals combining basic chart, Graphviz diagrams,  SVG images, and few 3D visualizations.
+* generates standard reports, providing a templates based story about measured data, enriched with visuals combining basic chart, Mermaid diagrams,  SVG images, and few 3D visualizations.
 * provides an interactive explorer to browse quickly, search and visualize all the data, and
 * store all the data into simple text and JSON files if you want to analyze them further using your tools.
 

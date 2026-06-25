@@ -120,9 +120,7 @@
          &lt;span class=&quot;nt&quot;&gt;-reportConcerns&lt;/span&gt;               generate only the concerns report &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;stored &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &amp;lt;outputFolder&amp;gt;/html/Concerns.html&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
          &lt;span class=&quot;nt&quot;&gt;-reportMetrics&lt;/span&gt;                generate only the metrics overview report &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;stored &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &amp;lt;outputFolder&amp;gt;/html/Metrics.html&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
          &lt;span class=&quot;nt&quot;&gt;-reportControls&lt;/span&gt;               generate only the controls report &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;stored &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &amp;lt;outputFolder&amp;gt;/html/Controls.html&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-         &lt;span class=&quot;nt&quot;&gt;-reportFindings&lt;/span&gt;               generate only the findings report &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;stored &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &amp;lt;outputFolder&amp;gt;/html/Findings.html&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-         &lt;span class=&quot;nt&quot;&gt;-internalGraphviz&lt;/span&gt;             use internal Graphviz library &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;by default external dot program is used, you may specify
-                                       the external dot path via the system variable GRAPHVIZ_DOT&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+         &lt;span class=&quot;nt&quot;&gt;-reportFindings&lt;/span&gt;               generate only the findings report &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;stored &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &amp;lt;outputFolder&amp;gt;/html/Findings.html&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;img src=&quot;assets/images/sokrates/cmd-generate-reports.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
