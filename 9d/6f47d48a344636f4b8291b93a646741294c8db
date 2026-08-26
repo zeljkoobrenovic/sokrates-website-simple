@@ -1,0 +1,19 @@
+docs/index.html
+  s_3786983bc6bd72::t_9b491707adbb0c 199
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "9d6f47d48a344636f4b8291b93a646741294c8db",
+  "prompts": {},
+  "sessions": {
+    "s_3786983bc6bd72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a1f85628-6910-42bd-a09c-cda8952fefb1",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
