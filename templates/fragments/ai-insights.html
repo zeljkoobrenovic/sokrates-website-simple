@@ -1,0 +1,124 @@
+<div class="card">
+    <h1>AI INSIGHTS — SKILLS FOR AI CODING TOOLS</h1>
+    <p style="font-size: 110%">
+        Sokrates measures: size, complexity, duplication, churn, coupling, contributors. The
+        <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank"><b>sokrates-skills</b></a> project adds the layer
+        only an AI reader can add — what the code <i>is</i>, what it depends on, where the real risks are, how it got here — and makes
+        Sokrates itself more useful by configuring it well. The skills work with Claude Code and similar AI coding tools that can load
+        <span class="inline-code">SKILL.md</span> instructions.
+    </p>
+    <ul style="font-size: 110%">
+        <li><a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">github.com/zeljkoobrenovic/sokrates-skills</a> (MIT)</li>
+        <li><a href="https://zeljkoobrenovic.github.io/sokrates-skills/examples/codex/ai-insights/" target="_blank">Live example: AI Insights Explorer for OpenAI Codex ⤇</a>
+            — nine scanners, 191 verified findings</li>
+    </ul>
+</div>
+
+<div>
+    <div class="section" style="width: calc(50% - 50px)">
+        <div style="margin: 10px">
+            <h2 class="title">Analysis skills (scanners)</h2>
+            <p>Read a finished Sokrates analysis (<span class="inline-code">_sokrates/</span>) and write findings with verifiable evidence.
+                Each scanner answers one question:</p>
+            <ul>
+                <li><b>domain-map-scan</b> — the domain language: glossary, bounded contexts, capabilities, language drift</li>
+                <li><b>architecture-scan</b> — the implemented architecture: style, components, boundaries, violations, communication, migrations</li>
+                <li><b>tech-stack-scan</b> — languages, frameworks, libraries, build tooling, CI/CD, infrastructure, external services</li>
+                <li><b>cicd-scan</b> — the CI/CD process as a narrative: triggers, build, tests, gates, release, deployment, hygiene</li>
+                <li><b>observability-scan</b> — logging, metrics, tracing, error reporting, health surfaces, blind spots</li>
+                <li><b>security-design-scan</b> — trust boundaries, sandboxing, identity and access, secrets handling, posture</li>
+                <li><b>security-scan</b> — code-level audit: secrets, injection, crypto, unsafe code, input handling</li>
+                <li><b>risk-synthesis-scan</b> — Sokrates hotspots explained: what each risky file does, knowledge risk, change coupling</li>
+                <li><b>evolution-scan</b> — the history as a story: eras, growth, focus shift, people, module lifecycle, trajectory</li>
+                <li><b>full-scan</b> — runs all of them in dependency order and merges the results</li>
+            </ul>
+        </div>
+    </div>
+    <div class="section" style="width: calc(50% - 50px)">
+        <div style="margin: 10px">
+            <h2 class="title">Configuration skills</h2>
+            <p>Create and tune Sokrates configuration <i>before</i> an analysis. Each comes with a checker that simulates Sokrates' own
+                rules on the real tree, so a configuration is verified before Sokrates runs:</p>
+            <ul>
+                <li><b>sokrates-repo-config</b> — <span class="inline-code">_sokrates/config.json</span>: scope, file classification, thresholds, history settings</li>
+                <li><b>sokrates-decompositions</b> — meaningful components: folder depth, build modules, mixed depth for monorepos, ownership, layers</li>
+                <li><b>sokrates-features-of-interest</b> — concerns worth tracking: debt markers, security-sensitive code, feature flags, domain vocabulary</li>
+                <li><b>sokrates-landscape-config</b> — <span class="inline-code">_sokrates_landscape/</span> files: discovery, filters, tags, teams</li>
+                <li><b>sokrates-people-config</b> — contributor identity merging from git history, with a review file for the human decisions</li>
+                <li><b>sokrates-virtual-landscapes</b> — sub-landscapes from your grouping or from naming conventions, technology, activity, teams</li>
+            </ul>
+            <p>The field references were read from the Sokrates Java source — including the places where documentation and code disagree.</p>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h1>HOW TO USE</h1>
+    <div class="section" style="width: calc(100% - 50px)">
+        <div style="margin: 10px">
+            <h3 style="background-color: #ededed; padding: 4px"><b>1. Install the skills</b></h3>
+            <pre style="padding: 6px; background-color: lightyellow">git clone https://github.com/zeljkoobrenovic/sokrates-skills.git
+cd sokrates-skills
+for s in skills/scanners/*/ skills/config/*/; do ln -s "$(pwd)/$s" ~/.claude/skills/$(basename "$s"); done</pre>
+            <p>Requirements: Python 3.9+ (standard library only) for the scripts, and a Sokrates analysis of your project.</p>
+
+            <h3 style="background-color: #ededed; padding: 4px"><b>2. Analyze the project with Sokrates</b></h3>
+            <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
+java -jar sokrates.jar init
+java -jar sokrates.jar extractGitHistory      # optional, enables history-based insights
+java -jar sokrates.jar generateReports</pre>
+            <p>Optionally let the configuration skills improve the setup first — ask your AI tool, in the project folder:
+                <i>"define meaningful components for this repository"</i>, <i>"which features of interest should Sokrates track here?"</i>,
+                <i>"merge duplicate contributors"</i> — then run <span class="inline-code">generateReports</span> again.</p>
+
+            <h3 style="background-color: #ededed; padding: 4px"><b>3. Ask for insights</b></h3>
+            <p>In the project folder, ask your AI tool: <i>"run a tech stack scan"</i>, <i>"explain the risks in this codebase"</i>,
+                <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all nine scanners.
+                Every scanner reads the Sokrates data first and spends its reading budget where the numbers point.</p>
+
+            <h3 style="background-color: #ededed; padding: 4px"><b>4. Open the AI Insights Explorer</b></h3>
+            <p>Results land in <span class="inline-code">&lt;your-project&gt;/_sokrates/findings/ai-insights/</span>: one JSON file per scanner
+                and <span class="inline-code">index.html</span> — a self-contained interactive page with an overview, a page per scanner,
+                a cross-scanner list of attention items, severity and confidence filters, full-text search, and every finding's evidence
+                as file, line range and verbatim snippet.</p>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="section" style="width: calc(50% - 50px)">
+        <div style="margin: 10px">
+            <h2 class="title">Why the findings can be trusted</h2>
+            <ul>
+                <li>Every finding carries evidence: file, line range, verbatim snippet.</li>
+                <li>A validator mechanically checks each snippet against the actual file — a scan is not finished until validation passes. This is the guard against hallucinated findings.</li>
+                <li>Findings have a severity (info → critical) and a confidence (certain / likely / possible); claims without evidence must say so.</li>
+                <li>Finding ids are stable across runs, so two scans of the same project can be diffed: new, resolved, persisting.</li>
+                <li>Scanners cite Sokrates data (<span class="inline-code">component:</span>, <span class="inline-code">metric:</span> references) instead of re-measuring it.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="section" style="width: calc(50% - 50px)">
+        <div style="margin: 10px">
+            <h2 class="title">Landscapes and many repositories</h2>
+            <ul>
+                <li>The configuration skills also cover landscapes: repository discovery, filters and thresholds, tags, teams,
+                    contributor identity merging across repositories, and virtual sub-landscapes.</li>
+                <li>Each has a checker that previews exactly what Sokrates will do — which repositories are found, which tags match,
+                    how contributors map to people and teams — before <span class="inline-code">updateLandscape</span> runs.</li>
+                <li>Typical order for a portfolio: repository config → decompositions → features of interest →
+                    <span class="inline-code">generateReports</span> → landscape config → people config → virtual landscapes →
+                    <span class="inline-code">updateLandscape</span> → scanners per repository.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h1>EXTENDING</h1>
+    <p>All scanners share one contract (<span class="inline-code">sokrates-scan-core</span>): the findings format, the evidence rules,
+        the validator and the explorer renderer. A new scanner is a <span class="inline-code">SKILL.md</span> that defines its
+        question and its group taxonomy; the proven way to build one is to run it live on a real codebase with a fresh agent, ask that
+        agent what was unclear, and fold the answers back into the skill. See the
+        <a href="https://github.com/zeljkoobrenovic/sokrates-skills#development" target="_blank">development notes</a>.</p>
+</div>

@@ -24,6 +24,11 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
+        window.addEventListener('DOMContentLoaded', function () {
+            var tab = location.hash.replace('#', '');
+            var btn = tab && document.getElementById(tab + '_tab');
+            if (btn) btn.click();
+        });
     </script>
 </head>
 <body>
@@ -42,6 +47,7 @@
     <div class="tab">
         <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">HOME</button>
         <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">INSTALL & USE</button>
+        <button id="ai_insights_tab" class="tablinks" onclick="openTab(event, 'ai_insights')">AI INSIGHTS</button>
         <button id="config_tab" class="tablinks" onclick="openTab(event, 'config')">CONFIGURATION</button>
         <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">EXAMPLES</button>
         <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">FEATURES</button>
@@ -54,6 +60,10 @@
 
     <div id="install" class="tabcontent">
         ${import install.html}
+    </div>
+
+    <div id="ai_insights" class="tabcontent">
+        ${import ai-insights.html}
     </div>
 
     <div id="config" class="tabcontent">

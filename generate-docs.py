@@ -11,6 +11,7 @@ with open('docs/index.html', 'w') as html_file:
                     .replace('${import home.html}', open('templates/fragments/home.html').read())
                     .replace('${import examples.html}', open('templates/fragments/examples.html').read())
                     .replace('${import install.html}', open('templates/fragments/install.html').read())
+                    .replace('${import ai-insights.html}', open('templates/fragments/ai-insights.html').read())
                     .replace('${import articles.html}', open('templates/fragments/articles.html').read())
                     .replace('${import config.html}', open('templates/fragments/config.html').read())
                     .replace('${import features.html}', open('templates/fragments/features.html').read())
