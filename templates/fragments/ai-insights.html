@@ -57,9 +57,23 @@
     <div class="section" style="width: calc(100% - 50px)">
         <div style="margin: 10px">
             <h3 style="background-color: #ededed; padding: 4px"><b>1. Install the skills</b></h3>
+            <p>Every skill is a folder with a <span class="inline-code">SKILL.md</span> in the open
+                <a href="https://agentskills.io" target="_blank">Agent Skills</a> format, so the same folders work in any AI coding tool that
+                supports skills. The repository's <span class="inline-code">install.sh</span> symlinks all of them into the right places;
+                <span class="inline-code">git pull</span> then updates every tool at once.</p>
             <pre style="padding: 6px; background-color: lightyellow">git clone https://github.com/zeljkoobrenovic/sokrates-skills.git
 cd sokrates-skills
-for s in skills/scanners/*/ skills/config/*/; do ln -s "$(pwd)/$s" ~/.claude/skills/$(basename "$s"); done</pre>
+./install.sh            # → ~/.claude/skills (Claude Code) and ~/.agents/skills (Codex, Gemini CLI, Cursor, Copilot, …)
+./install.sh --project  # → ./.claude/skills and ./.agents/skills of the current project instead (shareable via git)</pre>
+            <table style="border-collapse: collapse; font-size: 95%">
+                <tr style="background-color: #f4f4f4"><th style="text-align: left; padding: 6px">Tool</th><th style="text-align: left; padding: 6px">Reads skills from</th><th style="text-align: left; padding: 6px">Invoke</th></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>Claude Code</b></td><td style="padding: 6px"><span class="inline-code">~/.claude/skills/</span> (personal), <span class="inline-code">.claude/skills/</span> (project)</td><td style="padding: 6px">automatically when relevant, or <span class="inline-code">/tech-stack-scan</span></td></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>OpenAI Codex CLI</b></td><td style="padding: 6px"><span class="inline-code">~/.agents/skills/</span> (personal), <span class="inline-code">.agents/skills/</span> (repository)</td><td style="padding: 6px">automatically, or <span class="inline-code">$tech-stack-scan</span></td></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>Gemini CLI</b></td><td style="padding: 6px"><span class="inline-code">~/.gemini/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (user), <span class="inline-code">.gemini/skills/</span> or <span class="inline-code">.agents/skills/</span> (workspace); or <span class="inline-code">gemini skills install https://github.com/zeljkoobrenovic/sokrates-skills.git</span></td><td style="padding: 6px">activates a matching skill after a confirmation; <span class="inline-code">gemini skills list --all</span></td></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>Cursor</b></td><td style="padding: 6px"><span class="inline-code">~/.cursor/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (user), <span class="inline-code">.cursor/skills/</span> or <span class="inline-code">.agents/skills/</span> (project); <span class="inline-code">.claude/skills/</span> is read too</td><td style="padding: 6px"><span class="inline-code">/</span> in Agent chat, or automatically</td></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>GitHub Copilot</b><br>(CLI, VS Code, coding agent)</td><td style="padding: 6px"><span class="inline-code">~/.copilot/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (personal), <span class="inline-code">.github/skills/</span>, <span class="inline-code">.agents/skills/</span> or <span class="inline-code">.claude/skills/</span> (repository)</td><td style="padding: 6px">automatically; <span class="inline-code">gh skill</span> installs from repositories</td></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>Other tools</b></td><td style="padding: 6px">any Agent-Skills folder: <span class="inline-code">./install.sh &lt;folder&gt;</span>, or copy the skill folders</td><td style="padding: 6px">see the tool's documentation</td></tr>
+            </table>
             <p>Requirements: Python 3.9+ (standard library only) for the scripts, and a Sokrates analysis of your project.</p>
 
             <h3 style="background-color: #ededed; padding: 4px"><b>2. Analyze the project with Sokrates</b></h3>
