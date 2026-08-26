@@ -559,6 +559,13 @@ java -jar sokrates.jar generateReports</pre>
                 and <span class="inline-code">index.html</span> — a self-contained interactive page with an overview, a page per scanner,
                 a cross-scanner list of attention items, severity and confidence filters, full-text search, and every finding's evidence
                 as file, line range and verbatim snippet.</p>
+
+            <h3 style="background-color: #ededed; padding: 4px"><b>5. Embed the explorer in the Sokrates report</b></h3>
+            <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
+java -jar sokrates.jar addCustomTab -label "AI Insights*" -iframeLink "../../findings/ai-insights/index.html"</pre>
+            <p>This adds an <b>AI Insights*</b> tab to the main Sokrates HTML report (<span class="inline-code">_sokrates/reports/html/index.html</span>)
+                that shows the explorer inline, so the quantitative reports and the AI findings live in one place. Re-run the scanners
+                whenever the analysis is refreshed; the tab picks up the regenerated <span class="inline-code">index.html</span> automatically.</p>
         </div>
     </div>
 </div>
