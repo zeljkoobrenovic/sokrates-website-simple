@@ -545,27 +545,41 @@ for s in skills/scanners/*/ skills/config/*/; do ln -s "$(pwd)/$s" ~/.claude/ski
 java -jar sokrates.jar init
 java -jar sokrates.jar extractGitHistory      # optional, enables history-based insights
 java -jar sokrates.jar generateReports</pre>
-            <p>Optionally let the configuration skills improve the setup first — ask your AI tool, in the project folder:
-                <i>"define meaningful components for this repository"</i>, <i>"which features of interest should Sokrates track here?"</i>,
-                <i>"merge duplicate contributors"</i> — then run <span class="inline-code">generateReports</span> again.</p>
 
-            <h3 style="background-color: #ededed; padding: 4px"><b>3. Ask for insights</b></h3>
+            <h3 style="background-color: #ededed; padding: 4px"><b>3. Refine the configuration with the config skills</b></h3>
+            <p>The default <span class="inline-code">init</span> configuration is a starting point. In the project folder, ask your AI tool to
+                improve it — each configuration skill previews the effect on the real tree before Sokrates runs:</p>
+            <ul>
+                <li><i>"check the Sokrates configuration of this repository"</i> — scope, ignored and misclassified files, thresholds (<b>sokrates-repo-config</b>)</li>
+                <li><i>"define meaningful components for this repository"</i> — modules, mixed depth for monorepos, ownership, layers (<b>sokrates-decompositions</b>)</li>
+                <li><i>"which features of interest should Sokrates track here?"</i> — debt markers, security-sensitive code, feature flags, domain vocabulary (<b>sokrates-features-of-interest</b>)</li>
+                <li><i>"merge duplicate contributors"</i> — identity merging with a review file (<b>sokrates-people-config</b>)</li>
+            </ul>
+            <p>Then regenerate the reports so the analysis reflects the refined configuration:</p>
+            <pre style="padding: 6px; background-color: lightyellow">java -jar sokrates.jar generateReports</pre>
+
+            <h3 style="background-color: #ededed; padding: 4px"><b>4. Ask for insights</b></h3>
             <p>In the project folder, ask your AI tool: <i>"run a tech stack scan"</i>, <i>"explain the risks in this codebase"</i>,
                 <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all nine scanners.
                 Every scanner reads the Sokrates data first and spends its reading budget where the numbers point.</p>
 
-            <h3 style="background-color: #ededed; padding: 4px"><b>4. Open the AI Insights Explorer</b></h3>
+            <h3 style="background-color: #ededed; padding: 4px"><b>5. Open the AI Insights Explorer</b></h3>
             <p>Results land in <span class="inline-code">&lt;your-project&gt;/_sokrates/findings/ai-insights/</span>: one JSON file per scanner
                 and <span class="inline-code">index.html</span> — a self-contained interactive page with an overview, a page per scanner,
                 a cross-scanner list of attention items, severity and confidence filters, full-text search, and every finding's evidence
                 as file, line range and verbatim snippet.</p>
 
-            <h3 style="background-color: #ededed; padding: 4px"><b>5. Embed the explorer in the Sokrates report</b></h3>
+            <h3 style="background-color: #ededed; padding: 4px"><b>6. Embed the explorer in the Sokrates report</b></h3>
             <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
 java -jar sokrates.jar addCustomTab -label "AI Insights*" -iframeLink "../../findings/ai-insights/index.html"</pre>
-            <p>This adds an <b>AI Insights*</b> tab to the main Sokrates HTML report (<span class="inline-code">_sokrates/reports/html/index.html</span>)
-                that shows the explorer inline, so the quantitative reports and the AI findings live in one place. Re-run the scanners
-                whenever the analysis is refreshed; the tab picks up the regenerated <span class="inline-code">index.html</span> automatically.</p>
+            <p>This registers an <b>AI Insights*</b> tab in the configuration of the main Sokrates HTML report
+                (<span class="inline-code">_sokrates/reports/html/index.html</span>) that shows the explorer inline, so the quantitative
+                reports and the AI findings live in one place.</p>
+
+            <h3 style="background-color: #ededed; padding: 4px"><b>7. Regenerate the reports to see the new tab</b></h3>
+            <pre style="padding: 6px; background-color: lightyellow">java -jar sokrates.jar generateReports</pre>
+            <p>The tab is part of the generated report from now on; it picks up the explorer's regenerated
+                <span class="inline-code">index.html</span> automatically whenever you re-run the scanners.</p>
         </div>
     </div>
 </div>
