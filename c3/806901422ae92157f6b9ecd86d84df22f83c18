@@ -1,0 +1,21 @@
+docs/index.html
+  s_3fb22a5f8abdd4::t_cf678bc7f37f3a 12-160,190,195,199,208-260,262-269,272-299,305-311,313-348,378-379,382-384,395-398,427-428,441-457,459-466,471-474,480-516,519-533,535-536,538-547,551-563,568-592,594-603,605-612,614-615,617-627,629-641,643-653,659-668,670-671,673-678,680-734,736,738-759,761-762,769,771-776,778-784,786,790-1011,1014-1513,1516-1517,1523-1538,1543-1544
+templates/fragments/ai-insights.html
+  s_3fb22a5f8abdd4::t_efe4257efb3914 13,30-33,104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "c3806901422ae92157f6b9ecd86d84df22f83c18",
+  "prompts": {},
+  "sessions": {
+    "s_3fb22a5f8abdd4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6675bcd7-0e88-4469-8a48-6960b480b641",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
