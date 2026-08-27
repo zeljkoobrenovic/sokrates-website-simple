@@ -9,205 +9,155 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
     <style>
         body {
-            font-family: Quicksand, Vollkorn, Ubuntu, Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
-        }
+    font-family: Quicksand, Vollkorn, Ubuntu, Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+}
 
-        .inline-code {
-            background-color: lightyellow;
-            font-family: monospace;
-        }
+.inline-code {
+    background-color: lightyellow;
+    font-family: monospace;
+}
 
-        .logo {
-            height: 120px;
-            width: 120px;
-        }
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
 
-        @media (max-width: 800px) {
-            .card {
-                border: 1px solid lightgrey;
-                background-color: rgba(0, 0, 0, 0.01);
-                margin: 0px;
-                padding: 4px;
-                width: calc(100% - 12px);
-                display: inline-block;
-                background-color: white;
-                font-size: 90%;
-            }
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 14px;
+}
 
-            .section {
-                margin: 0px;
-                border: 2px dashed lightgrey;
-                padding: 4px;
-                overflow: hidden;
-                box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-                display: inline-block;
-                vertical-align: top;
-                font-size: 90%;
-                font-size: 90%;
-                overflow: hidden;
-            }
+.tab button:hover {
+    background-color: #ddd;
+}
 
+.tab button.active {
+    background-color: #ccc;
+}
 
-            .home-card {
-                border: 1px solid lightgrey;
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                margin: 0;
-                padding: 4px;
-                width: calc(100% - 60px);
-                display: inline-block;
-                background-color: white;
-                border-radius: 8px;
-                font-size: 90%;
-                overflow: hidden;
-            }
+.logo {
+    height: 120px;
+    width: 120px;
+    border: 1px solid rgb(222, 222, 222);
+    border-radius: 50%;
+}
 
-            .tabcontent {
-                display: none;
-                padding: 4px;
-                border: 1px solid #ccc;
-                border-top: none;
-                overflow: hidden;
-            }
+@media (max-width: 800px) {
+    .card {
+        border: 1px solid lightgrey;
+        background-color: rgba(0, 0, 0, 0.01);
+        margin: 0px;
+        padding: 4px;
+        width: calc(100% - 12px);
+        display: inline-block;
+        background-color: white;
+        font-size: 90%;
+    }
 
-            pre {
-                overflow: hidden;
-            }
-        }
-
-        @media (min-width: 801px) {
-            .card {
-                border: 1px solid lightgrey;
-                background-color: rgba(0, 0, 0, 0.01);
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                margin: 14px;
-                padding: 16px;
-                width: calc(100% - 70px);
-                display: inline-block;
-                background-color: white;
-                border-radius: 8px;
-            }
-
-            .section {
-                margin: 10px;
-                border: 2px dashed lightgrey;
-                padding: 10px;
-                overflow: hidden;
-                box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-                display: inline-block;
-                vertical-align: top;
-            }
-
-            body {
-                margin: 20px;
-            }
+    .section {
+        margin: 0px;
+        border: 2px dashed lightgrey;
+        padding: 4px;
+        overflow: hidden;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 90%;
+        font-size: 90%;
+        overflow: hidden;
+    }
 
 
-            .home-card {
-                border: 1px solid lightgrey;
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                margin: 0px;
-                padding: 16px;
-                width: calc(100% - 60px);
-                display: inline-block;
-                background-color: white;
-                border-radius: 8px;
-            }
+    .home-card {
+        border: 1px solid lightgrey;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 0;
+        padding: 4px;
+        width: calc(100% - 60px);
+        display: inline-block;
+        background-color: white;
+        border-radius: 8px;
+        font-size: 90%;
+        overflow: hidden;
+    }
 
-            .tabcontent {
-                display: none;
-                padding: 20px;
-                border: 1px solid #ccc;
-                border-top: none;
-            }
-        }
+    .tabcontent {
+        display: none;
+        padding: 4px;
+        border: 1px solid #ccc;
+        border-top: none;
+        overflow: hidden;
+    }
 
-        h1 {
-            margin-top: 10px;
-            font-size: 180%;
-        }
+    pre {
+        overflow: hidden;
+    }
+}
 
-        @media (max-width: 800px) {
-            .hide-on-mobile {
-                display: none;
-            }
-        }
-    </style>
-    <style>
-        .tab {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 4px;
-        }
+@media (min-width: 801px) {
+    .card {
+        border: 1px solid lightgrey;
+        background-color: rgba(0, 0, 0, 0.01);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 14px;
+        padding: 16px;
+        width: calc(100% - 70px);
+        display: inline-block;
+        background-color: white;
+        border-radius: 8px;
+    }
 
-        .tab button {
-            position: relative;
-            background-color: transparent;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 11px 16px;
-            margin-bottom: -1px;
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 500;
-            color: #6b7280;
-            border-bottom: 4px solid transparent;
-            border-radius: 8px 8px 0 0;
-            transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
-        }
+    .section {
+        margin: 10px;
+        border: 2px dashed lightgrey;
+        padding: 10px;
+        overflow: hidden;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+        display: inline-block;
+        vertical-align: top;
+    }
 
-        .tab button:hover {
-            color: #1f2937;
-            background-color: #f3f4f6;
-        }
+    body {
+        margin: 20px;
+    }
 
-        .tab button:focus-visible {
-            outline: 2px solid #1d4ed8;
-            outline-offset: -2px;
-        }
 
-        .tab button.active {
-            color: #1d4ed8;
-            border-bottom-color: #1d4ed8;
-        }
+    .home-card {
+        border: 1px solid lightgrey;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 0px;
+        padding: 16px;
+        width: calc(100% - 60px);
+        display: inline-block;
+        background-color: white;
+        border-radius: 8px;
+    }
 
-        .tabcontent {
-            display: none;
-            padding: 2px 2px;
-            animation: tabContentFade 0.2s ease;
-        }
+    .tabcontent {
+        display: none;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+}
 
-        @keyframes tabContentFade {
-            from {
-                opacity: 0;
-                transform: translateY(3px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+h1 {
+    margin-top: 10px;
+    font-size: 180%;
+}
 
-        @media (max-width: 720px) {
-            .tab {
-                flex-direction: column;
-                gap: 0;
-            }
-
-            .tab button {
-                width: 100%;
-                text-align: left;
-                margin-bottom: 0;
-                border-bottom: 1px solid #e5e7eb;
-                border-radius: 0;
-            }
-
-            .tab button.active {
-                border-bottom-color: #1d4ed8;
-            }
-        }
+@media (max-width: 800px) {
+    .hide-on-mobile {
+        display: none;
+    }
+}
     </style>
     <script>
         function openTab(evt, cityName) {
@@ -223,7 +173,6 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-
         window.addEventListener('DOMContentLoaded', function () {
             var tab = location.hash.replace('#', '');
             var btn = tab && document.getElementById(tab + '_tab');
@@ -238,16 +187,16 @@
             <img src="assets/logo.png" class="logo hide-on-mobile">
         </td>
         <td style="">
-            <div style="font-size: 430%; font-weight: bold; margin-bottom: 0;">Sokrates</div>
+            <div style="font-size: 360%; font-weight: bold; margin-bottom: 32px">SOKRATES</div>
             <div style="color: #a0a0a0; font-size: 150%">Polyglot source code examination tool</div>
         </td>
     </tr>
 </table>
-<div style="margin-top: 30px">
+<div style="margin-top: 32px">
     <div class="tab">
         <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">HOME</button>
         <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">INSTALL & USE</button>
-        <button id="ai_insights_tab" class="tablinks" onclick="openTab(event, 'ai_insights')">AI INSIGHTS*</button>
+        <button id="ai_insights_tab" class="tablinks" onclick="openTab(event, 'ai_insights')">AI INSIGHTS</button>
         <button id="config_tab" class="tablinks" onclick="openTab(event, 'config')">CONFIGURATION</button>
         <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">EXAMPLES</button>
         <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">FEATURES</button>
@@ -256,161 +205,147 @@
 
     <div id="home" class="tabcontent" style="display: block">
         <div style="margin: 0px; margin: 0">
-            <p style="padding: 22px">
-                <i style=" font-size: 24px">"Talk is expensive. Show me the code."</i><br><br><span style="font-size: 20px">― <b style="font-size: 20px">Željko Obrenović</b></span></p>
-            <div class="card">
-                <h1>What is Sokrates?</h1>
-                <ul style="padding-left: 20px">
-                    <li>
-                        Sokrates is a tool built by <b><a href="https://zeljkoobrenovic.com">Željko Obrenović</a></b>.
-                        It implements his vision on how to document and analyze software architectures of complex systems.
-                    </li>
-                    <li>
-                        Sokrates is provides a pragmatic, inexpensive way to extract rich data from any source code repositories. No need for long interviews and workshops. Just show the code.
-                    </li>
-                    <li>Sokrates can help you to understand your code by making visible the size, complexity, and
-                        coupling of software, as well all people interactions and team topologies.
-                    </li>
-                    <li style="margin-top: 12px">
-                        Sokrates is one of several open-source tools we use when implementing <a target="_blank" href="https://grounded-architecture.io">Grounded Architecture</a>
-                        <a target="_blank" href="https://grounded-architecture.io/analytics">Lightweight
-                            Architectural Analytics</a></li>
-                    <li style="margin-top: 12px">
-                        Sokrates borrows ideas from <b><a
-                            href="https://queue.acm.org/detail.cfm?id=945136">code spelunking</a></b> tool,
-                        in particular <a href="https://en.wikipedia.org/wiki/Grep">grep</a>, adding structure on top of regex source
-                        code searches.
-                    </li>
-                </ul>
-            </div>
-            <div class="card">
-                <h1>Recent examples of complex Sokrates analyses:</h1>
-                <div style="display: inline-block">
-                    <div style="margin-left: 12px">Single repository:</div>
-                    <div class="section" style="background-color: #f0f0f0; width: 300px; margin-bottom: 30px; ">
-                        <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/index.html" target="_blank" style="text-decoration: none">
-                            <div><img src="assets/logos/codex-logo.png" style="height: 90px; padding: 4px"></div>
-                            <div style="font-size: 140%; font-weight: bold">OpenAI Codex Repository</div>
-                            <div style="margin-top: 8px; font-size: 90%; color: black"><b>1.1</b> MLOC, <b>500+</b> contributors, <b>9K</b> commits (includes AI Insights*)</div>
-                        </a>
-                    </div>
-                </div>
-                <div style="display: inline-block; border-left: 2px dashed #c0c0c0; padding-left: 20px; margin-left: 15px">
-                    <div style="margin-left: 12px">Landscape analysis of multiple repositories:</div>
-                    <div class="section" style="width: 300px; margin-bottom: 30px; ">
-                        <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                            <div><img src="assets/logos/openai.svg" style="height: 90px; padding: 4px"></div>
-                            <div style="font-size: 140%; font-weight: bold">OpenAI's OSS Projects</div>
-                            <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors, <b>9K</b> commits</div>
-                        </a>
-                    </div>
-                    <div class="section" style="width: 300px; margin-bottom: 30px; ">
-                        <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                            <div><img src="assets/logos/anthropics.png" style="height: 90px; padding: 4px"></div>
-                            <div style="font-size: 140%; font-weight: bold">Anthropics's OSS Projects</div>
-                            <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors, <b>5K</b> commits</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <h1>Sokrates in 5 minutes</h1>
-                <div style="display: inline-block; margin-right: 20px">
-                    <p>See a 5 minutes video on using Sokrates CLI to analyze source code of Sokrates:</p>
-                    <div>
-                        <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/ZybfJQ8Ob7g"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div style="display: inline-block;">
-                    <p>See a 5 minutes video on using Sokrates Explorer to analyze source code of JUnit4:</p>
-                    <div>
-                        <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/kdLcUEqGXl0"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <h1>Background</h1>
-                <ul>
-                    <li>Sokrates looks on the source code from a perspective of maintenance, making visible the size, complexity and
-                        coupling of software.
-                    </li>
-
-                    <li>Sokrates is one of several open-source tools we frequently used when implementing <a target="_blank" href="https://grounded-architecture.io/analytics">Grounded Architecture
-                        Lightweight
-                        Architectural Analytics</a></li>
-
-                    <li>For more details see my O'Reilly Video Training (from my time at Software Improvement Group):
-                        <b><a href="https://player.oreilly.com/videos/9781491950791">Building Maintainable Software</a></b> (4 hours),
-                        and
-                        O'Reilly Webcast: <b><a href="https://www.oreilly.com/pub/e/3535">Building Maintainable Software</a></b>
-                        (1 hour, together with <a href="https://www.linkedin.com/in/rob-van-der-leek-66596962/">Rob van der Leek</a>).
-                    </li>
-                    <li>
-                        The fragment of my training video on building maintainable software is freely avaliable at Youtube:<br/><br/>
-                        <iframe style="max-width: 560px" width="100%" height="315"
-                                src="https://www.youtube.com/embed/8k14k3q5zDs?start=334" frameborder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </li>
-                </ul>
-            </div>
-
+    <p style="padding: 22px">
+        <i style=" font-size: 24px">"Talk is expensive. Show me the code."</i><br><br><span style="font-size: 20px">― <b style="font-size: 20px">Željko Obrenović</b></span></p>
+    <div class="card">
+        <h1>What is Sokrates?</h1>
+        <ul style="padding-left: 20px">
+            <li>
+                Sokrates is a tool built by <b><a href="https://zeljkoobrenovic.com">Željko Obrenović</a></b>.
+                It implements his vision on how to document and analyze software architectures of complex systems.
+            </li>
+            <li>
+                Sokrates is provides a pragmatic, inexpensive way to extract rich data from any source code repositories. No need for long interviews and workshops. Just show the code.
+            </li>
+            <li>Sokrates can help you to understand your code by making visible the size, complexity, and
+                coupling of software, as well all people interactions and team topologies.
+            </li>
+            <li style="margin-top: 12px">
+                Sokrates is one of several open-source tools we use when implementing <a target="_blank" href="https://grounded-architecture.io">Grounded Architecture</a>
+                <a target="_blank" href="https://grounded-architecture.io/analytics">Lightweight
+                Architectural Analytics</a></li>
+            <li style="margin-top: 12px">
+                Sokrates borrows ideas from <b><a
+                    href="https://queue.acm.org/detail.cfm?id=945136">code spelunking</a></b> tool,
+                in particular <a href="https://en.wikipedia.org/wiki/Grep">grep</a>, adding structure on top of regex source
+                code searches.
+            </li>
+        </ul>
+    </div>
+    <div class="card">
+        <h1>Recent examples of complex Sokrates analyses:</h1>
+        <div class="section" style="width: 300px; margin-bottom: 50px; ">
+            <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                <div><img src="assets/logos/openai.svg" style="height: 90px; padding: 4px"></div>
+                <div style="font-size: 140%; font-weight: bold">OpenAI's OSS Projects</div>
+                <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors, <b>9K</b> commits</div>
+            </a>
         </div>
+        <div class="section" style="width: 300px; margin-bottom: 50px; ">
+            <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                <div><img src="assets/logos/anthropics.png" style="height: 90px; padding: 4px"></div>
+                <div style="font-size: 140%; font-weight: bold">Anthropics's OSS Projects</div>
+                <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors, <b>5K</b> commits</div>
+            </a>
+        </div>
+    </div>
+    <div class="card">
+        <h1>Sokrates in 5 minutes</h1>
+        <div style="display: inline-block; margin-right: 20px">
+            <p>See a 5 minutes video on using Sokrates CLI to analyze source code of Sokrates:</p>
+            <div>
+                <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/ZybfJQ8Ob7g"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+        <div style="display: inline-block;">
+            <p>See a 5 minutes video on using Sokrates Explorer to analyze source code of JUnit4:</p>
+            <div>
+                <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/kdLcUEqGXl0"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h1>Background</h1>
+        <ul>
+            <li>Sokrates looks on the source code from a perspective of maintenance, making visible the size, complexity and
+                coupling of software.
+            </li>
+
+            <li>Sokrates is one of several open-source tools we frequently used when implementing <a target="_blank" href="https://grounded-architecture.io/analytics">Grounded Architecture Lightweight
+                Architectural Analytics</a></li>
+
+            <li>For more details see my O'Reilly Video Training (from my time at Software Improvement Group):
+                <b><a href="https://player.oreilly.com/videos/9781491950791">Building Maintainable Software</a></b> (4 hours),
+                and
+                O'Reilly Webcast: <b><a href="https://www.oreilly.com/pub/e/3535">Building Maintainable Software</a></b>
+                (1 hour, together with <a href="https://www.linkedin.com/in/rob-van-der-leek-66596962/">Rob van der Leek</a>).
+            </li>
+            <li>
+                The fragment of my training video on building maintainable software is freely avaliable at Youtube:<br/><br/>
+                <iframe style="max-width: 560px" width="100%" height="315"
+                        src="https://www.youtube.com/embed/8k14k3q5zDs?start=334" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </li>
+        </ul>
+    </div>
+
+</div>
 
     </div>
 
     <div id="install" class="tabcontent">
         <div class="card">
-            <h1>SOURCE CODE</h1>
-            <ul style="font-size: 120%">
-                <li><p><a href="https://github.com/zeljkoobrenovic/sokrates"
-                          target="_blank">github.com/zeljkoobrenovic/sokrates</a>
-                </p></li>
-            </ul>
-        </div>
+    <h1>SOURCE CODE</h1>
+    <ul style="font-size: 120%">
+        <li><p><a href="https://github.com/zeljkoobrenovic/sokrates"
+                  target="_blank">github.com/zeljkoobrenovic/sokrates</a>
+        </p></li>
+    </ul>
+</div>
 
-        <div>
-            <div class="card">
-                <h1>PRE-REQUIREMENTS</h1>
-                <ul>
-                    <li>Java runtime</li>
-                    <li>Optional set the <b>SOKRATES_ANALYSIS_DATE</b> system variable (in the YYYY-MM-dd format) to define the reference date for commit history analyses.
-                        By default, Sokrates uses the current date to calculate the number of commits and contributors in different periods relative to the reference date
-                        (e.g. past 30 days, past 90 days, past year).
-                    </li>
-                    <li>If you want to run Sokrates in a Docker container, see <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/dockerfile">Sokrates Dockerfile</a></li>
-                </ul>
-            </div>
-            <div class="card">
-                <h1>COMMAND LINE INTERFACE (CLI) JAR</h1>
-                <table>
-                    <tr>
-                        <td style="text-align: left; padding-right: 10px">
-                            DOWNLOAD:
-                        </td>
-                        <td>
-                            <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">sokrates-LATEST.jar</a>
-                            (40 MB)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left; padding-right: 10px">
-                            CURL:
-                        </td>
-                        <td>
-                            <pre style="padding: 6px; background-color: lightyellow; font-size: 110%">curl https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar --output sokrates-LATEST.jar</pre>
-                        </td>
-                    </tr>
-                </table>
-                <div class="card">
-                    <h3 style="background-color: #ededed; padding: 4px"><b>Command Line Usage:</b></h3>
-                    <div style="" class="section">
+<div>
+    <div class="card">
+        <h1>PRE-REQUIREMENTS</h1>
+        <ul>
+            <li>Java runtime</li>
+            <li>Optional set the <b>SOKRATES_ANALYSIS_DATE</b> system variable (in the YYYY-MM-dd format) to define the reference date for commit history analyses.
+                By default, Sokrates uses the current date to calculate the number of commits and contributors in different periods relative to the reference date
+                (e.g. past 30 days, past 90 days, past year).
+            </li>
+            <li>If you want to run Sokrates in a Docker container, see <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/dockerfile">Sokrates Dockerfile</a></li>
+        </ul>
+    </div>
+    <div class="card">
+        <h1>COMMAND LINE INTERFACE (CLI) JAR</h1>
+        <table>
+            <tr>
+                <td style="text-align: left; padding-right: 10px">
+                    DOWNLOAD:
+                </td>
+                <td>
+                    <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">sokrates-LATEST.jar</a>
+                    (40 MB)
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left; padding-right: 10px">
+                    CURL:
+                </td>
+                <td>
+                    <pre style="padding: 6px; background-color: lightyellow; font-size: 110%">curl https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar --output sokrates-LATEST.jar</pre>
+                </td>
+            </tr>
+        </table>
+        <div class="card">
+            <h3 style="background-color: #ededed; padding: 4px"><b>Command Line Usage:</b></h3>
+            <div style="" class="section">
 <pre style="">
 Usage: java -jar sokrates.jar &lt;command> &lt;options>
 
@@ -440,13 +375,13 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
 * extractGitSubHistory: A utility function to split a git history file (git-history.txt) into smaller ones based on a commit file path prefix, removing the prefix from file path in split files
    - options: [-prefix &lt;arg>] [-analysisRoot &lt;arg>] [-help]
 </pre>
-                    </div>
-                </div>
+            </div>
+        </div>
 
 
-                <div class="card">
-                    <div><b>CLI Usage Example 1. Analyze a single projects (Junit4): </b></div>
-                    <div style="width: 100%; overflow-x: auto">
+        <div class="card">
+            <div><b>CLI Usage Example 1. Analyze a single projects (Junit4): </b></div>
+            <div style="width: 100%; overflow-x: auto">
     <pre style="background-color: #dedede; padding: 4px">
     git clone https://github.com/junit-team/junit4
     cd junit4
@@ -457,10 +392,10 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
 
     open _sokrates/reports/html/index.html
   </pre>
-                        <div><b>CLI Usage Example 2. Analyze multiple projects and create a landscape page that summarizes data from
-                            these
-                            two analyses:</b></div>
-                        <pre style="background-color: #dedede; padding: 4px">
+                <div><b>CLI Usage Example 2. Analyze multiple projects and create a landscape page that summarizes data from
+                    these
+                    two analyses:</b></div>
+                <pre style="background-color: #dedede; padding: 4px">
     git clone https://github.com/junit-team/junit4
     cd junit4
     java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">extractGitHistory</span>
@@ -489,8 +424,8 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
 
     open _sokrates_landscape/index.html
   </pre>
-                        <div><b>CLI Usage Example 3. Analyzing a project using custom configurations:</b></div>
-                        <div style="width: 100%; overflow-x: auto">
+                <div><b>CLI Usage Example 3. Analyzing a project using custom configurations:</b></div>
+                <div style="width: 100%; overflow-x: auto">
     <pre style="background-color: #dedede; padding: 4px">
     git clone https://github.com/junit-team/junit5
     cd junit5
@@ -501,1148 +436,1110 @@ Commands: init, generateReports, updateLandscape, updateConfig, extractGitHistor
     java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init -conventionsFile analysis_conventions.json</span>
     java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">generateReports</span>
   </pre>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <div class="card">
-                <h1>BIG SCALE ANALYSES</h1>
-                <h3>BIG SCALE ANALYSES ON AWS</h3>
-                <ul>
-                    <li>If you want to perform landscape analyses of all repositories in a GitHub organization, take a look at this project <a
-                            href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis</a></li>
-                </ul>
-                <h3>BIG SCALE ANALYSES</h3>
-                <ul>
-                    <li>A Dockerized version of analysis I sue to run analyses of open source projects on AWS <a href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws"
-                                                                                                                 target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws</a>
-                    </li>
-                </ul>
-                <div>
-                    <img src="assets/figures/aws-lanscape-analysis.png" style="width: 800px" class="section hide-on-mobile">
-                </div>
+        </div>
+    </div>
+    <div class="card">
+        <h1>BIG SCALE ANALYSES</h1>
+        <h3>BIG SCALE ANALYSES ON AWS</h3>
+        <ul>
+            <li>If you want to perform landscape analyses of all repositories in a GitHub organization, take a look at this project <a
+                    href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis</a></li>
+        </ul>
+        <h3>BIG SCALE ANALYSES</h3>
+        <ul>
+            <li>A Dockerized version of analysis I sue to run analyses of open source projects on AWS <a href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws</a>
+            </li>
+        </ul>
+        <div>
+            <img src="assets/figures/aws-lanscape-analysis.png" style="width: 800px" class="section hide-on-mobile">
+        </div>
 
-            </div>
-            <div class="card">
-                <h1>VISUAL EXPLORER</h1>
-                <p>DOWNLOAD: <a
-                        href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-LATEST.jar">sokrates-explorer-LATEST.jar</a>
-                    (78 MB)</p>
-                <p><b>NOTE: require JavaFX (download it and install it from <a ref="https://openjfx.io/">openjfx.io</a>)</b></p>
-                <div style="width: 100%; overflow-x: auto">
+    </div>
+    <div class="card">
+        <h1>VISUAL EXPLORER</h1>
+        <p>DOWNLOAD: <a
+                href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-LATEST.jar">sokrates-explorer-LATEST.jar</a>
+            (78 MB)</p>
+        <p><b>NOTE: require JavaFX (download it and install it from <a ref="https://openjfx.io/">openjfx.io</a>)</b></p>
+        <div style="width: 100%; overflow-x: auto">
     <pre>
    java --module-path $JAVAFX_HOME/lib --add-modules=javafx.controls,javafx.web -jar sokrates-explorer-LATEST.jar
   </pre>
-                </div>
-                <br/>
-                <img src="assets/explorer.png" style="width: 100%; max-width: 1024px">
-            </div>
         </div>
+        <br/>
+        <img src="assets/explorer.png" style="width: 100%; max-width: 1024px">
+    </div>
+</div>
 
     </div>
 
     <div id="ai_insights" class="tabcontent">
         <div class="card">
-            <h1>AI INSIGHTS — SKILLS FOR AI CODING TOOLS</h1>
-            <p style="font-size: 110%">
-                Sokrates measures: size, complexity, duplication, churn, coupling, contributors. The
-                <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank"><b>sokrates-skills</b></a> project adds the layer
-                only an AI reader can add — what the code <i>is</i>, what it depends on, where the real risks are, how it got here — and makes
-                Sokrates itself more useful by configuring it well. The skills work with Claude Code and similar AI coding tools that can load
-                <span class="inline-code">SKILL.md</span> instructions.
-            </p>
-            <ul style="font-size: 110%">
-                <li><a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">github.com/zeljkoobrenovic/sokrates-skills</a> (MIT)</li>
-                <li><a href="https://zeljkoobrenovic.github.io/sokrates-skills/examples/codex/ai-insights/" target="_blank">Live example: AI Insights Explorer for OpenAI Codex ⤇</a>
-                    — ten scanners, 228 verified findings
-                </li>
+    <h1>AI INSIGHTS — SKILLS FOR AI CODING TOOLS</h1>
+    <p style="font-size: 110%">
+        Sokrates measures: size, complexity, duplication, churn, coupling, contributors. The
+        <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank"><b>sokrates-skills</b></a> project adds the layer
+        only an AI reader can add — what the code <i>is</i>, what it depends on, where the real risks are, how it got here — and makes
+        Sokrates itself more useful by configuring it well. The skills work with Claude Code and similar AI coding tools that can load
+        <span class="inline-code">SKILL.md</span> instructions.
+    </p>
+    <ul style="font-size: 110%">
+        <li><a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">github.com/zeljkoobrenovic/sokrates-skills</a> (MIT)</li>
+        <li><a href="https://zeljkoobrenovic.github.io/sokrates-skills/examples/codex/ai-insights/" target="_blank">Live example: AI Insights Explorer for OpenAI Codex ⤇</a>
+            — fourteen scanners, 298 verified findings</li>
+    </ul>
+</div>
+
+<div>
+    <div class="section" style="width: calc(50% - 50px)">
+        <div style="margin: 10px">
+            <h2 class="title">Analysis skills (scanners)</h2>
+            <p>Read a finished Sokrates analysis (<span class="inline-code">_sokrates/</span>) and write findings with verifiable evidence.
+                Each scanner answers one question:</p>
+            <ul>
+                <li><b>functionality-scan</b> — what the software does: purpose, features, entry points, workflows, data, integrations, hidden functionality, documentation-vs-code gaps</li>
+                <li><b>domain-language-scan</b> — the domain language: glossary, bounded contexts, concepts per capability, language drift</li>
+                <li><b>architecture-scan</b> — the implemented architecture: style, components, boundaries, violations, communication, migrations</li>
+                <li><b>tech-stack-scan</b> — languages, frameworks, libraries, build tooling, CI/CD, infrastructure, external services</li>
+                <li><b>cicd-scan</b> — the CI/CD process as a narrative: triggers, build, tests, gates, release, deployment, hygiene</li>
+                <li><b>observability-scan</b> — logging, metrics, tracing, error reporting, health surfaces, blind spots</li>
+                <li><b>reliability-scan</b> — how the code behaves when things go wrong: error model, failure handling on load-bearing paths, isolation and blast radius, retries and timeouts, degradation, resource cleanup and shutdown</li>
+                <li><b>performance-scan</b> — static performance review: workload model and scaling factors, hot-path algorithms and data structures, I/O and memory, parallelism, caching, cost limits, ranked bottlenecks</li>
+                <li><b>storage-scan</b> — persistent data: data classes and where they live, access patterns, schema and format versioning, integrity and corruption recovery, retention and cleanup</li>
+                <li><b>network-scan</b> — connectivity: endpoint topology, protocols as used, timeouts, TLS and proxies, endpoint configurability, offline behaviour, data in transit</li>
+                <li><b>security-design-scan</b> — trust boundaries, sandboxing, identity and access, secrets handling, posture</li>
+                <li><b>security-scan</b> — code-level audit: secrets, injection, crypto, unsafe code, input handling</li>
+                <li><b>risk-synthesis-scan</b> — Sokrates hotspots explained: what each risky file does, knowledge risk, change coupling</li>
+                <li><b>evolution-scan</b> — the history as a story: eras, growth, focus shift, people, module lifecycle, trajectory</li>
+                <li><b>full-scan</b> — runs all of them in dependency order and merges the results</li>
             </ul>
         </div>
-
-        <div>
-            <div class="section" style="width: calc(50% - 50px)">
-                <div style="margin: 10px">
-                    <h2 class="title">Analysis skills (scanners)</h2>
-                    <p>Read a finished Sokrates analysis (<span class="inline-code">_sokrates/</span>) and write findings with verifiable evidence.
-                        Each scanner answers one question:</p>
-                    <ul>
-                        <li><b>functionality-scan</b> — what the software does: purpose, features, entry points, workflows, data, integrations, hidden functionality, documentation-vs-code gaps</li>
-                        <li><b>domain-language-scan</b> — the domain language: glossary, bounded contexts, concepts per capability, language drift</li>
-                        <li><b>architecture-scan</b> — the implemented architecture: style, components, boundaries, violations, communication, migrations</li>
-                        <li><b>tech-stack-scan</b> — languages, frameworks, libraries, build tooling, CI/CD, infrastructure, external services</li>
-                        <li><b>cicd-scan</b> — the CI/CD process as a narrative: triggers, build, tests, gates, release, deployment, hygiene</li>
-                        <li><b>observability-scan</b> — logging, metrics, tracing, error reporting, health surfaces, blind spots</li>
-                        <li><b>security-design-scan</b> — trust boundaries, sandboxing, identity and access, secrets handling, posture</li>
-                        <li><b>security-scan</b> — code-level audit: secrets, injection, crypto, unsafe code, input handling</li>
-                        <li><b>risk-synthesis-scan</b> — Sokrates hotspots explained: what each risky file does, knowledge risk, change coupling</li>
-                        <li><b>evolution-scan</b> — the history as a story: eras, growth, focus shift, people, module lifecycle, trajectory</li>
-                        <li><b>full-scan</b> — runs all of them in dependency order and merges the results</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="section" style="width: calc(50% - 50px)">
-                <div style="margin: 10px">
-                    <h2 class="title">Configuration skills</h2>
-                    <p>Create and tune Sokrates configuration <i>before</i> an analysis. Each comes with a checker that simulates Sokrates' own
-                        rules on the real tree, so a configuration is verified before Sokrates runs:</p>
-                    <ul>
-                        <li><b>sokrates-repo-config</b> — <span class="inline-code">_sokrates/config.json</span>: scope, file classification, thresholds, history settings</li>
-                        <li><b>sokrates-decompositions</b> — meaningful components: folder depth, build modules, mixed depth for monorepos, ownership, layers</li>
-                        <li><b>sokrates-features-of-interest</b> — concerns worth tracking: debt markers, security-sensitive code, feature flags, domain vocabulary</li>
-                        <li><b>sokrates-landscape-config</b> — <span class="inline-code">_sokrates_landscape/</span> files: discovery, filters, tags, teams</li>
-                        <li><b>sokrates-people-config</b> — contributor identity merging from git history, with a review file for the human decisions</li>
-                        <li><b>sokrates-virtual-landscapes</b> — sub-landscapes from your grouping or from naming conventions, technology, activity, teams</li>
-                    </ul>
-                    <p>The field references were read from the Sokrates Java source — including the places where documentation and code disagree.</p>
-                </div>
-            </div>
+    </div>
+    <div class="section" style="width: calc(50% - 50px)">
+        <div style="margin: 10px">
+            <h2 class="title">Configuration skills</h2>
+            <p>Create and tune Sokrates configuration <i>before</i> an analysis. Each comes with a checker that simulates Sokrates' own
+                rules on the real tree, so a configuration is verified before Sokrates runs:</p>
+            <ul>
+                <li><b>sokrates-repo-config</b> — <span class="inline-code">_sokrates/config.json</span>: scope, file classification, thresholds, history settings</li>
+                <li><b>sokrates-decompositions</b> — meaningful components: folder depth, build modules, mixed depth for monorepos, ownership, layers</li>
+                <li><b>sokrates-features-of-interest</b> — concerns worth tracking: debt markers, security-sensitive code, feature flags, domain vocabulary</li>
+                <li><b>sokrates-landscape-config</b> — <span class="inline-code">_sokrates_landscape/</span> files: discovery, filters, tags, teams</li>
+                <li><b>sokrates-people-config</b> — contributor identity merging from git history, with a review file for the human decisions</li>
+                <li><b>sokrates-virtual-landscapes</b> — sub-landscapes from your grouping or from naming conventions, technology, activity, teams</li>
+            </ul>
+            <p>The field references were read from the Sokrates Java source — including the places where documentation and code disagree.</p>
         </div>
+    </div>
+</div>
 
-        <div class="card">
-            <h1>HOW TO USE</h1>
-            <div class="section" style="width: calc(100% - 50px)">
-                <div style="margin: 10px">
-                    <h3 style="background-color: #ededed; padding: 4px"><b>1. Install the skills</b></h3>
-                    <p>Every skill is a folder with a <span class="inline-code">SKILL.md</span> in the open
-                        <a href="https://agentskills.io" target="_blank">Agent Skills</a> format, so the same folders work in any AI coding tool that
-                        supports skills. The repository's <span class="inline-code">install.sh</span> symlinks all of them into the right places;
-                        <span class="inline-code">git pull</span> then updates every tool at once.</p>
-                    <pre style="padding: 6px; background-color: lightyellow">git clone https://github.com/zeljkoobrenovic/sokrates-skills.git
+<div class="card">
+    <h1>HOW TO USE</h1>
+    <div class="section" style="width: calc(100% - 50px)">
+        <div style="margin: 10px">
+            <h3 style="background-color: #ededed; padding: 4px"><b>1. Install the skills</b></h3>
+            <p>Every skill is a folder with a <span class="inline-code">SKILL.md</span> in the open
+                <a href="https://agentskills.io" target="_blank">Agent Skills</a> format, so the same folders work in any AI coding tool that
+                supports skills. The repository's <span class="inline-code">install.sh</span> symlinks all of them into the right places;
+                <span class="inline-code">git pull</span> then updates every tool at once.</p>
+            <pre style="padding: 6px; background-color: lightyellow">git clone https://github.com/zeljkoobrenovic/sokrates-skills.git
 cd sokrates-skills
 ./install.sh            # → ~/.claude/skills (Claude Code) and ~/.agents/skills (Codex, Gemini CLI, Cursor, Copilot, …)
 ./install.sh --project  # → ./.claude/skills and ./.agents/skills of the current project instead (shareable via git)</pre>
-                    <table style="border-collapse: collapse; font-size: 95%">
-                        <tr style="background-color: #f4f4f4">
-                            <th style="text-align: left; padding: 6px">Tool</th>
-                            <th style="text-align: left; padding: 6px">Reads skills from</th>
-                            <th style="text-align: left; padding: 6px">Invoke</th>
-                        </tr>
-                        <tr>
-                            <td style="padding: 6px; vertical-align: top"><b>Claude Code</b></td>
-                            <td style="padding: 6px"><span class="inline-code">~/.claude/skills/</span> (personal), <span class="inline-code">.claude/skills/</span> (project)</td>
-                            <td style="padding: 6px">automatically when relevant, or <span class="inline-code">/tech-stack-scan</span></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 6px; vertical-align: top"><b>OpenAI Codex CLI</b></td>
-                            <td style="padding: 6px"><span class="inline-code">~/.agents/skills/</span> (personal), <span class="inline-code">.agents/skills/</span> (repository)</td>
-                            <td style="padding: 6px">automatically, or <span class="inline-code">$tech-stack-scan</span></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 6px; vertical-align: top"><b>Gemini CLI</b></td>
-                            <td style="padding: 6px"><span class="inline-code">~/.gemini/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (user), <span class="inline-code">.gemini/skills/</span>
-                                or <span class="inline-code">.agents/skills/</span> (workspace); or <span class="inline-code">gemini skills install https://github.com/zeljkoobrenovic/sokrates-skills.git</span>
-                            </td>
-                            <td style="padding: 6px">activates a matching skill after a confirmation; <span class="inline-code">gemini skills list --all</span></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 6px; vertical-align: top"><b>Cursor</b></td>
-                            <td style="padding: 6px"><span class="inline-code">~/.cursor/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (user), <span class="inline-code">.cursor/skills/</span>
-                                or <span class="inline-code">.agents/skills/</span> (project); <span class="inline-code">.claude/skills/</span> is read too
-                            </td>
-                            <td style="padding: 6px"><span class="inline-code">/</span> in Agent chat, or automatically</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 6px; vertical-align: top"><b>GitHub Copilot</b><br>(CLI, VS Code, coding agent)</td>
-                            <td style="padding: 6px"><span class="inline-code">~/.copilot/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (personal), <span class="inline-code">.github/skills/</span>,
-                                <span class="inline-code">.agents/skills/</span> or <span class="inline-code">.claude/skills/</span> (repository)
-                            </td>
-                            <td style="padding: 6px">automatically; <span class="inline-code">gh skill</span> installs from repositories</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 6px; vertical-align: top"><b>Other tools</b></td>
-                            <td style="padding: 6px">any Agent-Skills folder: <span class="inline-code">./install.sh &lt;folder&gt;</span>, or copy the skill folders</td>
-                            <td style="padding: 6px">see the tool's documentation</td>
-                        </tr>
-                    </table>
-                    <p>Requirements: Python 3.9+ (standard library only) for the scripts, and a Sokrates analysis of your project.</p>
+            <table style="border-collapse: collapse; font-size: 95%">
+                <tr style="background-color: #f4f4f4"><th style="text-align: left; padding: 6px">Tool</th><th style="text-align: left; padding: 6px">Reads skills from</th><th style="text-align: left; padding: 6px">Invoke</th></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>Claude Code</b></td><td style="padding: 6px"><span class="inline-code">~/.claude/skills/</span> (personal), <span class="inline-code">.claude/skills/</span> (project)</td><td style="padding: 6px">automatically when relevant, or <span class="inline-code">/tech-stack-scan</span></td></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>OpenAI Codex CLI</b></td><td style="padding: 6px"><span class="inline-code">~/.agents/skills/</span> (personal), <span class="inline-code">.agents/skills/</span> (repository)</td><td style="padding: 6px">automatically, or <span class="inline-code">$tech-stack-scan</span></td></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>Gemini CLI</b></td><td style="padding: 6px"><span class="inline-code">~/.gemini/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (user), <span class="inline-code">.gemini/skills/</span> or <span class="inline-code">.agents/skills/</span> (workspace); or <span class="inline-code">gemini skills install https://github.com/zeljkoobrenovic/sokrates-skills.git</span></td><td style="padding: 6px">activates a matching skill after a confirmation; <span class="inline-code">gemini skills list --all</span></td></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>Cursor</b></td><td style="padding: 6px"><span class="inline-code">~/.cursor/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (user), <span class="inline-code">.cursor/skills/</span> or <span class="inline-code">.agents/skills/</span> (project); <span class="inline-code">.claude/skills/</span> is read too</td><td style="padding: 6px"><span class="inline-code">/</span> in Agent chat, or automatically</td></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>GitHub Copilot</b><br>(CLI, VS Code, coding agent)</td><td style="padding: 6px"><span class="inline-code">~/.copilot/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (personal), <span class="inline-code">.github/skills/</span>, <span class="inline-code">.agents/skills/</span> or <span class="inline-code">.claude/skills/</span> (repository)</td><td style="padding: 6px">automatically; <span class="inline-code">gh skill</span> installs from repositories</td></tr>
+                <tr><td style="padding: 6px; vertical-align: top"><b>Other tools</b></td><td style="padding: 6px">any Agent-Skills folder: <span class="inline-code">./install.sh &lt;folder&gt;</span>, or copy the skill folders</td><td style="padding: 6px">see the tool's documentation</td></tr>
+            </table>
+            <p>Requirements: Python 3.9+ (standard library only) for the scripts, and a Sokrates analysis of your project.</p>
 
-                    <h3 style="background-color: #ededed; padding: 4px"><b>2. Analyze the project with Sokrates</b></h3>
-                    <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
+            <h3 style="background-color: #ededed; padding: 4px"><b>2. Analyze the project with Sokrates</b></h3>
+            <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
 java -jar sokrates.jar init
 java -jar sokrates.jar extractGitHistory      # optional, enables history-based insights
 java -jar sokrates.jar generateReports</pre>
 
-                    <h3 style="background-color: #ededed; padding: 4px"><b>3. Refine the configuration with the config skills</b></h3>
-                    <p>The default <span class="inline-code">init</span> configuration is a starting point. In the project folder, ask your AI tool to
-                        improve it — each configuration skill previews the effect on the real tree before Sokrates runs:</p>
-                    <ul>
-                        <li><i>"check the Sokrates configuration of this repository"</i> — scope, ignored and misclassified files, thresholds (<b>sokrates-repo-config</b>)</li>
-                        <li><i>"define meaningful components for this repository"</i> — modules, mixed depth for monorepos, ownership, layers (<b>sokrates-decompositions</b>)</li>
-                        <li><i>"which features of interest should Sokrates track here?"</i> — debt markers, security-sensitive code, feature flags, domain vocabulary
-                            (<b>sokrates-features-of-interest</b>)
-                        </li>
-                        <li><i>"merge duplicate contributors"</i> — identity merging with a review file (<b>sokrates-people-config</b>)</li>
-                    </ul>
-                    <p>Then regenerate the reports so the analysis reflects the refined configuration:</p>
-                    <pre style="padding: 6px; background-color: lightyellow">java -jar sokrates.jar generateReports</pre>
+            <h3 style="background-color: #ededed; padding: 4px"><b>3. Refine the configuration with the config skills</b></h3>
+            <p>The default <span class="inline-code">init</span> configuration is a starting point. In the project folder, ask your AI tool to
+                improve it — each configuration skill previews the effect on the real tree before Sokrates runs:</p>
+            <ul>
+                <li><i>"check the Sokrates configuration of this repository"</i> — scope, ignored and misclassified files, thresholds (<b>sokrates-repo-config</b>)</li>
+                <li><i>"define meaningful components for this repository"</i> — modules, mixed depth for monorepos, ownership, layers (<b>sokrates-decompositions</b>)</li>
+                <li><i>"which features of interest should Sokrates track here?"</i> — debt markers, security-sensitive code, feature flags, domain vocabulary (<b>sokrates-features-of-interest</b>)</li>
+                <li><i>"merge duplicate contributors"</i> — identity merging with a review file (<b>sokrates-people-config</b>)</li>
+            </ul>
+            <p>Then regenerate the reports so the analysis reflects the refined configuration:</p>
+            <pre style="padding: 6px; background-color: lightyellow">java -jar sokrates.jar generateReports</pre>
 
-                    <h3 style="background-color: #ededed; padding: 4px"><b>4. Ask for insights</b></h3>
-                    <p>In the project folder, ask your AI tool: <i>"run a tech stack scan"</i>, <i>"explain the risks in this codebase"</i>,
-                        <i>"what does this software do?"</i>, <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all ten scanners.
-                        Every scanner reads the Sokrates data first and spends its reading budget where the numbers point.</p>
+            <h3 style="background-color: #ededed; padding: 4px"><b>4. Ask for insights</b></h3>
+            <p>In the project folder, ask your AI tool: <i>"run a tech stack scan"</i>, <i>"explain the risks in this codebase"</i>,
+                <i>"what does this software do?"</i>, <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all fourteen scanners.
+                Every scanner reads the Sokrates data first and spends its reading budget where the numbers point.</p>
 
-                    <h3 style="background-color: #ededed; padding: 4px"><b>5. Open the AI Insights Explorer</b></h3>
-                    <p>Results land in <span class="inline-code">&lt;your-project&gt;/_sokrates/findings/ai-insights/</span>: one JSON file per scanner
-                        and <span class="inline-code">index.html</span> — a self-contained interactive page with an overview, a page per scanner,
-                        a cross-scanner list of attention items, severity and confidence filters, full-text search, and every finding's evidence
-                        as file, line range and verbatim snippet.</p>
+            <h3 style="background-color: #ededed; padding: 4px"><b>5. Open the AI Insights Explorer</b></h3>
+            <p>Results land in <span class="inline-code">&lt;your-project&gt;/_sokrates/findings/ai-insights/</span>: one JSON file per scanner
+                and <span class="inline-code">index.html</span> — a self-contained interactive page with an overview, a page per scanner,
+                a cross-scanner list of attention items, severity and confidence filters, full-text search, and every finding's evidence
+                as file, line range and verbatim snippet.</p>
 
-                    <h3 style="background-color: #ededed; padding: 4px"><b>6. Illustrate the summaries (optional)</b></h3>
-                    <pre style="padding: 6px; background-color: lightyellow">export GEMINI_API_KEY=...
+            <h3 style="background-color: #ededed; padding: 4px"><b>6. Illustrate the summaries (optional)</b></h3>
+            <pre style="padding: 6px; background-color: lightyellow">export GEMINI_API_KEY=...
 python3 skills/illustrators/generate_summary_visuals.py &lt;your-project&gt;/_sokrates/findings/ai-insights</pre>
-                    <p>The illustrator script (in the <span class="inline-code">skills/illustrators/</span> folder of the repository) turns each
-                        scanner's summary into one calm, mostly visual illustration that tells its story with a few key words — a pipeline for
-                        CI/CD, a landscape with glowing hotspots for risks, growth rings for evolution. It uses Google's Gemini image model
-                        ("Nano Banana"), saves the images next to the findings (<span class="inline-code">ai-insights/visuals/</span>), records them
-                        in the findings JSON and re-renders the explorer, which shows each image at the end of the foldable summary block.
-                        Existing images are kept on re-runs; <span class="inline-code">--force</span> regenerates them. Skip this step and the
-                        explorer looks exactly as before.</p>
+            <p>The illustrator script (in the <span class="inline-code">skills/illustrators/</span> folder of the repository) turns each
+                scanner's summary into one calm, mostly visual illustration that tells its story with a few key words — a pipeline for
+                CI/CD, a landscape with glowing hotspots for risks, growth rings for evolution. It uses Google's Gemini image model
+                ("Nano Banana"), saves the images next to the findings (<span class="inline-code">ai-insights/visuals/</span>), records them
+                in the findings JSON and re-renders the explorer, which shows each image at the end of the foldable summary block.
+                Existing images are kept on re-runs; <span class="inline-code">--force</span> regenerates them. Skip this step and the
+                explorer looks exactly as before.</p>
 
-                    <h3 style="background-color: #ededed; padding: 4px"><b>7. Embed the explorer in the Sokrates report</b></h3>
-                    <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
+            <h3 style="background-color: #ededed; padding: 4px"><b>7. Embed the explorer in the Sokrates report</b></h3>
+            <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
 java -jar sokrates.jar addCustomTab -label "AI Insights*" -iframeLink "../../findings/ai-insights/index.html"</pre>
-                    <p>This registers an <b>AI Insights*</b> tab in the configuration of the main Sokrates HTML report
-                        (<span class="inline-code">_sokrates/reports/html/index.html</span>) that shows the explorer inline, so the quantitative
-                        reports and the AI findings live in one place.</p>
+            <p>This registers an <b>AI Insights*</b> tab in the configuration of the main Sokrates HTML report
+                (<span class="inline-code">_sokrates/reports/html/index.html</span>) that shows the explorer inline, so the quantitative
+                reports and the AI findings live in one place.</p>
 
-                    <h3 style="background-color: #ededed; padding: 4px"><b>8. Regenerate the reports to see the new tab</b></h3>
-                    <pre style="padding: 6px; background-color: lightyellow">java -jar sokrates.jar generateReports</pre>
-                    <p>The tab is part of the generated report from now on; it picks up the explorer's regenerated
-                        <span class="inline-code">index.html</span> automatically whenever you re-run the scanners.</p>
-                </div>
-            </div>
+            <h3 style="background-color: #ededed; padding: 4px"><b>8. Regenerate the reports to see the new tab</b></h3>
+            <pre style="padding: 6px; background-color: lightyellow">java -jar sokrates.jar generateReports</pre>
+            <p>The tab is part of the generated report from now on; it picks up the explorer's regenerated
+                <span class="inline-code">index.html</span> automatically whenever you re-run the scanners.</p>
         </div>
+    </div>
+</div>
 
-        <div>
-            <div class="section" style="width: calc(50% - 50px)">
-                <div style="margin: 10px">
-                    <h2 class="title">Why the findings can be trusted</h2>
-                    <ul>
-                        <li>Every finding carries evidence: file, line range, verbatim snippet.</li>
-                        <li>A validator mechanically checks each snippet against the actual file — a scan is not finished until validation passes. This is the guard against hallucinated findings.</li>
-                        <li>Findings have a severity (info → critical) and a confidence (certain / likely / possible); claims without evidence must say so.</li>
-                        <li>Finding ids are stable across runs, so two scans of the same project can be diffed: new, resolved, persisting.</li>
-                        <li>Scanners cite Sokrates data (<span class="inline-code">component:</span>, <span class="inline-code">metric:</span> references) instead of re-measuring it.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="section" style="width: calc(50% - 50px)">
-                <div style="margin: 10px">
-                    <h2 class="title">Landscapes and many repositories</h2>
-                    <ul>
-                        <li>The configuration skills also cover landscapes: repository discovery, filters and thresholds, tags, teams,
-                            contributor identity merging across repositories, and virtual sub-landscapes.
-                        </li>
-                        <li>Each has a checker that previews exactly what Sokrates will do — which repositories are found, which tags match,
-                            how contributors map to people and teams — before <span class="inline-code">updateLandscape</span> runs.
-                        </li>
-                        <li>Typical order for a portfolio: repository config → decompositions → features of interest →
-                            <span class="inline-code">generateReports</span> → landscape config → people config → virtual landscapes →
-                            <span class="inline-code">updateLandscape</span> → scanners per repository.
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<div>
+    <div class="section" style="width: calc(50% - 50px)">
+        <div style="margin: 10px">
+            <h2 class="title">Why the findings can be trusted</h2>
+            <ul>
+                <li>Every finding carries evidence: file, line range, verbatim snippet.</li>
+                <li>A validator mechanically checks each snippet against the actual file — a scan is not finished until validation passes. This is the guard against hallucinated findings.</li>
+                <li>Findings have a severity (info → critical) and a confidence (certain / likely / possible); claims without evidence must say so.</li>
+                <li>Finding ids are stable across runs, so two scans of the same project can be diffed: new, resolved, persisting.</li>
+                <li>Scanners cite Sokrates data (<span class="inline-code">component:</span>, <span class="inline-code">metric:</span> references) instead of re-measuring it.</li>
+            </ul>
         </div>
+    </div>
+    <div class="section" style="width: calc(50% - 50px)">
+        <div style="margin: 10px">
+            <h2 class="title">Landscapes and many repositories</h2>
+            <ul>
+                <li>The configuration skills also cover landscapes: repository discovery, filters and thresholds, tags, teams,
+                    contributor identity merging across repositories, and virtual sub-landscapes.</li>
+                <li>Each has a checker that previews exactly what Sokrates will do — which repositories are found, which tags match,
+                    how contributors map to people and teams — before <span class="inline-code">updateLandscape</span> runs.</li>
+                <li>Typical order for a portfolio: repository config → decompositions → features of interest →
+                    <span class="inline-code">generateReports</span> → landscape config → people config → virtual landscapes →
+                    <span class="inline-code">updateLandscape</span> → scanners per repository.</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-        <div class="card">
-            <h1>EXTENDING</h1>
-            <p>All scanners share one contract (<span class="inline-code">sokrates-scan-core</span>): the findings format, the evidence rules,
-                the validator and the explorer renderer. A new scanner is a <span class="inline-code">SKILL.md</span> that defines its
-                question and its group taxonomy; the proven way to build one is to run it live on a real codebase with a fresh agent, ask that
-                agent what was unclear, and fold the answers back into the skill. See the
-                <a href="https://github.com/zeljkoobrenovic/sokrates-skills#development" target="_blank">development notes</a>.</p>
-        </div>
+<div class="card">
+    <h1>EXTENDING</h1>
+    <p>All scanners share one contract (<span class="inline-code">sokrates-scan-core</span>): the findings format, the evidence rules,
+        the validator and the explorer renderer. A new scanner is a <span class="inline-code">SKILL.md</span> that defines its
+        question and its group taxonomy; the proven way to build one is to run it live on a real codebase with a fresh agent, ask that
+        agent what was unclear, and fold the answers back into the skill. See the
+        <a href="https://github.com/zeljkoobrenovic/sokrates-skills#development" target="_blank">development notes</a>.</p>
+</div>
 
     </div>
 
     <div id="config" class="tabcontent">
         <div class="" style="">
-            <div class="section" style="">
-                <div style="margin: 10px 10px 10px 10px;">
-                    <h2 class="title">Configuration File for Project Analyses</h2>
-                    <ul>
-                        <li> Sokrates project analysis configuration is defined in a JSON file.</li>
-                        <li>You can use the <span class="inline-code">init</span> command to generate default file for your project (see Download tab for
-                            details).
-                        </li>
-                        <li>The default location of the configuration file is <span class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/config.json&nbsp;</span>
-                        </li>
-                        <ul>
-                            <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/data/config.json" target="_blank"> See an example of a
-                                Sokrates configuration file ⤇ </a></li>
-                        </ul>
-                        <li>Based on this configuration Sokrates will generate a number of reports. The default reports folders is <span
-                                class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/reports/&nbsp;</span>
-                        </li>
-                        <ul>
-                            <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/html/index.html" target="_blank"> See an example of a
-                                Sokrates report ⤇ </a></li>
-                        </ul>
-                        <li> To learn more about details of the configuration file see the <a
-                                href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/core/CodeConfiguration.java"
-                                target="_blank">configuration file structure definition (in Java)</a>.
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <img src="book/assets/images/sokrates/config-overview.png" style="width: 640px" class="card hide-on-mobile">
-                </div>
-            </div>
-            <div class="section" style="">
-                <div style="margin: 10px 10px 10px 10px;"><h2 class="title">Configuration File for a Landscape Analysis</h2>
-                    <ul>
-                        <li> Sokrates landscape analysis configuration is defined in two JSON files: config.json and config-tags.json.</li>
-                        <li>You can use the <span class="inline-code">updateLandscape</span> command to generate default files.</li>
-                        <ul>
-                            <li>java -jar sokrates.jar updateLandscape [options]</li>
-                        </ul>
-                        <li>The default location of the configuration files is <span class="inline-code">&lt;your-project&gt;/_sokrates_landscape/</span>
-                        </li>
-                        <ul>
-                            <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Tomcat/_sokrates_landscape/config.json" target="_blank"> See an example
-                                of a Sokrates landscape configuration file ⤇ </a></li>
-                            <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Tomcat/_sokrates_landscape/config-tags.json" target="_blank"> See an
-                                example of a Sokrates landscape tags configuration file ⤇ </a></li>
-                        </ul>
-                        <li>Based on this configuration Sokrates will generate a number the landscape reports. The default reports folders is <span
-                                class="inline-code">&lt;your-project&gt;/_sokrates_landscape/reports/</span>
-                        </li>
-                        <ul>
-                            <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank"> See an example of a
-                                Sokrates landscape report ⤇ </a></li>
-                        </ul>
-                        <li> To learn more about details of the configuration file see the <a
-                                href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/landscape/LandscapeConfiguration.java"
-                                target="_blank">configuration file structure definition (in Java)</a>.
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <img src="book/assets/images/sokrates/cmd-init-landscape.png" style="width: 640px" class="card hide-on-mobile">
-                </div>
-            </div>
-            <div class="section">
-                <h2 class="title">Configuring the Analysis Initialization</h2>
+    <div class="section" style="">
+        <div style="margin: 10px 10px 10px 10px;">
+            <h2 class="title">Configuration File for Project Analyses</h2>
+            <ul>
+                <li> Sokrates project analysis configuration is defined in a JSON file.</li>
+                <li>You can use the <span class="inline-code">init</span> command to generate default file for your project (see Download tab for
+                    details).
+                </li>
+                <li>The default location of the configuration file is <span class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/config.json&nbsp;</span>
+                </li>
                 <ul>
-                    <li>The <span class="inline-code">init</span> command creates a configuration file for project analyses. Without any parameters, this
-                        command uses the standard conventions to generate a project analysis configuration.
-                    </li>
-                    <li>You can also use your own custom conventions to initialize projects and create new configuration files:
-                        <ul>
-                            <li><pre style="background-color: #dedede; padding: 4px">    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span
-                                    style="background-color: yellow">createConventionsFile</span>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/data/config.json" target="_blank"> See an example of a
+                        Sokrates configuration file ⤇ </a></li>
+                </ul>
+                <li>Based on this configuration Sokrates will generate a number of reports. The default reports folders is <span
+                        class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/reports/&nbsp;</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/html/index.html" target="_blank"> See an example of a
+                        Sokrates report ⤇ </a></li>
+                </ul>
+                <li> To learn more about details of the configuration file see the <a
+                        href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/core/CodeConfiguration.java"
+                        target="_blank">configuration file structure definition (in Java)</a>.
+                </li>
+            </ul>
+        </div>
+        <div>
+            <img src="book/assets/images/sokrates/config-overview.png" style="width: 640px" class="card hide-on-mobile">
+        </div>
+    </div>
+    <div class="section" style="">
+        <div style="margin: 10px 10px 10px 10px;"><h2 class="title">Configuration File for a Landscape Analysis</h2>
+            <ul>
+                <li> Sokrates landscape analysis configuration is defined in two JSON files: config.json and config-tags.json.</li>
+                <li>You can use the <span class="inline-code">updateLandscape</span> command to generate default files.</li>
+                <ul>
+                    <li>java -jar sokrates.jar updateLandscape [options]</li>
+                </ul>
+                <li>The default location of the configuration files is <span class="inline-code">&lt;your-project&gt;/_sokrates_landscape/</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Tomcat/_sokrates_landscape/config.json" target="_blank"> See an example
+                        of a Sokrates landscape configuration file ⤇ </a></li>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Tomcat/_sokrates_landscape/config-tags.json" target="_blank"> See an
+                        example of a Sokrates landscape tags configuration file ⤇ </a></li>
+                </ul>
+                <li>Based on this configuration Sokrates will generate a number the landscape reports. The default reports folders is <span
+                        class="inline-code">&lt;your-project&gt;/_sokrates_landscape/reports/</span>
+                </li>
+                <ul>
+                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank"> See an example of a
+                        Sokrates landscape report ⤇ </a></li>
+                </ul>
+                <li> To learn more about details of the configuration file see the <a
+                        href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/landscape/LandscapeConfiguration.java"
+                        target="_blank">configuration file structure definition (in Java)</a>.
+                </li>
+            </ul>
+        </div>
+        <div>
+            <img src="book/assets/images/sokrates/cmd-init-landscape.png" style="width: 640px" class="card hide-on-mobile">
+        </div>
+    </div>
+    <div class="section">
+        <h2 class="title">Configuring the Analysis Initialization</h2>
+        <ul>
+            <li>The <span class="inline-code">init</span> command creates a configuration file for project analyses. Without any parameters, this
+                command uses the standard conventions to generate a project analysis configuration.
+            </li>
+            <li>You can also use your own custom conventions to initialize projects and create new configuration files:
+                <ul>
+                    <li><pre style="background-color: #dedede; padding: 4px">    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span
+                            style="background-color: yellow">createConventionsFile</span>
     # edit the 'analysis_conventions.json' file to define your custom conventions
     java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init -conventionsFile analysis_conventions.json</span></pre>
-                            </li>
-                            <li><a href="assets/conf/sokrates_conventions.json" target="_blank">See example of a custom conventions file</a></li>
-                        </ul>
                     </li>
+                    <li><a href="assets/conf/sokrates_conventions.json" target="_blank">See example of a custom conventions file</a></li>
                 </ul>
-                <ul style="margin-top: 24px;">
-                    <li>The <span class="inline-code">exportStandardConventions</span> command exports Sokrates conventions to a JSON file that you can
-                        use as inspiration for your custom conventions:
-                    </li>
-                    <ul>
-                        <li>
-                            <pre style="background-color: #dedede;">    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span class="inline-code">exportStandardConventions</span></pre>
-                        </li>
-                        <li><a href="assets/conf/standard_analysis_conventions.json" target="_blank">See example of a standard_analysis_conventions.json
-                            file</a></li>
-                    </ul>
-                </ul>
-                <ul style="margin-top: 24px;">
-                    <li> To learn more about details of the configuration file see the <a
-                            href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/scoping/custom/CustomScopingConventions.java"
-                            target="_blank">configuration file structure definition (in Java)</a>.
-                    </li>
-                </ul>
-                <div>
-                    <img src="book/assets/images/sokrates/cmd-init.png" style="width: 640px" class="card hide-on-mobile">
-                </div>
-            </div>
+            </li>
+        </ul>
+        <ul style="margin-top: 24px;">
+            <li>The <span class="inline-code">exportStandardConventions</span> command exports Sokrates conventions to a JSON file that you can
+                use as inspiration for your custom conventions:
+            </li>
+            <ul>
+                <li>
+                    <pre style="background-color: #dedede;">    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span class="inline-code">exportStandardConventions</span></pre>
+                </li>
+                <li><a href="assets/conf/standard_analysis_conventions.json" target="_blank">See example of a standard_analysis_conventions.json
+                    file</a></li>
+            </ul>
+        </ul>
+        <ul style="margin-top: 24px;">
+            <li> To learn more about details of the configuration file see the <a
+                    href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/scoping/custom/CustomScopingConventions.java"
+                    target="_blank">configuration file structure definition (in Java)</a>.
+            </li>
+        </ul>
+        <div>
+            <img src="book/assets/images/sokrates/cmd-init.png" style="width: 640px" class="card hide-on-mobile">
         </div>
+    </div>
+</div>
 
     </div>
 
     <div id="examples" class="tabcontent">
         <div>
 
-            <h1>Examples: Sokrates Analyses of Individual Repositories</h1>
+    <h1>Examples: Sokrates Analyses of Individual Repositories</h1>
 
-            <div class="ng-star-inserted">
-                <div class="section" style="background-color: #f0f0f0">
-                    <img style="width: 50px; height: 50px; object-fit: contain"
-                         src="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/logo.png">
-                    <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
-                        <div style="font-size: 140%; font-weight: bold"><div style="font-size: 80%">OpenAI</div><div>Codex</div></div>
-                    </div>
-                    <div style="margin-top: 6px"><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/index.html">View Sokrates documentation</a> ⤇</div>
-                </div>
-                <div class="section" style="background-color: #f0f0f0">
-                    <img style="width: 50px; height: 50px; object-fit: contain"
-                         src="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/logo.png">
-                    <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
-                        <div style="font-size: 140%; font-weight: bold"><div style="font-size: 80%">Anthropics</div><div>Official Claude Plugins</div></div>
-                    </div>
-                    <div style="margin-top: 6px"><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/claude-plugins-official/html/index.html">View Sokrates documentation</a> ⤇</div>
-                </div>
+    <div class="ng-star-inserted">
+        <div class="section">
+            <img style="width: 48px; height: 48px; object-fit: contain"
+                 src="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/logo.png">
+            <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
+                <div style="font-size: 120%; font-weight: bold">OpenAI / Codex</div>
             </div>
-
-            <div style="margin-top: 12px; padding: 3px; margin-bottom: 50px">
-                <b><u>NOTE</u></b>: If you want to perform similar landscape analyses of all repositories in a GitHub organization, take a look at this project <a
-                    href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis</a> and Dockerized AWS version
-                <a
-                        href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws</a>.
-            </div>
-            <h1>Recent Sokrates Analyses of Big Projects and Whole GitHub Organizations</h1>
-            <p style="color: #a0a0a0">NOTE: Analysis is limited to repositories with commits in past year or two.</p>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/JetBrains/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/jetbrains.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">JetBrains OSS Landscape</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>528</b> repos, <b>60</b> MLOC, <b>42,800</b> contributors, <b>1.7M</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/huggingface/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/huggingface.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Hugging Face OSS Landscape</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>204</b> repos, <b>9</b> MLOC, <b>8,500</b> contributors, <b>110K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/google-gemini/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/google-gemini.webp" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Google Gemini Landscape</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>29</b> repos, <b>147</b> KLOC, <b>400</b> contributors, <b>4K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/mozilla/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/mozilla.webp" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Mozilla OSS Landscape</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>204</b> repos, <b>204</b> MLOC, <b>16,500</b> contributors, <b>1.4M</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/mozilla-firefox/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/firefox.svg" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Mozilla Firefox</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>2</b> repos, <b>50</b> MLOC, <b>10,300</b> contributors, <b>1.8M</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/apache/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/apache.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Apache Software Foundation</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>1.1K</b> repos, <b>300</b> MLOC, <b>34,000</b> contributors, <b>3M</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/elastic/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/elastic.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Elastic OSS Landscape</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>288</b> repos, <b>29</b> MLOC, <b>11,000</b> contributors, <b>445K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/gitlab-org/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="https://gitlab.com/uploads/-/system/group/avatar/9970/project_avatar.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">GitLab OSS Landscape</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>203</b> repos, <b>15</b> MLOC, <b>13,000</b> contributors, <b>1.2M</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/aws/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/aws.svg" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">AWS Source Code Landscape</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>284</b> repos, <b>58</b> MLOC, <b>15,000</b> contributors, <b>477K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/GoogleCloudPlatform/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/gcp.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Google Cloud Platform (GCP) Landscape</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>533</b> repos, <b>33</b> MLOC, <b>11,500</b> contributors, <b>295K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/azure/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/azure.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Microsoft Azure OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>746</b> repos, <b>184</b> MLOC, <b>1,700</b> contributors, <b>142K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/aliyun/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/ali-cloud.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Alibaba Cloud OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>185</b> repos, <b>72</b> MLOC, <b>20,000</b> contributors, <b>600K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/guardian/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/the-guardian.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">The Guardian's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>197</b> repos, <b>3.3</b> MLOC, <b>1,190</b> contributors, <b>321K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/openai.svg" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">OpenAI's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors, <b>9K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/anthropics.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Anthropics's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors, <b>5K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/deepseek-ai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/deepseek.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">DeepSeek OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>150</b> KLOC, <b>49</b> contributors, <b>415</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/mysql/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/mysql.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">MySQL OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>14</b> repos, <b>8</b> MLOC, <b>553</b> contributors, <b>191K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/netflix/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/netflix.webp" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Netflix's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>42</b> repos, <b>1.5</b> MLOC, <b>844</b> contributors, <b>38K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/spotify/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/spotify.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Spotify's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>72+</b> repos, <b>800</b> KLOC, <b>1,100+</b> contributors, <b>41K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/uber/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/uber.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Uber's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>30</b> repos, <b>1.4</b> MLOC, <b>650</b> contributors, <b>22K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/twitter/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/twitter.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Twitter's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>60</b> repos, <b>850</b> KLOC, <b>1,000</b> contributors, <b>45K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/alibaba/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/alibaba.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Alibaba's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>10.2</b> MLOC, <b>6.5K</b> contributors, <b>133K</b> commits</div>
-                </a>
-            </div>
-
-            <h1>Older Examples</h1>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/linux/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/linux.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Linux Source Code Landscape</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>23</b> MLOC, <b>17,000</b> contributors, <b>330K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/logo.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Apache Software Foundation (ASF) Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>1,100</b>+ repos, <b>100</b> MLOC, <b>24,000</b> contributors, <b>2M</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/amzn/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/amzn.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Amazon's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>2,700</b> repos, <b>60</b> MLOC, <b>13,000</b> contributors, <b>600K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/google/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/google.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Google's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>1,000</b> repos, <b>40</b> MLOC, <b>12,000+</b> contributors, <b>1.2M</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/meta/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/meta.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Facebook/Meta's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>150</b> repos, <b>37</b> MLOC, <b>14,000</b> contributors, <b>900K</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/microsoft/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/microsoft.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Microsoft's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>2,500</b> repos, <b>47</b> MLOC, <b>18,000</b> contributors, <b>1.2M</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/github/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/github.webp" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">GitHub's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>200</b> repos, <b>2</b> MLOC, <b>4,400</b> contributors, <b>1.2M</b> commits</div>
-                </a>
-            </div>
-            <div class="section" style="width: 300px; margin-bottom: 50px; ">
-                <a href="https://d3axxy9bcycpv7.cloudfront.net/apple/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                    <div><img src="assets/logos/apple.jpeg" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Apple's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>100</b> repos, <b>4.5</b> MLOC, <b>1,700</b> contributors, <b>200K</b> commits</div>
-                </a>
-            </div>
+            <div><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/index.html">View Sokrates documentation</a> ⤇</div>
         </div>
+        <div class="section">
+            <img style="width: 48px; height: 48px; object-fit: contain"
+                 src="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/logo.png">
+            <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
+                <div style="font-size: 120%; font-weight: bold">Anthropics / Beam</div>
+            </div>
+            <div><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/beam/html/index.html">View Sokrates documentation</a> ⤇</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 12px; padding: 3px; margin-bottom: 50px">
+        <b><u>NOTE</u></b>: If you want to perform similar landscape analyses of all repositories in a GitHub organization, take a look at this project <a
+            href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis</a> and Dockerized AWS version  <a
+            href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws</a>.
+    </div>
+    <h1>Recent Sokrates Analyses of Big Projects and Whole GitHub Organizations</h1>
+    <p style="color: #a0a0a0">NOTE: Analysis is limited to repositories with commits in past year or two.</p>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/JetBrains/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/jetbrains.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">JetBrains OSS Landscape</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>528</b> repos, <b>60</b> MLOC, <b>42,800</b> contributors, <b>1.7M</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/huggingface/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/huggingface.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Hugging Face OSS Landscape</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>204</b> repos, <b>9</b> MLOC, <b>8,500</b> contributors, <b>110K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/google-gemini/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/google-gemini.webp" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Google Gemini Landscape</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>29</b> repos, <b>147</b> KLOC, <b>400</b> contributors, <b>4K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/mozilla/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/mozilla.webp" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Mozilla OSS Landscape</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>204</b> repos, <b>204</b> MLOC, <b>16,500</b> contributors, <b>1.4M</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/mozilla-firefox/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/firefox.svg" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Mozilla Firefox</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>2</b> repos, <b>50</b> MLOC, <b>10,300</b> contributors, <b>1.8M</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/apache/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/apache.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Apache Software Foundation</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>1.1K</b> repos, <b>300</b> MLOC, <b>34,000</b> contributors, <b>3M</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/elastic/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/elastic.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Elastic OSS Landscape</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>288</b> repos, <b>29</b> MLOC, <b>11,000</b> contributors, <b>445K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/gitlab-org/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="https://gitlab.com/uploads/-/system/group/avatar/9970/project_avatar.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">GitLab OSS Landscape</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>203</b> repos, <b>15</b> MLOC, <b>13,000</b> contributors, <b>1.2M</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/aws/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/aws.svg" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">AWS Source Code Landscape</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>284</b> repos, <b>58</b> MLOC, <b>15,000</b> contributors, <b>477K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/GoogleCloudPlatform/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/gcp.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Google Cloud Platform (GCP) Landscape</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>533</b> repos, <b>33</b> MLOC, <b>11,500</b> contributors, <b>295K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/azure/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/azure.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Microsoft Azure OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>746</b> repos, <b>184</b> MLOC, <b>1,700</b> contributors, <b>142K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/aliyun/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/ali-cloud.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Alibaba Cloud OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>185</b> repos, <b>72</b> MLOC, <b>20,000</b> contributors, <b>600K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/guardian/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/the-guardian.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">The Guardian's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>197</b> repos, <b>3.3</b> MLOC, <b>1,190</b> contributors, <b>321K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/openai.svg" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">OpenAI's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors, <b>9K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/anthropics.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Anthropics's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors, <b>5K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/deepseek-ai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/deepseek.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">DeepSeek OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>150</b> KLOC, <b>49</b> contributors, <b>415</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/mysql/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/mysql.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">MySQL OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>14</b> repos, <b>8</b> MLOC, <b>553</b> contributors, <b>191K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/netflix/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/netflix.webp" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Netflix's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>42</b> repos, <b>1.5</b> MLOC, <b>844</b> contributors, <b>38K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/spotify/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/spotify.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Spotify's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>72+</b> repos, <b>800</b> KLOC, <b>1,100+</b> contributors, <b>41K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/uber/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/uber.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Uber's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>30</b> repos, <b>1.4</b> MLOC, <b>650</b> contributors, <b>22K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/twitter/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/twitter.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Twitter's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>60</b> repos, <b>850</b> KLOC, <b>1,000</b> contributors, <b>45K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/alibaba/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/alibaba.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Alibaba's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>10.2</b> MLOC, <b>6.5K</b> contributors, <b>133K</b> commits</div>
+        </a>
+    </div>
+
+    <h1>Older Examples</h1>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/linux/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/linux.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Linux Source Code Landscape</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>23</b> MLOC, <b>17,000</b> contributors, <b>330K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/logo.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Apache Software Foundation (ASF) Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>1,100</b>+ repos, <b>100</b> MLOC, <b>24,000</b> contributors, <b>2M</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/amzn/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/amzn.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Amazon's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>2,700</b> repos, <b>60</b> MLOC, <b>13,000</b> contributors, <b>600K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/google/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/google.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Google's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>1,000</b> repos, <b>40</b> MLOC, <b>12,000+</b> contributors, <b>1.2M</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/meta/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/meta.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Facebook/Meta's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>150</b> repos, <b>37</b> MLOC, <b>14,000</b> contributors, <b>900K</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/microsoft/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/microsoft.png" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Microsoft's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>2,500</b> repos, <b>47</b> MLOC, <b>18,000</b> contributors, <b>1.2M</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/github/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/github.webp" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">GitHub's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>200</b> repos, <b>2</b> MLOC, <b>4,400</b> contributors, <b>1.2M</b> commits</div>
+        </a>
+    </div>
+    <div class="section" style="width: 300px; margin-bottom: 50px; ">
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/apple/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+            <div><img src="assets/logos/apple.jpeg" style="height: 90px; padding: 4px"></div>
+            <div style="font-size: 140%; font-weight: bold">Apple's OSS Projects</div>
+            <div style="margin-top: 8px; font-size: 90%; color: black"><b>100</b> repos, <b>4.5</b> MLOC, <b>1,700</b> contributors, <b>200K</b> commits</div>
+        </a>
+    </div>
+</div>
     </div>
 
     <div id="features" class="tabcontent">
         <div style="transform: none;">
-            <div>
-                <div class="card">
-                    <h2><img src="assets/icons/overview.svg"
-                             style="width: 58px; vertical-align: middle"> Source Code Overview</h2>
-                    <ul>
-                        <li>For analysis purposes Sokrates separate files in scope into several categories: main, test, generated, deployment and build, and other.</li>
-                        <li>The <b>main</b> category contains all <b>manually</b> created source code files that are being used in
-                            the <b>production</b>.
-                        </li>
-                        <li>Files in the <b>main</b> category are used as input for other analyses: logical decomposition, concerns, duplication, file
-                            size, unit size, and cyclomatic complexity.
-                        </li>
-                        <li><b>Test</b> source code files are used only for testing of the product. These files are normally not deployed to production.
-                        </li>
-                        <li><b>Build and deployment</b> source code files are used to configure or support build and deployment process.</li>
-                        <li><b>Generated</b> source code files are automatically generated files that have not been manually changed after generation.
-                        </li>
-                        <li>While a source code folder may contain a number of files, Sokrates is primarily interested in the source code files that are being written and
-                            maintained by developers.
-                        </li>
-                        <li>Files containing binaries, documentation, or third-party libraries, for instance, are excluded from analysis. The exception are third-party
-                            libraries that have been changed by developers.
-                        </li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/SourceCodeOverview.html" target="_blank"> See an
-                            example of a Sokrates Source Code Overview report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/duplication.svg"
-                             style="width: 58px; vertical-align: middle"> Duplication</h2>
-                    <ul>
-                        <li>For duplication, Sokrates look at places in code where there are six or more lines of code that are exactly the same.</li>
-                        <li>Before duplication is calculated, the code is cleaned to remove empty lines, comments, and frequently duplicated constructs such as imports.</li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/plugins/html/Duplication.html" target="_blank"> See an example of a
-                            Sokrates Duplication report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/dependencies.svg"
-                             style="width: 58px; vertical-align: middle"> Logical Decomposition: Components and Dependencies
-                    </h2>
-                    <p><b>Logical decomposition</b> is a representation of the organization of the <b>main</b> source code, where
-                        every and each file is put in exactly one <b>logical component</b>.</p>
-                    <ul>
-                        <li>A software system can have <b>one</b> or <b>more</b> logical decompositions.</li>
-                        <li>A logical decomposition can be defined in two ways.</li>
-                        <li>First approach is based on the <b>folders structure</b>. Components are mapped to folders at defined <b>folder
-                            depth</b> relative to the source code root.
-                        </li>
-                        <li>Second approach is based on <b>explicit</b> definition of each component. In such explicit definitions, components are
-                            explicitly <b>named</b> and their files are selected based on explicitly defined path and content <b>filters</b>.
-                        </li>
-                        <li>A logical decomposition is considered <b>invalid</b> if a file is selected into <b>two or more
-                            components</b>.This constraint is introduced in order to facilitate measuring of <b>dependencies</b> among components.
-                        </li>
-                        <li>Files not assigned to any component are put into a special "<b>Unclassified</b>" component.</li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/Components.html" target="_blank"> See an example of
-                            a Sokrates Components and Dependencies report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/concerns.svg"
-                             style="width: 58px; vertical-align: middle"> Features of Interest</h2>
-                    <ul>
-                        <li>Features of interests are cross-curring concerns of a software system that can be identified thourgh patterns in code.</li>
-                        <li>A single fetaure of interest may be present in multiple files. One source code file may contain multiple concerns.</li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/FeaturesOfInterest.html" target="_blank"> See an
-                            example of a Sokrates Features of Interest report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/files.svg" style="width: 58px; vertical-align: middle">
-                        File Size</h2>
-                    <ul>
-                        <li>File size measurements show the distribution of size of files.</li>
-                        <li>Files are classified in four categories based on their size (lines of code): 1-200 (small files), 200-500 (medium size files), 501-1000 (long
-                            files), 1001+ (very long files).
-                        </li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/FileSize.html" target="_blank"> See an example of a
-                            Sokrates File Size report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/units.svg" style="width: 58px; vertical-align: middle">
-                        Unit Size</h2>
-                    <ul>
-                        <li>Unit size measurements show the distribution of size of units of code (methods, functions...).</li>
-                        <li>Units are classified in four categories based on their size (lines of code): 1-20 (small units), 20-50 (medium size units), 51-100 (long units),
-                            101+ (very long units).
-                        </li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/UnitSize.html" target="_blank"> See an example of a
-                            Sokrates Unit Size report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/conditional.svg"
-                             style="width: 58px; vertical-align: middle"> Conditional Complexity </h2>
-                    <ul>
-                        <li>Conditional complexity (also known as cyclomatic complexity) is a software metric (measurement), used to indicate the complexity of a program. It
-                            is a quantitative measure of the number of linearly independent paths through a program's source code.
-                        </li>
-                        <li>Conditional complexity is measured at the unit level (methods, functions...).</li>
-                        <li>Units are classified in four categories based on the measured McCabe index: 1-5 (simple units), 6-10 (medium complex units), 11-25 (complex units),
-                            26+ (very complex units).
-                        </li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/ConditionalComplexity.html" target="_blank"> See an
-                            example of a Sokrates Conditional Complexity report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/conditional.svg"
-                             style="width: 58px; vertical-align: middle"> File Age </h2>
-                    <ul>
-                        <li>File age measurements show the distribution of file ages (days since the first commit) and the recency of file updates (days since the latest
-                            commit).
-                        </li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/FileAge.html" target="_blank"> See an example of a
-                            Sokrates File Age report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/conditional.svg"
-                             style="width: 58px; vertical-align: middle"> File Churn </h2>
-                    <ul>
-                        <li>File change frequency (churn) measurements show the distribution of the number of file updates (days with at least one commit).</li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/FileChurn.html" target="_blank"> See an
-                            example of a Sokrates File Change Frequency report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/file_history.svg"
-                             style="width: 58px; vertical-align: middle"> Temporal Dependencies</h2>
-                    <ul>
-                        <li>A temporal dependency occurs when a developer changes two or more files at the same time (in the same commit).</li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/FileTemporalDependencies.html" target="_blank"> See an
-                            example of a Sokrates Temporal Dependencies report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/metrics.svg" style="width: 58px; vertical-align: middle">
-                        Detailed Metrics</h2>
-                    <ul>
-                        <li>A list of all measurements.</li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/Metrics.html" target="_blank"> See an example of a
-                            Sokrates Metrics report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2><img src="assets/icons/goal.svg" style="width: 58px; vertical-align: middle">
-                        Goals &amp; Controls</h2>
-                    <ul>
-                        <li>A semaphore-like controls, to get warnings based on the range or metric values.</li>
-                    </ul>
-                    <ul>
-                        <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/Controls.html" target="_blank"> See an example of a
-                            Sokrates Controls report ⤇ </a></li>
-                    </ul>
-                </div>
-                <div class="card hide-on-mobile">
-                    <h2>Supported Languages</h2>
-                    <p>Any textual file can be analyzed in Sokrates with standard analyses (empty lines cleaning, source code overview, duplication, file size, file age, file
-                        change frequency, temporal dependencies, committers &amp; contributions, features of interest, findings, metrics, controls).</p>
-                    <p>For several popular languages Sokrates provides more in-depth analyses:</p>
-                    <div style="width: 100%; overflow-x: auto">
-                        <table>
-                            <th style="text-align: left">Language</th>
-                            <th style="text-align: left">Units Analysis</th>
-                            <th style="text-align: left">Dependencies</th>
-                            <th style="text-align: left">Extensions</th>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Abap</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.abap</td>
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">AdabasNatural</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.nsd .nsh .nsn .nsm .nsp</td>
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">CSharp</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.cs .csx .cake</td>
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">CStyle</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.c .idc .cats</td>
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Cfg</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.cfg</td>
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">ClojureLang</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.cljscm .wisp .cl2 .hl .clj .rg .boot .cljc .cljx .cljs .hic .edn</td>
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Cpp</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.ipp .cc .h .hpp .cp .m .hh .c++ .hxx .tpp .mm .cpp .re .cxx .dart .h++ .tcc .inl .ino</td>
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Css</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.css</td>
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">D</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.d .di</td>
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Dbc</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.dbc</td>
+    <div>
+        <div class="card">
+            <h2><img src="assets/icons/overview.svg"
+                     style="width: 58px; vertical-align: middle"> Source Code Overview</h2>
+            <ul>
+                <li>For analysis purposes Sokrates separate files in scope into several categories: main, test, generated, deployment and build, and other.</li>
+                <li>The <b>main</b> category contains all <b>manually</b> created source code files that are being used in
+                    the <b>production</b>.
+                </li>
+                <li>Files in the <b>main</b> category are used as input for other analyses: logical decomposition, concerns, duplication, file
+                    size, unit size, and cyclomatic complexity.
+                </li>
+                <li><b>Test</b> source code files are used only for testing of the product. These files are normally not deployed to production.
+                </li>
+                <li><b>Build and deployment</b> source code files are used to configure or support build and deployment process.</li>
+                <li><b>Generated</b> source code files are automatically generated files that have not been manually changed after generation.
+                </li>
+                <li>While a source code folder may contain a number of files, Sokrates is primarily interested in the source code files that are being written and
+                    maintained by developers.
+                </li>
+                <li>Files containing binaries, documentation, or third-party libraries, for instance, are excluded from analysis. The exception are third-party
+                    libraries that have been changed by developers.
+                </li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/SourceCodeOverview.html" target="_blank"> See an
+                    example of a Sokrates Source Code Overview report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/duplication.svg"
+                     style="width: 58px; vertical-align: middle"> Duplication</h2>
+            <ul>
+                <li>For duplication, Sokrates look at places in code where there are six or more lines of code that are exactly the same.</li>
+                <li>Before duplication is calculated, the code is cleaned to remove empty lines, comments, and frequently duplicated constructs such as imports.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/plugins/html/Duplication.html" target="_blank"> See an example of a
+                    Sokrates Duplication report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/dependencies.svg"
+                     style="width: 58px; vertical-align: middle"> Logical Decomposition: Components and Dependencies
+            </h2>
+            <p><b>Logical decomposition</b> is a representation of the organization of the <b>main</b> source code, where
+                every and each file is put in exactly one <b>logical component</b>.</p>
+            <ul>
+                <li>A software system can have <b>one</b> or <b>more</b> logical decompositions.</li>
+                <li>A logical decomposition can be defined in two ways.</li>
+                <li>First approach is based on the <b>folders structure</b>. Components are mapped to folders at defined <b>folder
+                    depth</b> relative to the source code root.
+                </li>
+                <li>Second approach is based on <b>explicit</b> definition of each component. In such explicit definitions, components are
+                    explicitly <b>named</b> and their files are selected based on explicitly defined path and content <b>filters</b>.
+                </li>
+                <li>A logical decomposition is considered <b>invalid</b> if a file is selected into <b>two or more
+                    components</b>.This constraint is introduced in order to facilitate measuring of <b>dependencies</b> among components.
+                </li>
+                <li>Files not assigned to any component are put into a special "<b>Unclassified</b>" component.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/Components.html" target="_blank"> See an example of
+                    a Sokrates Components and Dependencies report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/concerns.svg"
+                     style="width: 58px; vertical-align: middle"> Features of Interest</h2>
+            <ul>
+                <li>Features of interests are cross-curring concerns of a software system that can be identified thourgh patterns in code.</li>
+                <li>A single fetaure of interest may be present in multiple files. One source code file may contain multiple concerns.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/FeaturesOfInterest.html" target="_blank"> See an
+                    example of a Sokrates Features of Interest report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/files.svg" style="width: 58px; vertical-align: middle">
+                File Size</h2>
+            <ul>
+                <li>File size measurements show the distribution of size of files.</li>
+                <li>Files are classified in four categories based on their size (lines of code): 1-200 (small files), 200-500 (medium size files), 501-1000 (long
+                    files), 1001+ (very long files).
+                </li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/FileSize.html" target="_blank"> See an example of a
+                    Sokrates File Size report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/units.svg" style="width: 58px; vertical-align: middle">
+                Unit Size</h2>
+            <ul>
+                <li>Unit size measurements show the distribution of size of units of code (methods, functions...).</li>
+                <li>Units are classified in four categories based on their size (lines of code): 1-20 (small units), 20-50 (medium size units), 51-100 (long units),
+                    101+ (very long units).
+                </li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/UnitSize.html" target="_blank"> See an example of a
+                    Sokrates Unit Size report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/conditional.svg"
+                     style="width: 58px; vertical-align: middle"> Conditional Complexity </h2>
+            <ul>
+                <li>Conditional complexity (also known as cyclomatic complexity) is a software metric (measurement), used to indicate the complexity of a program. It
+                    is a quantitative measure of the number of linearly independent paths through a program's source code.
+                </li>
+                <li>Conditional complexity is measured at the unit level (methods, functions...).</li>
+                <li>Units are classified in four categories based on the measured McCabe index: 1-5 (simple units), 6-10 (medium complex units), 11-25 (complex units),
+                    26+ (very complex units).
+                </li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/ConditionalComplexity.html" target="_blank"> See an
+                    example of a Sokrates Conditional Complexity report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/conditional.svg"
+                     style="width: 58px; vertical-align: middle"> File Age </h2>
+            <ul>
+                <li>File age measurements show the distribution of file ages (days since the first commit) and the recency of file updates (days since the latest
+                    commit).
+                </li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/FileAge.html" target="_blank"> See an example of a
+                    Sokrates File Age report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/conditional.svg"
+                     style="width: 58px; vertical-align: middle"> File Churn </h2>
+            <ul>
+                <li>File change frequency (churn) measurements show the distribution of the number of file updates (days with at least one commit).</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/FileChurn.html" target="_blank"> See an
+                    example of a Sokrates File Change Frequency report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/file_history.svg"
+                     style="width: 58px; vertical-align: middle"> Temporal Dependencies</h2>
+            <ul>
+                <li>A temporal dependency occurs when a developer changes two or more files at the same time (in the same commit).</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/FileTemporalDependencies.html" target="_blank"> See an
+                    example of a Sokrates Temporal Dependencies report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/metrics.svg" style="width: 58px; vertical-align: middle">
+                Detailed Metrics</h2>
+            <ul>
+                <li>A list of all measurements.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/Metrics.html" target="_blank"> See an example of a
+                    Sokrates Metrics report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><img src="assets/icons/goal.svg" style="width: 58px; vertical-align: middle">
+                Goals &amp; Controls</h2>
+            <ul>
+                <li>A semaphore-like controls, to get warnings based on the range or metric values.</li>
+            </ul>
+            <ul>
+                <li><a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/Controls.html" target="_blank"> See an example of a
+                    Sokrates Controls report ⤇ </a></li>
+            </ul>
+        </div>
+        <div class="card hide-on-mobile">
+            <h2>Supported Languages</h2>
+            <p>Any textual file can be analyzed in Sokrates with standard analyses (empty lines cleaning, source code overview, duplication, file size, file age, file
+                change frequency, temporal dependencies, committers &amp; contributions, features of interest, findings, metrics, controls).</p>
+            <p>For several popular languages Sokrates provides more in-depth analyses:</p>
+            <div style="width: 100%; overflow-x: auto">
+                <table>
+                    <th style="text-align: left">Language</th>
+                    <th style="text-align: left">Units Analysis</th>
+                    <th style="text-align: left">Dependencies</th>
+                    <th style="text-align: left">Extensions</th>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Abap</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.abap</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">AdabasNatural</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.nsd .nsh .nsn .nsm .nsp</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">CSharp</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.cs .csx .cake</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">CStyle</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.c .idc .cats</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Cfg</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.cfg</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">ClojureLang</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.cljscm .wisp .cl2 .hl .clj .rg .boot .cljc .cljx .cljs .hic .edn</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Cpp</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.ipp .cc .h .hpp .cp .m .hh .c++ .hxx .tpp .mm .cpp .re .cxx .dart .h++ .tcc .inl .ino</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Css</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.css</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">D</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.d .di</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Dbc</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.dbc</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">GoLang</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.v .go</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">GoLang</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.v .go</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Gradle</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.gradle</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Gradle</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.gradle</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Groovy</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.grt .gvy .groovy .gtpl</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Groovy</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.grt .gvy .groovy .gtpl</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Hack</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.hack</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Hack</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.hack</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Html</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.ascx .jsx .haml .mustache .htm .ashx .razor .erb .asmx .vue .aspx .soy .mtml .njk .deface .phtml .st .asp
-                                    .jinja .handlebars .vbhtml .jinja2 .hbs .xhtml .axd .rtml .hhi .cshtml .xht .ecr .html .asax .eex
-                                </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Html</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.ascx .jsx .haml .mustache .htm .ashx .razor .erb .asmx .vue .aspx .soy .mtml .njk .deface .phtml .st .asp
+                            .jinja .handlebars .vbhtml .jinja2 .hbs .xhtml .axd .rtml .hhi .cshtml .xht .ecr .html .asax .eex
+                        </td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Java</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.ck .j .java .uc</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Java</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.ck .j .java .uc</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">JavaScript</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.jsb .jsm .cy .pac .es .xsjslib .jake .gs .cjs .sjs .js .es6 .xsjs .frag ._js .njs .ssjs .bones .jscad .jsfl
-                                </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">JavaScript</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.jsb .jsm .cy .pac .es .xsjslib .jake .gs .cjs .sjs .js .es6 .xsjs .frag ._js .njs .ssjs .bones .jscad .jsfl
+                        </td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Json</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.sublime-mousemap .sublime-theme .sublime-menu .webmanifest .json .tfstate.backup .geojson .sublime-commands
-                                    .yyp .avsc .sublime_session .tfstate .sublime-workspace .gltf .sublime_metrics .json5 .sublime-macro .sublime-project .jsonc .webapp .ice .jsonl .har .topojson
-                                    .jsonld .yy .mcmeta .sublime-completions .sublime-settings .sublime-build .jsoniq .sublime-keymap .JSON-tmLanguage
-                                </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Json</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.sublime-mousemap .sublime-theme .sublime-menu .webmanifest .json .tfstate.backup .geojson .sublime-commands
+                            .yyp .avsc .sublime_session .tfstate .sublime-workspace .gltf .sublime_metrics .json5 .sublime-macro .sublime-project .jsonc .webapp .ice .jsonl .har .topojson
+                            .jsonld .yy .mcmeta .sublime-completions .sublime-settings .sublime-build .jsoniq .sublime-keymap .JSON-tmLanguage
+                        </td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Jsp</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.jsp .gsp</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Jsp</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.jsp .gsp</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Julia</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.jl</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Julia</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.jl</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Kotlin</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.ktm .kts .kt</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Kotlin</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.ktm .kts .kt</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Less</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.less</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Less</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.less</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Lua</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.wlua .rbxs .rockspec .p8 .nse .pd_lua .lua</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Lua</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.wlua .rbxs .rockspec .p8 .nse .pd_lua .lua</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">ObjectPascal</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.dfm .p .pas .dpr .pascal .lpr</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">ObjectPascal</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.dfm .p .pas .dpr .pascal .lpr</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Perl</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.al .t .ph .pl .plx .pm .psgi .perl</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Perl</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.al .t .ph .pl .plx .pm .psgi .perl</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Php</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.aw .php .php4 .php5 .php3 .phpt .phps .ctp .inc</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Php</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.aw .php .php4 .php5 .php3 .phpt .phps .ctp .inc</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">PlSql</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.plsql .pck .pkb .pks .plb .pls</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">PlSql</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.plsql .pck .pkb .pks .plb .pls</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Puppet</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.pp</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Puppet</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.pp</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Python</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.numpyw .pyde .xpy .wsgi .eb .gn .smk .gyp .rpy .pytb .py .numsc .numpy .gypi .lmi .py3 .pxd .pxi .pyi .pyp
-                                    .pyt .pyx .pyw .tac
-                                </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Python</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.numpyw .pyde .xpy .wsgi .eb .gn .smk .gyp .rpy .pytb .py .numsc .numpy .gypi .lmi .py3 .pxd .pxi .pyi .pyp
+                            .pyt .pyx .pyw .tac
+                        </td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">R</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.rda .r .rds .rdata .rd .rsx</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">R</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.rda .r .rds .rdata .rd .rsx</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Ruby</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.rbi .rbw .rbx .podspec .god .gemspec .rbuild .watchr .ruby .rb .eye .ru .builder .rabl .jbuilder .thor .mspec
-                                    .rake
-                                </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Ruby</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.rbi .rbw .rbx .podspec .god .gemspec .rbuild .watchr .ruby .rb .eye .ru .builder .rabl .jbuilder .thor .mspec
+                            .rake
+                        </td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Rust</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.rlib .in .rs</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Rust</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.rlib .in .rs</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Sass</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.sass</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Sass</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.sass</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Scala</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="vertical-align: top">.sbt .kojo .sc .scala</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Scala</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="vertical-align: top">.sbt .kojo .sc .scala</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Scss</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.scss</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Scss</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.scss</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Shell</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.ksh .zsh .tool .sh .bats .tmux .bash .command</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Shell</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.ksh .zsh .tool .sh .bats .tmux .bash .command</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Sql</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.viw .bdy .fnc .tpb .tps .spc .trg .cql .sql .mysql .prc .vw .tab .udf .ddl</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Sql</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.viw .bdy .fnc .tpb .tps .spc .trg .cql .sql .mysql .prc .vw .tab .udf .ddl</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Swift</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.swift</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Swift</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.swift</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Thrift</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.thrift</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Thrift</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.thrift</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">TypeScript</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.tsx .ts</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">TypeScript</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.tsx .ts</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">VisualBasic</td>
-                                <td style="text-align: center; vertical-align: top">X</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.bas .frm .cls .frx .ctl .vb .vba .vbs</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">VisualBasic</td>
+                        <td style="text-align: center; vertical-align: top">X</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.bas .frm .cls .frx .ctl .vb .vba .vbs</td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Xml</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.xmi .xml .sch .axml .csdef .glade .gml .gmx .wsdl .nuspec .cscfg .xsp-config .xquery .ct .rdf .xpl .xql .xqm
-                                    .vcxproj .xacro .xqy .csproj .mxml .xsd .xsl .ivy .cproject .xproc .x3d .wsf .xul .tml .shproj .xproj .admx .ccproj .odd .adml .fsproj .wixproj .scxml .psc1
-                                    .targets .ncl .pluginspec .dita .workflow .sublime-snippet .wxi .wxl .wxs .xliff .fxml .ditamap .stTheme .jelly .dotsettings .clixml .ant .tmTheme .xslt .csl
-                                    .pt .ccxml .builds .pkgproj .natvis .storyboard .sfproj .vsixmanifest .rss .tmSnippet .launch .xaml .nproj .ui .dll.config .ux .grxml .zcml .tmPreferences
-                                    .xspec .tmLanguage .filters .xq .vbproj .mod .osm .srdf .props .ps1xml .depproj .kml .jsproj .plist .tmCommand .proj .ndproj .ditaval .owl .xml.dist .xib
-                                    .mdpolicy .iml .mjml .vxml .vstemplate .urdf .resx .xlf .vssettings
-                                </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Xml</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.xmi .xml .sch .axml .csdef .glade .gml .gmx .wsdl .nuspec .cscfg .xsp-config .xquery .ct .rdf .xpl .xql .xqm
+                            .vcxproj .xacro .xqy .csproj .mxml .xsd .xsl .ivy .cproject .xproc .x3d .wsf .xul .tml .shproj .xproj .admx .ccproj .odd .adml .fsproj .wixproj .scxml .psc1
+                            .targets .ncl .pluginspec .dita .workflow .sublime-snippet .wxi .wxl .wxs .xliff .fxml .ditamap .stTheme .jelly .dotsettings .clixml .ant .tmTheme .xslt .csl
+                            .pt .ccxml .builds .pkgproj .natvis .storyboard .sfproj .vsixmanifest .rss .tmSnippet .launch .xaml .nproj .ui .dll.config .ux .grxml .zcml .tmPreferences
+                            .xspec .tmLanguage .filters .xq .vbproj .mod .osm .srdf .props .ps1xml .depproj .kml .jsproj .plist .tmCommand .proj .ndproj .ditaval .owl .xml.dist .xib
+                            .mdpolicy .iml .mjml .vxml .vstemplate .urdf .resx .xlf .vssettings
+                        </td>
 
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 36px; vertical-align: top">Yaml</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="text-align: center; vertical-align: top">-</td>
-                                <td style="vertical-align: top">.sed .syntax .reek .rviz .mir .tf .yaml .sublime-syntax .yaml-tmlanguage .yml</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 36px; vertical-align: top">Yaml</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="text-align: center; vertical-align: top">-</td>
+                        <td style="vertical-align: top">.sed .syntax .reek .rviz .mir .tf .yaml .sublime-syntax .yaml-tmlanguage .yml</td>
 
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+                    </tr>
+                </table>
             </div>
         </div>
+    </div>
+</div>
 
     </div>
 
     <div id="articles" class="tabcontent">
         <div class="section" style="padding: 30px">
-            <div style="transform: none;"><br style="">
-                <h1 style="margin-top: -12px">The Sokrates Book</h1>
-                <div _nghost-kxy-c10="" style="">
-                    <div style="vertical-align: top; padding-top: 0">
-                        <ul>
-                            <li>I am working on a book about Sokrates: <a href="https://sokrates.dev/book/" target="_blank">
-                                <b>Examined Line: The Art of Source Code Analysis with Sokrates</b>. </a></li>
-                            <li>You can <a href="https://sokrates.dev/book/" target="_blank"><b>read the draft of the book</b></a>
-                                online.
-                            </li>
-                            <li>The book is about 70% complete (an not polished).</li>
-                        </ul>
-                    </div>
-                    <div style=" margin-left: 38px; "><a href="https://sokrates.dev/book/" style="margin: 0; padding: 0" target="_blank">
-                        <img src="assets/book.png"
-                             style="max-width: 300px; width: calc(100%); margin: 0; margin: 4px 4px 0px 4px; padding: 0"></a>
-                    </div>
-                </div>
+    <div style="transform: none;"><br style="">
+        <h1 style="margin-top: -12px">The Sokrates Book</h1>
+        <div _nghost-kxy-c10="" style="">
+            <div style="vertical-align: top; padding-top: 0">
+                <ul>
+                    <li>I am working on a book about Sokrates: <a href="https://sokrates.dev/book/" target="_blank">
+                        <b>Examined Line: The Art of Source Code Analysis with Sokrates</b>. </a></li>
+                    <li>You can <a href="https://sokrates.dev/book/" target="_blank"><b>read the draft of the book</b></a>
+                        online.
+                    </li>
+                    <li>The book is about 70% complete (an not polished).</li>
+                </ul>
+            </div>
+            <div style=" margin-left: 38px; "><a href="https://sokrates.dev/book/" style="margin: 0; padding: 0" target="_blank">
+                <img src="assets/book.png"
+                     style="max-width: 300px; width: calc(100%); margin: 0; margin: 4px 4px 0px 4px; padding: 0"></a>
             </div>
         </div>
+    </div>
+</div>
     </div>
 </div>
 

@@ -10,7 +10,7 @@
     <ul style="font-size: 110%">
         <li><a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">github.com/zeljkoobrenovic/sokrates-skills</a> (MIT)</li>
         <li><a href="https://zeljkoobrenovic.github.io/sokrates-skills/examples/codex/ai-insights/" target="_blank">Live example: AI Insights Explorer for OpenAI Codex ⤇</a>
-            — ten scanners, 228 verified findings</li>
+            — fourteen scanners, 298 verified findings</li>
     </ul>
 </div>
 
@@ -27,6 +27,10 @@
                 <li><b>tech-stack-scan</b> — languages, frameworks, libraries, build tooling, CI/CD, infrastructure, external services</li>
                 <li><b>cicd-scan</b> — the CI/CD process as a narrative: triggers, build, tests, gates, release, deployment, hygiene</li>
                 <li><b>observability-scan</b> — logging, metrics, tracing, error reporting, health surfaces, blind spots</li>
+                <li><b>reliability-scan</b> — how the code behaves when things go wrong: error model, failure handling on load-bearing paths, isolation and blast radius, retries and timeouts, degradation, resource cleanup and shutdown</li>
+                <li><b>performance-scan</b> — static performance review: workload model and scaling factors, hot-path algorithms and data structures, I/O and memory, parallelism, caching, cost limits, ranked bottlenecks</li>
+                <li><b>storage-scan</b> — persistent data: data classes and where they live, access patterns, schema and format versioning, integrity and corruption recovery, retention and cleanup</li>
+                <li><b>network-scan</b> — connectivity: endpoint topology, protocols as used, timeouts, TLS and proxies, endpoint configurability, offline behaviour, data in transit</li>
                 <li><b>security-design-scan</b> — trust boundaries, sandboxing, identity and access, secrets handling, posture</li>
                 <li><b>security-scan</b> — code-level audit: secrets, injection, crypto, unsafe code, input handling</li>
                 <li><b>risk-synthesis-scan</b> — Sokrates hotspots explained: what each risky file does, knowledge risk, change coupling</li>
@@ -97,7 +101,7 @@ java -jar sokrates.jar generateReports</pre>
 
             <h3 style="background-color: #ededed; padding: 4px"><b>4. Ask for insights</b></h3>
             <p>In the project folder, ask your AI tool: <i>"run a tech stack scan"</i>, <i>"explain the risks in this codebase"</i>,
-                <i>"what does this software do?"</i>, <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all ten scanners.
+                <i>"what does this software do?"</i>, <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all fourteen scanners.
                 Every scanner reads the Sokrates data first and spends its reading budget where the numbers point.</p>
 
             <h3 style="background-color: #ededed; padding: 4px"><b>5. Open the AI Insights Explorer</b></h3>
