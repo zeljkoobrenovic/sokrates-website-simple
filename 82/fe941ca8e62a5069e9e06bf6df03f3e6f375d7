@@ -1,0 +1,21 @@
+docs/index.html
+  s_9c82e2ca8d5dc4::t_6e25b355dbf8f2 199,491,502-503,578
+templates/fragments/ai-insights.html
+  s_9c82e2ca8d5dc4::t_0b3ce6dcdb8f1c 13,24-25,100
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "82fe941ca8e62a5069e9e06bf6df03f3e6f375d7",
+  "prompts": {},
+  "sessions": {
+    "s_9c82e2ca8d5dc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1d22c1c5-43b5-4af3-9f0a-9d2f31702890",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
