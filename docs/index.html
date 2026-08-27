@@ -17,31 +17,6 @@
     font-family: monospace;
 }
 
-.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-}
-
-.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 14px;
-}
-
-.tab button:hover {
-    background-color: #ddd;
-}
-
-.tab button.active {
-    background-color: #ccc;
-}
-
 .logo {
     height: 120px;
     width: 120px;
@@ -158,6 +133,84 @@ h1 {
         display: none;
     }
 }
+
+
+.tab {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 4px;
+}
+
+.tab button {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 11px 16px;
+    margin-bottom: -1px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+    border-bottom: 4px solid transparent;
+    border-radius: 8px 8px 0 0;
+    transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.tab button:hover {
+    color: #1f2937;
+    background-color: #f3f4f6;
+}
+
+.tab button:focus-visible {
+    outline: 2px solid #1d4ed8;
+    outline-offset: -2px;
+}
+
+.tab button.active {
+    color: #1d4ed8;
+    border-bottom-color: #1d4ed8;
+}
+
+.tabcontent {
+    display: none;
+    padding: 2px 2px;
+    animation: tabContentFade 0.2s ease;
+}
+
+@keyframes tabContentFade {
+    from {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 720px) {
+    .tab {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .tab button {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0;
+        border-bottom: 1px solid #e5e7eb;
+        border-radius: 0;
+    }
+
+    .tab button.active {
+        border-bottom-color: #1d4ed8;
+    }
+}
+
     </style>
     <script>
         function openTab(evt, cityName) {
@@ -187,7 +240,7 @@ h1 {
             <img src="assets/logo.png" class="logo hide-on-mobile">
         </td>
         <td style="">
-            <div style="font-size: 360%; font-weight: bold; margin-bottom: 32px">SOKRATES</div>
+            <div style="font-size: 420%; font-weight: bold; margin-bottom: 0;">Sokrates</div>
             <div style="color: #a0a0a0; font-size: 150%">Polyglot source code examination tool</div>
         </td>
     </tr>
@@ -223,7 +276,7 @@ h1 {
             <li style="margin-top: 12px">
                 Sokrates is one of several open-source tools we use when implementing <a target="_blank" href="https://grounded-architecture.io">Grounded Architecture</a>
                 <a target="_blank" href="https://grounded-architecture.io/analytics">Lightweight
-                Architectural Analytics</a></li>
+                    Architectural Analytics</a></li>
             <li style="margin-top: 12px">
                 Sokrates borrows ideas from <b><a
                     href="https://queue.acm.org/detail.cfm?id=945136">code spelunking</a></b> tool,
@@ -234,19 +287,32 @@ h1 {
     </div>
     <div class="card">
         <h1>Recent examples of complex Sokrates analyses:</h1>
-        <div class="section" style="width: 300px; margin-bottom: 50px; ">
-            <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                <div><img src="assets/logos/openai.svg" style="height: 90px; padding: 4px"></div>
-                <div style="font-size: 140%; font-weight: bold">OpenAI's OSS Projects</div>
-                <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors, <b>9K</b> commits</div>
-            </a>
+        <div style="display: inline-block">
+            <div style="margin-left: 12px">Single repository:</div>
+            <div class="section" style="background-color: #f0f0f0; width: 300px; margin-bottom: 30px; ">
+                <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/index.html" target="_blank" style="text-decoration: none">
+                    <div><img src="assets/logos/codex-logo.png" style="height: 90px; padding: 4px"></div>
+                    <div style="font-size: 140%; font-weight: bold">OpenAI Codex Repository</div>
+                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>1.1</b> MLOC, <b>500+</b> contributors, <b>9K</b> commits (includes AI Insights*)</div>
+                </a>
+            </div>
         </div>
-        <div class="section" style="width: 300px; margin-bottom: 50px; ">
-            <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                <div><img src="assets/logos/anthropics.png" style="height: 90px; padding: 4px"></div>
-                <div style="font-size: 140%; font-weight: bold">Anthropics's OSS Projects</div>
-                <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors, <b>5K</b> commits</div>
-            </a>
+        <div style="display: inline-block; border-left: 2px dashed #c0c0c0; padding-left: 20px; margin-left: 15px">
+            <div style="margin-left: 12px">Landscape analysis of multiple repositories:</div>
+            <div class="section" style="width: 300px; margin-bottom: 30px; ">
+                <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                    <div><img src="assets/logos/openai.svg" style="height: 90px; padding: 4px"></div>
+                    <div style="font-size: 140%; font-weight: bold">OpenAI's OSS Projects</div>
+                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors, <b>9K</b> commits</div>
+                </a>
+            </div>
+            <div class="section" style="width: 300px; margin-bottom: 30px; ">
+                <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                    <div><img src="assets/logos/anthropics.png" style="height: 90px; padding: 4px"></div>
+                    <div style="font-size: 140%; font-weight: bold">Anthropics's OSS Projects</div>
+                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors, <b>5K</b> commits</div>
+                </a>
+            </div>
         </div>
     </div>
     <div class="card">
@@ -769,27 +835,33 @@ java -jar sokrates.jar addCustomTab -label "AI Insights*" -iframeLink "../../fin
     <h1>Examples: Sokrates Analyses of Individual Repositories</h1>
 
     <div class="ng-star-inserted">
-        <div class="section">
-            <img style="width: 48px; height: 48px; object-fit: contain"
+        <div class="section" style="background-color: #f0f0f0">
+            <img style="width: 50px; height: 50px; object-fit: contain"
                  src="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/logo.png">
             <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
-                <div style="font-size: 120%; font-weight: bold">OpenAI / Codex</div>
+                <div style="font-size: 140%; font-weight: bold">
+                    <div style="font-size: 80%">OpenAI</div>
+                    <div>Codex</div>
+                </div>
             </div>
-            <div><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/index.html">View Sokrates documentation</a> ⤇</div>
+            <div style="margin-top: 6px"><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/index.html">View Sokrates documentation</a> ⤇</div>
         </div>
-        <div class="section">
-            <img style="width: 48px; height: 48px; object-fit: contain"
+        <div class="section" style="background-color: #f0f0f0">
+            <img style="width: 50px; height: 50px; object-fit: contain"
                  src="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/logo.png">
             <div style="display: inline-block; vertical-align: top; margin-top: 0px; margin-left: 10px">
-                <div style="font-size: 120%; font-weight: bold">Anthropics / Beam</div>
+                <div style="font-size: 140%; font-weight: bold">
+                    <div style="font-size: 80%">Anthropics</div>
+                    <div>Official Claude Plugins</div>
+                </div>
             </div>
-            <div><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/beam/html/index.html">View Sokrates documentation</a> ⤇</div>
+            <div style="margin-top: 6px"><a target="_blank" href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/claude-plugins-official/html/index.html">View Sokrates documentation</a> ⤇</div>
         </div>
     </div>
 
     <div style="margin-top: 12px; padding: 3px; margin-bottom: 50px">
         <b><u>NOTE</u></b>: If you want to perform similar landscape analyses of all repositories in a GitHub organization, take a look at this project <a
-            href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis</a> and Dockerized AWS version  <a
+            href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis</a> and Dockerized AWS version <a
             href="https://github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws" target="_blank">github.com/zeljkoobrenovic/sokrates-oss-landscape-analysis-aws</a>.
     </div>
     <h1>Recent Sokrates Analyses of Big Projects and Whole GitHub Organizations</h1>
