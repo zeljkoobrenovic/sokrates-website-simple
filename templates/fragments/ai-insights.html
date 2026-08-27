@@ -106,14 +106,25 @@ java -jar sokrates.jar generateReports</pre>
                 a cross-scanner list of attention items, severity and confidence filters, full-text search, and every finding's evidence
                 as file, line range and verbatim snippet.</p>
 
-            <h3 style="background-color: #ededed; padding: 4px"><b>6. Embed the explorer in the Sokrates report</b></h3>
+            <h3 style="background-color: #ededed; padding: 4px"><b>6. Illustrate the summaries (optional)</b></h3>
+            <pre style="padding: 6px; background-color: lightyellow">export GEMINI_API_KEY=...
+python3 skills/illustrators/generate_summary_visuals.py &lt;your-project&gt;/_sokrates/findings/ai-insights</pre>
+            <p>The illustrator script (in the <span class="inline-code">skills/illustrators/</span> folder of the repository) turns each
+                scanner's summary into one calm, mostly visual illustration that tells its story with a few key words — a pipeline for
+                CI/CD, a landscape with glowing hotspots for risks, growth rings for evolution. It uses Google's Gemini image model
+                ("Nano Banana"), saves the images next to the findings (<span class="inline-code">ai-insights/visuals/</span>), records them
+                in the findings JSON and re-renders the explorer, which shows each image at the end of the foldable summary block.
+                Existing images are kept on re-runs; <span class="inline-code">--force</span> regenerates them. Skip this step and the
+                explorer looks exactly as before.</p>
+
+            <h3 style="background-color: #ededed; padding: 4px"><b>7. Embed the explorer in the Sokrates report</b></h3>
             <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
 java -jar sokrates.jar addCustomTab -label "AI Insights*" -iframeLink "../../findings/ai-insights/index.html"</pre>
             <p>This registers an <b>AI Insights*</b> tab in the configuration of the main Sokrates HTML report
                 (<span class="inline-code">_sokrates/reports/html/index.html</span>) that shows the explorer inline, so the quantitative
                 reports and the AI findings live in one place.</p>
 
-            <h3 style="background-color: #ededed; padding: 4px"><b>7. Regenerate the reports to see the new tab</b></h3>
+            <h3 style="background-color: #ededed; padding: 4px"><b>8. Regenerate the reports to see the new tab</b></h3>
             <pre style="padding: 6px; background-color: lightyellow">java -jar sokrates.jar generateReports</pre>
             <p>The tab is part of the generated report from now on; it picks up the explorer's regenerated
                 <span class="inline-code">index.html</span> automatically whenever you re-run the scanners.</p>
