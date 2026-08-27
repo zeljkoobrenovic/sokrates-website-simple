@@ -10,7 +10,7 @@
     <ul style="font-size: 110%">
         <li><a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">github.com/zeljkoobrenovic/sokrates-skills</a> (MIT)</li>
         <li><a href="https://zeljkoobrenovic.github.io/sokrates-skills/examples/codex/ai-insights/" target="_blank">Live example: AI Insights Explorer for OpenAI Codex ⤇</a>
-            — nine scanners, 191 verified findings</li>
+            — ten scanners, 228 verified findings</li>
     </ul>
 </div>
 
@@ -21,7 +21,8 @@
             <p>Read a finished Sokrates analysis (<span class="inline-code">_sokrates/</span>) and write findings with verifiable evidence.
                 Each scanner answers one question:</p>
             <ul>
-                <li><b>domain-map-scan</b> — the domain language: glossary, bounded contexts, capabilities, language drift</li>
+                <li><b>functionality-scan</b> — what the software does: purpose, features, entry points, workflows, data, integrations, hidden functionality, documentation-vs-code gaps</li>
+                <li><b>domain-language-scan</b> — the domain language: glossary, bounded contexts, concepts per capability, language drift</li>
                 <li><b>architecture-scan</b> — the implemented architecture: style, components, boundaries, violations, communication, migrations</li>
                 <li><b>tech-stack-scan</b> — languages, frameworks, libraries, build tooling, CI/CD, infrastructure, external services</li>
                 <li><b>cicd-scan</b> — the CI/CD process as a narrative: triggers, build, tests, gates, release, deployment, hygiene</li>
@@ -96,7 +97,7 @@ java -jar sokrates.jar generateReports</pre>
 
             <h3 style="background-color: #ededed; padding: 4px"><b>4. Ask for insights</b></h3>
             <p>In the project folder, ask your AI tool: <i>"run a tech stack scan"</i>, <i>"explain the risks in this codebase"</i>,
-                <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all nine scanners.
+                <i>"what does this software do?"</i>, <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all ten scanners.
                 Every scanner reads the Sokrates data first and spends its reading budget where the numbers point.</p>
 
             <h3 style="background-color: #ededed; padding: 4px"><b>5. Open the AI Insights Explorer</b></h3>
