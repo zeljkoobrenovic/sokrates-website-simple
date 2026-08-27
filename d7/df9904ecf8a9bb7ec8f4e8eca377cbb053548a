@@ -1,0 +1,22 @@
+docs/index.html
+  h_32d60cd4daf66e 136-213,243,279,290-298,300-315,838-839,842-845,847,849-850,853-856,858,864
+templates/fragments/examples.html
+  h_32d60cd4daf66e 6-7,10-13,15,17-18,21-24,26,32
+templates/fragments/home.html
+  h_32d60cd4daf66e 20,31-39,41-56
+templates/fragments/style.css
+  h_32d60cd4daf66e 125-202
+templates/index.html
+  h_32d60cd4daf66e 41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "d7df9904ecf8a9bb7ec8f4e8eca377cbb053548a",
+  "prompts": {},
+  "humans": {
+    "h_32d60cd4daf66e": {
+      "author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
