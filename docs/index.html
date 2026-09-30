@@ -608,7 +608,6 @@ mvn clean install            <span class="c"># add -DskipTests for a faster buil
         <p>The build produces two runnable fat JARs:</p>
         <ul>
             <li>the command line interface: <span class="inline-code">cli/target/cli-1.0-jar-with-dependencies.jar</span></li>
-            <li>the visual explorer (GUI): <span class="inline-code">codeexplorer/target/codeexplorer-1.0-jar-with-dependencies.jar</span></li>
         </ul>
         <p><b>Run</b> from the root folder of the code base you want to analyze:</p>
         <div class="cmd">cd &lt;your-project&gt;
@@ -766,19 +765,6 @@ Commands: analyze, init, generateReports, analyzeLandscape, updateLandscape, upd
     </div>
     <p>The full reference of every key in <span class="inline-code">config.json</span> and the landscape configuration is in
         <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank">docs/configuration.md</a>.</p>
-</div>
-
-<div class="card">
-    <h1>VISUAL EXPLORER (GUI)</h1>
-    <p>The explorer is an interactive desktop front-end for the same analyses: it opens a configuration, lets you edit it and previews the
-        results. Most users only need the command line; the explorer is handy while tuning a configuration.</p>
-    <p>DOWNLOAD: <a
-            href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-LATEST.jar">sokrates-explorer-LATEST.jar</a>
-        (~65 MB)</p>
-    <p><b>NOTE: requires Java 17+ and JavaFX (download it from <a href="https://openjfx.io/" target="_blank">openjfx.io</a>)</b></p>
-    <div class="cmd">java --module-path $JAVAFX_HOME/lib --add-modules=javafx.controls,javafx.web -jar sokrates-explorer-LATEST.jar</div>
-    <br/>
-    <img src="assets/explorer.png" style="width: 100%; max-width: 1024px">
 </div>
 
     </div>
