@@ -5,56 +5,79 @@ date:   2020-05-25 19:12:01 +0100
 author: by Željko Obrenović (zeljkoobrenovic.com)
 permalink: install
 icon: install
-excerpt: "You can install and run Sokrates in three ways. First, you can download the Sokrates command-line interface JAR file. Second, you can download the Sokrates Explorer JAR file. Lastly, you can build it from scratch from the Sokrates' GitHub repository."
+excerpt: "You can run Sokrates in three ways: as a Docker image (no Java needed), as a downloaded JAR file with Java 17+, or built from source with Maven. All three end with the same one-shot analyze command."
 ---
 
-## Installation: JAR files
+You can run Sokrates in three ways. All three end with the same command, `analyze`, which extracts the git history, creates the analysis configuration (`_sokrates/config.json`, only if it does not exist yet) and generates the reports into `_sokrates/reports/`. Run it from the root of the code base you want to analyze.
 
-### Command Line Interface
+## Track 1: Docker (recommended)
 
-COMMAND LINE JAR
-DOWNLOAD: [sokrates-LATEST.jar](https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar) (38 MB)
-
-Simple usage example (to analyze Junit4):
+You need only [Docker](https://docs.docker.com/get-docker/). The image `ghcr.io/zeljkoobrenovic/sokrates` is published for `linux/amd64` and `linux/arm64`.
 
 {% highlight bash %}
 git clone https://github.com/junit-team/junit4
 cd junit4
 
-java -jar sokrates-LATEST.jar init
-java -jar sokrates-LATEST.jar generateReports
+docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze
 
-open _sokrates/reports/html/index.html
+open _sokrates/reports/index.html
 {% endhighlight %}
 
-### Explorer
+Any other command works the same way (replace `analyze`). On Linux add `--user "$(id -u):$(id -g)"` so the generated files are owned by you; in Windows PowerShell use `-v "${PWD}:/code"`.
 
-DOWNLOAD: [sokrates-explorer-0.9.jar](https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-0.9.jar) (78 MB)
+## Track 2: Java (download the JAR)
 
-NOTE: require JavaFX (download it and install it from openjfx.io)
+You need a Java runtime, version 17 or newer. Git is not needed (the history is read with JGit).
 
-   java --module-path $JAVAFX_HOME/lib --add-modules=javafx.controls,javafx.web -jar sokrates-explorer-0.9.jar
+DOWNLOAD: [sokrates-LATEST.jar](https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar) (~20 MB, the latest build of the master branch)
 
+{% highlight bash %}
+git clone https://github.com/junit-team/junit4
+cd junit4
 
-## Source Code
+java -jar <sokrates-folder>/sokrates-LATEST.jar analyze
 
-Sokrates is an open-source project, released under the [GNU Affero General Public License v3.0](https://github.com/zeljkoobrenovic/sokrates/blob/master/LICENSE).
+open _sokrates/reports/index.html
+{% endhighlight %}
 
-To build a project from source code, go to the root of the project, and run the following command:
+For big repositories give the JVM more memory (`java -Xmx8g -jar ...`).
+
+## Track 3: From source
+
+Sokrates is an open-source project, released under the [MIT license](https://github.com/zeljkoobrenovic/sokrates/blob/master/LICENSE). You need Java 17+ and Maven.
+
 <pre>
+git clone https://github.com/zeljkoobrenovic/sokrates.git
+cd sokrates
 mvn clean install
 </pre>
 
-The build will create two jar files:
+The build creates two JAR files:
 
-* the [command line interface JAR](https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar) in the **cli/target** folder
-* the [interactive explorer JAR](https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-0.9.jar) in the **codeexplorer/target** folder
+* the command line interface JAR in the **cli/target** folder (`cli-1.0-jar-with-dependencies.jar`)
+* the interactive explorer JAR in the **codeexplorer/target** folder (`codeexplorer-1.0-jar-with-dependencies.jar`)
 
-Prerequirements:
-* Java 8+
-* Maven
+{% highlight bash %}
+cd <your-project>
+java -jar <sokrates-repo>/cli/target/cli-1.0-jar-with-dependencies.jar analyze
+{% endhighlight %}
 
+## Explorer (GUI)
 
+DOWNLOAD: [sokrates-explorer-LATEST.jar](https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-LATEST.jar) (~65 MB)
 
+NOTE: requires Java 17+ and JavaFX (download it from [openjfx.io](https://openjfx.io))
 
+<pre>
+java --module-path $JAVAFX_HOME/lib --add-modules=javafx.controls,javafx.web -jar sokrates-explorer-LATEST.jar
+</pre>
 
+## What analyze does
+
+The `analyze` command chains three steps that are also available as separate commands:
+
+* `extractGitHistory` — writes `git-history.txt` (skipped when the folder is not a git repository, or with `-skipGitHistory`)
+* `init` — creates `_sokrates/config.json` from the standard conventions, only when the file does not exist yet
+* `generateReports` — runs the analyses and writes the reports to `_sokrates/reports/`
+
+The workflow is iterative: run `analyze`, look at the reports, edit `_sokrates/config.json`, run `analyze` again. See the [command line interface](cli) appendix for all commands.

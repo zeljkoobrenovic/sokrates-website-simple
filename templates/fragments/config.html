@@ -4,8 +4,9 @@
             <h2 class="title">Configuration File for Project Analyses</h2>
             <ul>
                 <li> Sokrates project analysis configuration is defined in a JSON file.</li>
-                <li>You can use the <span class="inline-code">init</span> command to generate default file for your project (see Download tab for
-                    details).
+                <li>The <span class="inline-code">analyze</span> command (or the <span class="inline-code">init</span> command on its own) generates
+                    the default file for your project (see the INSTALL &amp; USE tab for details). Edit it and run
+                    <span class="inline-code">analyze</span> (or <span class="inline-code">generateReports</span>) again to refresh the reports.
                 </li>
                 <li>The default location of the configuration file is <span class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/config.json&nbsp;</span>
                 </li>
@@ -34,9 +35,9 @@
         <div style="margin: 10px 10px 10px 10px;"><h2 class="title">Configuration File for a Landscape Analysis</h2>
             <ul>
                 <li> Sokrates landscape analysis configuration is defined in two JSON files: config.json and config-tags.json.</li>
-                <li>You can use the <span class="inline-code">updateLandscape</span> command to generate default files.</li>
+                <li>You can use the <span class="inline-code">analyzeLandscape</span> command (older name: <span class="inline-code">updateLandscape</span>) to generate default files.</li>
                 <ul>
-                    <li>java -jar sokrates.jar updateLandscape [options]</li>
+                    <li>java -jar sokrates.jar analyzeLandscape [options]</li>
                 </ul>
                 <li>The default location of the configuration files is <span class="inline-code">&lt;your-project&gt;/_sokrates_landscape/</span>
                 </li>

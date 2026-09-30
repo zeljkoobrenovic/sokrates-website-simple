@@ -8,15 +8,15 @@
 <meta property="og:title" content="Appendix: Command Line Interface (CLI)" />
 <meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Sokrates command-line interface (CLI) includes five commands: init, generateReports, updateConfig, initLandscape, and updateLandscape." />
-<meta property="og:description" content="Sokrates command-line interface (CLI) includes five commands: init, generateReports, updateConfig, initLandscape, and updateLandscape." />
+<meta name="description" content="Sokrates command-line interface (CLI): the one-shot analyze command, plus init, generateReports, extractGitHistory, updateConfig and updateLandscape." />
+<meta property="og:description" content="Sokrates command-line interface (CLI): the one-shot analyze command, plus init, generateReports, extractGitHistory, updateConfig and updateLandscape." />
 <link rel="canonical" href="/book/cli" />
 <meta property="og:url" content="/book/cli" />
 <meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/cli","headline":"Appendix: Command Line Interface (CLI)","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/cli"},"description":"Sokrates command-line interface (CLI) includes five commands: init, generateReports, updateConfig, initLandscape, and updateLandscape.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/cli","headline":"Appendix: Command Line Interface (CLI)","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/cli"},"description":"Sokrates command-line interface (CLI): the one-shot analyze command, plus init, generateReports, extractGitHistory, updateConfig and updateLandscape.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
 <body><header class="site-header" role="banner">
@@ -88,16 +88,44 @@
     </header>
 
     <div class="post-content e-content" itemprop="articleBody">
-        <p>Sokrates command-line interface (CLI) includes five commands:</p>
+        <p>The main commands of the Sokrates command-line interface (CLI) are:</p>
 <ul>
+  <li>analyze (= extractGitHistory + init + generateReports),</li>
+  <li>extractGitHistory,</li>
   <li>init,</li>
   <li>generateReports,</li>
-  <li>updateConfig,</li>
-  <li>initLandscape, and</li>
+  <li>updateConfig, and</li>
   <li>updateLandscape.</li>
 </ul>
 
+<p>Run <code class="language-plaintext highlighter-rouge">java -jar sokrates-LATEST.jar</code> without arguments for the full list (it also includes <code class="language-plaintext highlighter-rouge">addCustomTab</code>, <code class="language-plaintext highlighter-rouge">updatePeopleConfigByUserName</code>, <code class="language-plaintext highlighter-rouge">updateLandscapePeopleConfigByUserName</code>, <code class="language-plaintext highlighter-rouge">createConventionsFile</code>, <code class="language-plaintext highlighter-rouge">exportStandardConventions</code> and <code class="language-plaintext highlighter-rouge">extractGitSubHistory</code>), and any command with <code class="language-plaintext highlighter-rouge">-help</code> for its options. When running from Docker, replace <code class="language-plaintext highlighter-rouge">java -jar sokrates-LATEST.jar</code> with <code class="language-plaintext highlighter-rouge">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates</code> (see the <a href="/book/install">installation</a> appendix).</p>
+
 <p><br /></p>
+<h2 id="analyze-command"><strong><em>analyze</em></strong> command</h2>
+
+<p>The <strong>analyze</strong> command is the recommended way to get a first report: from the root of a code base it extracts the git history (when the folder is a git repository), creates the analysis configuration if none exists yet (so your edits survive later runs), and generates the reports.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">java <span class="nt">-jar</span> sokrates-LATEST.jar analyze <span class="o">[</span>options]
+   <span class="nt">-srcRoot</span>         &lt;arg&gt;   <span class="o">[</span>OPTIONAL] the root folder of the code base to analyze <span class="o">(</span>default is the current folder<span class="o">)</span>
+   <span class="nt">-confFile</span>        &lt;arg&gt;   <span class="o">[</span>OPTIONAL] the path to configuration file <span class="o">(</span>default is <span class="s2">"&lt;srcRoot&gt;/_sokrates/config.json"</span><span class="o">)</span>
+   <span class="nt">-outputFolder</span>    &lt;arg&gt;   <span class="o">[</span>OPTIONAL] the folder where reports will be stored <span class="o">(</span>default is <span class="s2">"&lt;srcRoot&gt;/_sokrates/reports/"</span><span class="o">)</span>
+   <span class="nt">-conventionsFile</span> &lt;arg&gt;   <span class="o">[</span>OPTIONAL] custom scoping conventions used when the configuration is created
+   <span class="nt">-name</span>            &lt;arg&gt;   <span class="o">[</span>OPTIONAL] the repository name
+   <span class="nt">-description</span>     &lt;arg&gt;   <span class="o">[</span>OPTIONAL] the repository description
+   <span class="nt">-skipGitHistory</span>          <span class="o">[</span>OPTIONAL] does not <span class="o">(</span>re<span class="o">)</span>extract the git history<span class="p">;</span> an existing git-history.txt is still used
+   <span class="nt">-date</span>            &lt;arg&gt;   <span class="o">[</span>OPTIONAL] reference date <span class="o">(</span>YYYY-MM-dd<span class="o">)</span> <span class="k">for </span>the <span class="s2">"past N days"</span> commit and contributor counts</code></pre></figure>
+
+<p><br />
+<br /></p>
+<h2 id="extractgithistory-command"><strong><em>extractGitHistory</em></strong> command</h2>
+
+<p>The <strong>extractGitHistory</strong> command reads the git log with JGit (no git binary needed) and writes <code class="language-plaintext highlighter-rouge">git-history.txt</code> in the repository root: one line per file change, with date, author, commit and lines added/removed. This file feeds the commit, contributor, file-age, churn and trend analyses.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">java <span class="nt">-jar</span> sokrates-LATEST.jar extractGitHistory <span class="o">[</span>options]
+   <span class="nt">-analysisRoot</span> &lt;arg&gt;   <span class="o">[</span>OPTIONAL] the repository root folder <span class="o">(</span>default is &lt;currentFolder&gt;<span class="o">)</span></code></pre></figure>
+
+<p><br />
+<br /></p>
 <h2 id="init-command"><strong><em>init</em></strong> command</h2>
 
 <p>The <strong>init</strong> command generates a new Sokrates configuration file based on standard source code conventions.</p>
@@ -119,19 +147,8 @@
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">  java <span class="nt">-jar</span> sokrates-LATEST.jar generateReports <span class="o">[</span>options]
          <span class="nt">-confFile</span>     &lt;arg&gt;           <span class="o">[</span>OPTIONAL] the path to configuration file <span class="o">(</span>default is <span class="s2">"&lt;currentFolder&gt;/_sokrates/config.json"</span><span class="o">)</span>
          <span class="nt">-outputFolder</span> &lt;arg&gt;           <span class="o">[</span>OPTIONAL] the folder where reports will be stored <span class="o">(</span>default is <span class="s2">"&lt;currentFolder&gt;/_sokrates/reports/"</span><span class="o">)</span>
-         <span class="nt">-reportAll</span>                    <span class="o">[</span>DEFAULT] generate all reports
-         <span class="nt">-reportData</span>                   save only data <span class="k">in </span>JSON and text formats <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/data<span class="o">)</span>
-         <span class="nt">-reportOverview</span>               generate only the report describing the overview of files <span class="k">in </span>scope <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/html/SourceCodeOverview.html<span class="o">)</span>
-         <span class="nt">-reportDuplication</span>            generate only the duplication report <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/html/Duplication.html<span class="o">)</span>
-         <span class="nt">-reportLogicalDecomposition</span>   generate only the components logical decomposition report <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/LogicalDecomposition.html<span class="o">)</span>
-         <span class="nt">-reportFileSize</span>               generate only the file size report <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/html/FileSize.html<span class="o">)</span>
-         <span class="nt">-reportUnitSize</span>               generate only the unit size report <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/html/UnitSize.html<span class="o">)</span>
-         <span class="nt">-reportConditionalComplexity</span>  generate only the conditional complexity report <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/html/ConditionalComplexity.html<span class="o">)</span>
-         <span class="nt">-reportConcerns</span>               generate only the concerns report <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/html/Concerns.html<span class="o">)</span>
-         <span class="nt">-reportMetrics</span>                generate only the metrics overview report <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/html/Metrics.html<span class="o">)</span>
-         <span class="nt">-reportControls</span>               generate only the controls report <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/html/Controls.html<span class="o">)</span>
-         <span class="nt">-reportFindings</span>               generate only the findings report <span class="o">(</span>stored <span class="k">in</span> &lt;outputFolder&gt;/html/Findings.html<span class="o">)</span>
-         </code></pre></figure>
+         <span class="nt">-date</span>         &lt;arg&gt;   <span class="o">[</span>OPTIONAL] reference date <span class="o">(</span>YYYY-MM-dd<span class="o">)</span> <span class="k">for </span>the <span class="s2">"past N days"</span> commit and contributor counts
+         <span class="nt">-timeout</span>      &lt;arg&gt;   <span class="o">[</span>OPTIONAL] timeout <span class="k">in </span>seconds</code></pre></figure>
 
 <p><img src="assets/images/sokrates/cmd-generate-reports.png" alt="" /></p>
 
@@ -156,23 +173,9 @@
 
 <p><br />
 <br /></p>
-<h2 id="initlandscape-command"><strong><em>initLandscape</em></strong> command</h2>
-
-<p>The <strong>initLandscape</strong> creates a Sokrates Landscape report and an initial landscape configuration file for landscape analyses.</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">java <span class="nt">-jar</span> sokrates.jar initLandscape <span class="o">[</span>options]
-     <span class="nt">-analysisRoot</span> &lt;arg&gt;    the path to the root folder of multiple Sokrates projects, scans all subfolders <span class="k">for </span>Sokrates reports and configurations.  The folder where landscape reports will be stored <span class="o">(</span>default is <span class="s2">"&lt;currentFolder&gt;/_sokrates_landscape/reports/"</span><span class="nb">.</span>
-     <span class="nt">-confFile</span>     &lt;arg&gt;    <span class="o">[</span>OPTIONAL] the path to landscape configuration file <span class="o">(</span>default is <span class="s2">"&lt;currentFolder&gt;/_sokrates_landscape/config.json"</span></code></pre></figure>
-
-<p><img src="assets/images/sokrates/cmd-init-landscape.png" alt="" /></p>
-
-<p><em><strong>Figure 4:</strong> The <strong>initLandscape</strong> creates a Sokrates Landscape report and an initial landscape configuration file for landscape analyses.</em></p>
-
-<p><br />
-<br /></p>
 <h2 id="updatelandscape-command"><strong><em>updateLandscape</em></strong> command</h2>
 
-<p>The <strong>updateLandscape</strong> updates a Sokrates Landscape report, adding new and removing non-existent projects without changing other settings in the landscape configuration file.</p>
+<p>The <strong>updateLandscape</strong> creates or updates a Sokrates Landscape report that aggregates the analyses found under the analysis root, adding new and removing non-existent projects without changing other settings in the landscape configuration file.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">java <span class="nt">-jar</span> sokrates.jar updateLandscape <span class="o">[</span>options]
      <span class="nt">-analysisRoot</span> &lt;arg&gt;   the path to the root folder of multiple Sokrates projects, scans all subfolders <span class="k">for </span>Sokrates reports and configurations. The folder where landscape reports will be stored <span class="o">(</span>default is <span class="s2">"&lt;currentFolder&gt;/_sokrates_landscape/reports/"</span><span class="nb">.</span>
@@ -180,7 +183,7 @@
 
 <p><img src="assets/images/sokrates/cmd-update-landscape.png" alt="" /></p>
 
-<p><em><strong>Figure 5:</strong> The <strong>updateLandscape</strong> updates a Sokrates Landscape report, adding new and removing non-existent projects without changing other settings in the landscape configuration file.</em></p>
+<p><em><strong>Figure 4:</strong> The <strong>updateLandscape</strong> updates a Sokrates Landscape report, adding new and removing non-existent projects without changing other settings in the landscape configuration file.</em></p>
 
 <p><br />
 <br /></p>
@@ -222,7 +225,8 @@ git clone https://github.com/zeljkoobrenovic/sokrates.git
 <span class="nb">rm</span> <span class="nt">-rf</span> temp-git-dir
 
 <span class="c"># run analysis</span>
-java <span class="nt">-jar</span> <span class="nt">-Xmx10g</span> sokrates-LATEST.jar generateReports <span class="nt">-reportAll</span>
+<span class="c"># run the analysis with the prepared configuration (analyze keeps an existing config.json)</span>
+java <span class="nt">-jar</span> <span class="nt">-Xmx10g</span> sokrates-LATEST.jar analyze
 
 <span class="c"># copy generated reports to the reports folder</span>
 <span class="nb">cp</span> <span class="nt">-r</span> _sokrates/reports/<span class="k">*</span> ../reports

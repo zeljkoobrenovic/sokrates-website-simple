@@ -84,9 +84,10 @@ cd sokrates-skills
 
             <h3 style="background-color: #ededed; padding: 4px"><b>2. Analyze the project with Sokrates</b></h3>
             <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
-java -jar sokrates.jar init
-java -jar sokrates.jar extractGitHistory      # optional, enables history-based insights
-java -jar sokrates.jar generateReports</pre>
+java -jar sokrates.jar analyze                # = extractGitHistory + init + generateReports
+# or, without Java:  docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</pre>
+            <p>See the <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">INSTALL &amp; USE</a>
+                tab for the Docker, JAR and from-source ways of running Sokrates.</p>
 
             <h3 style="background-color: #ededed; padding: 4px"><b>3. Refine the configuration with the config skills</b></h3>
             <p>The default <span class="inline-code">init</span> configuration is a starting point. In the project folder, ask your AI tool to

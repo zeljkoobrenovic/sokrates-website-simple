@@ -11,8 +11,8 @@ excerpt: "To learn how to use Sokrates, like with any software tools or programm
 To learn how to use Sokrates, like with any software tools or programming languages, you need to do some hands-on work. [Install Sokrates](install), and use this to analyze your code. For instance, Figure 1 illustrates how to create an initial analysis. This analysis will generate an initial configuration file under **_sokrates/config.json**, and reports under the **_sokrates/reports/html** folder. Explore these artifacts to get a basic familiarity with Sokrates projects.
 
 {% highlight sh %}
-    git clone https://github.com/junit-team/junit5
-    cd junit5
+    git clone https://github.com/junit-team/junit-framework
+    cd junit-framework
     java -jar sokrates-LATEST.jar extractGitHistory
 
     java -jar sokrates-LATEST.jar init

@@ -8,15 +8,15 @@
 <meta property="og:title" content="Appendix: Installation" />
 <meta name="author" content="by Željko Obrenović (zeljkoobrenovic.com)" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="You can install and run Sokrates in three ways. First, you can download the Sokrates command-line interface JAR file. Second, you can download the Sokrates Explorer JAR file. Lastly, you can build it from scratch from the Sokrates’ GitHub repository." />
-<meta property="og:description" content="You can install and run Sokrates in three ways. First, you can download the Sokrates command-line interface JAR file. Second, you can download the Sokrates Explorer JAR file. Lastly, you can build it from scratch from the Sokrates’ GitHub repository." />
+<meta name="description" content="You can run Sokrates in three ways: as a Docker image (no Java needed), as a downloaded JAR file with Java 17+, or built from source with Maven. All three end with the same one-shot analyze command." />
+<meta property="og:description" content="You can run Sokrates in three ways: as a Docker image (no Java needed), as a downloaded JAR file with Java 17+, or built from source with Maven. All three end with the same one-shot analyze command." />
 <link rel="canonical" href="/book/install" />
 <meta property="og:url" content="/book/install" />
 <meta property="og:site_name" content="Examined Line: The Art of Source Code Analysis with Sokrates" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-25T20:12:01+02:00" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/install","headline":"Appendix: Installation","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/install"},"description":"You can install and run Sokrates in three ways. First, you can download the Sokrates command-line interface JAR file. Second, you can download the Sokrates Explorer JAR file. Lastly, you can build it from scratch from the Sokrates’ GitHub repository.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"by Željko Obrenović (zeljkoobrenovic.com)"},"url":"/book/install","headline":"Appendix: Installation","dateModified":"2020-05-25T20:12:01+02:00","datePublished":"2020-05-25T20:12:01+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"/book/install"},"description":"You can run Sokrates in three ways: as a Docker image (no Java needed), as a downloaded JAR file with Java 17+, or built from source with Maven. All three end with the same one-shot analyze command.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/book/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/book/feed.xml" title="Examined Line: The Art of Source Code Analysis with Sokrates" /></head>
 <body><header class="site-header" role="banner">
@@ -88,53 +88,75 @@
     </header>
 
     <div class="post-content e-content" itemprop="articleBody">
-        <h2 id="installation-jar-files">Installation: JAR files</h2>
+        <p>You can run Sokrates in three ways. All three end with the same command, <code class="language-plaintext highlighter-rouge">analyze</code>, which extracts the git history, creates the analysis configuration (<code class="language-plaintext highlighter-rouge">_sokrates/config.json</code>, only if it does not exist yet) and generates the reports into <code class="language-plaintext highlighter-rouge">_sokrates/reports/</code>. Run it from the root of the code base you want to analyze.</p>
 
-<h3 id="command-line-interface">Command Line Interface</h3>
+<h2 id="track-1-docker-recommended">Track 1: Docker (recommended)</h2>
 
-<p>COMMAND LINE JAR
-DOWNLOAD: <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">sokrates-LATEST.jar</a> (38 MB)</p>
-
-<p>Simple usage example (to analyze Junit4):</p>
+<p>You need only <a href="https://docs.docker.com/get-docker/">Docker</a>. The image <code class="language-plaintext highlighter-rouge">ghcr.io/zeljkoobrenovic/sokrates</code> is published for <code class="language-plaintext highlighter-rouge">linux/amd64</code> and <code class="language-plaintext highlighter-rouge">linux/arm64</code>.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/junit-team/junit4
 <span class="nb">cd </span>junit4
 
-java <span class="nt">-jar</span> sokrates-LATEST.jar init
-java <span class="nt">-jar</span> sokrates-LATEST.jar generateReports
+docker run <span class="nt">--rm</span> <span class="nt">-v</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">:/code"</span> ghcr.io/zeljkoobrenovic/sokrates analyze
 
-open _sokrates/reports/html/index.html</code></pre></figure>
+open _sokrates/reports/index.html</code></pre></figure>
 
-<h3 id="explorer">Explorer</h3>
+<p>Any other command works the same way (replace <code class="language-plaintext highlighter-rouge">analyze</code>). On Linux add <code class="language-plaintext highlighter-rouge">--user "$(id -u):$(id -g)"</code> so the generated files are owned by you; in Windows PowerShell use <code class="language-plaintext highlighter-rouge">-v "${{PWD}}:/code"</code>.</p>
 
-<p>DOWNLOAD: <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-LATEST.jar">sokrates-explorer-LATEST.jar</a> (78 MB)</p>
+<h2 id="track-2-java-download-the-jar">Track 2: Java (download the JAR)</h2>
 
-<p>NOTE: require JavaFX (download it and install it from openjfx.io)</p>
+<p>You need a Java runtime, version 17 or newer. Git is not needed (the history is read with JGit).</p>
 
-<p>java –module-path $JAVAFX_HOME/lib –add-modules=javafx.controls,javafx.web -jar sokrates-explorer-LATEST.jar</p>
+<p>DOWNLOAD: <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">sokrates-LATEST.jar</a> (~20 MB, the latest build of the master branch)</p>
 
-<h2 id="source-code">Source Code</h2>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/junit-team/junit4
+<span class="nb">cd </span>junit4
 
-<p>Sokrates is an open-source project, released under the <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/LICENSE">GNU Affero General Public License v3.0</a>.</p>
+java <span class="nt">-jar</span> &lt;sokrates-folder&gt;/sokrates-LATEST.jar analyze
 
-<p>To build a project from source code, go to the root of the project, and run the following command:</p>
+open _sokrates/reports/index.html</code></pre></figure>
+
+<p>For big repositories give the JVM more memory (<code class="language-plaintext highlighter-rouge">java -Xmx8g -jar ...</code>).</p>
+
+<h2 id="track-3-from-source">Track 3: From source</h2>
+
+<p>Sokrates is an open-source project, released under the <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/LICENSE">MIT license</a>. You need Java 17+ and Maven.</p>
 <pre>
+git clone https://github.com/zeljkoobrenovic/sokrates.git
+cd sokrates
 mvn clean install
 </pre>
 
-<p>The build will create two jar files:</p>
+<p>The build creates two JAR files:</p>
 
 <ul>
-  <li>the <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">command line interface JAR</a> in the <strong>cli/target</strong> folder</li>
-  <li>the <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-LATEST.jar">interactive explorer JAR</a> in the <strong>codeexplorer/target</strong> folder</li>
+  <li>the command line interface JAR in the <strong>cli/target</strong> folder (<code class="language-plaintext highlighter-rouge">cli-1.0-jar-with-dependencies.jar</code>)</li>
+  <li>the interactive explorer JAR in the <strong>codeexplorer/target</strong> folder (<code class="language-plaintext highlighter-rouge">codeexplorer-1.0-jar-with-dependencies.jar</code>)</li>
 </ul>
 
-<p>Prerequirements:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> &lt;your-project&gt;
+java <span class="nt">-jar</span> &lt;sokrates-repo&gt;/cli/target/cli-1.0-jar-with-dependencies.jar analyze</code></pre></figure>
+
+<h2 id="explorer-gui">Explorer (GUI)</h2>
+
+<p>DOWNLOAD: <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-explorer-LATEST.jar">sokrates-explorer-LATEST.jar</a> (~65 MB)</p>
+
+<p>NOTE: requires Java 17+ and JavaFX (download it from <a href="https://openjfx.io">openjfx.io</a>)</p>
+<pre>
+java --module-path $JAVAFX_HOME/lib --add-modules=javafx.controls,javafx.web -jar sokrates-explorer-LATEST.jar
+</pre>
+
+<h2 id="what-analyze-does">What analyze does</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">analyze</code> command chains three steps that are also available as separate commands:</p>
+
 <ul>
-  <li>Java 8+</li>
-  <li>Maven</li>
+  <li><code class="language-plaintext highlighter-rouge">extractGitHistory</code> — writes <code class="language-plaintext highlighter-rouge">git-history.txt</code> (skipped when the folder is not a git repository, or with <code class="language-plaintext highlighter-rouge">-skipGitHistory</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">init</code> — creates <code class="language-plaintext highlighter-rouge">_sokrates/config.json</code> from the standard conventions, only when the file does not exist yet</li>
+  <li><code class="language-plaintext highlighter-rouge">generateReports</code> — runs the analyses and writes the reports to <code class="language-plaintext highlighter-rouge">_sokrates/reports/</code></li>
 </ul>
 
+<p>The workflow is iterative: run <code class="language-plaintext highlighter-rouge">analyze</code>, look at the reports, edit <code class="language-plaintext highlighter-rouge">_sokrates/config.json</code>, run <code class="language-plaintext highlighter-rouge">analyze</code> again. See the <a href="/book/cli">command line interface</a> appendix for all commands.</p>
 
     </div><a class="u-url" href="/book/install" hidden></a>
 </article>

@@ -1,0 +1,150 @@
+<div class="card">
+    <h1>WHAT IS A LANDSCAPE?</h1>
+    <p style="font-size: 105%">
+        A single Sokrates analysis describes one repository. A <b>landscape</b> aggregates many repository analyses into one portfolio
+        report: the size and languages of every repository, who contributes where and how much, how contributors and teams connect
+        across repositories, and how all of that changes over time. It is the tool for looking at a whole organization, a business
+        unit, or an open-source ecosystem rather than one code base.
+    </p>
+    <div style="display: inline-block">
+        <div class="section" style="width: 300px; margin-bottom: 10px">
+            <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                <div><img src="assets/logos/openai.svg" style="height: 70px; padding: 4px"></div>
+                <div style="font-size: 130%; font-weight: bold">OpenAI's OSS Projects</div>
+                <div style="margin-top: 6px; font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors</div>
+            </a>
+        </div>
+        <div class="section" style="width: 300px; margin-bottom: 10px">
+            <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                <div><img src="assets/logos/anthropics.png" style="height: 70px; padding: 4px"></div>
+                <div style="font-size: 130%; font-weight: bold">Anthropic's OSS Projects</div>
+                <div style="margin-top: 6px; font-size: 90%; color: black"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors</div>
+            </a>
+        </div>
+        <div class="section" style="width: 300px; margin-bottom: 10px">
+            <a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                <div style="font-size: 130%; font-weight: bold; padding-top: 30px">Apache Software Foundation</div>
+                <div style="margin-top: 6px; font-size: 90%; color: black">hundreds of repositories, with folder sub-landscapes per project</div>
+            </a>
+        </div>
+    </div>
+    <p>More live landscapes are on the <a href="#examples" onclick="document.getElementById('examples_tab').click(); return false;">EXAMPLES</a> tab.</p>
+</div>
+
+<div class="card">
+    <h1>BUILD A LANDSCAPE IN THREE STEPS</h1>
+    <p>The commands use the <span class="inline-code">sokrates</span> alias from the
+        <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">INSTALL &amp; USE</a> tab (Docker, JAR or
+        source build &mdash; the commands are identical).</p>
+
+    <div class="example">
+        <b>Step 1. Analyze each repository</b> with <span class="inline-code">analyze</span>, as for a single repository:
+        <div class="cmd">git clone https://github.com/junit-team/junit4
+git clone https://github.com/junit-team/junit-framework
+
+(cd junit4 &amp;&amp; sokrates <span class="hl">analyze</span>)
+(cd junit-framework &amp;&amp; sokrates <span class="hl">analyze</span>)</div>
+    </div>
+
+    <div class="example">
+        <b>Step 2. Collect the analysis folders under one root.</b> A landscape reads each repository's
+        <span class="inline-code">_sokrates</span> folder (the configuration plus the generated <span class="inline-code">reports/</span>);
+        the source code itself is no longer needed. Any nesting is fine &mdash; the landscape finds the analyses recursively, and the folder
+        names become the repository names:
+        <div class="cmd">mkdir landscape
+mv junit4/_sokrates landscape/junit4
+mv junit-framework/_sokrates landscape/junit-framework
+
+<span class="c"># the resulting layout:</span>
+landscape/
+  junit4/config.json
+  junit4/reports/...
+  junit-framework/config.json
+  junit-framework/reports/...</div>
+    </div>
+
+    <div class="example">
+        <b>Step 3. Generate the landscape report:</b>
+        <div class="cmd">cd landscape
+sokrates <span class="hl">analyzeLandscape</span>
+
+open _sokrates_landscape/index.html</div>
+        <p style="margin: 4px 0"><span class="inline-code">analyzeLandscape</span> (the landscape counterpart of <span class="inline-code">analyze</span>; <span class="inline-code">updateLandscape</span> is the older name of the same command and still works) creates <span class="inline-code">_sokrates_landscape/config.json</span>
+            on the first run and keeps your edits on later runs; the discovered repositories are kept apart in
+            <span class="inline-code">info.json</span>, so re-running after adding or re-analyzing repositories is always safe. Use
+            <span class="inline-code">-setName</span>, <span class="inline-code">-setDescription</span>,
+            <span class="inline-code">-setLogoLink</span> and <span class="inline-code">-addLink</span> to label the landscape, or edit the
+            metadata in the configuration file.</p>
+    </div>
+
+    <div class="note">
+        <b>Keeping a landscape up to date.</b> Re-run <span class="inline-code">analyze</span> in a repository (or
+        <span class="inline-code">generateReports</span> if only the code changed) and move its fresh <span class="inline-code">_sokrates</span>
+        folder into place, then run <span class="inline-code">analyzeLandscape</span> again. Because <span class="inline-code">analyze</span> keeps an
+        existing <span class="inline-code">config.json</span>, you can also leave the repository analyses in place and point the landscape at
+        the folder that holds the clones (<span class="inline-code">-analysisRoot</span>): a nightly job that pulls every repository, runs
+        <span class="inline-code">analyze</span> in each and finishes with <span class="inline-code">analyzeLandscape</span> is the whole pipeline.
+    </div>
+</div>
+
+<div class="card">
+    <h1>CONFIGURING A LANDSCAPE</h1>
+    <p>A landscape is driven by JSON files in <span class="inline-code">_sokrates_landscape/</span>. All keys are documented in
+        <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md#part-2--landscape-_sokrates_landscapeconfigjson" target="_blank">docs/configuration.md</a>;
+        the most useful ones:</p>
+    <table class="steps">
+        <tr>
+            <td>config.json</td>
+            <td>Metadata (name, description, logo, links), display thresholds, contributor and bot filters, the
+                <span class="inline-code">repositoryReportsUrlPrefix</span> that links the landscape to the repository reports, and the
+                <span class="inline-code">virtualLandscapes</span> definitions described below.</td>
+        </tr>
+        <tr>
+            <td>config-tags.json</td>
+            <td>Repository <b>tags</b>: groups of regex rules that label repositories (by name, path or the technologies they contain)
+                and drive the tag-based overviews.</td>
+        </tr>
+        <tr>
+            <td>config-teams.json</td>
+            <td><b>Teams</b>: email patterns that assign contributors to teams, enabling the team-level reports and team topology graphs.</td>
+        </tr>
+        <tr>
+            <td>config-people.json</td>
+            <td><b>People</b>: merges the several emails one person commits with into a single identity. Bootstrap it with
+                <span class="inline-code">sokrates updateLandscapePeopleConfigByUserName</span>, which groups all emails that share a
+                display name (additive; it never removes entries), then run <span class="inline-code">analyzeLandscape</span> again.</td>
+        </tr>
+    </table>
+
+    <h3>Sub-landscapes</h3>
+    <p>Large landscapes are easier to read when split. There are two ways, and they can be combined:</p>
+    <ul>
+        <li><b>Folder-based:</b> put repository folders into sub-directories and run <span class="inline-code">analyzeLandscape</span> in each
+            (or once at the top with <span class="inline-code">-recursive</span>). Every sub-directory with its own
+            <span class="inline-code">_sokrates_landscape/</span> shows up in the parent's <i>Sub-landscapes</i> tab.</li>
+        <li><b>Virtual:</b> define sub-landscapes by repository-name patterns in the parent's <span class="inline-code">config.json</span>,
+            without moving any folders. A repository may belong to several; the ones matched by none go to a <i>Remainder</i> landscape.
+            Virtual landscapes can be nested to any depth:</li>
+    </ul>
+    <div class="cmd">"virtualLandscapes": {
+  "remainderLandscapeMetadata": { "name": "Other" },
+  "landscapes": [
+    {
+      "metadata": { "name": "Platform", "description": "Shared platform code" },
+      "includeRepoNamePatterns": [".*platform.*", "core-.*"],
+      "excludeRepoNamePatterns": [".*-deprecated"]
+    },
+    {
+      "metadata": { "name": "Mobile" },
+      "includeRepoNamePatterns": [".*-(ios|android)"]
+    }
+  ]
+}</div>
+
+    <h3>Publishing</h3>
+    <p>The landscape and the repository reports are static HTML. Copy the whole root folder (repository folders plus
+        <span class="inline-code">_sokrates_landscape/</span>) to any static host &mdash; S3 + CloudFront, GitHub Pages, an internal web server
+        &mdash; and the links between the landscape and the repository reports keep working. The reports load a few rendering libraries
+        (d3, Mermaid) from a CDN, so viewers need internet access; nothing is sent anywhere.</p>
+</div>
+

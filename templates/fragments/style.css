@@ -198,3 +198,50 @@ h1 {
         border-bottom-color: #1d4ed8;
     }
 }
+
+/* command snippets, notes and examples shared by the INSTALL & USE and LANDSCAPES tabs */
+.cmd {
+    background-color: lightyellow;
+    border: 1px solid #e0e0c0;
+    padding: 8px 10px;
+    font-family: monospace;
+    font-size: 105%;
+    overflow-x: auto;
+    white-space: pre;
+    margin: 6px 0 10px 0;
+}
+
+.cmd .hl {
+    background-color: yellow;
+}
+
+.cmd .c {
+    color: #808080;
+}
+
+.steps td {
+    vertical-align: top;
+    padding: 6px 10px 6px 0;
+}
+
+.steps td:first-child {
+    white-space: nowrap;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.note {
+    background-color: #f4f4f4;
+    border-left: 4px solid #c0c0c0;
+    padding: 6px 10px;
+    margin: 8px 0;
+    font-size: 95%;
+}
+
+.example {
+    margin: 10px 0;
+    border: 2px dashed lightgrey;
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}

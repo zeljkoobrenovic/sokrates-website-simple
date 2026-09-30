@@ -47,6 +47,7 @@
     <div class="tab">
         <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">HOME</button>
         <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">INSTALL & USE</button>
+        <button id="landscapes_tab" class="tablinks" onclick="openTab(event, 'landscapes')">LANDSCAPES</button>
         <button id="ai_insights_tab" class="tablinks" onclick="openTab(event, 'ai_insights')">AI INSIGHTS</button>
         <button id="config_tab" class="tablinks" onclick="openTab(event, 'config')">CONFIGURATION</button>
         <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">EXAMPLES</button>
@@ -60,6 +61,10 @@
 
     <div id="install" class="tabcontent">
         ${import install.html}
+    </div>
+
+    <div id="landscapes" class="tabcontent">
+        ${import landscapes.html}
     </div>
 
     <div id="ai_insights" class="tabcontent">
