@@ -689,15 +689,16 @@ sokrates <span class="hl">generateReports</span></div>
         <div class="cmd">sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
 open junit-team/junit4/reports/index.html
 
-<span class="c"># options: -destFolder <folder>, -branch <name>, -depth <n> (shallow clone), plus the analyze options</span>
-<span class="c"># private HTTPS repositories: export SOKRATES_GIT_TOKEN=<personal access token>   (Docker: -e SOKRATES_GIT_TOKEN)</span></div>
+<span class="c"># options: -destFolder &lt;folder&gt;, -branch &lt;name&gt;, -depth &lt;n&gt; (shallow clone), plus the analyze options</span>
+<span class="c"># private HTTPS repositories: export SOKRATES_GIT_TOKEN=&lt;personal access token&gt;   (Docker: -e SOKRATES_GIT_TOKEN)</span></div>
     </div>
 
     <div class="example">
-        <b>Example 2. Analyze several repositories and aggregate them into a landscape:</b> run <span class="inline-code">analyze</span> in each
-        repository, collect the <span class="inline-code">_sokrates</span> folders under one root and run <span class="inline-code">analyzeLandscape</span>
-        there &mdash; see the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">LANDSCAPES</a> tab
-        for the step-by-step walkthrough, configuration, sub-landscapes and big-scale pipelines.
+        <b>Example 2. Analyze several repositories and aggregate them into a landscape</b> &mdash; one command, given a file with one git URL per line:
+        <div class="cmd">sokrates <span class="hl">analyzeLandscape -urls repos.txt</span>
+open _sokrates_landscape/index.html</div>
+        See the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">LANDSCAPES</a> tab
+        for the walkthrough, configuration, sub-landscapes and big-scale pipelines.
     </div>
 
     <div class="example">
@@ -752,11 +753,11 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
 * generateReports: Generates Sokrates reports based on the analysis configuration
    - options: [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
-* analyzeLandscape: Creates or updates a Sokrates landscape report aggregating the repository analyses found under the analysis root (the landscape counterpart of analyze). Same behavior and options as updateLandscape, which is kept as the older name.
-   - options: [-analysisRoot &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+* analyzeLandscape: Creates or updates a Sokrates landscape report aggregating the repository analyses found under the analysis root (the landscape counterpart of analyze). With -url (repeatable) and/or -urls &lt;file> (one git URL per line, # comments), it first runs analyzeGitRepo for each URL into &lt;analysisRoot>/&lt;owner>/&lt;repository> (a failing repository is logged and skipped), then builds the landscape; without URLs it aggregates what is already there. Same options as updateLandscape, which is kept as the older name.
+   - options: [-analysisRoot &lt;arg>] [-url &lt;arg>] [-urls &lt;arg>] [-depth &lt;arg>] [-conventionsFile &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
 * updateLandscape: Updates or creates a Sokrates landscape report, aggregating results of multiple analyses
-   - options: [-analysisRoot &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+   - options: [-analysisRoot &lt;arg>] [-url &lt;arg>] [-urls &lt;arg>] [-depth &lt;arg>] [-conventionsFile &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
 * updateLandscapePeopleConfigByUserName: Updates (or creates) the landscape config-people.json by grouping all contributor emails sharing the same display name (userName) under one entry, joining the emails in the email field with ';'. Purely additive: appends only new emails to existing entries, never removes emails or entries.
    - options: [-analysisRoot &lt;arg>] [-confFile &lt;arg>] [-timeout &lt;arg>] [-help]
@@ -822,59 +823,68 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
 </div>
 
 <div class="card">
-    <h1>BUILD A LANDSCAPE IN THREE STEPS</h1>
+    <h1>BUILD A LANDSCAPE IN ONE COMMAND</h1>
     <p>The commands use the <span class="inline-code">sokrates</span> alias from the
         <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">INSTALL &amp; USE</a> tab (Docker, JAR or
         source build &mdash; the commands are identical).</p>
 
     <div class="example">
-        <b>Step 1. Analyze each repository into the landscape folder.</b> <span class="inline-code">analyzeGitRepo</span> clones a
-        repository, analyzes it and keeps only the analysis (<span class="inline-code">config.json</span> + <span class="inline-code">reports/</span>)
-        under <span class="inline-code">&lt;owner&gt;/&lt;repository&gt;</span> &mdash; exactly the layout a landscape reads:
+        <b>List the repositories</b> in a text file, one git URL per line (blank lines and <span class="inline-code">#</span> comments are ignored):
+        <div class="cmd"><span class="c"># repos.txt</span>
+https://github.com/junit-team/junit4
+https://github.com/junit-team/junit-framework
+https://github.com/hamcrest/JavaHamcrest</div>
+    </div>
+
+    <div class="example">
+        <b>Run <span class="inline-code">analyzeLandscape</span></b> in the folder that should hold the landscape. It clones and analyzes every
+        repository (the <span class="inline-code">analyzeGitRepo</span> step: only the analysis is kept, under
+        <span class="inline-code">&lt;owner&gt;/&lt;repository&gt;</span>; a repository that cannot be cloned is logged and skipped), then builds the
+        landscape report over all of them:
         <div class="cmd">mkdir landscape
 cd landscape
+sokrates <span class="hl">analyzeLandscape -urls repos.txt</span>
 
-sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
-sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit-framework</span>
+open _sokrates_landscape/index.html
 
 <span class="c"># the resulting layout:</span>
 landscape/
+  _sokrates_landscape/index.html        <span class="c"># the landscape report</span>
   junit-team/junit4/config.json
   junit-team/junit4/reports/...
-  junit-team/junit-framework/config.json
-  junit-team/junit-framework/reports/...</div>
+  junit-team/junit-framework/...
+  hamcrest/JavaHamcrest/...</div>
+        <p style="margin: 4px 0">A few URLs can also be given inline with <span class="inline-code">-url</span> (repeatable), and
+            <span class="inline-code">-depth &lt;n&gt;</span> makes the clones shallow when history is not needed. For private repositories set
+            <span class="inline-code">SOKRATES_GIT_TOKEN</span>.</p>
     </div>
 
     <div class="example">
-        <b>Step 2 (only for clones you analyzed in place).</b> If you ran <span class="inline-code">analyze</span> inside existing clones
-        instead, collect their <span class="inline-code">_sokrates</span> folders under the landscape root; the source code itself is not
-        needed, and any nesting is fine &mdash; the landscape finds the analyses recursively:
+        <b>Or aggregate analyses you already have.</b> Without URLs, <span class="inline-code">analyzeLandscape</span> just aggregates the
+        analyses found under the current folder (or <span class="inline-code">-analysisRoot</span>). Analyses made with
+        <span class="inline-code">analyzeGitRepo</span> are already in the right layout; for clones analyzed in place with
+        <span class="inline-code">analyze</span>, collect their <span class="inline-code">_sokrates</span> folders under the landscape root (the
+        source code itself is not needed, and any nesting is fine &mdash; the landscape finds the analyses recursively):
         <div class="cmd">mv junit4/_sokrates landscape/junit4
-mv junit-framework/_sokrates landscape/junit-framework</div>
-    </div>
-
-    <div class="example">
-        <b>Step 3. Generate the landscape report:</b>
-        <div class="cmd">cd landscape
-sokrates <span class="hl">analyzeLandscape</span>
-
-open _sokrates_landscape/index.html</div>
+mv junit-framework/_sokrates landscape/junit-framework
+cd landscape
+sokrates <span class="hl">analyzeLandscape</span></div>
         <p style="margin: 4px 0">Each repository appears with the name, logo, description and repository link from its own analysis
             (<span class="inline-code">analyze</span> derives them from the git remote), so a landscape of Docker-analyzed clones is not a list of
             repositories all called "Code".</p>
-        <p style="margin: 4px 0"><span class="inline-code">analyzeLandscape</span> (the landscape counterpart of <span class="inline-code">analyze</span>; <span class="inline-code">updateLandscape</span> is the older name of the same command and still works) creates <span class="inline-code">_sokrates_landscape/config.json</span>
-            on the first run and keeps your edits on later runs; the discovered repositories are kept apart in
-            <span class="inline-code">info.json</span>, so re-running after adding or re-analyzing repositories is always safe. Use
-            <span class="inline-code">-setName</span>, <span class="inline-code">-setDescription</span>,
+        <p style="margin: 4px 0"><span class="inline-code">analyzeLandscape</span> (the landscape counterpart of <span class="inline-code">analyze</span>;
+            <span class="inline-code">updateLandscape</span> is the older name of the same command and still works) creates
+            <span class="inline-code">_sokrates_landscape/config.json</span> on the first run and keeps your edits on later runs; the discovered
+            repositories are kept apart in <span class="inline-code">info.json</span>, so re-running after adding or re-analyzing repositories is
+            always safe. Use <span class="inline-code">-setName</span>, <span class="inline-code">-setDescription</span>,
             <span class="inline-code">-setLogoLink</span> and <span class="inline-code">-addLink</span> to label the landscape, or edit the
             metadata in the configuration file.</p>
     </div>
 
     <div class="note">
-        <b>Keeping a landscape up to date.</b> Re-run <span class="inline-code">analyzeGitRepo</span> for each repository (it clones afresh
-        and reuses the kept <span class="inline-code">config.json</span>, so your tuning survives), then run
-        <span class="inline-code">analyzeLandscape</span> again. A nightly job that loops over the repository URLs and finishes with
-        <span class="inline-code">analyzeLandscape</span> is the whole pipeline.
+        <b>Keeping a landscape up to date.</b> Re-run the same <span class="inline-code">analyzeLandscape -urls repos.txt</span>: every repository
+        is cloned afresh and analyzed with its kept <span class="inline-code">config.json</span> (so your tuning survives), and the landscape is
+        rebuilt. A nightly job running that one command is the whole pipeline; add a URL to the file to add a repository.
     </div>
 </div>
 

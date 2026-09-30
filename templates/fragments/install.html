@@ -274,15 +274,16 @@ sokrates <span class="hl">generateReports</span></div>
         <div class="cmd">sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
 open junit-team/junit4/reports/index.html
 
-<span class="c"># options: -destFolder <folder>, -branch <name>, -depth <n> (shallow clone), plus the analyze options</span>
-<span class="c"># private HTTPS repositories: export SOKRATES_GIT_TOKEN=<personal access token>   (Docker: -e SOKRATES_GIT_TOKEN)</span></div>
+<span class="c"># options: -destFolder &lt;folder&gt;, -branch &lt;name&gt;, -depth &lt;n&gt; (shallow clone), plus the analyze options</span>
+<span class="c"># private HTTPS repositories: export SOKRATES_GIT_TOKEN=&lt;personal access token&gt;   (Docker: -e SOKRATES_GIT_TOKEN)</span></div>
     </div>
 
     <div class="example">
-        <b>Example 2. Analyze several repositories and aggregate them into a landscape:</b> run <span class="inline-code">analyze</span> in each
-        repository, collect the <span class="inline-code">_sokrates</span> folders under one root and run <span class="inline-code">analyzeLandscape</span>
-        there &mdash; see the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">LANDSCAPES</a> tab
-        for the step-by-step walkthrough, configuration, sub-landscapes and big-scale pipelines.
+        <b>Example 2. Analyze several repositories and aggregate them into a landscape</b> &mdash; one command, given a file with one git URL per line:
+        <div class="cmd">sokrates <span class="hl">analyzeLandscape -urls repos.txt</span>
+open _sokrates_landscape/index.html</div>
+        See the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">LANDSCAPES</a> tab
+        for the walkthrough, configuration, sub-landscapes and big-scale pipelines.
     </div>
 
     <div class="example">
@@ -337,11 +338,11 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
 * generateReports: Generates Sokrates reports based on the analysis configuration
    - options: [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
-* analyzeLandscape: Creates or updates a Sokrates landscape report aggregating the repository analyses found under the analysis root (the landscape counterpart of analyze). Same behavior and options as updateLandscape, which is kept as the older name.
-   - options: [-analysisRoot &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+* analyzeLandscape: Creates or updates a Sokrates landscape report aggregating the repository analyses found under the analysis root (the landscape counterpart of analyze). With -url (repeatable) and/or -urls &lt;file> (one git URL per line, # comments), it first runs analyzeGitRepo for each URL into &lt;analysisRoot>/&lt;owner>/&lt;repository> (a failing repository is logged and skipped), then builds the landscape; without URLs it aggregates what is already there. Same options as updateLandscape, which is kept as the older name.
+   - options: [-analysisRoot &lt;arg>] [-url &lt;arg>] [-urls &lt;arg>] [-depth &lt;arg>] [-conventionsFile &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
 * updateLandscape: Updates or creates a Sokrates landscape report, aggregating results of multiple analyses
-   - options: [-analysisRoot &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+   - options: [-analysisRoot &lt;arg>] [-url &lt;arg>] [-urls &lt;arg>] [-depth &lt;arg>] [-conventionsFile &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
 * updateLandscapePeopleConfigByUserName: Updates (or creates) the landscape config-people.json by grouping all contributor emails sharing the same display name (userName) under one entry, joining the emails in the email field with ';'. Purely additive: appends only new emails to existing entries, never removes emails or entries.
    - options: [-analysisRoot &lt;arg>] [-confFile &lt;arg>] [-timeout &lt;arg>] [-help]
