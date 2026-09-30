@@ -1,0 +1,45 @@
+templates/fragments/install.html
+  s_bd91f8b7d8eeb9::t_6af0dbcc35e145 1-86,88-107,109-144,146-153,155-156,159,161,165-306,312-315,323-325,329-334,338-340,344,352-354,356-366
+templates/fragments/landscapes.html
+  s_bd91f8b7d8eeb9::t_818103a9963854 1-150
+blog-src/_posts/2020-01-06-cli.markdown
+  s_bd91f8b7d8eeb9::t_805c5b0bdc2cb6 8,11-13,16,19-49,75-78,110,121,161,165-166
+blog-src/_posts/2020-01-12-install.markdown
+  s_bd91f8b7d8eeb9::t_f2a9877b57ed21 8,11,13,15,21,23,26-32,34-36,38,40-41,43,45,47,50-51,55,57-58,60-67,69-73,75,77,79-81,83
+blog-src/_posts/2020-05-24-hands-on.markdown
+  s_bd91f8b7d8eeb9::t_74a5a4b602a3c5 14-15
+docs/book/cli.html
+  s_bd91f8b7d8eeb9::t_ec7eae99ebe171 11-12,19,91,93-94,97,101-102,104-128,150-151,178,186,228-229
+docs/book/hands-on.html
+  s_bd91f8b7d8eeb9::t_3334cbf06c4ecc 93-94
+docs/book/install.html
+  s_bd91f8b7d8eeb9::t_544265fa7d0d5d 11-12,19,91,93,95,100-102,104,106,108,110,112-113,115,117,119-123,125-126,130,133-134,137-152,154-156,159
+docs/index.html
+  s_bd91f8b7d8eeb9::t_a2e741f299a508 212-258,297,416-422,424-521,523-568,570-571,574,576,580-721,727-730,738-740,744-749,753-755,759,766-782,784,786,788-801,803-814,816-818,820-832,834-863,865-934,937,1027-1030,1128-1130,1159,1161
+generate-docs.py
+  s_bd91f8b7d8eeb9::t_94bcb8eb4edf20 14
+templates/fragments/ai-insights.html
+  s_bd91f8b7d8eeb9::t_acc55caca9b782 87-90
+templates/fragments/config.html
+  s_bd91f8b7d8eeb9::t_3f87a2ca3447b8 7-9,38,40
+templates/fragments/style.css
+  s_bd91f8b7d8eeb9::t_0c46fd6e315298 201-247
+templates/index.html
+  s_bd91f8b7d8eeb9::t_840ecce9a2aeb7 50,66-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a26381783d4981d25bb782daaeb5710492c76eb5",
+  "prompts": {},
+  "sessions": {
+    "s_bd91f8b7d8eeb9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b4f325de-8987-4e83-8891-b5647d72e7bf",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
