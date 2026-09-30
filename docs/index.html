@@ -683,10 +683,11 @@ sokrates <span class="hl">generateReports</span></div>
     </div>
 
     <div class="example">
-        <b>Example 1b. Analyze a repository straight from its URL</b> (clone + analyze in one command; the clone lands in a folder named
-        after the URL, here <span class="inline-code">./junit4</span>, and a re-run fetches the latest commits and keeps your configuration):
+        <b>Example 1b. Analyze a repository straight from its URL</b> (clone + analyze in one command; only the analysis is kept &mdash;
+        <span class="inline-code">config.json</span> and <span class="inline-code">reports/</span> in a folder named after the repository, here
+        <span class="inline-code">./junit-team/junit4</span> &mdash; the clone is deleted; a re-run clones afresh and reuses your configuration):
         <div class="cmd">sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
-open junit4/_sokrates/reports/index.html
+open junit-team/junit4/reports/index.html
 
 <span class="c"># options: -destFolder <folder>, -branch <name>, -depth <n> (shallow clone), plus the analyze options</span>
 <span class="c"># private HTTPS repositories: export SOKRATES_GIT_TOKEN=<personal access token>   (Docker: -e SOKRATES_GIT_TOKEN)</span></div>
@@ -742,8 +743,8 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
 * analyze: One-shot analysis: extracts the git history (when the source root is a git repository), creates the analysis configuration if none exists (init), and generates the reports. The recommended way to get a first report: run it from the root of the code base without any options.
    - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-skipGitHistory] [-date &lt;arg>] [-timeout &lt;arg>] [-help]
 
-* analyzeGitRepo: Clones a git repository from its URL (JGit, no git binary needed; an existing clone is fetched and reset to the remote branch instead) and then runs analyze on it. Reports end up in &lt;destFolder>/_sokrates/reports. For private HTTPS repositories set the SOKRATES_GIT_TOKEN (and optionally SOKRATES_GIT_USER) environment variable.
-   - options: [-url &lt;arg>] [-destFolder &lt;arg>] [-branch &lt;arg>] [-depth &lt;arg>] [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-date &lt;arg>] [-timeout &lt;arg>] [-help]
+* analyzeGitRepo: Clones a git repository from its URL into a temporary folder (JGit, no git binary needed), runs analyze on it, and keeps only the analysis — config.json and reports/ — in &lt;destFolder> (default: &lt;currentFolder>/&lt;owner>/&lt;repository>, e.g. junit-team/junit4); the clone is deleted. Re-runs clone again and reuse the kept config.json, so edits survive. The output layout is what analyzeLandscape expects, so several analyzeGitRepo runs in one folder plus analyzeLandscape make a landscape. For private HTTPS repositories set the SOKRATES_GIT_TOKEN (and optionally SOKRATES_GIT_USER) environment variable.
+   - options: [-url &lt;arg>] [-destFolder &lt;arg>] [-branch &lt;arg>] [-depth &lt;arg>] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-date &lt;arg>] [-timeout &lt;arg>] [-help]
 
 * init: Creates a new Sokrates analysis configuration file based on standard and optional custom conventions
    - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-help]
@@ -827,28 +828,29 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
         source build &mdash; the commands are identical).</p>
 
     <div class="example">
-        <b>Step 1. Analyze each repository</b> with <span class="inline-code">analyze</span>, as for a single repository:
-        <div class="cmd">sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
-sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit-framework</span>
-
-<span class="c"># the same as cloning each repository and running `sokrates analyze` inside it</span></div>
-    </div>
-
-    <div class="example">
-        <b>Step 2. Collect the analysis folders under one root.</b> A landscape reads each repository's
-        <span class="inline-code">_sokrates</span> folder (the configuration plus the generated <span class="inline-code">reports/</span>);
-        the source code itself is no longer needed. Any nesting is fine &mdash; the landscape finds the analyses recursively, and the folder
-        names become the repository names:
+        <b>Step 1. Analyze each repository into the landscape folder.</b> <span class="inline-code">analyzeGitRepo</span> clones a
+        repository, analyzes it and keeps only the analysis (<span class="inline-code">config.json</span> + <span class="inline-code">reports/</span>)
+        under <span class="inline-code">&lt;owner&gt;/&lt;repository&gt;</span> &mdash; exactly the layout a landscape reads:
         <div class="cmd">mkdir landscape
-mv junit4/_sokrates landscape/junit4
-mv junit-framework/_sokrates landscape/junit-framework
+cd landscape
+
+sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
+sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit-framework</span>
 
 <span class="c"># the resulting layout:</span>
 landscape/
-  junit4/config.json
-  junit4/reports/...
-  junit-framework/config.json
-  junit-framework/reports/...</div>
+  junit-team/junit4/config.json
+  junit-team/junit4/reports/...
+  junit-team/junit-framework/config.json
+  junit-team/junit-framework/reports/...</div>
+    </div>
+
+    <div class="example">
+        <b>Step 2 (only for clones you analyzed in place).</b> If you ran <span class="inline-code">analyze</span> inside existing clones
+        instead, collect their <span class="inline-code">_sokrates</span> folders under the landscape root; the source code itself is not
+        needed, and any nesting is fine &mdash; the landscape finds the analyses recursively:
+        <div class="cmd">mv junit4/_sokrates landscape/junit4
+mv junit-framework/_sokrates landscape/junit-framework</div>
     </div>
 
     <div class="example">
@@ -869,12 +871,10 @@ open _sokrates_landscape/index.html</div>
     </div>
 
     <div class="note">
-        <b>Keeping a landscape up to date.</b> Re-run <span class="inline-code">analyze</span> in a repository (or
-        <span class="inline-code">generateReports</span> if only the code changed) and move its fresh <span class="inline-code">_sokrates</span>
-        folder into place, then run <span class="inline-code">analyzeLandscape</span> again. Because <span class="inline-code">analyze</span> keeps an
-        existing <span class="inline-code">config.json</span>, you can also leave the repository analyses in place and point the landscape at
-        the folder that holds the clones (<span class="inline-code">-analysisRoot</span>): a nightly job that pulls every repository, runs
-        <span class="inline-code">analyze</span> in each and finishes with <span class="inline-code">analyzeLandscape</span> is the whole pipeline.
+        <b>Keeping a landscape up to date.</b> Re-run <span class="inline-code">analyzeGitRepo</span> for each repository (it clones afresh
+        and reuses the kept <span class="inline-code">config.json</span>, so your tuning survives), then run
+        <span class="inline-code">analyzeLandscape</span> again. A nightly job that loops over the repository URLs and finishes with
+        <span class="inline-code">analyzeLandscape</span> is the whole pipeline.
     </div>
 </div>
 

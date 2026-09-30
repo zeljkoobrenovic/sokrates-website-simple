@@ -38,28 +38,29 @@
         source build &mdash; the commands are identical).</p>
 
     <div class="example">
-        <b>Step 1. Analyze each repository</b> with <span class="inline-code">analyze</span>, as for a single repository:
-        <div class="cmd">sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
-sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit-framework</span>
-
-<span class="c"># the same as cloning each repository and running `sokrates analyze` inside it</span></div>
-    </div>
-
-    <div class="example">
-        <b>Step 2. Collect the analysis folders under one root.</b> A landscape reads each repository's
-        <span class="inline-code">_sokrates</span> folder (the configuration plus the generated <span class="inline-code">reports/</span>);
-        the source code itself is no longer needed. Any nesting is fine &mdash; the landscape finds the analyses recursively, and the folder
-        names become the repository names:
+        <b>Step 1. Analyze each repository into the landscape folder.</b> <span class="inline-code">analyzeGitRepo</span> clones a
+        repository, analyzes it and keeps only the analysis (<span class="inline-code">config.json</span> + <span class="inline-code">reports/</span>)
+        under <span class="inline-code">&lt;owner&gt;/&lt;repository&gt;</span> &mdash; exactly the layout a landscape reads:
         <div class="cmd">mkdir landscape
-mv junit4/_sokrates landscape/junit4
-mv junit-framework/_sokrates landscape/junit-framework
+cd landscape
+
+sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
+sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit-framework</span>
 
 <span class="c"># the resulting layout:</span>
 landscape/
-  junit4/config.json
-  junit4/reports/...
-  junit-framework/config.json
-  junit-framework/reports/...</div>
+  junit-team/junit4/config.json
+  junit-team/junit4/reports/...
+  junit-team/junit-framework/config.json
+  junit-team/junit-framework/reports/...</div>
+    </div>
+
+    <div class="example">
+        <b>Step 2 (only for clones you analyzed in place).</b> If you ran <span class="inline-code">analyze</span> inside existing clones
+        instead, collect their <span class="inline-code">_sokrates</span> folders under the landscape root; the source code itself is not
+        needed, and any nesting is fine &mdash; the landscape finds the analyses recursively:
+        <div class="cmd">mv junit4/_sokrates landscape/junit4
+mv junit-framework/_sokrates landscape/junit-framework</div>
     </div>
 
     <div class="example">
@@ -80,12 +81,10 @@ open _sokrates_landscape/index.html</div>
     </div>
 
     <div class="note">
-        <b>Keeping a landscape up to date.</b> Re-run <span class="inline-code">analyze</span> in a repository (or
-        <span class="inline-code">generateReports</span> if only the code changed) and move its fresh <span class="inline-code">_sokrates</span>
-        folder into place, then run <span class="inline-code">analyzeLandscape</span> again. Because <span class="inline-code">analyze</span> keeps an
-        existing <span class="inline-code">config.json</span>, you can also leave the repository analyses in place and point the landscape at
-        the folder that holds the clones (<span class="inline-code">-analysisRoot</span>): a nightly job that pulls every repository, runs
-        <span class="inline-code">analyze</span> in each and finishes with <span class="inline-code">analyzeLandscape</span> is the whole pipeline.
+        <b>Keeping a landscape up to date.</b> Re-run <span class="inline-code">analyzeGitRepo</span> for each repository (it clones afresh
+        and reuses the kept <span class="inline-code">config.json</span>, so your tuning survives), then run
+        <span class="inline-code">analyzeLandscape</span> again. A nightly job that loops over the repository URLs and finishes with
+        <span class="inline-code">analyzeLandscape</span> is the whole pipeline.
     </div>
 </div>
 
