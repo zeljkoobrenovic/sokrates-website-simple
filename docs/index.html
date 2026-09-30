@@ -854,6 +854,12 @@ landscape/
   junit-team/junit4/reports/...
   junit-team/junit-framework/...
   hamcrest/JavaHamcrest/...</div>
+        <p style="margin: 4px 0">Without the alias, the same command is:</p>
+        <div class="cmd"><span class="c"># Docker (no Java needed; repos.txt and the results live in the current folder)</span>
+docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandscape -urls repos.txt
+
+<span class="c"># Java (Java 17+)</span>
+java -jar sokrates-LATEST.jar analyzeLandscape -urls repos.txt</div>
         <p style="margin: 4px 0">A few URLs can also be given inline with <span class="inline-code">-url</span> (repeatable), and
             <span class="inline-code">-depth &lt;n&gt;</span> makes the clones shallow when history is not needed. For private repositories set
             <span class="inline-code">SOKRATES_GIT_TOKEN</span>.</p>
