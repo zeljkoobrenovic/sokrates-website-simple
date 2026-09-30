@@ -679,6 +679,16 @@ sokrates <span class="hl">generateReports</span></div>
     </div>
 
     <div class="example">
+        <b>Example 1b. Analyze a repository straight from its URL</b> (clone + analyze in one command; the clone lands in a folder named
+        after the URL, here <span class="inline-code">./junit4</span>, and a re-run fetches the latest commits and keeps your configuration):
+        <div class="cmd">sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
+open junit4/_sokrates/reports/index.html
+
+<span class="c"># options: -destFolder <folder>, -branch <name>, -depth <n> (shallow clone), plus the analyze options</span>
+<span class="c"># private HTTPS repositories: export SOKRATES_GIT_TOKEN=<personal access token>   (Docker: -e SOKRATES_GIT_TOKEN)</span></div>
+    </div>
+
+    <div class="example">
         <b>Example 2. Analyze several repositories and aggregate them into a landscape:</b> run <span class="inline-code">analyze</span> in each
         repository, collect the <span class="inline-code">_sokrates</span> folders under one root and run <span class="inline-code">analyzeLandscape</span>
         there &mdash; see the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">LANDSCAPES</a> tab
@@ -723,10 +733,13 @@ Usage: java -jar sokrates.jar &lt;command> &lt;options>
 
 Help: java -jar sokrates.jar &lt;command> -help
 
-Commands: analyze, init, generateReports, analyzeLandscape, updateLandscape, updateLandscapePeopleConfigByUserName, updatePeopleConfigByUserName, updateConfig, addCustomTab, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
+Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, updateLandscape, updateLandscapePeopleConfigByUserName, updatePeopleConfigByUserName, updateConfig, addCustomTab, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
 
 * analyze: One-shot analysis: extracts the git history (when the source root is a git repository), creates the analysis configuration if none exists (init), and generates the reports. The recommended way to get a first report: run it from the root of the code base without any options.
    - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-skipGitHistory] [-date &lt;arg>] [-timeout &lt;arg>] [-help]
+
+* analyzeGitRepo: Clones a git repository from its URL (JGit, no git binary needed; an existing clone is fetched and reset to the remote branch instead) and then runs analyze on it. Reports end up in &lt;destFolder>/_sokrates/reports. For private HTTPS repositories set the SOKRATES_GIT_TOKEN (and optionally SOKRATES_GIT_USER) environment variable.
+   - options: [-url &lt;arg>] [-destFolder &lt;arg>] [-branch &lt;arg>] [-depth &lt;arg>] [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-date &lt;arg>] [-timeout &lt;arg>] [-help]
 
 * init: Creates a new Sokrates analysis configuration file based on standard and optional custom conventions
    - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-help]
@@ -811,11 +824,10 @@ Commands: analyze, init, generateReports, analyzeLandscape, updateLandscape, upd
 
     <div class="example">
         <b>Step 1. Analyze each repository</b> with <span class="inline-code">analyze</span>, as for a single repository:
-        <div class="cmd">git clone https://github.com/junit-team/junit4
-git clone https://github.com/junit-team/junit-framework
+        <div class="cmd">sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
+sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit-framework</span>
 
-(cd junit4 &amp;&amp; sokrates <span class="hl">analyze</span>)
-(cd junit-framework &amp;&amp; sokrates <span class="hl">analyze</span>)</div>
+<span class="c"># the same as cloning each repository and running `sokrates analyze` inside it</span></div>
     </div>
 
     <div class="example">

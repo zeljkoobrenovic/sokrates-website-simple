@@ -39,11 +39,10 @@
 
     <div class="example">
         <b>Step 1. Analyze each repository</b> with <span class="inline-code">analyze</span>, as for a single repository:
-        <div class="cmd">git clone https://github.com/junit-team/junit4
-git clone https://github.com/junit-team/junit-framework
+        <div class="cmd">sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit4</span>
+sokrates <span class="hl">analyzeGitRepo -url https://github.com/junit-team/junit-framework</span>
 
-(cd junit4 &amp;&amp; sokrates <span class="hl">analyze</span>)
-(cd junit-framework &amp;&amp; sokrates <span class="hl">analyze</span>)</div>
+<span class="c"># the same as cloning each repository and running `sokrates analyze` inside it</span></div>
     </div>
 
     <div class="example">
