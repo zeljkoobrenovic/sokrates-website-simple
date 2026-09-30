@@ -68,6 +68,9 @@ landscape/
 sokrates <span class="hl">analyzeLandscape</span>
 
 open _sokrates_landscape/index.html</div>
+        <p style="margin: 4px 0">Each repository appears with the name, logo, description and repository link from its own analysis
+            (<span class="inline-code">analyze</span> derives them from the git remote), so a landscape of Docker-analyzed clones is not a list of
+            repositories all called "Code".</p>
         <p style="margin: 4px 0"><span class="inline-code">analyzeLandscape</span> (the landscape counterpart of <span class="inline-code">analyze</span>; <span class="inline-code">updateLandscape</span> is the older name of the same command and still works) creates <span class="inline-code">_sokrates_landscape/config.json</span>
             on the first run and keeps your edits on later runs; the discovered repositories are kept apart in
             <span class="inline-code">info.json</span>, so re-running after adding or re-analyzing repositories is always safe. Use

@@ -225,7 +225,11 @@ sokrates analyze</div>
             <td>2. init</td>
             <td>Creates the analysis configuration <span class="inline-code">_sokrates/config.json</span> using standard conventions:
                 which files are main code, tests, generated or build files, how the code is decomposed into components, which
-                "features of interest" to search for. <b>Only when the file does not exist yet</b>, so your edits survive later runs.</td>
+                "features of interest" to search for. <b>Only when the file does not exist yet</b>, so your edits survive later runs.
+                The report is titled and linked after the git remote: the repository name, a link to it, the owner's avatar as logo and
+                (for GitHub) the repository description &mdash; unless you set them yourself with <span class="inline-code">-name</span>,
+                <span class="inline-code">-description</span>, <span class="inline-code">-logoLink</span>, <span class="inline-code">-addLink</span>
+                or in the config file. Set <span class="inline-code">SOKRATES_OFFLINE=1</span> to skip the GitHub lookup.</td>
         </tr>
         <tr>
             <td>3. generateReports</td>
