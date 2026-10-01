@@ -61,7 +61,10 @@ sokrates generateReports</div>
         <span class="inline-code">SOKRATES_REPO_URL</span>, <span class="inline-code">SOKRATES_ANALYSIS_FOLDER</span> and friends in its environment.
         <div class="cmd">sokrates <span class="hl">analyzeGitHubOrg -org junit-team -ai claude</span>
 sokrates <span class="hl">analyzeLandscape -urls repos.txt -ai codex -aiPrompt "run a tech stack scan"</span></div>
-        The agent CLI and the skills must be installed on the machine running Sokrates (the JAR, not the Docker image, which has no agent).
+        It is incremental: a repository whose head commit has not moved since a successful run is skipped (<span class="inline-code">-aiForce</span>
+        runs it anyway), and <span class="inline-code">-aiMaxRepos &lt;n&gt;</span> bounds the runs per invocation, so a nightly job works through
+        an organization a slice at a time. The agent CLI and the skills must be installed on the machine running Sokrates (the JAR, not the Docker
+        image, which has no agent).
     </div>
     <details class="tips">
         <summary>Where each tool reads skills from, and optional illustrations</summary>
