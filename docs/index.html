@@ -743,7 +743,7 @@ Usage: java -jar sokrates.jar &lt;command> &lt;options>
 
 Help: java -jar sokrates.jar &lt;command> -help
 
-Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, updateLandscape, updateLandscapePeopleConfigByUserName, updatePeopleConfigByUserName, updateConfig, addCustomTab, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
+Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, updateLandscape, analyzeGitHubOrg, updateLandscapePeopleConfigByUserName, updatePeopleConfigByUserName, updateConfig, addCustomTab, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
 
 * analyze: One-shot analysis: extracts the git history (when the source root is a git repository), creates the analysis configuration if none exists (init), and generates the reports. The recommended way to get a first report: run it from the root of the code base without any options.
    - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-dataOnly] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-skipGitHistory] [-date &lt;arg>] [-timeout &lt;arg>] [-help]
@@ -762,6 +762,9 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
 
 * updateLandscape: Updates or creates a Sokrates landscape report, aggregating results of multiple analyses; with -url / -urls it first clones and analyzes those git repositories (the older name of analyzeLandscape, same options)
    - options: [-analysisRoot &lt;arg>] [-url &lt;gitUrl>] [-urls &lt;file>] [-depth &lt;arg>] [-dataOnly] [-conventionsFile &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+
+* analyzeGitHubOrg: Analyzes whole GitHub organizations (or user accounts): for every -org (repeatable) and/or login in -orgs &lt;file>, lists its repositories with the GitHub REST API, filters them (forks and archived repositories are excluded unless -includeForks / -includeArchived; -pushedWithinDays, -includeRepoNamePattern / -excludeRepoNamePattern and -maxRepos narrow further), writes the selection to &lt;analysisRoot>/&lt;org>/repos.txt, analyzes each repository into &lt;analysisRoot>/&lt;org>/&lt;repository> (the analyzeGitRepo step) and builds a landscape per organization in &lt;analysisRoot>/&lt;org>/_sokrates_landscape, named, described, linked and branded from the organization's GitHub profile (only fields you have not set). With several organizations a parent landscape in &lt;analysisRoot>/_sokrates_landscape lists them as sub-landscapes. -listOnly just writes repos.txt; -prune deletes analyses of repositories no longer selected. Set SOKRATES_GIT_TOKEN for private repositories and the higher API rate limit.
+   - options: [-org &lt;login>] [-orgs &lt;file>] [-analysisRoot &lt;arg>] [-includeForks] [-includeArchived] [-pushedWithinDays &lt;days>] [-includeRepoNamePattern &lt;regex>] [-excludeRepoNamePattern &lt;regex>] [-maxRepos &lt;count>] [-listOnly] [-prune] [-depth &lt;arg>] [-dataOnly] [-conventionsFile &lt;arg>] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
 * updateLandscapePeopleConfigByUserName: Updates (or creates) the landscape config-people.json by grouping all contributor emails sharing the same display name (userName) under one entry, joining the emails in the email field with ';'. Purely additive: appends only new emails to existing entries, never removes emails or entries.
    - options: [-analysisRoot &lt;arg>] [-confFile &lt;arg>] [-timeout &lt;arg>] [-help]
@@ -871,6 +874,33 @@ java -jar sokrates-LATEST.jar analyzeLandscape -urls repos.txt</div>
             reports, and <span class="inline-code">-depth &lt;n&gt;</span> makes the clones
             shallow when history is not needed. For private repositories set
             <span class="inline-code">SOKRATES_GIT_TOKEN</span>.</p>
+    </div>
+
+    <div class="example">
+        <b>Whole GitHub organizations:</b> <span class="inline-code">analyzeGitHubOrg</span> does the listing for you. Give it organization
+        (or user) logins and it asks the GitHub API for their repositories, filters them, analyzes each one into
+        <span class="inline-code">&lt;org&gt;/&lt;repository&gt;</span> and builds a landscape per organization, named, described, linked and
+        branded from the organization's GitHub profile (with several organizations, a parent landscape sits on top):
+        <div class="cmd">sokrates <span class="hl">analyzeGitHubOrg -org junit-team -org hamcrest -pushedWithinDays 365</span>
+
+open junit-team/_sokrates_landscape/index.html   <span class="c"># one landscape per organization ...</span>
+open _sokrates_landscape/index.html              <span class="c"># ... and a parent landscape over them</span>
+
+<span class="c"># the resulting layout:</span>
+landscape/
+  _sokrates_landscape/index.html              <span class="c"># parent landscape</span>
+  junit-team/_sokrates_landscape/index.html   <span class="c"># the organization's landscape</span>
+  junit-team/repos.txt                        <span class="c"># the selected repositories</span>
+  junit-team/junit4/config.json + reports/
+  hamcrest/...</div>
+        <p style="margin: 4px 0">Forks and archived repositories are skipped unless you pass <span class="inline-code">-includeForks</span> /
+            <span class="inline-code">-includeArchived</span>; <span class="inline-code">-pushedWithinDays &lt;n&gt;</span>,
+            <span class="inline-code">-includeRepoNamePattern</span> / <span class="inline-code">-excludeRepoNamePattern &lt;regex&gt;</span> and
+            <span class="inline-code">-maxRepos &lt;n&gt;</span> narrow the selection. Cloning a large organization takes a while, so
+            <span class="inline-code">-listOnly</span> first writes just <span class="inline-code">&lt;org&gt;/repos.txt</span> to review the
+            selection, and <span class="inline-code">-dataOnly</span> keeps only the data. Re-runs reuse every kept configuration and your edits
+            of the landscape metadata; <span class="inline-code">-prune</span> removes the analyses of repositories no longer selected. For private
+            repositories (and the higher API rate limit) set <span class="inline-code">SOKRATES_GIT_TOKEN</span>.</p>
     </div>
 
     <div class="example">
