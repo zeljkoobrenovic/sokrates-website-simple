@@ -68,6 +68,12 @@
                     (configuration and reports) and <span class="inline-code">git-history.txt</span>.</div>
             </li>
         </ol>
+        <div class="next-steps" style="margin-bottom: 12px">
+            <b>Memory:</b> Docker Desktop and Colima give their VM 2 GB by default, which is typically not enough for bigger repositories
+            &mdash; the JVM in the image gets 75% of it, and a repository of a few hundred thousand lines can need 4 GB, after which the analysis
+            just stops, often without a message. Give the VM 8 GB (Docker Desktop &rarr; Settings &rarr; Resources; Colima:
+            <span class="inline-code">colima start --memory 8</span>) before analyzing anything big or a whole organization.
+        </div>
         <details class="tips">
             <summary>Tips &amp; troubleshooting: alias, other commands, Windows, Linux, Colima, memory, versions</summary>
             <p><b>Alias:</b> define it once, and every example on this site works verbatim:</p>
@@ -90,10 +96,9 @@ docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandsc
                 <li><b>Versions:</b> <span class="inline-code">:latest</span> tracks the master branch; release tags are available as
                     <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates:&lt;version&gt;</span>. See the
                     <a href="https://github.com/zeljkoobrenovic/sokrates/pkgs/container/sokrates" target="_blank">package page</a>.</li>
-                <li><b>Big repositories:</b> the JVM may use 75% of the memory Docker gives the container. On
-                    <span class="inline-code">OutOfMemoryError: Java heap space</span>, raise the Docker VM's memory (Docker Desktop &rarr; Settings
-                    &rarr; Resources; Colima: <span class="inline-code">colima start --memory 8</span>) or pass an explicit heap,
-                    <span class="inline-code">-e JAVA_TOOL_OPTIONS=-Xmx8g</span>.</li>
+                <li><b>Memory:</b> a run that ends in <span class="inline-code">OutOfMemoryError: Java heap space</span>, or stops in the middle
+                    without a message, needs a bigger Docker VM (see the note above); an explicit heap,
+                    <span class="inline-code">-e JAVA_TOOL_OPTIONS=-Xmx6g</span>, overrides the 75% rule but cannot exceed what the VM has.</li>
             </ul>
         </details>
     </div>
