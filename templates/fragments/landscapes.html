@@ -71,7 +71,9 @@ docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandsc
 java -jar sokrates-LATEST.jar analyzeLandscape -urls repos.txt</div>
         <p style="margin: 4px 0">A few URLs can also be given inline with <span class="inline-code">-url</span> (repeatable);
             <span class="inline-code">-dataOnly</span> keeps just each repository's <span class="inline-code">data.zip</span> (all the landscape
-            needs, and far smaller than the full per-repository reports) and <span class="inline-code">-depth &lt;n&gt;</span> makes the clones
+            needs, and far smaller than the full per-repository reports) plus the landscape's own
+            <span class="inline-code">_sokrates_landscape/data/data.zip</span> (all a parent landscape needs) instead of the HTML
+            reports, and <span class="inline-code">-depth &lt;n&gt;</span> makes the clones
             shallow when history is not needed. For private repositories set
             <span class="inline-code">SOKRATES_GIT_TOKEN</span>.</p>
     </div>
