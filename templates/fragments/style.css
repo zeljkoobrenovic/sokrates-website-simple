@@ -734,3 +734,7 @@ details.tips[open] summary {
     margin-top: 4px;
     overflow-wrap: anywhere;
 }
+
+.hero .example-card {
+    width: 250px;
+}

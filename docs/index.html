@@ -745,6 +745,10 @@ details.tips[open] summary {
     overflow-wrap: anywhere;
 }
 
+.hero .example-card {
+    width: 250px;
+}
+
     </style>
     <script>
         function openTab(evt, cityName) {
@@ -1340,391 +1344,242 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
     </div>
 
     <div id="landscapes" class="tabcontent">
-        <div class="card">
-    <h1>What is a landscape?</h1>
-    <p style="font-size: 105%">
-        A single Sokrates analysis describes one repository. A <b>landscape</b> aggregates many repository analyses into one portfolio
-        report: the size and languages of every repository, who contributes where and how much, how contributors and teams connect
-        across repositories, and how all of that changes over time. It is the tool for looking at a whole organization, a business
-        unit, or an open-source ecosystem rather than one code base.
-    </p>
-    <div style="display: inline-block">
-        <div class="section" style="width: 300px; margin-bottom: 10px">
-            <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                <div><img src="assets/logos/openai.svg" style="height: 70px; padding: 4px"></div>
-                <div style="font-size: 130%; font-weight: bold">OpenAI's OSS Projects</div>
-                <div style="margin-top: 6px; font-size: 90%"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors</div>
-            </a>
+        <div class="hero">
+    <div class="hero-text">
+        <h1 style="font-size: 32px; margin-top: 8px">Many repositories, one report</h1>
+        <p class="hero-sub">A landscape aggregates repository analyses into a portfolio view: size and languages per repository,
+            who contributes where, how people and teams connect across repositories, and how all of it changes over time.</p>
+        <div class="examples-row">
+            <div class="examples-group">
+                <div class="section example-card">
+                    <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                        <div><img src="assets/logos/openai.svg" style="height: 60px; padding: 4px"></div>
+                        <div style="font-size: 125%; font-weight: bold">OpenAI's OSS projects</div>
+                        <div style="margin-top: 6px; font-size: 90%"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors</div>
+                    </a>
+                </div>
+                <div class="section example-card">
+                    <a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                        <div style="font-size: 125%; font-weight: bold; padding-top: 22px">Apache Software Foundation</div>
+                        <div style="margin-top: 6px; font-size: 90%">hundreds of repositories, a sub-landscape per project</div>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="section" style="width: 300px; margin-bottom: 10px">
-            <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                <div><img src="assets/logos/anthropics.png" style="height: 70px; padding: 4px"></div>
-                <div style="font-size: 130%; font-weight: bold">Anthropic's OSS Projects</div>
-                <div style="margin-top: 6px; font-size: 90%"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors</div>
-            </a>
-        </div>
-        <div class="section" style="width: 300px; margin-bottom: 10px">
-            <a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                <div style="font-size: 130%; font-weight: bold; padding-top: 30px">Apache Software Foundation</div>
-                <div style="margin-top: 6px; font-size: 90%">hundreds of repositories, with folder sub-landscapes per project</div>
-            </a>
-        </div>
+        <p class="hero-links">More on the <a href="#examples" onclick="document.getElementById('examples_tab').click(); return false;">Examples</a> tab.</p>
     </div>
-    <p>More live landscapes are on the <a href="#examples" onclick="document.getElementById('examples_tab').click(); return false;">Examples</a> tab.</p>
+    <a class="hero-shot" href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" title="Open the live landscape">
+        <img src="assets/screenshots/landscape-overview.png" alt="The overview of a landscape report">
+        <div class="shot-caption">The overview of a landscape &mdash; OpenAI's OSS projects, live &nearr;</div>
+    </a>
 </div>
 
 <div class="card">
-    <h1>Build a landscape in one command</h1>
-    <p>The commands use the <span class="inline-code">sokrates</span> alias from the
-        <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">Install &amp; use</a> tab (Docker, JAR or
-        source build &mdash; the commands are identical).</p>
-
-    <div class="example">
-        <b>List the repositories</b> in a text file, one git URL per line (blank lines and <span class="inline-code">#</span> comments are ignored):
-        <div class="cmd"><span class="c"># repos.txt</span>
+    <h1>Build one</h1>
+    <p>Three ways in, one result. The commands use the <span class="inline-code">sokrates</span> alias from the
+        <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">install guide</a>; with Docker or the JAR
+        they are the same.</p>
+    <ol class="steps-list">
+        <li>
+            <div class="step-title">From a list of repository URLs</div>
+            <div class="cmd"><span class="c"># repos.txt: one git URL per line</span>
 https://github.com/junit-team/junit4
 https://github.com/junit-team/junit-framework
-https://github.com/hamcrest/JavaHamcrest</div>
-    </div>
+https://github.com/hamcrest/JavaHamcrest
 
-    <div class="example">
-        <b>Run <span class="inline-code">analyzeLandscape</span></b> in the folder that should hold the landscape. It clones and analyzes every
-        repository (the <span class="inline-code">analyzeGitRepo</span> step: only the analysis is kept, under
-        <span class="inline-code">&lt;owner&gt;/&lt;repository&gt;</span>; a repository that cannot be cloned is logged and skipped), then builds the
-        landscape report over all of them:
-        <div class="cmd">mkdir landscape
-cd landscape
 sokrates <span class="hl">analyzeLandscape -urls repos.txt</span>
-
-open _sokrates_landscape/index.html
-
-<span class="c"># the resulting layout:</span>
-landscape/
-  _sokrates_landscape/index.html        <span class="c"># the landscape report</span>
-  junit-team/junit4/config.json
-  junit-team/junit4/reports/...
-  junit-team/junit-framework/...
-  hamcrest/JavaHamcrest/...</div>
-        <p style="margin: 4px 0">Without the alias, the same command is:</p>
-        <div class="cmd"><span class="c"># Docker (no Java needed; repos.txt and the results live in the current folder)</span>
-docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandscape -urls repos.txt
-
-<span class="c"># Java (Java 17+)</span>
-java -jar sokrates-LATEST.jar analyzeLandscape -urls repos.txt</div>
-        <p style="margin: 4px 0">A few URLs can also be given inline with <span class="inline-code">-url</span> (repeatable);
-            <span class="inline-code">-dataOnly</span> keeps just each repository's <span class="inline-code">data.zip</span> (all the landscape
-            needs, and far smaller than the full per-repository reports) plus the landscape's own
-            <span class="inline-code">_sokrates_landscape/data/data.zip</span> (all a parent landscape needs) instead of the HTML
-            reports, and <span class="inline-code">-depth &lt;n&gt;</span> makes the clones
-            shallow when history is not needed. For private repositories set
-            <span class="inline-code">SOKRATES_GIT_TOKEN</span>.</p>
-    </div>
-
-    <div class="example">
-        <b>Whole GitHub organizations:</b> <span class="inline-code">analyzeGitHubOrg</span> does the listing for you. Give it organization
-        (or user) logins and it asks the GitHub API for their repositories, filters them, analyzes each one into
-        <span class="inline-code">&lt;org&gt;/&lt;repository&gt;</span> and builds a landscape per organization, named, described, linked and
-        branded from the organization's GitHub profile (with several organizations, a parent landscape sits on top):
-        <div class="cmd">sokrates <span class="hl">analyzeGitHubOrg -org junit-team -org hamcrest -pushedWithinDays 365</span>
-
-open junit-team/_sokrates_landscape/index.html   <span class="c"># one landscape per organization ...</span>
-open _sokrates_landscape/index.html              <span class="c"># ... and a parent landscape over them</span>
+open _sokrates_landscape/index.html</div>
+            <div class="step-body">Each repository is cloned, analyzed and kept under <span class="inline-code">&lt;owner&gt;/&lt;repository&gt;</span>
+                (no source stays behind); a repository that cannot be cloned is skipped. Re-run the same command to refresh; add a line to add a repository.</div>
+        </li>
+        <li>
+            <div class="step-title">From a GitHub organization or a GitLab group</div>
+            <div class="cmd">sokrates <span class="hl">analyzeGitHubOrg -org junit-team -org hamcrest</span>
+sokrates <span class="hl">analyzeGitLabGroup -group gitlab-org/ci-cd</span>     <span class="c"># gitlab.com or -gitlabUrl https://gitlab.example.com</span>
 
 <span class="c"># the resulting layout:</span>
 landscape/
-  _sokrates_landscape/index.html              <span class="c"># parent landscape</span>
-  junit-team/_sokrates_landscape/index.html   <span class="c"># the organization's landscape</span>
+  _sokrates_landscape/index.html              <span class="c"># parent landscape, when there are several organizations</span>
+  junit-team/_sokrates_landscape/index.html   <span class="c"># one landscape per organization</span>
   junit-team/repos.txt                        <span class="c"># the selected repositories</span>
   junit-team/junit4/config.json + reports/
   hamcrest/...</div>
-        <p style="margin: 4px 0">Forks and archived repositories are skipped unless you pass <span class="inline-code">-includeForks</span> /
-            <span class="inline-code">-includeArchived</span>; <span class="inline-code">-pushedWithinDays &lt;n&gt;</span>,
-            <span class="inline-code">-includeRepoNamePattern</span> / <span class="inline-code">-excludeRepoNamePattern &lt;regex&gt;</span> and
-            <span class="inline-code">-maxRepos &lt;n&gt;</span> narrow the selection. Cloning a large organization takes a while, so
-            <span class="inline-code">-listOnly</span> first writes just <span class="inline-code">&lt;org&gt;/repos.txt</span> to review the
-            selection, and <span class="inline-code">-dataOnly</span> keeps only the data. Re-runs reuse every kept configuration and your edits
-            of the landscape metadata; <span class="inline-code">-prune</span> removes the analyses of repositories no longer selected. For private
-            repositories (and the higher API rate limit) set <span class="inline-code">SOKRATES_GIT_TOKEN</span>.</p>
-        <p style="margin: 4px 0"><span class="inline-code">analyzeGitLabGroup</span> is the same for GitLab groups, with their subgroups, on
-            gitlab.com or a self-hosted instance: <span class="inline-code">-group gitlab-org/ci-cd</span>, or a group URL such as
-            <span class="inline-code">-group https://gitlab.example.com/acme/tools</span> (which also names the instance;
-            <span class="inline-code">-gitlabUrl</span> sets it explicitly). Projects are kept in
-            <span class="inline-code">&lt;group path&gt;/&lt;project path&gt;</span>, so subgroup folders are preserved, and the same filters
-            and switches apply.</p>
-    </div>
-
-    <div class="example">
-        <b>Or aggregate analyses you already have.</b> Without URLs, <span class="inline-code">analyzeLandscape</span> just aggregates the
-        analyses found under the current folder (or <span class="inline-code">-analysisRoot</span>). Analyses made with
-        <span class="inline-code">analyzeGitRepo</span> are already in the right layout; for clones analyzed in place with
-        <span class="inline-code">analyze</span>, collect their <span class="inline-code">_sokrates</span> folders under the landscape root (the
-        source code itself is not needed, and any nesting is fine &mdash; the landscape finds the analyses recursively):
-        <div class="cmd">mv junit4/_sokrates landscape/junit4
-mv junit-framework/_sokrates landscape/junit-framework
+            <div class="step-body">The repositories are listed through the API and the landscape takes its name, description, logo and link from the
+                organization's profile. Forks and archived repositories are skipped unless asked for; <span class="inline-code">-pushedWithinDays</span>,
+                name patterns and <span class="inline-code">-maxRepos</span> narrow the selection, <span class="inline-code">-listOnly</span> previews it
+                without cloning, <span class="inline-code">-prune</span> drops repositories no longer selected. Private repositories: set
+                <span class="inline-code">SOKRATES_GIT_TOKEN</span>.</div>
+        </li>
+        <li>
+            <div class="step-title">From analyses you already have</div>
+            <div class="cmd">mv junit4/_sokrates landscape/junit4
 cd landscape
 sokrates <span class="hl">analyzeLandscape</span></div>
-        <p style="margin: 4px 0">Each repository appears with the name, logo, description and repository link from its own analysis
-            (<span class="inline-code">analyze</span> derives them from the git remote), so a landscape of Docker-analyzed clones is not a list of
-            repositories all called "Code".</p>
-        <p style="margin: 4px 0"><span class="inline-code">analyzeLandscape</span> (the landscape counterpart of <span class="inline-code">analyze</span>;
-            <span class="inline-code">updateLandscape</span> is the older name of the same command and still works) creates
-            <span class="inline-code">_sokrates_landscape/config.json</span> on the first run and keeps your edits on later runs; the discovered
-            repositories are kept apart in <span class="inline-code">info.json</span>, so re-running after adding or re-analyzing repositories is
-            always safe. Use <span class="inline-code">-setName</span>, <span class="inline-code">-setDescription</span>,
-            <span class="inline-code">-setLogoLink</span> and <span class="inline-code">-addLink</span> to label the landscape, or edit the
-            metadata in the configuration file.</p>
-    </div>
-
-    <div class="note">
-        <b>Keeping a landscape up to date.</b> Re-run the same <span class="inline-code">analyzeLandscape -urls repos.txt</span>: every repository
-        is cloned afresh and analyzed with its kept <span class="inline-code">config.json</span> (so your tuning survives), and the landscape is
-        rebuilt. A nightly job running that one command is the whole pipeline; add a URL to the file to add a repository.
+            <div class="step-body">Without URLs the command aggregates whatever analyses it finds under the folder, at any depth.</div>
+        </li>
+    </ol>
+    <div class="next-steps">
+        <b>Big landscapes:</b> <span class="inline-code">-dataOnly</span> keeps only the data of each repository and of the landscape, a fraction of the size
+        of the full reports; <span class="inline-code">-depth &lt;n&gt;</span> makes the clones shallow when history is not needed. A nightly job
+        running one of these commands is the whole pipeline.
     </div>
 </div>
 
 <div class="card">
-    <h1>Configuring a landscape</h1>
-    <p>A landscape is driven by JSON files in <span class="inline-code">_sokrates_landscape/</span>. All keys are documented in
-        <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md#part-2--landscape-_sokrates_landscapeconfigjson" target="_blank">docs/configuration.md</a>;
-        the most useful ones:</p>
+    <h1>Configure</h1>
+    <p>Four JSON files in <span class="inline-code">_sokrates_landscape/</span>, created on the first run and kept on later ones. Every key is in the
+        <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md#part-2--landscape-_sokrates_landscapeconfigjson" target="_blank">configuration manual</a>.</p>
     <table class="steps">
         <tr>
             <td>config.json</td>
-            <td>Metadata (name, description, logo, links), display thresholds, contributor and bot filters, the
-                <span class="inline-code">repositoryReportsUrlPrefix</span> that links the landscape to the repository reports, and the
-                <span class="inline-code">virtualLandscapes</span> definitions described below.</td>
+            <td>Name, description, logo and links (or <span class="inline-code">-setName</span>, <span class="inline-code">-setDescription</span>,
+                <span class="inline-code">-setLogoLink</span>, <span class="inline-code">-addLink</span>), thresholds, contributor and bot filters, virtual sub-landscapes.</td>
         </tr>
         <tr>
             <td>config-tags.json</td>
-            <td>Repository <b>tags</b>: groups of regex rules that label repositories (by name, path or the technologies they contain)
-                and drive the tag-based overviews.</td>
+            <td>Regex rules that tag repositories by name, path or technology, driving the tag overviews.</td>
         </tr>
         <tr>
             <td>config-teams.json</td>
-            <td><b>Teams</b>: email patterns that assign contributors to teams, enabling the team-level reports and team topology graphs.</td>
+            <td>Email patterns that assign contributors to teams: team reports and team topology graphs.</td>
         </tr>
         <tr>
             <td>config-people.json</td>
-            <td><b>People</b>: merges the several emails one person commits with into a single identity. Bootstrap it with
-                <span class="inline-code">sokrates updateLandscapePeopleConfigByUserName</span>, which groups all emails that share a
-                display name (additive; it never removes entries), then run <span class="inline-code">analyzeLandscape</span> again.</td>
+            <td>Merges the several emails one person commits with. Bootstrap it with
+                <span class="inline-code">sokrates updateLandscapePeopleConfigByUserName</span>.</td>
         </tr>
     </table>
-
-    <h3>Sub-landscapes</h3>
-    <p>Large landscapes are easier to read when split. There are two ways, and they can be combined:</p>
-    <ul>
-        <li><b>Folder-based:</b> put repository folders into sub-directories and run <span class="inline-code">analyzeLandscape</span> in each
-            (or once at the top with <span class="inline-code">-recursive</span>). Every sub-directory with its own
-            <span class="inline-code">_sokrates_landscape/</span> shows up in the parent's <i>Sub-landscapes</i> tab.</li>
-        <li><b>Virtual:</b> define sub-landscapes by repository-name patterns in the parent's <span class="inline-code">config.json</span>,
-            without moving any folders. A repository may belong to several; the ones matched by none go to a <i>Remainder</i> landscape.
-            Virtual landscapes can be nested to any depth:</li>
-    </ul>
+    <h2>Sub-landscapes</h2>
+    <p>Two ways to split a big landscape, usable together. <b>Folder-based:</b> any sub-folder with its own
+        <span class="inline-code">_sokrates_landscape/</span> appears in the parent's Sub-landscapes tab (run the command in each, or once at the top
+        with <span class="inline-code">-recursive</span>). <b>Virtual:</b> repository-name patterns in the parent's
+        <span class="inline-code">config.json</span>, no folders moved, nested to any depth; unmatched repositories go to a remainder landscape:</p>
     <div class="cmd">"virtualLandscapes": {
   "remainderLandscapeMetadata": { "name": "Other" },
   "landscapes": [
-    {
-      "metadata": { "name": "Platform", "description": "Shared platform code" },
-      "includeRepoNamePatterns": [".*platform.*", "core-.*"],
-      "excludeRepoNamePatterns": [".*-deprecated"]
-    },
-    {
-      "metadata": { "name": "Mobile" },
-      "includeRepoNamePatterns": [".*-(ios|android)"]
-    }
+    { "metadata": { "name": "Platform" }, "includeRepoNamePatterns": [".*platform.*", "core-.*"], "excludeRepoNamePatterns": [".*-deprecated"] },
+    { "metadata": { "name": "Mobile" },   "includeRepoNamePatterns": [".*-(ios|android)"] }
   ]
 }</div>
-
-    <h3>Publishing</h3>
-    <p>The landscape and the repository reports are static HTML. Copy the whole root folder (repository folders plus
-        <span class="inline-code">_sokrates_landscape/</span>) to any static host &mdash; S3 + CloudFront, GitHub Pages, an internal web server
-        &mdash; and the links between the landscape and the repository reports keep working. The reports load a few rendering libraries
-        (d3, Mermaid) from a CDN, so viewers need internet access; nothing is sent anywhere.</p>
 </div>
 
+<div class="card">
+    <h1>Publish</h1>
+    <p>Everything is static HTML. Copy the root folder, repositories plus <span class="inline-code">_sokrates_landscape/</span>, to any static host
+        &mdash; S3 and CloudFront, GitHub Pages, an internal web server &mdash; and all links keep working. Viewers need internet access for the
+        rendering libraries loaded from a CDN; nothing is sent anywhere.</p>
+</div>
 
     </div>
 
     <div id="ai_insights" class="tabcontent">
-        <div class="card">
-    <h1>AI insights: skills for AI coding tools</h1>
-    <p style="font-size: 110%">
-        Sokrates measures: size, complexity, duplication, churn, coupling, contributors. The
-        <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank"><b>sokrates-skills</b></a> project adds the layer
-        only an AI reader can add — what the code <i>is</i>, what it depends on, where the real risks are, how it got here — and makes
-        Sokrates itself more useful by configuring it well. The skills work with Claude Code and similar AI coding tools that can load
-        <span class="inline-code">SKILL.md</span> instructions.
-    </p>
-    <ul style="font-size: 110%">
-        <li><a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">github.com/zeljkoobrenovic/sokrates-skills</a> (MIT)</li>
-        <li><a href="https://zeljkoobrenovic.github.io/sokrates-skills/examples/codex/ai-insights/" target="_blank">Live example: AI Insights Explorer for OpenAI Codex ⤇</a>
-            — fifteen scanners, 330 verified findings</li>
-    </ul>
-</div>
-
-<div>
-    <div class="section" style="width: calc(50% - 50px)">
-        <div style="margin: 10px">
-            <h2 class="title">Analysis skills (scanners)</h2>
-            <p>Read a finished Sokrates analysis (<span class="inline-code">_sokrates/</span>) and write findings with verifiable evidence.
-                Each scanner answers one question:</p>
-            <ul>
-                <li><b>functionality-scan</b> — what the software does: purpose, features, entry points, workflows, data, integrations, hidden functionality, documentation-vs-code gaps</li>
-                <li><b>domain-language-scan</b> — the domain language: glossary, bounded contexts, concepts per capability, language drift</li>
-                <li><b>architecture-scan</b> — the implemented architecture: style, components, boundaries, violations, communication, migrations, and the security boundaries as structure (trust map, sandboxing, escape hatches)</li>
-                <li><b>tech-stack-scan</b> — languages, frameworks, libraries, build tooling, CI/CD, infrastructure, external services</li>
-                <li><b>cicd-scan</b> — the CI/CD process as a narrative: triggers, build, tests, gates, release, deployment, hygiene</li>
-                <li><b>testing-scan</b> — the tests as a system: layers as implemented, coverage map inferred from what tests reference, assertion/mocking/determinism quality, flakiness and skips, infrastructure, gaps on load-bearing paths</li>
-                <li><b>observability-scan</b> — logging, metrics, tracing, error reporting, health surfaces, blind spots</li>
-                <li><b>reliability-scan</b> — how the code behaves when things go wrong: error model, failure handling on load-bearing paths, isolation and blast radius, retries and timeouts, degradation, resource cleanup and shutdown</li>
-                <li><b>performance-scan</b> — static performance review: workload model and scaling factors, hot-path algorithms and data structures, I/O and memory, parallelism, caching, cost limits, ranked bottlenecks</li>
-                <li><b>storage-scan</b> — persistent data: data classes and where they live, access patterns, schema and format versioning, integrity and corruption recovery, retention and cleanup</li>
-                <li><b>network-scan</b> — connectivity: endpoint topology, protocols as used, timeouts, TLS and proxies, endpoint configurability, offline behaviour, data in transit</li>
-                <li><b>security-scan</b> — security review, design first and code second: identity and permission design, secrets by design and in the tree, boundary validation, injection, crypto, unsafe code, third-party and model-output trust, with a coverage statement</li>
-                <li><b>risk-synthesis-scan</b> — Sokrates hotspots explained: what each risky file does, knowledge risk, change coupling</li>
-                <li><b>maintainability-scan</b> — maintainability grades per sub-characteristic and per component: modularity, reusability, analysability, modifiability, testability — rolled up from Sokrates numbers and the other scanners' findings</li>
-                <li><b>evolution-scan</b> — the history as a story: eras, growth, focus shift, people, module lifecycle, trajectory</li>
-                <li><b>full-scan</b> — runs all of them in dependency order and merges the results</li>
-            </ul>
-        </div>
+        <div class="hero">
+    <div class="hero-text">
+        <h1 style="font-size: 32px; margin-top: 8px">Let an AI agent read the analysis</h1>
+        <p class="hero-sub">Sokrates measures. The <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">sokrates-skills</a>
+            add what only a reader can add: what the code is, what it depends on, where the real risks are, how it got here. Fifteen scanners
+            write findings with verifiable evidence; six configuration skills tune Sokrates before it runs.</p>
+        <p class="hero-links">Works with Claude Code, Codex CLI, Gemini CLI, Cursor, Copilot and any tool that loads
+            <a href="https://agentskills.io" target="_blank">Agent Skills</a>. MIT.</p>
     </div>
-    <div class="section" style="width: calc(50% - 50px)">
-        <div style="margin: 10px">
-            <h2 class="title">Configuration skills</h2>
-            <p>Create and tune Sokrates configuration <i>before</i> an analysis. Each comes with a checker that simulates Sokrates' own
-                rules on the real tree, so a configuration is verified before Sokrates runs:</p>
-            <ul>
-                <li><b>sokrates-repo-config</b> — <span class="inline-code">_sokrates/config.json</span>: scope, file classification, thresholds, history settings</li>
-                <li><b>sokrates-decompositions</b> — meaningful components: folder depth, build modules, mixed depth for monorepos, ownership, layers</li>
-                <li><b>sokrates-features-of-interest</b> — concerns worth tracking: debt markers, security-sensitive code, feature flags, domain vocabulary</li>
-                <li><b>sokrates-landscape-config</b> — <span class="inline-code">_sokrates_landscape/</span> files: discovery, filters, tags, teams</li>
-                <li><b>sokrates-people-config</b> — contributor identity merging from git history, with a review file for the human decisions</li>
-                <li><b>sokrates-virtual-landscapes</b> — sub-landscapes from your grouping or from naming conventions, technology, activity, teams</li>
-            </ul>
-            <p>The field references were read from the Sokrates Java source — including the places where documentation and code disagree.
-                The human-readable reference is the
-                <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank">configuration manual</a>.</p>
-        </div>
-    </div>
+    <a class="hero-shot" href="https://zeljkoobrenovic.github.io/sokrates-skills/examples/codex/ai-insights/" target="_blank" title="Open the live explorer">
+        <img src="assets/screenshots/reports/ai-insights.png" alt="The AI Insights explorer for OpenAI Codex">
+        <div class="shot-caption">The AI Insights explorer &mdash; OpenAI Codex, 330 verified findings, live &nearr;</div>
+    </a>
 </div>
 
 <div class="card">
     <h1>How to use</h1>
-    <div class="section" style="width: calc(100% - 50px)">
-        <div style="margin: 10px">
-            <h3 style="background-color: #ededed; padding: 4px"><b>1. Install the skills</b></h3>
-            <p>Every skill is a folder with a <span class="inline-code">SKILL.md</span> in the open
-                <a href="https://agentskills.io" target="_blank">Agent Skills</a> format, so the same folders work in any AI coding tool that
-                supports skills. The repository's <span class="inline-code">install.sh</span> symlinks all of them into the right places;
-                <span class="inline-code">git pull</span> then updates every tool at once.</p>
-            <pre style="padding: 6px; background-color: lightyellow">git clone https://github.com/zeljkoobrenovic/sokrates-skills.git
+    <ol class="steps-list">
+        <li>
+            <div class="step-title">Install the skills</div>
+            <div class="cmd">git clone https://github.com/zeljkoobrenovic/sokrates-skills.git
 cd sokrates-skills
-./install.sh            # → ~/.claude/skills (Claude Code) and ~/.agents/skills (Codex, Gemini CLI, Cursor, Copilot, …)
-./install.sh --project  # → ./.claude/skills and ./.agents/skills of the current project instead (shareable via git)</pre>
-            <table style="border-collapse: collapse; font-size: 95%">
-                <tr style="background-color: #f4f4f4"><th style="text-align: left; padding: 6px">Tool</th><th style="text-align: left; padding: 6px">Reads skills from</th><th style="text-align: left; padding: 6px">Invoke</th></tr>
-                <tr><td style="padding: 6px; vertical-align: top"><b>Claude Code</b></td><td style="padding: 6px"><span class="inline-code">~/.claude/skills/</span> (personal), <span class="inline-code">.claude/skills/</span> (project)</td><td style="padding: 6px">automatically when relevant, or <span class="inline-code">/tech-stack-scan</span></td></tr>
-                <tr><td style="padding: 6px; vertical-align: top"><b>OpenAI Codex CLI</b></td><td style="padding: 6px"><span class="inline-code">~/.agents/skills/</span> (personal), <span class="inline-code">.agents/skills/</span> (repository)</td><td style="padding: 6px">automatically, or <span class="inline-code">$tech-stack-scan</span></td></tr>
-                <tr><td style="padding: 6px; vertical-align: top"><b>Gemini CLI</b></td><td style="padding: 6px"><span class="inline-code">~/.gemini/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (user), <span class="inline-code">.gemini/skills/</span> or <span class="inline-code">.agents/skills/</span> (workspace); or <span class="inline-code">gemini skills install https://github.com/zeljkoobrenovic/sokrates-skills.git</span></td><td style="padding: 6px">activates a matching skill after a confirmation; <span class="inline-code">gemini skills list --all</span></td></tr>
-                <tr><td style="padding: 6px; vertical-align: top"><b>Cursor</b></td><td style="padding: 6px"><span class="inline-code">~/.cursor/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (user), <span class="inline-code">.cursor/skills/</span> or <span class="inline-code">.agents/skills/</span> (project); <span class="inline-code">.claude/skills/</span> is read too</td><td style="padding: 6px"><span class="inline-code">/</span> in Agent chat, or automatically</td></tr>
-                <tr><td style="padding: 6px; vertical-align: top"><b>GitHub Copilot</b><br>(CLI, VS Code, coding agent)</td><td style="padding: 6px"><span class="inline-code">~/.copilot/skills/</span> or <span class="inline-code">~/.agents/skills/</span> (personal), <span class="inline-code">.github/skills/</span>, <span class="inline-code">.agents/skills/</span> or <span class="inline-code">.claude/skills/</span> (repository)</td><td style="padding: 6px">automatically; <span class="inline-code">gh skill</span> installs from repositories</td></tr>
-                <tr><td style="padding: 6px; vertical-align: top"><b>Other tools</b></td><td style="padding: 6px">any Agent-Skills folder: <span class="inline-code">./install.sh &lt;folder&gt;</span>, or copy the skill folders</td><td style="padding: 6px">see the tool's documentation</td></tr>
-            </table>
-            <p>Requirements: Python 3.9+ (standard library only) for the scripts, and a Sokrates analysis of your project.</p>
-
-            <h3 style="background-color: #ededed; padding: 4px"><b>2. Analyze the project with Sokrates</b></h3>
-            <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
-java -jar sokrates.jar analyze                # = extractGitHistory + init + generateReports
-# or, without Java:  docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</pre>
-            <p>See the <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">Install &amp; use</a>
-                tab for the Docker, JAR and from-source ways of running Sokrates.</p>
-
-            <h3 style="background-color: #ededed; padding: 4px"><b>3. Refine the configuration with the config skills</b></h3>
-            <p>The default <span class="inline-code">init</span> configuration is a starting point. In the project folder, ask your AI tool to
-                improve it — each configuration skill previews the effect on the real tree before Sokrates runs:</p>
-            <ul>
-                <li><i>"check the Sokrates configuration of this repository"</i> — scope, ignored and misclassified files, thresholds (<b>sokrates-repo-config</b>)</li>
-                <li><i>"define meaningful components for this repository"</i> — modules, mixed depth for monorepos, ownership, layers (<b>sokrates-decompositions</b>)</li>
-                <li><i>"which features of interest should Sokrates track here?"</i> — debt markers, security-sensitive code, feature flags, domain vocabulary (<b>sokrates-features-of-interest</b>)</li>
-                <li><i>"merge duplicate contributors"</i> — identity merging with a review file (<b>sokrates-people-config</b>)</li>
-            </ul>
-            <p>Then regenerate the reports so the analysis reflects the refined configuration:</p>
-            <pre style="padding: 6px; background-color: lightyellow">java -jar sokrates.jar generateReports</pre>
-
-            <h3 style="background-color: #ededed; padding: 4px"><b>4. Ask for insights</b></h3>
-            <p>In the project folder, ask your AI tool: <i>"run a tech stack scan"</i>, <i>"explain the risks in this codebase"</i>,
-                <i>"what does this software do?"</i>, <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all fifteen scanners.
-                Every scanner reads the Sokrates data first and spends its reading budget where the numbers point.</p>
-
-            <h3 style="background-color: #ededed; padding: 4px"><b>5. Open the AI Insights Explorer</b></h3>
-            <p>Results land in <span class="inline-code">&lt;your-project&gt;/_sokrates/reports/ai-insights/</span>: one JSON file per scanner
-                and <span class="inline-code">index.html</span> — a self-contained interactive page with an overview, a page per scanner,
-                a cross-scanner list of attention items, severity and confidence filters, full-text search, and every finding's evidence
-                as file, line range and verbatim snippet.</p>
-
-            <h3 style="background-color: #ededed; padding: 4px"><b>6. Illustrate the summaries (optional)</b></h3>
-            <pre style="padding: 6px; background-color: lightyellow">export GEMINI_API_KEY=...
-python3 skills/illustrators/generate_summary_visuals.py &lt;your-project&gt;/_sokrates/reports/ai-insights</pre>
-            <p>The illustrator script (in the <span class="inline-code">skills/illustrators/</span> folder of the repository) turns each
-                scanner's summary into one calm, mostly visual illustration that tells its story with a few key words — a pipeline for
-                CI/CD, a landscape with glowing hotspots for risks, growth rings for evolution. It uses Google's Gemini image model
-                ("Nano Banana"), saves the images next to the findings (<span class="inline-code">ai-insights/visuals/</span>), records them
-                in the findings JSON and re-renders the explorer, which shows each image at the end of the foldable summary block.
-                Existing images are kept on re-runs; <span class="inline-code">--force</span> regenerates them. Skip this step and the
-                explorer looks exactly as before.</p>
-
-            <h3 style="background-color: #ededed; padding: 4px"><b>7. Embed the explorer in the Sokrates report</b></h3>
-            <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
-java -jar sokrates.jar addCustomTab -label "AI Insights*" -iframeLink "../ai-insights/index.html"</pre>
-            <p>This registers an <b>AI Insights*</b> tab in the configuration of the main Sokrates HTML report
-                (<span class="inline-code">_sokrates/reports/html/index.html</span>) that shows the explorer inline, so the quantitative
-                reports and the AI findings live in one place.</p>
-
-            <h3 style="background-color: #ededed; padding: 4px"><b>8. Regenerate the reports to see the new tab</b></h3>
-            <pre style="padding: 6px; background-color: lightyellow">java -jar sokrates.jar generateReports</pre>
-            <p>The tab is part of the generated report from now on; it picks up the explorer's regenerated
-                <span class="inline-code">index.html</span> automatically whenever you re-run the scanners.</p>
-        </div>
-    </div>
+<span class="hl">./install.sh</span>            <span class="c"># → ~/.claude/skills and ~/.agents/skills, for every tool at once</span>
+./install.sh --project  <span class="c"># → the current project instead, shareable via git</span></div>
+            <div class="step-body">Python 3.9+ for the scripts, nothing else. <span class="inline-code">git pull</span> updates every tool.</div>
+        </li>
+        <li>
+            <div class="step-title">Analyze the project</div>
+            <div class="cmd">cd &lt;your-project&gt;
+sokrates <span class="hl">analyze</span></div>
+        </li>
+        <li>
+            <div class="step-title">Refine the configuration, by asking</div>
+            <div class="step-body">In the project folder, ask your AI tool: <i>"check the Sokrates configuration of this repository"</i>,
+                <i>"define meaningful components"</i>, <i>"which features of interest should Sokrates track here?"</i>,
+                <i>"merge duplicate contributors"</i>. Each skill previews its effect on the real tree before Sokrates runs. Then
+                <span class="inline-code">sokrates generateReports</span>.</div>
+        </li>
+        <li>
+            <div class="step-title">Ask for insights</div>
+            <div class="step-body"><i>"run a tech stack scan"</i>, <i>"explain the risks in this codebase"</i>, <i>"what does this software do?"</i>,
+                <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all fifteen. Every scanner reads the Sokrates data first and
+                spends its reading where the numbers point.</div>
+        </li>
+        <li>
+            <div class="step-title">Open the explorer, and put it in the report</div>
+            <div class="cmd">open _sokrates/reports/ai-insights/index.html
+sokrates <span class="hl">addCustomTab -label "AI Insights*" -iframeLink "../ai-insights/index.html"</span>
+sokrates generateReports</div>
+            <div class="step-body">The explorer is a self-contained page: a page per scanner, attention items across scanners, severity and
+                confidence filters, search, and every finding's evidence. The custom tab shows it inside the Sokrates report from now on.</div>
+        </li>
+    </ol>
+    <details class="tips">
+        <summary>Where each tool reads skills from, and optional illustrations</summary>
+        <table class="steps">
+            <tr><td>Claude Code</td><td><span class="inline-code">~/.claude/skills/</span>, <span class="inline-code">.claude/skills/</span>; automatic, or <span class="inline-code">/tech-stack-scan</span></td></tr>
+            <tr><td>Codex CLI</td><td><span class="inline-code">~/.agents/skills/</span>, <span class="inline-code">.agents/skills/</span>; automatic, or <span class="inline-code">$tech-stack-scan</span></td></tr>
+            <tr><td>Gemini CLI</td><td><span class="inline-code">~/.gemini/skills/</span> or <span class="inline-code">~/.agents/skills/</span>; or <span class="inline-code">gemini skills install &lt;repo url&gt;</span></td></tr>
+            <tr><td>Cursor</td><td><span class="inline-code">~/.cursor/skills/</span> or <span class="inline-code">~/.agents/skills/</span>; <span class="inline-code">/</span> in Agent chat</td></tr>
+            <tr><td>GitHub Copilot</td><td><span class="inline-code">~/.copilot/skills/</span>, <span class="inline-code">.github/skills/</span> or <span class="inline-code">.agents/skills/</span>; <span class="inline-code">gh skill</span> installs from the repo</td></tr>
+            <tr><td>Other tools</td><td>any Agent Skills folder: <span class="inline-code">./install.sh &lt;folder&gt;</span></td></tr>
+        </table>
+        <p style="margin-top: 10px"><b>Illustrations:</b> <span class="inline-code">python3 skills/illustrators/generate_summary_visuals.py &lt;project&gt;/_sokrates/reports/ai-insights</span>
+            (with <span class="inline-code">GEMINI_API_KEY</span> set) turns each scanner's summary into one calm picture shown in the explorer. Optional.</p>
+    </details>
 </div>
 
-<div>
-    <div class="section" style="width: calc(50% - 50px)">
-        <div style="margin: 10px">
-            <h2 class="title">Why the findings can be trusted</h2>
-            <ul>
-                <li>Every finding carries evidence: file, line range, verbatim snippet.</li>
-                <li>A validator mechanically checks each snippet against the actual file — a scan is not finished until validation passes. This is the guard against hallucinated findings.</li>
-                <li>Findings have a severity (info → critical) and a confidence (certain / likely / possible); claims without evidence must say so.</li>
-                <li>Finding ids are stable across runs, so two scans of the same project can be diffed: new, resolved, persisting.</li>
-                <li>Scanners cite Sokrates data (<span class="inline-code">component:</span>, <span class="inline-code">metric:</span> references) instead of re-measuring it.</li>
-            </ul>
+<div class="card">
+    <h1>The skills</h1>
+    <div class="feature-grid">
+        <div class="feature">
+            <div class="feature-title">Scanners: what the code is</div>
+            <div>functionality, domain language, architecture, tech stack</div>
         </div>
-    </div>
-    <div class="section" style="width: calc(50% - 50px)">
-        <div style="margin: 10px">
-            <h2 class="title">Landscapes and many repositories</h2>
-            <ul>
-                <li>The configuration skills also cover landscapes: repository discovery, filters and thresholds, tags, teams,
-                    contributor identity merging across repositories, and virtual sub-landscapes.</li>
-                <li>Each has a checker that previews exactly what Sokrates will do — which repositories are found, which tags match,
-                    how contributors map to people and teams — before <span class="inline-code">updateLandscape</span> runs.</li>
-                <li>Typical order for a portfolio: repository config → decompositions → features of interest →
-                    <span class="inline-code">generateReports</span> → landscape config → people config → virtual landscapes →
-                    <span class="inline-code">updateLandscape</span> → scanners per repository.</li>
-            </ul>
+        <div class="feature">
+            <div class="feature-title">Scanners: how it runs</div>
+            <div>CI/CD, testing, observability, reliability, performance, storage, network, security</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">Scanners: the synthesis</div>
+            <div>risk synthesis of the Sokrates hotspots, maintainability grades per component, evolution as a story; <span class="inline-code">full-scan</span> runs them all</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">Configuration: repository</div>
+            <div>repo config, decompositions, features of interest, people config, each with a checker that simulates Sokrates' own rules</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">Configuration: landscape</div>
+            <div>landscape config, virtual sub-landscapes; the same checkers across many repositories</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">Extending</div>
+            <div>one shared contract for findings, evidence, validation and rendering; a new scanner is a SKILL.md with a question.
+                <a href="https://github.com/zeljkoobrenovic/sokrates-skills#development" target="_blank">Development notes</a></div>
         </div>
     </div>
 </div>
 
 <div class="card">
-    <h1>Extending</h1>
-    <p>All scanners share one contract (<span class="inline-code">sokrates-scan-core</span>): the findings format, the evidence rules,
-        the validator and the explorer renderer. A new scanner is a <span class="inline-code">SKILL.md</span> that defines its
-        question and its group taxonomy; the proven way to build one is to run it live on a real codebase with a fresh agent, ask that
-        agent what was unclear, and fold the answers back into the skill. See the
-        <a href="https://github.com/zeljkoobrenovic/sokrates-skills#development" target="_blank">development notes</a>.</p>
+    <h1>Why the findings can be trusted</h1>
+    <ul>
+        <li>Every finding carries evidence: file, line range, verbatim snippet. A validator checks each snippet against the actual file, and a scan
+            is not finished until it passes.</li>
+        <li>Findings have a severity and a confidence; claims without evidence must say so. Scanners cite Sokrates data instead of re-measuring it.</li>
+        <li>Finding ids are stable across runs, so two scans of the same project can be diffed: new, resolved, persisting.</li>
+    </ul>
 </div>
 
     </div>
