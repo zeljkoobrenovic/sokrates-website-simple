@@ -5,8 +5,8 @@
     <title>Sokrates</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="assets/logo.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
     <style>
         ${import style.css}
     </style>
@@ -23,38 +23,63 @@
             }
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
+            window.scrollTo(0, 0);
         }
+
+        // A "copy" button on every command box (.cmd): copies the plain text of the box.
+        window.addEventListener('DOMContentLoaded', function () {
+            if (!navigator.clipboard) return;
+            var boxes = document.getElementsByClassName('cmd');
+            for (var i = 0; i < boxes.length; i++) {
+                (function (box) {
+                    var button = document.createElement('button');
+                    button.className = 'copy-btn';
+                    button.type = 'button';
+                    button.textContent = 'copy';
+                    button.title = 'Copy to clipboard';
+                    button.onclick = function () {
+                        var text = box.innerText.replace(/\s*copy$/, '').replace(/\s+$/, '');
+                        navigator.clipboard.writeText(text).then(function () {
+                            button.textContent = 'copied';
+                            setTimeout(function () { button.textContent = 'copy'; }, 1500);
+                        });
+                    };
+                    box.appendChild(button);
+                })(boxes[i]);
+            }
+        });
         window.addEventListener('DOMContentLoaded', function () {
             var tab = location.hash.replace('#', '');
             var btn = tab && document.getElementById(tab + '_tab');
-            if (btn) btn.click();
+            if (btn) {
+                btn.click();
+                // The hash also names the tab's content div, so the browser scrolls to it on load
+                // (hiding the header); undo that once the load-time fragment scroll has happened.
+                window.addEventListener('load', function () {
+                    setTimeout(function () { window.scrollTo(0, 0); }, 50);
+                });
+            }
         });
     </script>
 </head>
 <body>
-<table>
-    <tr>
-        <td class="hide-on-mobile" style="padding-right: 18px">
-            <img src="assets/logo.png" class="logo hide-on-mobile">
-        </td>
-        <td style="">
-            <div style="font-size: 420%; font-weight: bold; margin-bottom: 0;">Sokrates</div>
-            <div style="color: #a0a0a0; font-size: 150%">Polyglot source code examination tool</div>
-        </td>
-    </tr>
-</table>
-<div style="margin-top: 32px">
-    <div class="tab">
-        <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">HOME</button>
-        <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">INSTALL & USE</button>
-        <button id="landscapes_tab" class="tablinks" onclick="openTab(event, 'landscapes')">LANDSCAPES</button>
-        <button id="ai_insights_tab" class="tablinks" onclick="openTab(event, 'ai_insights')">AI INSIGHTS</button>
-        <button id="config_tab" class="tablinks" onclick="openTab(event, 'config')">CONFIGURATION</button>
-        <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">EXAMPLES</button>
-        <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">FEATURES</button>
-        <button id="articles_tab" class="tablinks" onclick="openTab(event, 'articles')">ARTICLES</button>
+<header class="site-header">
+    <div class="site-header-inner">
+        <a class="brand" href="#home" onclick="document.getElementById('home_tab').click(); return false;">
+            <img src="assets/logo.png" alt=""> Sokrates
+        </a>
+        <nav class="site-nav" aria-label="Sections">
+            <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">Home</button>
+            <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">Install &amp; use</button>
+            <button id="landscapes_tab" class="tablinks" onclick="openTab(event, 'landscapes')">Landscapes</button>
+            <button id="ai_insights_tab" class="tablinks" onclick="openTab(event, 'ai_insights')">AI insights</button>
+            <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">Examples</button>
+            <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">Features</button>
+            <button id="articles_tab" class="tablinks" onclick="openTab(event, 'articles')">Articles</button>
+        </nav>
     </div>
-
+</header>
+<main class="page">
     <div id="home" class="tabcontent" style="display: block">
         ${import home.html}
     </div>
@@ -71,10 +96,6 @@
         ${import ai-insights.html}
     </div>
 
-    <div id="config" class="tabcontent">
-        ${import config.html}
-    </div>
-
     <div id="examples" class="tabcontent">
         ${import examples.html}
     </div>
@@ -86,7 +107,13 @@
     <div id="articles" class="tabcontent">
         ${import articles.html}
     </div>
-</div>
 
+    <footer class="site-footer">
+        Sokrates is free and open source (MIT) &nbsp;&middot;&nbsp;
+        <a href="https://github.com/zeljkoobrenovic/sokrates" target="_blank">github.com/zeljkoobrenovic/sokrates</a> &nbsp;&middot;&nbsp;
+        <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank">configuration manual</a> &nbsp;&middot;&nbsp;
+        built by <a href="https://zeljkoobrenovic.com" target="_blank">Željko Obrenović</a>
+    </footer>
+</main>
 </body>
 </html>

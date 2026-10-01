@@ -5,255 +5,613 @@
     <title>Sokrates</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="assets/logo.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
     <style>
-        body {
-    font-family: Quicksand, Vollkorn, Ubuntu, Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+        :root {
+    --ink: #1b2430;
+    --ink-2: #4a5560;
+    --ink-3: #7a8591;
+    --paper: #ffffff;
+    --surface: #f4f6f8;
+    --line: #dfe4ea;
+    --steel: #2b5a8c;
+    --steel-dark: #1f4468;
+    --steel-soft: #e8f0f8;
+    --code-bg: #1e2a36;
+    --code-fg: #e8edf2;
+    --code-comment: #8fa3b5;
+    --code-hl: #ffd166;
+    --radius: 6px;
+    --font: "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
-.inline-code {
-    background-color: lightyellow;
-    font-family: monospace;
+* {
+    box-sizing: border-box;
 }
 
-.logo {
-    height: 120px;
-    width: 120px;
+html {
+    scroll-behavior: auto;
 }
 
-@media (max-width: 800px) {
-    .card {
-        border: 1px solid lightgrey;
-        background-color: rgba(0, 0, 0, 0.01);
-        margin: 0px;
-        padding: 4px;
-        width: calc(100% - 12px);
-        display: inline-block;
-        background-color: white;
-        font-size: 90%;
-    }
-
-    .section {
-        margin: 0px;
-        border: 2px dashed lightgrey;
-        padding: 4px;
-        overflow: hidden;
-        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-        display: inline-block;
-        vertical-align: top;
-        font-size: 90%;
-        font-size: 90%;
-        overflow: hidden;
-    }
-
-
-    .home-card {
-        border: 1px solid lightgrey;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        margin: 0;
-        padding: 4px;
-        width: calc(100% - 60px);
-        display: inline-block;
-        background-color: white;
-        border-radius: 8px;
-        font-size: 90%;
-        overflow: hidden;
-    }
-
-    .tabcontent {
-        display: none;
-        padding: 4px;
-        border: 1px solid #ccc;
-        border-top: none;
-        overflow: hidden;
-    }
-
-    pre {
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    background-color: var(--paper);
+    -webkit-font-smoothing: antialiased;
 }
 
-@media (min-width: 801px) {
-    .card {
-        border: 1px solid lightgrey;
-        background-color: rgba(0, 0, 0, 0.01);
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        margin: 14px;
-        padding: 16px;
-        width: calc(100% - 70px);
-        display: inline-block;
-        background-color: white;
-        border-radius: 8px;
-    }
+a {
+    color: var(--steel);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
 
-    .section {
-        margin: 10px;
-        border: 2px dashed lightgrey;
-        padding: 10px;
-        overflow: hidden;
-        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-        display: inline-block;
-        vertical-align: top;
-    }
+a:hover {
+    color: var(--steel-dark);
+}
 
-    body {
-        margin: 20px;
-    }
-
-
-    .home-card {
-        border: 1px solid lightgrey;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        margin: 0px;
-        padding: 16px;
-        width: calc(100% - 60px);
-        display: inline-block;
-        background-color: white;
-        border-radius: 8px;
-    }
-
-    .tabcontent {
-        display: none;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-top: none;
-    }
+h1, h2, h3, h4 {
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 12px 0;
 }
 
 h1 {
-    margin-top: 10px;
-    font-size: 180%;
+    font-size: 26px;
 }
 
-@media (max-width: 800px) {
-    .hide-on-mobile {
-        display: none;
-    }
+h2 {
+    font-size: 21px;
+    margin-top: 22px;
 }
 
+h3 {
+    font-size: 17px;
+    margin-top: 18px;
+}
 
-.tab {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    border-bottom: 1px solid #e5e7eb;
+p {
+    margin: 0 0 12px 0;
+}
+
+p, li {
+    max-width: 78ch;
+}
+
+ul, ol {
+    padding-left: 22px;
+    margin: 0 0 12px 0;
+}
+
+li {
     margin-bottom: 4px;
 }
 
-.tab button {
-    position: relative;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 11px 16px;
-    margin-bottom: -1px;
+img {
+    max-width: 100%;
+}
+
+/* ---------- page frame ---------- */
+
+.page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px 40px 24px;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--line);
+}
+
+.site-header-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 28px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.brand img {
+    height: 34px;
+    width: 34px;
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-left: auto;
+}
+
+.site-nav button {
     font-family: inherit;
-    font-size: 14px;
+    font-size: 14.5px;
     font-weight: 500;
-    color: #6b7280;
-    border-bottom: 4px solid transparent;
-    border-radius: 8px 8px 0 0;
-    transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+    color: var(--ink-2);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px 10px 6px 10px;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
 }
 
-.tab button:hover {
-    color: #1f2937;
-    background-color: #f3f4f6;
+.site-nav button:hover {
+    color: var(--ink);
+    background-color: var(--surface);
 }
 
-.tab button:focus-visible {
-    outline: 2px solid #1d4ed8;
+.site-nav button:focus-visible {
+    outline: 2px solid var(--steel);
     outline-offset: -2px;
 }
 
-.tab button.active {
-    color: #1d4ed8;
-    border-bottom-color: #1d4ed8;
+.site-nav button.active {
+    color: var(--steel);
+    border-bottom-color: var(--steel);
 }
 
 .tabcontent {
     display: none;
-    padding: 2px 2px;
-    animation: tabContentFade 0.2s ease;
+    padding-top: 8px;
 }
 
-@keyframes tabContentFade {
-    from {
-        opacity: 0;
-        transform: translateY(3px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.site-footer {
+    border-top: 1px solid var(--line);
+    margin-top: 40px;
+    padding-top: 16px;
+    font-size: 14px;
+    color: var(--ink-3);
 }
 
-@media (max-width: 720px) {
-    .tab {
-        flex-direction: column;
-        gap: 0;
-    }
-
-    .tab button {
-        width: 100%;
-        text-align: left;
-        margin-bottom: 0;
-        border-bottom: 1px solid #e5e7eb;
-        border-radius: 0;
-    }
-
-    .tab button.active {
-        border-bottom-color: #1d4ed8;
-    }
+.site-footer a {
+    color: var(--ink-2);
 }
 
-/* command snippets, notes and examples shared by the INSTALL & USE and LANDSCAPES tabs */
-.cmd {
-    background-color: lightyellow;
-    border: 1px solid #e0e0c0;
-    padding: 8px 10px;
-    font-family: monospace;
-    font-size: 105%;
-    overflow-x: auto;
-    white-space: pre;
-    margin: 6px 0 10px 0;
+/* ---------- content blocks shared by the tabs ---------- */
+
+/* a section of a tab: whitespace and a hairline, not a box */
+.card {
+    padding: 26px 0 22px 0;
+    border-top: 1px solid var(--line);
 }
 
-.cmd .hl {
-    background-color: yellow;
+.card:first-of-type {
+    border-top: none;
+    padding-top: 8px;
 }
 
-.cmd .c {
-    color: #808080;
-}
-
-.steps td {
+/* a tile that is a link target (examples, sub-pages) */
+.section {
+    display: inline-block;
     vertical-align: top;
-    padding: 6px 10px 6px 0;
+    background-color: var(--paper) !important;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px;
+    margin: 0 10px 12px 0 !important; /* the tiles carry inline 50px bottom margins from the old layout */
+    max-width: 100%;
+    overflow: hidden;
 }
 
-.steps td:first-child {
-    white-space: nowrap;
-    font-weight: bold;
-    font-family: monospace;
+.section:hover {
+    border-color: var(--steel);
+}
+
+.section a {
+    color: var(--steel);
+}
+
+/* an example box inside a tab (install examples) */
+.example {
+    margin: 12px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background-color: var(--surface);
+    padding: 12px 14px;
+    overflow: hidden;
 }
 
 .note {
-    background-color: #f4f4f4;
-    border-left: 4px solid #c0c0c0;
-    padding: 6px 10px;
-    margin: 8px 0;
-    font-size: 95%;
+    background-color: var(--surface);
+    border-left: 3px solid var(--steel);
+    padding: 8px 12px;
+    margin: 10px 0;
+    font-size: 15px;
 }
 
-.example {
-    margin: 10px 0;
-    border: 2px dashed lightgrey;
-    padding: 10px;
-    overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+.inline-code {
+    font-family: var(--mono);
+    font-size: 0.92em;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0 5px;
+    color: var(--ink);
+}
+
+.cmd {
+    position: relative;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--code-fg);
+    background-color: var(--code-bg);
+    border-radius: var(--radius);
+    padding: 12px 64px 12px 14px;
+    margin: 8px 0 12px 0;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.cmd .hl {
+    color: var(--code-hl);
+    background-color: rgba(255, 209, 102, 0.12);
+    border-radius: 3px;
+    padding: 1px 4px;
+    margin-left: -4px;
+}
+
+.cmd .c {
+    color: var(--code-comment);
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-family: var(--font);
+    font-size: 12px;
+    color: #cdd6e0;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    color: var(--paper);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+pre {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.5;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    overflow-x: auto;
+}
+
+table.steps td {
+    vertical-align: top;
+    padding: 6px 12px 6px 0;
+}
+
+table.steps td:first-child {
+    white-space: nowrap;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--steel);
+}
+
+/* ---------- home ---------- */
+
+.hero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 36px;
+    align-items: flex-start;
+    padding: 34px 0 10px 0;
+}
+
+.hero-text {
+    flex: 1 1 400px;
+    max-width: 560px;
+    min-width: 0;
+}
+
+.hero-title {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px 0;
+}
+
+.hero-sub {
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 56ch;
+    margin: 0 0 18px 0;
+}
+
+.hero-links {
+    font-size: 15px;
+    color: var(--ink-2);
+    margin: 0;
+}
+
+.hero-shot {
+    flex: 1 1 380px;
+    max-width: 580px;
+    min-width: 0;
+    text-decoration: none;
+    color: var(--ink-3);
+}
+
+.hero-shot img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(27, 36, 48, 0.12);
+}
+
+.shot-caption {
+    font-size: 13.5px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 18px 32px;
+    margin: 6px 0 16px 0;
+}
+
+.feature {
+    font-size: 15px;
+    color: var(--ink-2);
+}
+
+.feature-title {
+    font-size: 16.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+}
+
+.examples-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-bottom: 8px;
+}
+
+.examples-group {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.examples-label {
+    font-size: 14px;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+}
+
+.example-card {
+    width: 300px;
+    margin: 0 10px 0 0;
+}
+
+.hero .cmd {
+    font-size: 13px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.quote {
+    font-style: italic;
+    color: var(--ink-3);
+    margin: 14px 0 0 0;
+}
+
+/* ---------- install: tracks and checklist ---------- */
+
+.track-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 14px 0 12px 0;
+}
+
+.track-btn {
+    flex: 1 1 200px;
+    min-width: 200px;
+    font-family: inherit;
+    text-align: left;
+    background-color: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+.track-btn:hover {
+    border-color: var(--steel);
+}
+
+.track-btn.active {
+    border-color: var(--steel);
+    background-color: var(--steel-soft);
+}
+
+.track-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.track-sub {
+    color: var(--ink-2);
+    font-size: 13.5px;
+    margin-top: 2px;
+}
+
+.track-panel {
+    display: none;
+    background-color: var(--surface);
+    border-radius: 8px;
+    padding: 18px 20px 12px 20px;
+}
+
+.track-panel.active {
+    display: block;
+}
+
+.steps-list {
+    list-style: none;
+    counter-reset: step;
+    padding: 0;
+    margin: 0 0 8px 0;
+}
+
+.steps-list > li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 44px;
+    margin: 0 0 16px 0;
+    max-width: none;
+}
+
+.steps-list > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--steel);
+    color: var(--paper);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.step-title {
+    font-weight: 600;
+    font-size: 16.5px;
+    line-height: 30px;
+}
+
+.step-body {
+    color: var(--ink-2);
+    font-size: 15px;
+    margin: 2px 0 4px 0;
+    max-width: 78ch;
+}
+
+.track-panel .cmd {
+    background-color: var(--code-bg);
+}
+
+details.tips {
+    margin: 4px 0 4px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 6px 12px;
+    background-color: var(--paper);
+}
+
+details.tips summary {
+    cursor: pointer;
+    color: var(--steel);
+    font-size: 15px;
+}
+
+details.tips[open] summary {
+    margin-bottom: 8px;
+}
+
+.next-steps {
+    margin: 16px 0 0 0;
+    padding: 10px 14px;
+    border-left: 3px solid var(--steel);
+    background-color: var(--steel-soft);
+    max-width: 90ch;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 720px) {
+    body {
+        font-size: 15.5px;
+    }
+
+    .page, .site-header-inner {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .site-header-inner {
+        gap: 4px 12px;
+    }
+
+    .site-nav {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .site-nav button {
+        font-size: 13.5px;
+        padding: 6px 8px;
+    }
+
+    .hero {
+        padding-top: 18px;
+        gap: 22px;
+    }
+
+    .hero-title {
+        font-size: 30px;
+    }
+
+    .hero-sub {
+        font-size: 16.5px;
+    }
+
+    .section {
+        margin-right: 0;
+        width: 100% !important;
+    }
+
+    .hide-on-mobile {
+        display: none;
+    }
 }
 
     </style>
@@ -270,205 +628,174 @@ h1 {
             }
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
+            window.scrollTo(0, 0);
         }
+
+        // A "copy" button on every command box (.cmd): copies the plain text of the box.
+        window.addEventListener('DOMContentLoaded', function () {
+            if (!navigator.clipboard) return;
+            var boxes = document.getElementsByClassName('cmd');
+            for (var i = 0; i < boxes.length; i++) {
+                (function (box) {
+                    var button = document.createElement('button');
+                    button.className = 'copy-btn';
+                    button.type = 'button';
+                    button.textContent = 'copy';
+                    button.title = 'Copy to clipboard';
+                    button.onclick = function () {
+                        var text = box.innerText.replace(/\s*copy$/, '').replace(/\s+$/, '');
+                        navigator.clipboard.writeText(text).then(function () {
+                            button.textContent = 'copied';
+                            setTimeout(function () { button.textContent = 'copy'; }, 1500);
+                        });
+                    };
+                    box.appendChild(button);
+                })(boxes[i]);
+            }
+        });
         window.addEventListener('DOMContentLoaded', function () {
             var tab = location.hash.replace('#', '');
             var btn = tab && document.getElementById(tab + '_tab');
-            if (btn) btn.click();
+            if (btn) {
+                btn.click();
+                // The hash also names the tab's content div, so the browser scrolls to it on load
+                // (hiding the header); undo that once the load-time fragment scroll has happened.
+                window.addEventListener('load', function () {
+                    setTimeout(function () { window.scrollTo(0, 0); }, 50);
+                });
+            }
         });
     </script>
 </head>
 <body>
-<table>
-    <tr>
-        <td class="hide-on-mobile" style="padding-right: 18px">
-            <img src="assets/logo.png" class="logo hide-on-mobile">
-        </td>
-        <td style="">
-            <div style="font-size: 420%; font-weight: bold; margin-bottom: 0;">Sokrates</div>
-            <div style="color: #a0a0a0; font-size: 150%">Polyglot source code examination tool</div>
-        </td>
-    </tr>
-</table>
-<div style="margin-top: 32px">
-    <div class="tab">
-        <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">HOME</button>
-        <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">INSTALL & USE</button>
-        <button id="landscapes_tab" class="tablinks" onclick="openTab(event, 'landscapes')">LANDSCAPES</button>
-        <button id="ai_insights_tab" class="tablinks" onclick="openTab(event, 'ai_insights')">AI INSIGHTS</button>
-        <button id="config_tab" class="tablinks" onclick="openTab(event, 'config')">CONFIGURATION</button>
-        <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">EXAMPLES</button>
-        <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">FEATURES</button>
-        <button id="articles_tab" class="tablinks" onclick="openTab(event, 'articles')">ARTICLES</button>
+<header class="site-header">
+    <div class="site-header-inner">
+        <a class="brand" href="#home" onclick="document.getElementById('home_tab').click(); return false;">
+            <img src="assets/logo.png" alt=""> Sokrates
+        </a>
+        <nav class="site-nav" aria-label="Sections">
+            <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">Home</button>
+            <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">Install &amp; use</button>
+            <button id="landscapes_tab" class="tablinks" onclick="openTab(event, 'landscapes')">Landscapes</button>
+            <button id="ai_insights_tab" class="tablinks" onclick="openTab(event, 'ai_insights')">AI insights</button>
+            <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">Examples</button>
+            <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">Features</button>
+            <button id="articles_tab" class="tablinks" onclick="openTab(event, 'articles')">Articles</button>
+        </nav>
     </div>
-
+</header>
+<main class="page">
     <div id="home" class="tabcontent" style="display: block">
-        <div style="margin: 0px; margin: 0">
-    <p style="padding: 22px">
-        <i style=" font-size: 24px">"Talk is expensive. Show me the code."</i><br><br><span style="font-size: 20px">― <b style="font-size: 20px">Željko Obrenović</b></span></p>
-    <div class="card">
-        <h1>What is Sokrates?</h1>
-        <ul style="padding-left: 20px">
-            <li>
-                Sokrates is a tool built by <b><a href="https://zeljkoobrenovic.com">Željko Obrenović</a></b>.
-                It implements his vision on how to document and analyze software architectures of complex systems.
-            </li>
-            <li>
-                Sokrates is provides a pragmatic, inexpensive way to extract rich data from any source code repositories. No need for long interviews and workshops. Just show the code.
-            </li>
-            <li>Sokrates can help you to understand your code by making visible the size, complexity, and
-                coupling of software, as well all people interactions and team topologies.
-            </li>
-            <li style="margin-top: 12px">
-                Sokrates is one of several open-source tools we use when implementing <a target="_blank" href="https://grounded-architecture.io">Grounded Architecture</a>
-                <a target="_blank" href="https://grounded-architecture.io/analytics">Lightweight
-                    Architectural Analytics</a></li>
-            <li style="margin-top: 12px">
-                Sokrates borrows ideas from <b><a
-                    href="https://queue.acm.org/detail.cfm?id=945136">code spelunking</a></b> tool,
-                in particular <a href="https://en.wikipedia.org/wiki/Grep">grep</a>, adding structure on top of regex source
-                code searches.
-            </li>
-        </ul>
+        <div class="hero">
+    <div class="hero-text">
+        <div class="hero-title">See what is really in a code base. In one command.</div>
+        <p class="hero-sub">Sokrates turns any git repository into a set of self-contained HTML reports: size and structure,
+            duplication and complexity, components and dependencies, who works on what, and how all of it changes over time.
+            Any language, no setup, free and open source.</p>
+        <div class="cmd">cd &lt;your-project&gt;
+<span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span>
+open _sokrates/reports/index.html</div>
+        <p class="hero-links">
+            No Docker? <a href="#install-java" onclick="document.getElementById('install_tab').click(); openTrack('java'); return false;">Run the JAR with Java 17+</a>
+            &nbsp;&middot;&nbsp; <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">Step-by-step guide</a>
+            &nbsp;&middot;&nbsp; <a href="#examples" onclick="document.getElementById('examples_tab').click(); return false;">Live examples</a>
+        </p>
     </div>
-    <div class="card">
-        <h1>Recent examples of complex Sokrates analyses:</h1>
-        <div style="display: inline-block">
-            <div style="margin-left: 12px">Single repository:</div>
-            <div class="section" style="background-color: #f0f0f0; width: 300px; margin-bottom: 30px; ">
+    <a class="hero-shot" href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/index.html" target="_blank" title="Open the live report">
+        <img src="assets/screenshots/report-overview.png" alt="The overview page of a Sokrates report: code size per scope, age, languages and activity">
+        <div class="shot-caption">The overview of a report &mdash; OpenAI Codex, live &nearr;</div>
+    </a>
+</div>
+
+<div class="card">
+    <h1>What you get</h1>
+    <div class="feature-grid">
+        <div class="feature">
+            <div class="feature-title">Size &amp; structure</div>
+            <div>Lines of code per scope, language and folder; file sizes, age and freshness; zoomable maps of the whole tree.</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">Duplication &amp; complexity</div>
+            <div>Duplicated blocks across files and components; unit size and conditional complexity, with the risky code listed.</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">Components &amp; dependencies</div>
+            <div>Logical decompositions you define in one JSON file, with dependency graphs between components and files that change together.</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">People &amp; teams</div>
+            <div>Who contributes where and how much, knowledge concentration, team topologies, bots and AI co-authored commits.</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">Trends</div>
+            <div>Commits, churn and contributors per year, month, week and day; what is active, what is legacy.</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">Landscapes &amp; AI insights</div>
+            <div>Aggregate many repositories, or whole GitHub and GitLab organizations, into portfolio views. Let an AI coding agent refine the analysis and explain it.</div>
+        </div>
+    </div>
+    <p style="margin-bottom: 0">The <a href="#features" onclick="document.getElementById('features_tab').click(); return false;">Features</a> tab
+        describes every report; the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">Landscapes</a> and
+        <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a> tabs cover the last two.</p>
+</div>
+
+<div class="card">
+    <h1>Live examples</h1>
+    <div class="examples-row">
+        <div class="examples-group">
+            <div class="examples-label">One repository:</div>
+            <div class="section example-card" style="background-color: #f0f0f0">
                 <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/index.html" target="_blank" style="text-decoration: none">
                     <div><img src="assets/logos/codex-logo.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">OpenAI Codex Repository</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>1.1</b> MLOC, <b>500+</b> contributors, <b>9K</b> commits (includes AI Insights*)</div>
+                    <div style="font-size: 140%; font-weight: bold">OpenAI Codex</div>
+                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>1.1</b> MLOC, <b>500+</b> contributors, <b>9K</b> commits (with AI insights)</div>
                 </a>
             </div>
         </div>
-        <div style="display: inline-block; border-left: 2px dashed #c0c0c0; padding-left: 20px; margin-left: 15px">
-            <div style="margin-left: 12px">Landscape analysis of multiple repositories:</div>
-            <div class="section" style="width: 300px; margin-bottom: 30px; ">
+        <div class="examples-group examples-group-landscapes">
+            <div class="examples-label">A landscape of many repositories:</div>
+            <div class="section example-card">
                 <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
                     <div><img src="assets/logos/openai.svg" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">OpenAI's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors, <b>9K</b> commits</div>
+                    <div style="font-size: 140%; font-weight: bold">OpenAI's OSS projects</div>
+                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors</div>
                 </a>
             </div>
-            <div class="section" style="width: 300px; margin-bottom: 30px; ">
+            <div class="section example-card">
                 <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
                     <div><img src="assets/logos/anthropics.png" style="height: 90px; padding: 4px"></div>
-                    <div style="font-size: 140%; font-weight: bold">Anthropics's OSS Projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors, <b>5K</b> commits</div>
+                    <div style="font-size: 140%; font-weight: bold">Anthropic's OSS projects</div>
+                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors</div>
                 </a>
             </div>
         </div>
     </div>
-    <div class="card">
-        <h1>Sokrates in 5 minutes</h1>
-        <div style="display: inline-block; margin-right: 20px">
-            <p>See a 5 minutes video on using Sokrates CLI to analyze source code of Sokrates:</p>
-            <div>
-                <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/ZybfJQ8Ob7g"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-            </div>
-        </div>
-        <div style="display: inline-block;">
-            <p>See a 5 minutes video on using Sokrates Explorer to analyze source code of JUnit4:</p>
-            <div>
-                <iframe style="max-width: 560px" width="100%" height="315" src="https://www.youtube.com/embed/kdLcUEqGXl0"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <h1>Background</h1>
-        <ul>
-            <li>Sokrates looks on the source code from a perspective of maintenance, making visible the size, complexity and
-                coupling of software.
-            </li>
+    <p style="margin-bottom: 0">Dozens more &mdash; from single libraries to the Linux kernel and the Apache Software Foundation &mdash; on the
+        <a href="#examples" onclick="document.getElementById('examples_tab').click(); return false;">Examples</a> tab.</p>
+</div>
 
-            <li>Sokrates is one of several open-source tools we frequently used when implementing <a target="_blank" href="https://grounded-architecture.io/analytics">Grounded Architecture Lightweight
-                Architectural Analytics</a></li>
-
-            <li>For more details see my O'Reilly Video Training (from my time at Software Improvement Group):
-                <b><a href="https://player.oreilly.com/videos/9781491950791">Building Maintainable Software</a></b> (4 hours),
-                and
-                O'Reilly Webcast: <b><a href="https://www.oreilly.com/pub/e/3535">Building Maintainable Software</a></b>
-                (1 hour, together with <a href="https://www.linkedin.com/in/rob-van-der-leek-66596962/">Rob van der Leek</a>).
-            </li>
-            <li>
-                The fragment of my training video on building maintainable software is freely avaliable at Youtube:<br/><br/>
-                <iframe style="max-width: 560px" width="100%" height="315"
-                        src="https://www.youtube.com/embed/8k14k3q5zDs?start=334" frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-            </li>
-        </ul>
-    </div>
-
+<div class="card">
+    <h1>Why Sokrates</h1>
+    <ul style="padding-left: 20px">
+        <li><b>Show the code, skip the interviews.</b> A pragmatic, inexpensive way to get rich facts about any software system:
+            the analysis runs on the source and the git history, nothing else is needed.</li>
+        <li><b>Polyglot by design.</b> Forty-plus languages out of the box; everything else still gets size, duplication and history reports.
+            It borrows from <a href="https://queue.acm.org/detail.cfm?id=945136" target="_blank">code spelunking</a> and
+            <a href="https://en.wikipedia.org/wiki/Grep" target="_blank">grep</a>: structure on top of regex searches, instead of per-language parsers.</li>
+        <li><b>Reports you can hand over.</b> Static HTML that opens from disk or any web server, no database, no service to run.</li>
+        <li><b>Scales from one repo to an organization.</b> The same reports aggregate into landscapes with sub-landscapes, team views and trends.</li>
+        <li><b>Open source, MIT.</b> Built by <a href="https://zeljkoobrenovic.com" target="_blank">Željko Obrenović</a> as one of the tools behind
+            <a target="_blank" href="https://grounded-architecture.io">Grounded Architecture</a> and its
+            <a target="_blank" href="https://grounded-architecture.io/analytics">lightweight architectural analytics</a>.</li>
+    </ul>
+    <p class="quote">"Talk is expensive. Show me the code."</p>
 </div>
 
     </div>
 
     <div id="install" class="tabcontent">
-        <style>
-    .track-bar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 12px 0 4px 0;
-    }
-
-    .track-btn {
-        border: 2px solid #c0c0c0;
-        background-color: #f7f7f7;
-        border-radius: 8px;
-        padding: 10px 16px;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: 105%;
-        text-align: left;
-        min-width: 200px;
-        flex: 1 1 200px;
-    }
-
-    .track-btn:hover {
-        background-color: #eeeeee;
-    }
-
-    .track-btn.active {
-        border-color: #3f51b5;
-        background-color: #e8eaf6;
-    }
-
-    .track-btn .track-title {
-        font-weight: bold;
-        font-size: 115%;
-    }
-
-    .track-btn .track-sub {
-        color: #606060;
-        font-size: 85%;
-        margin-top: 2px;
-    }
-
-    .track-panel {
-        display: none;
-        border: 2px dashed #c0c0c0;
-        border-radius: 8px;
-        padding: 12px 16px;
-        margin-top: 10px;
-        background-color: #fcfcfc;
-    }
-
-    .track-panel.active {
-        display: block;
-    }
-
-</style>
-<script>
+        <script>
     function openTrack(name) {
         var panels = document.getElementsByClassName('track-panel');
         for (var i = 0; i < panels.length; i++) {
@@ -500,49 +827,56 @@ h1 {
 </script>
 
 <div class="card">
-    <h1>GET STARTED IN ONE COMMAND</h1>
+    <h1>Get started in one command</h1>
     <p style="font-size: 105%">
-        Sokrates analyzes a code base in one step: the <span class="inline-code">&nbsp;analyze&nbsp;</span> command extracts the git
-        history, creates an analysis configuration and generates the HTML reports. There are three ways to run it &mdash; pick the
-        track that fits you. All three end with the same command and produce the same reports.
+        Sokrates analyzes a code base in one step: <span class="inline-code">&nbsp;analyze&nbsp;</span> reads the git history, creates an
+        analysis configuration and generates the HTML reports. Pick how you want to run it &mdash; the command and the reports are the
+        same on every track.
     </p>
     <div class="track-bar">
         <button id="track-docker-btn" class="track-btn active" onclick="openTrack('docker')">
-            <div class="track-title">🐳 DOCKER</div>
+            <div class="track-title">Docker</div>
             <div class="track-sub">Recommended. Nothing to install but Docker; no Java needed.</div>
         </button>
         <button id="track-java-btn" class="track-btn" onclick="openTrack('java')">
-            <div class="track-title">☕ JAVA (JAR)</div>
+            <div class="track-title">Java (JAR)</div>
             <div class="track-sub">Download one JAR and run it with Java 17+.</div>
         </button>
         <button id="track-source-btn" class="track-btn" onclick="openTrack('source')">
-            <div class="track-title">🛠 FROM SOURCE</div>
+            <div class="track-title">From source</div>
             <div class="track-sub">Clone the repository and build with Maven.</div>
         </button>
     </div>
 
     <div id="track-docker" class="track-panel active">
-        <h3 style="margin-top: 4px">Track 1: Docker</h3>
-        <p><b>You need:</b> <a href="https://docs.docker.com/get-docker/" target="_blank">Docker</a> (Docker Desktop, Colima, Podman with
-            Docker compatibility, &hellip;). The image is published for <span class="inline-code">linux/amd64</span> and
-            <span class="inline-code">linux/arm64</span> (Apple Silicon), so it runs natively on macOS, Linux and Windows.</p>
-        <p><b>Run</b> from the root folder of the code base you want to analyze (a git clone works best &mdash; the history feeds the
-            contributor and trend reports):</p>
-        <div class="cmd">cd &lt;your-project&gt;
-<span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span>
-
-open _sokrates/reports/index.html</div>
-        <p>That is all. The first run downloads the image (once); later runs start instantly. The folder is mounted at
-            <span class="inline-code">/code</span> inside the container, and everything Sokrates writes (the
-            <span class="inline-code">_sokrates/</span> folder and <span class="inline-code">git-history.txt</span>) lands in your project
-            folder.</p>
-        <p><b>Any other command</b> works the same way &mdash; replace <span class="inline-code">analyze</span>:</p>
-        <div class="cmd">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates generateReports -help
-docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandscape -analysisRoot .</div>
-        <p><b>Tip:</b> define an alias once, and the examples further down this page work verbatim:</p>
-        <div class="cmd">alias sokrates='docker run --rm -v "$PWD:/code" ghcr.io/zeljkoobrenovic/sokrates'
+        <ol class="steps-list">
+            <li>
+                <div class="step-title">Have Docker</div>
+                <div class="step-body"><a href="https://docs.docker.com/get-docker/" target="_blank">Docker Desktop</a>, Colima or Podman.
+                    Nothing else: no Java, no git binary. The image runs natively on Intel and Apple Silicon, on macOS, Linux and Windows.</div>
+            </li>
+            <li>
+                <div class="step-title">Run <span class="inline-code">analyze</span> in the root folder of your project</div>
+                <div class="cmd">cd &lt;your-project&gt;
+<span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span></div>
+                <div class="step-body">A git clone works best: the history feeds the contributor and trend reports. The first run downloads
+                    the image once; later runs start instantly.</div>
+            </li>
+            <li>
+                <div class="step-title">Open the report</div>
+                <div class="cmd">open _sokrates/reports/index.html</div>
+                <div class="step-body">Everything Sokrates writes lands in your project folder: <span class="inline-code">_sokrates/</span>
+                    (configuration and reports) and <span class="inline-code">git-history.txt</span>.</div>
+            </li>
+        </ol>
+        <details class="tips">
+            <summary>Tips &amp; troubleshooting: alias, other commands, Windows, Linux, Colima, memory, versions</summary>
+            <p><b>Alias:</b> define it once, and every example on this site works verbatim:</p>
+            <div class="cmd">alias sokrates='docker run --rm -v "$PWD:/code" ghcr.io/zeljkoobrenovic/sokrates'
 sokrates analyze</div>
-        <div class="note">
+            <p><b>Any other command</b> works the same way &mdash; replace <span class="inline-code">analyze</span>:</p>
+            <div class="cmd">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates generateReports -help
+docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandscape -analysisRoot .</div>
             <ul style="margin: 4px 0; padding-left: 18px">
                 <li><b>Windows PowerShell:</b> use <span class="inline-code">-v "${PWD}:/code"</span> instead of
                     <span class="inline-code">"$(pwd):/code"</span>.</li>
@@ -556,76 +890,100 @@ sokrates analyze</div>
                 <li><b>Big repositories:</b> give the JVM more memory with
                     <span class="inline-code">-e JAVA_TOOL_OPTIONS=-Xmx8g</span> (Docker passes the variable on to Java).</li>
             </ul>
-        </div>
+        </details>
     </div>
 
     <div id="track-java" class="track-panel">
-        <h3 style="margin-top: 4px">Track 2: Java (download the JAR)</h3>
-        <p><b>You need:</b> a Java runtime, version 17 or newer (<a href="https://adoptium.net/" target="_blank">Adoptium Temurin</a>
-            is a good free choice; <span class="inline-code">java -version</span> shows what you have). Git itself is not needed: Sokrates
-            reads the repository history with JGit.</p>
-        <p><b>Download</b> the command line interface JAR (~20 MB, always the latest build of the master branch):</p>
-        <table style="margin-bottom: 8px">
-            <tr>
-                <td style="text-align: left; padding-right: 10px; vertical-align: top">BROWSER:</td>
-                <td><a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">sokrates-LATEST.jar</a></td>
-            </tr>
-            <tr>
-                <td style="text-align: left; padding-right: 10px; vertical-align: top">CURL:</td>
-                <td>
-                    <div class="cmd" style="margin: 0">curl https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar --output sokrates-LATEST.jar</div>
-                </td>
-            </tr>
-        </table>
-        <p><b>Run</b> from the root folder of the code base you want to analyze (a git clone works best &mdash; the history feeds the
-            contributor and trend reports):</p>
-        <div class="cmd">cd &lt;your-project&gt;
-<span class="hl">java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar analyze</span>
-
-open _sokrates/reports/index.html</div>
-        <p><b>Tip:</b> define an alias once, and the examples further down this page work verbatim:</p>
-        <div class="cmd">alias sokrates='java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar'
+        <ol class="steps-list">
+            <li>
+                <div class="step-title">Have Java 17 or newer</div>
+                <div class="step-body"><a href="https://adoptium.net/" target="_blank">Adoptium Temurin</a> is a good free choice;
+                    <span class="inline-code">java -version</span> shows what you have. Git itself is not needed: Sokrates reads the
+                    repository history with JGit.</div>
+            </li>
+            <li>
+                <div class="step-title">Download the JAR</div>
+                <div class="step-body">In the browser: <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">sokrates-LATEST.jar</a>
+                    (~20 MB, always the latest build of the master branch), or:</div>
+                <div class="cmd">curl https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar --output sokrates-LATEST.jar</div>
+            </li>
+            <li>
+                <div class="step-title">Run <span class="inline-code">analyze</span> in the root folder of your project</div>
+                <div class="cmd">cd &lt;your-project&gt;
+<span class="hl">java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar analyze</span></div>
+                <div class="step-body">A git clone works best: the history feeds the contributor and trend reports.</div>
+            </li>
+            <li>
+                <div class="step-title">Open the report</div>
+                <div class="cmd">open _sokrates/reports/index.html</div>
+                <div class="step-body">Everything Sokrates writes lands in your project folder: <span class="inline-code">_sokrates/</span>
+                    (configuration and reports) and <span class="inline-code">git-history.txt</span>.</div>
+            </li>
+        </ol>
+        <details class="tips">
+            <summary>Tips &amp; troubleshooting: alias, memory, reference date</summary>
+            <p><b>Alias:</b> define it once, and every example on this site works verbatim:</p>
+            <div class="cmd">alias sokrates='java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar'
 sokrates analyze</div>
-        <div class="note">
             <ul style="margin: 4px 0; padding-left: 18px">
                 <li><b>Big repositories:</b> give the JVM more memory, e.g. <span class="inline-code">java -Xmx8g -jar sokrates-LATEST.jar analyze</span>.</li>
                 <li><b>Reference date:</b> Sokrates counts commits and contributors relative to today (past 30 days, 90 days, year).
                     To analyze an older snapshot, pass <span class="inline-code">-date YYYY-MM-dd</span> or set the
                     <span class="inline-code">SOKRATES_ANALYSIS_DATE</span> environment variable.</li>
             </ul>
-        </div>
+        </details>
     </div>
 
     <div id="track-source" class="track-panel">
-        <h3 style="margin-top: 4px">Track 3: From source</h3>
-        <p><b>You need:</b> Java 17+ and <a href="https://maven.apache.org/" target="_blank">Maven</a>. The source code is on GitHub:
-            <a href="https://github.com/zeljkoobrenovic/sokrates" target="_blank">github.com/zeljkoobrenovic/sokrates</a>
-            (free and open source, <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/LICENSE" target="_blank">MIT license</a>).</p>
-        <p><b>Build:</b></p>
-        <div class="cmd">git clone https://github.com/zeljkoobrenovic/sokrates.git
+        <ol class="steps-list">
+            <li>
+                <div class="step-title">Have Java 17+ and Maven</div>
+                <div class="step-body">The source is on GitHub:
+                    <a href="https://github.com/zeljkoobrenovic/sokrates" target="_blank">github.com/zeljkoobrenovic/sokrates</a>
+                    (free and open source, <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/LICENSE" target="_blank">MIT license</a>).</div>
+            </li>
+            <li>
+                <div class="step-title">Clone and build</div>
+                <div class="cmd">git clone https://github.com/zeljkoobrenovic/sokrates.git
 cd sokrates
 mvn clean install            <span class="c"># add -DskipTests for a faster build</span></div>
-        <p>The build produces two runnable fat JARs:</p>
-        <ul>
-            <li>the command line interface: <span class="inline-code">cli/target/cli-1.0-jar-with-dependencies.jar</span></li>
-        </ul>
-        <p><b>Run</b> from the root folder of the code base you want to analyze:</p>
-        <div class="cmd">cd &lt;your-project&gt;
-<span class="hl">java -jar &lt;sokrates-repo&gt;/cli/target/cli-1.0-jar-with-dependencies.jar analyze</span>
-
-open _sokrates/reports/index.html</div>
-        <p><b>Tip:</b> define an alias once, and the examples further down this page work verbatim:</p>
-        <div class="cmd">alias sokrates='java -jar &lt;sokrates-repo&gt;/cli/target/cli-1.0-jar-with-dependencies.jar'
+                <div class="step-body">The build produces the command line interface as one runnable JAR:
+                    <span class="inline-code">cli/target/cli-1.0-jar-with-dependencies.jar</span>.</div>
+            </li>
+            <li>
+                <div class="step-title">Run <span class="inline-code">analyze</span> in the root folder of your project</div>
+                <div class="cmd">cd &lt;your-project&gt;
+<span class="hl">java -jar &lt;sokrates-repo&gt;/cli/target/cli-1.0-jar-with-dependencies.jar analyze</span></div>
+            </li>
+            <li>
+                <div class="step-title">Open the report</div>
+                <div class="cmd">open _sokrates/reports/index.html</div>
+            </li>
+        </ol>
+        <details class="tips">
+            <summary>Tips: alias, building the Docker image yourself, contributing</summary>
+            <p><b>Alias:</b> define it once, and every example on this site works verbatim:</p>
+            <div class="cmd">alias sokrates='java -jar &lt;sokrates-repo&gt;/cli/target/cli-1.0-jar-with-dependencies.jar'
 sokrates analyze</div>
-        <p>You can also build the Docker image yourself: <span class="inline-code">docker build -t sokrates -f dockerfile .</span> in the
-            repository root, then use <span class="inline-code">sokrates</span> instead of <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates</span>
-            in the Docker track. The repository's <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/CLAUDE.md" target="_blank">CLAUDE.md</a>
-            describes the module architecture for contributors.</p>
+            <p>You can also build the Docker image yourself: <span class="inline-code">docker build -t sokrates -f dockerfile .</span> in the
+                repository root, then use <span class="inline-code">sokrates</span> instead of <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates</span>
+                in the Docker track. The repository's <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/CLAUDE.md" target="_blank">CLAUDE.md</a>
+                describes the module architecture for contributors.</p>
+        </details>
+    </div>
+
+    <div class="next-steps">
+        <b>Next:</b> look at the reports, edit <span class="inline-code">_sokrates/config.json</span> (scope, components, features of interest
+        &mdash; see <a href="#configure" onclick="document.getElementById('configure').scrollIntoView(); return false;">Configure the analysis</a> below) and run
+        <span class="inline-code">analyze</span> again &mdash; or let an AI coding agent do that for you
+        (<a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>).
+        Many repositories, or a whole GitHub or GitLab organization? See
+        <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">Landscapes</a>.
     </div>
 </div>
 
 <div class="card">
-    <h1>WHAT <span style="font-family: monospace">analyze</span> DOES</h1>
+    <h1>What <span class="inline-code">analyze</span> does</h1>
     <p>The <span class="inline-code">&nbsp;analyze&nbsp;</span> command chains the three steps of a Sokrates analysis. Each step is also
         available as a separate command, which is useful once you start refining the analysis or scripting it:</p>
     <table class="steps">
@@ -655,8 +1013,8 @@ sokrates analyze</div>
     </table>
     <p><b>The workflow is iterative:</b> run <span class="inline-code">analyze</span>, look at the reports, edit
         <span class="inline-code">_sokrates/config.json</span> (scope, logical decompositions, features of interest, goals and controls
-        &mdash; see the <a href="#config" onclick="document.getElementById('config_tab').click(); return false;">CONFIGURATION</a> tab), and
-        run <span class="inline-code">analyze</span> again. The <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI INSIGHTS</a>
+        &mdash; see <a href="#configure" onclick="document.getElementById('configure').scrollIntoView(); return false;">Configure the analysis</a> below), and
+        run <span class="inline-code">analyze</span> again. The <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>
         tab shows how to let an AI coding agent refine the configuration and explain the results.</p>
     <p>Options (all optional): <span class="inline-code">-srcRoot &lt;folder&gt;</span> analyzes another folder than the current one,
         <span class="inline-code">-name</span>/<span class="inline-code">-description</span> label the report,
@@ -669,8 +1027,45 @@ sokrates analyze</div>
         <span class="inline-code">data/data.zip</span>). Run <span class="inline-code">sokrates analyze -help</span> for the full list.</p>
 </div>
 
+<div class="card" id="configure">
+    <h1>Configure the analysis</h1>
+    <p>Everything about an analysis lives in one file, <span class="inline-code">_sokrates/config.json</span>, created on the first run
+        and never overwritten. Edit it and run <span class="inline-code">analyze</span> again. The keys a newcomer touches first:</p>
+    <table class="steps">
+        <tr>
+            <td>ignore, extensions</td>
+            <td>What to leave out (vendored code, fixtures) and which file extensions count. Each scope &mdash;
+                <span class="inline-code">main</span>, <span class="inline-code">test</span>, <span class="inline-code">generated</span>,
+                <span class="inline-code">buildAndDeployment</span>, <span class="inline-code">other</span> &mdash; has its own path and content filters.</td>
+        </tr>
+        <tr>
+            <td>logicalDecompositions</td>
+            <td>How the main code is grouped into components (by folder depth or by explicit path rules), which drives the component
+                and dependency reports. A code base can have several decompositions.</td>
+        </tr>
+        <tr>
+            <td>concernGroups</td>
+            <td>"Features of interest": regex rules that find cross-cutting concerns (feature flags, security-sensitive code, debt markers)
+                across files, with their own report.</td>
+        </tr>
+        <tr>
+            <td>goalsAndControls</td>
+            <td>Thresholds on the metrics (duplication, file size, unit size, complexity) that become traffic lights on the report index.</td>
+        </tr>
+        <tr>
+            <td>metadata, customTabs</td>
+            <td>The report's name, description, logo and links, and extra tabs showing any page in an iframe
+                (<span class="inline-code">addCustomTab</span> edits these from the command line).</td>
+        </tr>
+    </table>
+    <p>Every key, with defaults and examples, for the repository configuration, the landscape files and the custom conventions:
+        <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank"><b>the configuration manual</b></a>.
+        Rather not edit JSON by hand? The <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>
+        skills let an AI coding agent write and check the configuration for you.</p>
+</div>
+
 <div class="card">
-    <h1>MORE EXAMPLES</h1>
+    <h1>More examples</h1>
     <p>The examples use the <span class="inline-code">sokrates</span> alias defined in your track above (Docker, JAR or source build
         &mdash; the commands are identical).</p>
 
@@ -701,7 +1096,7 @@ open junit-team/junit4/reports/index.html
         <b>Example 2. Analyze several repositories and aggregate them into a landscape</b> &mdash; one command, given a file with one git URL per line:
         <div class="cmd">sokrates <span class="hl">analyzeLandscape -urls repos.txt</span>
 open _sokrates_landscape/index.html</div>
-        See the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">LANDSCAPES</a> tab
+        See the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">Landscapes</a> tab
         for the walkthrough, configuration, sub-landscapes and big-scale pipelines.
     </div>
 
@@ -712,7 +1107,9 @@ sokrates <span class="hl">createConventionsFile</span>
 <span class="c"># edit analysis_conventions.json (which folders are tests, generated code, which extensions to include, ...)</span>
 sokrates <span class="hl">analyze -conventionsFile analysis_conventions.json</span></div>
         <p style="margin: 4px 0">Use <span class="inline-code">exportStandardConventions</span> to see the built-in conventions the default
-            configuration is derived from.</p>
+            configuration is derived from: <a href="assets/conf/standard_analysis_conventions.json" target="_blank">standard_analysis_conventions.json</a>;
+            a custom one looks like <a href="assets/conf/sokrates_conventions.json" target="_blank">this</a>. The keys are in the
+            <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md#part-3--custom-scoping-conventions-analysis_conventionsjson" target="_blank">configuration manual</a>.</p>
     </div>
 
     <div class="example">
@@ -735,7 +1132,7 @@ sokrates <span class="hl">analyze -conventionsFile analysis_conventions.json</sp
 </div>
 
 <div class="card">
-    <h1>COMMAND LINE REFERENCE</h1>
+    <h1>Command line reference</h1>
     <p>Every command prints its options with <span class="inline-code">-help</span>. Without arguments, Sokrates prints this overview:</p>
     <div class="example">
 <pre style="">
@@ -800,7 +1197,7 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
 
     <div id="landscapes" class="tabcontent">
         <div class="card">
-    <h1>WHAT IS A LANDSCAPE?</h1>
+    <h1>What is a landscape?</h1>
     <p style="font-size: 105%">
         A single Sokrates analysis describes one repository. A <b>landscape</b> aggregates many repository analyses into one portfolio
         report: the size and languages of every repository, who contributes where and how much, how contributors and teams connect
@@ -829,13 +1226,13 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
             </a>
         </div>
     </div>
-    <p>More live landscapes are on the <a href="#examples" onclick="document.getElementById('examples_tab').click(); return false;">EXAMPLES</a> tab.</p>
+    <p>More live landscapes are on the <a href="#examples" onclick="document.getElementById('examples_tab').click(); return false;">Examples</a> tab.</p>
 </div>
 
 <div class="card">
-    <h1>BUILD A LANDSCAPE IN ONE COMMAND</h1>
+    <h1>Build a landscape in one command</h1>
     <p>The commands use the <span class="inline-code">sokrates</span> alias from the
-        <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">INSTALL &amp; USE</a> tab (Docker, JAR or
+        <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">Install &amp; use</a> tab (Docker, JAR or
         source build &mdash; the commands are identical).</p>
 
     <div class="example">
@@ -942,7 +1339,7 @@ sokrates <span class="hl">analyzeLandscape</span></div>
 </div>
 
 <div class="card">
-    <h1>CONFIGURING A LANDSCAPE</h1>
+    <h1>Configuring a landscape</h1>
     <p>A landscape is driven by JSON files in <span class="inline-code">_sokrates_landscape/</span>. All keys are documented in
         <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md#part-2--landscape-_sokrates_landscapeconfigjson" target="_blank">docs/configuration.md</a>;
         the most useful ones:</p>
@@ -1007,7 +1404,7 @@ sokrates <span class="hl">analyzeLandscape</span></div>
 
     <div id="ai_insights" class="tabcontent">
         <div class="card">
-    <h1>AI INSIGHTS — SKILLS FOR AI CODING TOOLS</h1>
+    <h1>AI insights: skills for AI coding tools</h1>
     <p style="font-size: 110%">
         Sokrates measures: size, complexity, duplication, churn, coupling, contributors. The
         <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank"><b>sokrates-skills</b></a> project adds the layer
@@ -1061,13 +1458,15 @@ sokrates <span class="hl">analyzeLandscape</span></div>
                 <li><b>sokrates-people-config</b> — contributor identity merging from git history, with a review file for the human decisions</li>
                 <li><b>sokrates-virtual-landscapes</b> — sub-landscapes from your grouping or from naming conventions, technology, activity, teams</li>
             </ul>
-            <p>The field references were read from the Sokrates Java source — including the places where documentation and code disagree.</p>
+            <p>The field references were read from the Sokrates Java source — including the places where documentation and code disagree.
+                The human-readable reference is the
+                <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank">configuration manual</a>.</p>
         </div>
     </div>
 </div>
 
 <div class="card">
-    <h1>HOW TO USE</h1>
+    <h1>How to use</h1>
     <div class="section" style="width: calc(100% - 50px)">
         <div style="margin: 10px">
             <h3 style="background-color: #ededed; padding: 4px"><b>1. Install the skills</b></h3>
@@ -1094,7 +1493,7 @@ cd sokrates-skills
             <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
 java -jar sokrates.jar analyze                # = extractGitHistory + init + generateReports
 # or, without Java:  docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</pre>
-            <p>See the <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">INSTALL &amp; USE</a>
+            <p>See the <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">Install &amp; use</a>
                 tab for the Docker, JAR and from-source ways of running Sokrates.</p>
 
             <h3 style="background-color: #ededed; padding: 4px"><b>3. Refine the configuration with the config skills</b></h3>
@@ -1176,122 +1575,12 @@ java -jar sokrates.jar addCustomTab -label "AI Insights*" -iframeLink "../ai-ins
 </div>
 
 <div class="card">
-    <h1>EXTENDING</h1>
+    <h1>Extending</h1>
     <p>All scanners share one contract (<span class="inline-code">sokrates-scan-core</span>): the findings format, the evidence rules,
         the validator and the explorer renderer. A new scanner is a <span class="inline-code">SKILL.md</span> that defines its
         question and its group taxonomy; the proven way to build one is to run it live on a real codebase with a fresh agent, ask that
         agent what was unclear, and fold the answers back into the skill. See the
         <a href="https://github.com/zeljkoobrenovic/sokrates-skills#development" target="_blank">development notes</a>.</p>
-</div>
-
-    </div>
-
-    <div id="config" class="tabcontent">
-        <div class="" style="">
-    <div class="section" style="">
-        <div style="margin: 10px 10px 10px 10px;">
-            <h2 class="title">Configuration File for Project Analyses</h2>
-            <ul>
-                <li> Sokrates project analysis configuration is defined in a JSON file.</li>
-                <li>The <span class="inline-code">analyze</span> command (or the <span class="inline-code">init</span> command on its own) generates
-                    the default file for your project (see the INSTALL &amp; USE tab for details). Edit it and run
-                    <span class="inline-code">analyze</span> (or <span class="inline-code">generateReports</span>) again to refresh the reports.
-                </li>
-                <li>The default location of the configuration file is <span class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/config.json&nbsp;</span>
-                </li>
-                <ul>
-                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/data/config.json" target="_blank"> See an example of a
-                        Sokrates configuration file ⤇ </a></li>
-                </ul>
-                <li>Based on this configuration Sokrates will generate a number of reports. The default reports folders is <span
-                        class="inline-code">&nbsp;&lt;your-project&gt;/_sokrates/reports/&nbsp;</span>
-                </li>
-                <ul>
-                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/tomcat/tomcat/html/index.html" target="_blank"> See an example of a
-                        Sokrates report ⤇ </a></li>
-                </ul>
-                <li> To learn more about details of the configuration file see the <a
-                        href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/core/CodeConfiguration.java"
-                        target="_blank">configuration file structure definition (in Java)</a>.
-                </li>
-            </ul>
-        </div>
-        <div>
-            <img src="book/assets/images/sokrates/config-overview.png" style="width: 640px" class="card hide-on-mobile">
-        </div>
-    </div>
-    <div class="section" style="">
-        <div style="margin: 10px 10px 10px 10px;"><h2 class="title">Configuration File for a Landscape Analysis</h2>
-            <ul>
-                <li> Sokrates landscape analysis configuration is defined in two JSON files: config.json and config-tags.json.</li>
-                <li>You can use the <span class="inline-code">analyzeLandscape</span> command (older name: <span class="inline-code">updateLandscape</span>) to generate default files.</li>
-                <ul>
-                    <li>java -jar sokrates.jar analyzeLandscape [options]</li>
-                </ul>
-                <li>The default location of the configuration files is <span class="inline-code">&lt;your-project&gt;/_sokrates_landscape/</span>
-                </li>
-                <ul>
-                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Tomcat/_sokrates_landscape/config.json" target="_blank"> See an example
-                        of a Sokrates landscape configuration file ⤇ </a></li>
-                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/Tomcat/_sokrates_landscape/config-tags.json" target="_blank"> See an
-                        example of a Sokrates landscape tags configuration file ⤇ </a></li>
-                </ul>
-                <li>Based on this configuration Sokrates will generate a number the landscape reports. The default reports folders is <span
-                        class="inline-code">&lt;your-project&gt;/_sokrates_landscape/reports/</span>
-                </li>
-                <ul>
-                    <li><a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank"> See an example of a
-                        Sokrates landscape report ⤇ </a></li>
-                </ul>
-                <li> To learn more about details of the configuration file see the <a
-                        href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/landscape/LandscapeConfiguration.java"
-                        target="_blank">configuration file structure definition (in Java)</a>.
-                </li>
-            </ul>
-        </div>
-        <div>
-            <img src="book/assets/images/sokrates/cmd-init-landscape.png" style="width: 640px" class="card hide-on-mobile">
-        </div>
-    </div>
-    <div class="section">
-        <h2 class="title">Configuring the Analysis Initialization</h2>
-        <ul>
-            <li>The <span class="inline-code">init</span> command creates a configuration file for project analyses. Without any parameters, this
-                command uses the standard conventions to generate a project analysis configuration.
-            </li>
-            <li>You can also use your own custom conventions to initialize projects and create new configuration files:
-                <ul>
-                    <li><pre style="background-color: #dedede; padding: 4px">    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span
-                            style="background-color: yellow">createConventionsFile</span>
-    # edit the 'analysis_conventions.json' file to define your custom conventions
-    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span style="background-color: yellow">init -conventionsFile analysis_conventions.json</span></pre>
-                    </li>
-                    <li><a href="assets/conf/sokrates_conventions.json" target="_blank">See example of a custom conventions file</a></li>
-                </ul>
-            </li>
-        </ul>
-        <ul style="margin-top: 24px;">
-            <li>The <span class="inline-code">exportStandardConventions</span> command exports Sokrates conventions to a JSON file that you can
-                use as inspiration for your custom conventions:
-            </li>
-            <ul>
-                <li>
-                    <pre style="background-color: #dedede;">    java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar <span class="inline-code">exportStandardConventions</span></pre>
-                </li>
-                <li><a href="assets/conf/standard_analysis_conventions.json" target="_blank">See example of a standard_analysis_conventions.json
-                    file</a></li>
-            </ul>
-        </ul>
-        <ul style="margin-top: 24px;">
-            <li> To learn more about details of the configuration file see the <a
-                    href="https://github.com/zeljkoobrenovic/sokrates/blob/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/scoping/custom/CustomScopingConventions.java"
-                    target="_blank">configuration file structure definition (in Java)</a>.
-            </li>
-        </ul>
-        <div>
-            <img src="book/assets/images/sokrates/cmd-init.png" style="width: 640px" class="card hide-on-mobile">
-        </div>
-    </div>
 </div>
 
     </div>
@@ -2080,7 +2369,13 @@ java -jar sokrates.jar addCustomTab -label "AI Insights*" -iframeLink "../ai-ins
     </div>
 </div>
     </div>
-</div>
 
+    <footer class="site-footer">
+        Sokrates is free and open source (MIT) &nbsp;&middot;&nbsp;
+        <a href="https://github.com/zeljkoobrenovic/sokrates" target="_blank">github.com/zeljkoobrenovic/sokrates</a> &nbsp;&middot;&nbsp;
+        <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank">configuration manual</a> &nbsp;&middot;&nbsp;
+        built by <a href="https://zeljkoobrenovic.com" target="_blank">Željko Obrenović</a>
+    </footer>
+</main>
 </body>
 </html>

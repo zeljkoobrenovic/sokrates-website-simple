@@ -1,5 +1,5 @@
 <div class="card">
-    <h1>AI INSIGHTS — SKILLS FOR AI CODING TOOLS</h1>
+    <h1>AI insights: skills for AI coding tools</h1>
     <p style="font-size: 110%">
         Sokrates measures: size, complexity, duplication, churn, coupling, contributors. The
         <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank"><b>sokrates-skills</b></a> project adds the layer
@@ -53,13 +53,15 @@
                 <li><b>sokrates-people-config</b> — contributor identity merging from git history, with a review file for the human decisions</li>
                 <li><b>sokrates-virtual-landscapes</b> — sub-landscapes from your grouping or from naming conventions, technology, activity, teams</li>
             </ul>
-            <p>The field references were read from the Sokrates Java source — including the places where documentation and code disagree.</p>
+            <p>The field references were read from the Sokrates Java source — including the places where documentation and code disagree.
+                The human-readable reference is the
+                <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank">configuration manual</a>.</p>
         </div>
     </div>
 </div>
 
 <div class="card">
-    <h1>HOW TO USE</h1>
+    <h1>How to use</h1>
     <div class="section" style="width: calc(100% - 50px)">
         <div style="margin: 10px">
             <h3 style="background-color: #ededed; padding: 4px"><b>1. Install the skills</b></h3>
@@ -86,7 +88,7 @@ cd sokrates-skills
             <pre style="padding: 6px; background-color: lightyellow">cd &lt;your-project&gt;
 java -jar sokrates.jar analyze                # = extractGitHistory + init + generateReports
 # or, without Java:  docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</pre>
-            <p>See the <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">INSTALL &amp; USE</a>
+            <p>See the <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">Install &amp; use</a>
                 tab for the Docker, JAR and from-source ways of running Sokrates.</p>
 
             <h3 style="background-color: #ededed; padding: 4px"><b>3. Refine the configuration with the config skills</b></h3>
@@ -168,7 +170,7 @@ java -jar sokrates.jar addCustomTab -label "AI Insights*" -iframeLink "../ai-ins
 </div>
 
 <div class="card">
-    <h1>EXTENDING</h1>
+    <h1>Extending</h1>
     <p>All scanners share one contract (<span class="inline-code">sokrates-scan-core</span>): the findings format, the evidence rules,
         the validator and the explorer renderer. A new scanner is a <span class="inline-code">SKILL.md</span> that defines its
         question and its group taxonomy; the proven way to build one is to run it live on a real codebase with a fresh agent, ask that

@@ -1,58 +1,3 @@
-<style>
-    .track-bar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 12px 0 4px 0;
-    }
-
-    .track-btn {
-        border: 2px solid #c0c0c0;
-        background-color: #f7f7f7;
-        border-radius: 8px;
-        padding: 10px 16px;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: 105%;
-        text-align: left;
-        min-width: 200px;
-        flex: 1 1 200px;
-    }
-
-    .track-btn:hover {
-        background-color: #eeeeee;
-    }
-
-    .track-btn.active {
-        border-color: #3f51b5;
-        background-color: #e8eaf6;
-    }
-
-    .track-btn .track-title {
-        font-weight: bold;
-        font-size: 115%;
-    }
-
-    .track-btn .track-sub {
-        color: #606060;
-        font-size: 85%;
-        margin-top: 2px;
-    }
-
-    .track-panel {
-        display: none;
-        border: 2px dashed #c0c0c0;
-        border-radius: 8px;
-        padding: 12px 16px;
-        margin-top: 10px;
-        background-color: #fcfcfc;
-    }
-
-    .track-panel.active {
-        display: block;
-    }
-
-</style>
 <script>
     function openTrack(name) {
         var panels = document.getElementsByClassName('track-panel');
@@ -85,49 +30,56 @@
 </script>
 
 <div class="card">
-    <h1>GET STARTED IN ONE COMMAND</h1>
+    <h1>Get started in one command</h1>
     <p style="font-size: 105%">
-        Sokrates analyzes a code base in one step: the <span class="inline-code">&nbsp;analyze&nbsp;</span> command extracts the git
-        history, creates an analysis configuration and generates the HTML reports. There are three ways to run it &mdash; pick the
-        track that fits you. All three end with the same command and produce the same reports.
+        Sokrates analyzes a code base in one step: <span class="inline-code">&nbsp;analyze&nbsp;</span> reads the git history, creates an
+        analysis configuration and generates the HTML reports. Pick how you want to run it &mdash; the command and the reports are the
+        same on every track.
     </p>
     <div class="track-bar">
         <button id="track-docker-btn" class="track-btn active" onclick="openTrack('docker')">
-            <div class="track-title">🐳 DOCKER</div>
+            <div class="track-title">Docker</div>
             <div class="track-sub">Recommended. Nothing to install but Docker; no Java needed.</div>
         </button>
         <button id="track-java-btn" class="track-btn" onclick="openTrack('java')">
-            <div class="track-title">☕ JAVA (JAR)</div>
+            <div class="track-title">Java (JAR)</div>
             <div class="track-sub">Download one JAR and run it with Java 17+.</div>
         </button>
         <button id="track-source-btn" class="track-btn" onclick="openTrack('source')">
-            <div class="track-title">🛠 FROM SOURCE</div>
+            <div class="track-title">From source</div>
             <div class="track-sub">Clone the repository and build with Maven.</div>
         </button>
     </div>
 
     <div id="track-docker" class="track-panel active">
-        <h3 style="margin-top: 4px">Track 1: Docker</h3>
-        <p><b>You need:</b> <a href="https://docs.docker.com/get-docker/" target="_blank">Docker</a> (Docker Desktop, Colima, Podman with
-            Docker compatibility, &hellip;). The image is published for <span class="inline-code">linux/amd64</span> and
-            <span class="inline-code">linux/arm64</span> (Apple Silicon), so it runs natively on macOS, Linux and Windows.</p>
-        <p><b>Run</b> from the root folder of the code base you want to analyze (a git clone works best &mdash; the history feeds the
-            contributor and trend reports):</p>
-        <div class="cmd">cd &lt;your-project&gt;
-<span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span>
-
-open _sokrates/reports/index.html</div>
-        <p>That is all. The first run downloads the image (once); later runs start instantly. The folder is mounted at
-            <span class="inline-code">/code</span> inside the container, and everything Sokrates writes (the
-            <span class="inline-code">_sokrates/</span> folder and <span class="inline-code">git-history.txt</span>) lands in your project
-            folder.</p>
-        <p><b>Any other command</b> works the same way &mdash; replace <span class="inline-code">analyze</span>:</p>
-        <div class="cmd">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates generateReports -help
-docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandscape -analysisRoot .</div>
-        <p><b>Tip:</b> define an alias once, and the examples further down this page work verbatim:</p>
-        <div class="cmd">alias sokrates='docker run --rm -v "$PWD:/code" ghcr.io/zeljkoobrenovic/sokrates'
+        <ol class="steps-list">
+            <li>
+                <div class="step-title">Have Docker</div>
+                <div class="step-body"><a href="https://docs.docker.com/get-docker/" target="_blank">Docker Desktop</a>, Colima or Podman.
+                    Nothing else: no Java, no git binary. The image runs natively on Intel and Apple Silicon, on macOS, Linux and Windows.</div>
+            </li>
+            <li>
+                <div class="step-title">Run <span class="inline-code">analyze</span> in the root folder of your project</div>
+                <div class="cmd">cd &lt;your-project&gt;
+<span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span></div>
+                <div class="step-body">A git clone works best: the history feeds the contributor and trend reports. The first run downloads
+                    the image once; later runs start instantly.</div>
+            </li>
+            <li>
+                <div class="step-title">Open the report</div>
+                <div class="cmd">open _sokrates/reports/index.html</div>
+                <div class="step-body">Everything Sokrates writes lands in your project folder: <span class="inline-code">_sokrates/</span>
+                    (configuration and reports) and <span class="inline-code">git-history.txt</span>.</div>
+            </li>
+        </ol>
+        <details class="tips">
+            <summary>Tips &amp; troubleshooting: alias, other commands, Windows, Linux, Colima, memory, versions</summary>
+            <p><b>Alias:</b> define it once, and every example on this site works verbatim:</p>
+            <div class="cmd">alias sokrates='docker run --rm -v "$PWD:/code" ghcr.io/zeljkoobrenovic/sokrates'
 sokrates analyze</div>
-        <div class="note">
+            <p><b>Any other command</b> works the same way &mdash; replace <span class="inline-code">analyze</span>:</p>
+            <div class="cmd">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates generateReports -help
+docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandscape -analysisRoot .</div>
             <ul style="margin: 4px 0; padding-left: 18px">
                 <li><b>Windows PowerShell:</b> use <span class="inline-code">-v "${PWD}:/code"</span> instead of
                     <span class="inline-code">"$(pwd):/code"</span>.</li>
@@ -141,76 +93,100 @@ sokrates analyze</div>
                 <li><b>Big repositories:</b> give the JVM more memory with
                     <span class="inline-code">-e JAVA_TOOL_OPTIONS=-Xmx8g</span> (Docker passes the variable on to Java).</li>
             </ul>
-        </div>
+        </details>
     </div>
 
     <div id="track-java" class="track-panel">
-        <h3 style="margin-top: 4px">Track 2: Java (download the JAR)</h3>
-        <p><b>You need:</b> a Java runtime, version 17 or newer (<a href="https://adoptium.net/" target="_blank">Adoptium Temurin</a>
-            is a good free choice; <span class="inline-code">java -version</span> shows what you have). Git itself is not needed: Sokrates
-            reads the repository history with JGit.</p>
-        <p><b>Download</b> the command line interface JAR (~20 MB, always the latest build of the master branch):</p>
-        <table style="margin-bottom: 8px">
-            <tr>
-                <td style="text-align: left; padding-right: 10px; vertical-align: top">BROWSER:</td>
-                <td><a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">sokrates-LATEST.jar</a></td>
-            </tr>
-            <tr>
-                <td style="text-align: left; padding-right: 10px; vertical-align: top">CURL:</td>
-                <td>
-                    <div class="cmd" style="margin: 0">curl https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar --output sokrates-LATEST.jar</div>
-                </td>
-            </tr>
-        </table>
-        <p><b>Run</b> from the root folder of the code base you want to analyze (a git clone works best &mdash; the history feeds the
-            contributor and trend reports):</p>
-        <div class="cmd">cd &lt;your-project&gt;
-<span class="hl">java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar analyze</span>
-
-open _sokrates/reports/index.html</div>
-        <p><b>Tip:</b> define an alias once, and the examples further down this page work verbatim:</p>
-        <div class="cmd">alias sokrates='java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar'
+        <ol class="steps-list">
+            <li>
+                <div class="step-title">Have Java 17 or newer</div>
+                <div class="step-body"><a href="https://adoptium.net/" target="_blank">Adoptium Temurin</a> is a good free choice;
+                    <span class="inline-code">java -version</span> shows what you have. Git itself is not needed: Sokrates reads the
+                    repository history with JGit.</div>
+            </li>
+            <li>
+                <div class="step-title">Download the JAR</div>
+                <div class="step-body">In the browser: <a href="https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar">sokrates-LATEST.jar</a>
+                    (~20 MB, always the latest build of the master branch), or:</div>
+                <div class="cmd">curl https://d2bb1mtyn3kglb.cloudfront.net/builds/sokrates-LATEST.jar --output sokrates-LATEST.jar</div>
+            </li>
+            <li>
+                <div class="step-title">Run <span class="inline-code">analyze</span> in the root folder of your project</div>
+                <div class="cmd">cd &lt;your-project&gt;
+<span class="hl">java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar analyze</span></div>
+                <div class="step-body">A git clone works best: the history feeds the contributor and trend reports.</div>
+            </li>
+            <li>
+                <div class="step-title">Open the report</div>
+                <div class="cmd">open _sokrates/reports/index.html</div>
+                <div class="step-body">Everything Sokrates writes lands in your project folder: <span class="inline-code">_sokrates/</span>
+                    (configuration and reports) and <span class="inline-code">git-history.txt</span>.</div>
+            </li>
+        </ol>
+        <details class="tips">
+            <summary>Tips &amp; troubleshooting: alias, memory, reference date</summary>
+            <p><b>Alias:</b> define it once, and every example on this site works verbatim:</p>
+            <div class="cmd">alias sokrates='java -jar &lt;sokrates-folder&gt;/sokrates-LATEST.jar'
 sokrates analyze</div>
-        <div class="note">
             <ul style="margin: 4px 0; padding-left: 18px">
                 <li><b>Big repositories:</b> give the JVM more memory, e.g. <span class="inline-code">java -Xmx8g -jar sokrates-LATEST.jar analyze</span>.</li>
                 <li><b>Reference date:</b> Sokrates counts commits and contributors relative to today (past 30 days, 90 days, year).
                     To analyze an older snapshot, pass <span class="inline-code">-date YYYY-MM-dd</span> or set the
                     <span class="inline-code">SOKRATES_ANALYSIS_DATE</span> environment variable.</li>
             </ul>
-        </div>
+        </details>
     </div>
 
     <div id="track-source" class="track-panel">
-        <h3 style="margin-top: 4px">Track 3: From source</h3>
-        <p><b>You need:</b> Java 17+ and <a href="https://maven.apache.org/" target="_blank">Maven</a>. The source code is on GitHub:
-            <a href="https://github.com/zeljkoobrenovic/sokrates" target="_blank">github.com/zeljkoobrenovic/sokrates</a>
-            (free and open source, <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/LICENSE" target="_blank">MIT license</a>).</p>
-        <p><b>Build:</b></p>
-        <div class="cmd">git clone https://github.com/zeljkoobrenovic/sokrates.git
+        <ol class="steps-list">
+            <li>
+                <div class="step-title">Have Java 17+ and Maven</div>
+                <div class="step-body">The source is on GitHub:
+                    <a href="https://github.com/zeljkoobrenovic/sokrates" target="_blank">github.com/zeljkoobrenovic/sokrates</a>
+                    (free and open source, <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/LICENSE" target="_blank">MIT license</a>).</div>
+            </li>
+            <li>
+                <div class="step-title">Clone and build</div>
+                <div class="cmd">git clone https://github.com/zeljkoobrenovic/sokrates.git
 cd sokrates
 mvn clean install            <span class="c"># add -DskipTests for a faster build</span></div>
-        <p>The build produces two runnable fat JARs:</p>
-        <ul>
-            <li>the command line interface: <span class="inline-code">cli/target/cli-1.0-jar-with-dependencies.jar</span></li>
-        </ul>
-        <p><b>Run</b> from the root folder of the code base you want to analyze:</p>
-        <div class="cmd">cd &lt;your-project&gt;
-<span class="hl">java -jar &lt;sokrates-repo&gt;/cli/target/cli-1.0-jar-with-dependencies.jar analyze</span>
-
-open _sokrates/reports/index.html</div>
-        <p><b>Tip:</b> define an alias once, and the examples further down this page work verbatim:</p>
-        <div class="cmd">alias sokrates='java -jar &lt;sokrates-repo&gt;/cli/target/cli-1.0-jar-with-dependencies.jar'
+                <div class="step-body">The build produces the command line interface as one runnable JAR:
+                    <span class="inline-code">cli/target/cli-1.0-jar-with-dependencies.jar</span>.</div>
+            </li>
+            <li>
+                <div class="step-title">Run <span class="inline-code">analyze</span> in the root folder of your project</div>
+                <div class="cmd">cd &lt;your-project&gt;
+<span class="hl">java -jar &lt;sokrates-repo&gt;/cli/target/cli-1.0-jar-with-dependencies.jar analyze</span></div>
+            </li>
+            <li>
+                <div class="step-title">Open the report</div>
+                <div class="cmd">open _sokrates/reports/index.html</div>
+            </li>
+        </ol>
+        <details class="tips">
+            <summary>Tips: alias, building the Docker image yourself, contributing</summary>
+            <p><b>Alias:</b> define it once, and every example on this site works verbatim:</p>
+            <div class="cmd">alias sokrates='java -jar &lt;sokrates-repo&gt;/cli/target/cli-1.0-jar-with-dependencies.jar'
 sokrates analyze</div>
-        <p>You can also build the Docker image yourself: <span class="inline-code">docker build -t sokrates -f dockerfile .</span> in the
-            repository root, then use <span class="inline-code">sokrates</span> instead of <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates</span>
-            in the Docker track. The repository's <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/CLAUDE.md" target="_blank">CLAUDE.md</a>
-            describes the module architecture for contributors.</p>
+            <p>You can also build the Docker image yourself: <span class="inline-code">docker build -t sokrates -f dockerfile .</span> in the
+                repository root, then use <span class="inline-code">sokrates</span> instead of <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates</span>
+                in the Docker track. The repository's <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/CLAUDE.md" target="_blank">CLAUDE.md</a>
+                describes the module architecture for contributors.</p>
+        </details>
+    </div>
+
+    <div class="next-steps">
+        <b>Next:</b> look at the reports, edit <span class="inline-code">_sokrates/config.json</span> (scope, components, features of interest
+        &mdash; see <a href="#configure" onclick="document.getElementById('configure').scrollIntoView(); return false;">Configure the analysis</a> below) and run
+        <span class="inline-code">analyze</span> again &mdash; or let an AI coding agent do that for you
+        (<a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>).
+        Many repositories, or a whole GitHub or GitLab organization? See
+        <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">Landscapes</a>.
     </div>
 </div>
 
 <div class="card">
-    <h1>WHAT <span style="font-family: monospace">analyze</span> DOES</h1>
+    <h1>What <span class="inline-code">analyze</span> does</h1>
     <p>The <span class="inline-code">&nbsp;analyze&nbsp;</span> command chains the three steps of a Sokrates analysis. Each step is also
         available as a separate command, which is useful once you start refining the analysis or scripting it:</p>
     <table class="steps">
@@ -240,8 +216,8 @@ sokrates analyze</div>
     </table>
     <p><b>The workflow is iterative:</b> run <span class="inline-code">analyze</span>, look at the reports, edit
         <span class="inline-code">_sokrates/config.json</span> (scope, logical decompositions, features of interest, goals and controls
-        &mdash; see the <a href="#config" onclick="document.getElementById('config_tab').click(); return false;">CONFIGURATION</a> tab), and
-        run <span class="inline-code">analyze</span> again. The <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI INSIGHTS</a>
+        &mdash; see <a href="#configure" onclick="document.getElementById('configure').scrollIntoView(); return false;">Configure the analysis</a> below), and
+        run <span class="inline-code">analyze</span> again. The <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>
         tab shows how to let an AI coding agent refine the configuration and explain the results.</p>
     <p>Options (all optional): <span class="inline-code">-srcRoot &lt;folder&gt;</span> analyzes another folder than the current one,
         <span class="inline-code">-name</span>/<span class="inline-code">-description</span> label the report,
@@ -254,8 +230,45 @@ sokrates analyze</div>
         <span class="inline-code">data/data.zip</span>). Run <span class="inline-code">sokrates analyze -help</span> for the full list.</p>
 </div>
 
+<div class="card" id="configure">
+    <h1>Configure the analysis</h1>
+    <p>Everything about an analysis lives in one file, <span class="inline-code">_sokrates/config.json</span>, created on the first run
+        and never overwritten. Edit it and run <span class="inline-code">analyze</span> again. The keys a newcomer touches first:</p>
+    <table class="steps">
+        <tr>
+            <td>ignore, extensions</td>
+            <td>What to leave out (vendored code, fixtures) and which file extensions count. Each scope &mdash;
+                <span class="inline-code">main</span>, <span class="inline-code">test</span>, <span class="inline-code">generated</span>,
+                <span class="inline-code">buildAndDeployment</span>, <span class="inline-code">other</span> &mdash; has its own path and content filters.</td>
+        </tr>
+        <tr>
+            <td>logicalDecompositions</td>
+            <td>How the main code is grouped into components (by folder depth or by explicit path rules), which drives the component
+                and dependency reports. A code base can have several decompositions.</td>
+        </tr>
+        <tr>
+            <td>concernGroups</td>
+            <td>"Features of interest": regex rules that find cross-cutting concerns (feature flags, security-sensitive code, debt markers)
+                across files, with their own report.</td>
+        </tr>
+        <tr>
+            <td>goalsAndControls</td>
+            <td>Thresholds on the metrics (duplication, file size, unit size, complexity) that become traffic lights on the report index.</td>
+        </tr>
+        <tr>
+            <td>metadata, customTabs</td>
+            <td>The report's name, description, logo and links, and extra tabs showing any page in an iframe
+                (<span class="inline-code">addCustomTab</span> edits these from the command line).</td>
+        </tr>
+    </table>
+    <p>Every key, with defaults and examples, for the repository configuration, the landscape files and the custom conventions:
+        <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank"><b>the configuration manual</b></a>.
+        Rather not edit JSON by hand? The <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>
+        skills let an AI coding agent write and check the configuration for you.</p>
+</div>
+
 <div class="card">
-    <h1>MORE EXAMPLES</h1>
+    <h1>More examples</h1>
     <p>The examples use the <span class="inline-code">sokrates</span> alias defined in your track above (Docker, JAR or source build
         &mdash; the commands are identical).</p>
 
@@ -286,7 +299,7 @@ open junit-team/junit4/reports/index.html
         <b>Example 2. Analyze several repositories and aggregate them into a landscape</b> &mdash; one command, given a file with one git URL per line:
         <div class="cmd">sokrates <span class="hl">analyzeLandscape -urls repos.txt</span>
 open _sokrates_landscape/index.html</div>
-        See the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">LANDSCAPES</a> tab
+        See the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">Landscapes</a> tab
         for the walkthrough, configuration, sub-landscapes and big-scale pipelines.
     </div>
 
@@ -297,7 +310,9 @@ sokrates <span class="hl">createConventionsFile</span>
 <span class="c"># edit analysis_conventions.json (which folders are tests, generated code, which extensions to include, ...)</span>
 sokrates <span class="hl">analyze -conventionsFile analysis_conventions.json</span></div>
         <p style="margin: 4px 0">Use <span class="inline-code">exportStandardConventions</span> to see the built-in conventions the default
-            configuration is derived from.</p>
+            configuration is derived from: <a href="assets/conf/standard_analysis_conventions.json" target="_blank">standard_analysis_conventions.json</a>;
+            a custom one looks like <a href="assets/conf/sokrates_conventions.json" target="_blank">this</a>. The keys are in the
+            <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md#part-3--custom-scoping-conventions-analysis_conventionsjson" target="_blank">configuration manual</a>.</p>
     </div>
 
     <div class="example">
@@ -320,7 +335,7 @@ sokrates <span class="hl">analyze -conventionsFile analysis_conventions.json</sp
 </div>
 
 <div class="card">
-    <h1>COMMAND LINE REFERENCE</h1>
+    <h1>Command line reference</h1>
     <p>Every command prints its options with <span class="inline-code">-help</span>. Without arguments, Sokrates prints this overview:</p>
     <div class="example">
 <pre style="">
