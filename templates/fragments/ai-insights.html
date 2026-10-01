@@ -51,6 +51,18 @@ sokrates generateReports</div>
                 confidence filters, search, and every finding's evidence. The custom tab shows it inside the Sokrates report from now on.</div>
         </li>
     </ol>
+    <div class="next-steps">
+        <b>Many repositories at once.</b> <span class="inline-code">-ai claude|codex|gemini</span> on
+        <span class="inline-code">analyzeGitRepo</span>, <span class="inline-code">analyzeLandscape -urls</span>,
+        <span class="inline-code">analyzeGitHubOrg</span> and <span class="inline-code">analyzeGitLabGroup</span> runs that agent in headless mode
+        inside each clone, right after the Sokrates analysis and before the clone is deleted; its findings are kept with the analysis.
+        <span class="inline-code">-aiPrompt</span> changes the prompt (default <i>run a full scan</i>), and
+        <span class="inline-code">-postAnalysis "&lt;command&gt;"</span> runs any command instead, with
+        <span class="inline-code">SOKRATES_REPO_URL</span>, <span class="inline-code">SOKRATES_ANALYSIS_FOLDER</span> and friends in its environment.
+        <div class="cmd">sokrates <span class="hl">analyzeGitHubOrg -org junit-team -ai claude</span>
+sokrates <span class="hl">analyzeLandscape -urls repos.txt -ai codex -aiPrompt "run a tech stack scan"</span></div>
+        The agent CLI and the skills must be installed on the machine running Sokrates (the JAR, not the Docker image, which has no agent).
+    </div>
     <details class="tips">
         <summary>Where each tool reads skills from, and optional illustrations</summary>
         <table class="steps">
