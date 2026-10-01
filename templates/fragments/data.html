@@ -6,9 +6,10 @@
     <div class="cmd">cd &lt;your-project&gt;
 <span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze -dataOnly</span>
 unzip -p _sokrates/reports/data/data.zip analysisResults.json | jq '.metricsList.metrics[] | select(.id == "LINES_OF_CODE_MAIN")'</div>
-    <p>Browse a real one: the <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/data/data-preview.html?entry=analysisResults.json" target="_blank">data preview</a>
-        of the OpenAI Codex analysis shows any entry of its archive in the browser, and the
-        <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/data/data.zip">archive itself</a> downloads as one file.</p>
+    <p>Browse a real one: the <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/data/data-preview.html#" target="_blank">data preview of the OpenAI Codex analysis</a>
+        lists every entry of its archive and shows any of them in the browser, for example
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/data/data-preview.html?entry=analysisResults.json" target="_blank">analysisResults.json</a>;
+        the <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/data/data.zip">archive itself</a> downloads as one file.</p>
 </div>
 
 <div class="card">
