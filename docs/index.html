@@ -581,7 +581,7 @@ details.tips[open] summary {
     padding: 10px 14px;
     border-left: 3px solid var(--accent);
     background-color: var(--accent-soft);
-    max-width: 90ch;
+    max-width: 100ch;
 }
 
 /* ---------- responsive ---------- */
@@ -749,6 +749,28 @@ details.tips[open] summary {
     width: 250px;
 }
 
+/* small brand marks on the install tracks and the hero pill: white tiles, like the logo in the header */
+.track-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    background-color: var(--plate);
+    border-radius: 8px;
+    padding: 4px;
+    vertical-align: middle;
+    margin: -4px 12px 0 0;
+}
+
+.pill-logo {
+    width: 20px;
+    height: 20px;
+    background-color: var(--plate);
+    border-radius: 5px;
+    padding: 3px;
+    vertical-align: -5px;
+    margin-right: 6px;
+}
+
     </style>
     <script>
         function openTab(evt, cityName) {
@@ -829,12 +851,10 @@ details.tips[open] summary {
         <div class="hero-toggle" role="tablist" aria-label="What to analyze">
             <button type="button" class="active" onclick="showHeroCmd(this, 'folder')">Your folder</button>
             <button type="button" onclick="showHeroCmd(this, 'repo')">A repository URL</button>
-            <button type="button" onclick="showHeroCmd(this, 'org')">A GitHub organization</button>
+            <button type="button" onclick="showHeroCmd(this, 'org')"><img class="pill-logo" src="assets/logos/github.png" alt="">A GitHub organization</button>
         </div>
         <div class="cmd hero-cmd" id="hero-cmd-folder">cd &lt;your-project&gt;
-
 <span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span>
-
 open _sokrates/reports/index.html</div>
         <div class="cmd hero-cmd" id="hero-cmd-repo" style="display: none"><span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeGitRepo -url https://github.com/openai/codex</span>
 
@@ -987,15 +1007,15 @@ open openai/_sokrates_landscape/index.html
     <p style="font-size: 105%">One command reads the git history, creates the configuration and writes the reports. Pick how to run it.</p>
     <div class="track-bar">
         <button id="track-docker-btn" class="track-btn active" onclick="openTrack('docker')">
-            <div class="track-title">Docker</div>
+            <div class="track-title"><img class="track-logo" src="assets/logos/docker.png" alt="">Docker</div>
             <div class="track-sub">Recommended. Nothing to install but Docker; no Java needed.</div>
         </button>
         <button id="track-java-btn" class="track-btn" onclick="openTrack('java')">
-            <div class="track-title">Java (JAR)</div>
+            <div class="track-title"><img class="track-logo" src="assets/logos/java.png" alt="">Java (JAR)</div>
             <div class="track-sub">Download one JAR and run it with Java 17+.</div>
         </button>
         <button id="track-source-btn" class="track-btn" onclick="openTrack('source')">
-            <div class="track-title">From source</div>
+            <div class="track-title"><img class="track-logo" src="assets/logos/github.png" alt="">From source</div>
             <div class="track-sub">Clone the repository and build with Maven.</div>
         </button>
     </div>
@@ -1043,8 +1063,10 @@ docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandsc
                 <li><b>Versions:</b> <span class="inline-code">:latest</span> tracks the master branch; release tags are available as
                     <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates:&lt;version&gt;</span>. See the
                     <a href="https://github.com/zeljkoobrenovic/sokrates/pkgs/container/sokrates" target="_blank">package page</a>.</li>
-                <li><b>Big repositories:</b> give the JVM more memory with
-                    <span class="inline-code">-e JAVA_TOOL_OPTIONS=-Xmx8g</span> (Docker passes the variable on to Java).</li>
+                <li><b>Big repositories:</b> the JVM may use 75% of the memory Docker gives the container. On
+                    <span class="inline-code">OutOfMemoryError: Java heap space</span>, raise the Docker VM's memory (Docker Desktop &rarr; Settings
+                    &rarr; Resources; Colima: <span class="inline-code">colima start --memory 8</span>) or pass an explicit heap,
+                    <span class="inline-code">-e JAVA_TOOL_OPTIONS=-Xmx8g</span>.</li>
             </ul>
         </details>
     </div>
@@ -1116,14 +1138,20 @@ mvn clean install            <span class="c"># add -DskipTests for a faster buil
                 <div class="cmd">open _sokrates/reports/index.html</div>
             </li>
         </ol>
+        <div class="next-steps">
+            <b>Or build your own Docker image.</b> The repository's <span class="inline-code">dockerfile</span> is multi-stage: it runs Maven
+            inside the build, so this path needs only Docker (with BuildKit, the default in Docker Desktop), no local Java or Maven:
+            <div class="cmd">cd sokrates
+<span class="hl">docker build -t sokrates -f dockerfile .</span>
+docker run --rm -v "$(pwd):/code" <span class="hl">sokrates</span> analyze    <span class="c"># your image, used like the published one</span></div>
+            The image is a plain JRE plus the CLI jar; the JVM may use 75% of the container's memory.
+        </div>
         <details class="tips">
-            <summary>Tips: alias, building the Docker image yourself, contributing</summary>
+            <summary>Tips: alias, contributing</summary>
             <p><b>Alias:</b> define it once, and every example on this site works verbatim:</p>
             <div class="cmd">alias sokrates='java -jar &lt;sokrates-repo&gt;/cli/target/cli-1.0-jar-with-dependencies.jar'
 sokrates analyze</div>
-            <p>You can also build the Docker image yourself: <span class="inline-code">docker build -t sokrates -f dockerfile .</span> in the
-                repository root, then use <span class="inline-code">sokrates</span> instead of <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates</span>
-                in the Docker track. The repository's <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/CLAUDE.md" target="_blank">CLAUDE.md</a>
+            <p>The repository's <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/CLAUDE.md" target="_blank">CLAUDE.md</a>
                 describes the module architecture for contributors.</p>
         </details>
     </div>
@@ -1310,11 +1338,11 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
 * generateReports: Generates Sokrates reports based on the analysis configuration
    - options: [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-dataOnly] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
-* analyzeLandscape: Creates or updates a Sokrates landscape report aggregating the repository analyses found under the analysis root (the landscape counterpart of analyze). With -url (repeatable) and/or -urls &lt;file> (one git URL per line, # comments), it first runs analyzeGitRepo for each URL into &lt;analysisRoot>/&lt;owner>/&lt;repository> (a failing repository is logged and skipped), then builds the landscape; without URLs it aggregates what is already there. Same options as updateLandscape, which is kept as the older name.
-   - options: [-analysisRoot &lt;arg>] [-url &lt;gitUrl>] [-urls &lt;file>] [-depth &lt;arg>] [-dataOnly] [-conventionsFile &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+* analyzeLandscape: Creates or updates a Sokrates landscape report aggregating the repository analyses found under the analysis root (the landscape counterpart of analyze). With -url (repeatable) and/or -urls &lt;file> (one git URL per line, # comments), it first runs analyzeGitRepo for each URL into &lt;analysisRoot>/&lt;owner>/&lt;repository> (a failing repository is logged and skipped; -prune deletes the kept analyses of repositories no longer listed or no longer existing), then builds the landscape; without URLs it aggregates what is already there. Same options as updateLandscape, which is kept as the older name.
+   - options: [-analysisRoot &lt;arg>] [-url &lt;gitUrl>] [-urls &lt;file>] [-depth &lt;arg>] [-dataOnly] [-prune] [-conventionsFile &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
 * updateLandscape: Updates or creates a Sokrates landscape report, aggregating results of multiple analyses; with -url / -urls it first clones and analyzes those git repositories (the older name of analyzeLandscape, same options)
-   - options: [-analysisRoot &lt;arg>] [-url &lt;gitUrl>] [-urls &lt;file>] [-depth &lt;arg>] [-dataOnly] [-conventionsFile &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
+   - options: [-analysisRoot &lt;arg>] [-url &lt;gitUrl>] [-urls &lt;file>] [-depth &lt;arg>] [-dataOnly] [-prune] [-conventionsFile &lt;arg>] [-confFile &lt;arg>] [-recursive] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
 
 * analyzeGitHubOrg: Analyzes whole GitHub organizations (or user accounts): for every -org (repeatable) and/or login in -orgs &lt;file>, lists its repositories with the GitHub REST API, filters them (forks and archived repositories are excluded unless -includeForks / -includeArchived; -pushedWithinDays, -includeRepoNamePattern / -excludeRepoNamePattern and -maxRepos narrow further), writes the selection to &lt;analysisRoot>/&lt;org>/repos.txt, analyzes each repository into &lt;analysisRoot>/&lt;org>/&lt;repository> (the analyzeGitRepo step) and builds a landscape per organization in &lt;analysisRoot>/&lt;org>/_sokrates_landscape, named, described, linked and branded from the organization's GitHub profile (only fields you have not set). With several organizations a parent landscape in &lt;analysisRoot>/_sokrates_landscape lists them as sub-landscapes. -listOnly just writes repos.txt; -prune deletes analyses of repositories no longer selected. Set SOKRATES_GIT_TOKEN for private repositories and the higher API rate limit.
    - options: [-org &lt;login>] [-orgs &lt;file>] [-analysisRoot &lt;arg>] [-includeForks] [-includeArchived] [-pushedWithinDays &lt;days>] [-includeRepoNamePattern &lt;regex>] [-excludeRepoNamePattern &lt;regex>] [-maxRepos &lt;count>] [-listOnly] [-prune] [-depth &lt;arg>] [-dataOnly] [-conventionsFile &lt;arg>] [-setName &lt;arg>] [-setDescription &lt;arg>] [-setLogoLink &lt;arg>] [-addLink &lt;arg>] [-timeout &lt;arg>] [-date &lt;arg>] [-help]
@@ -1398,7 +1426,9 @@ https://github.com/hamcrest/JavaHamcrest
 sokrates <span class="hl">analyzeLandscape -urls repos.txt</span>
 open _sokrates_landscape/index.html</div>
             <div class="step-body">Each repository is cloned, analyzed and kept under <span class="inline-code">&lt;owner&gt;/&lt;repository&gt;</span>
-                (no source stays behind); a repository that cannot be cloned is skipped. Re-run the same command to refresh; add a line to add a repository.</div>
+                (no source stays behind); a repository that cannot be cloned is skipped. Re-run the same command to refresh; add a line to add a
+                repository, remove one and add <span class="inline-code">-prune</span> to delete its analysis (also for repositories that no longer
+                exist; only analyses the tool produced are ever deleted).</div>
         </li>
         <li>
             <div class="step-title">From a GitHub organization or a GitLab group</div>

@@ -571,7 +571,7 @@ details.tips[open] summary {
     padding: 10px 14px;
     border-left: 3px solid var(--accent);
     background-color: var(--accent-soft);
-    max-width: 90ch;
+    max-width: 100ch;
 }
 
 /* ---------- responsive ---------- */
@@ -737,4 +737,26 @@ details.tips[open] summary {
 
 .hero .example-card {
     width: 250px;
+}
+
+/* small brand marks on the install tracks and the hero pill: white tiles, like the logo in the header */
+.track-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    background-color: var(--plate);
+    border-radius: 8px;
+    padding: 4px;
+    vertical-align: middle;
+    margin: -4px 12px 0 0;
+}
+
+.pill-logo {
+    width: 20px;
+    height: 20px;
+    background-color: var(--plate);
+    border-radius: 5px;
+    padding: 3px;
+    vertical-align: -5px;
+    margin-right: 6px;
 }

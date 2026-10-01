@@ -6,12 +6,10 @@
         <div class="hero-toggle" role="tablist" aria-label="What to analyze">
             <button type="button" class="active" onclick="showHeroCmd(this, 'folder')">Your folder</button>
             <button type="button" onclick="showHeroCmd(this, 'repo')">A repository URL</button>
-            <button type="button" onclick="showHeroCmd(this, 'org')">A GitHub organization</button>
+            <button type="button" onclick="showHeroCmd(this, 'org')"><img class="pill-logo" src="assets/logos/github.png" alt="">A GitHub organization</button>
         </div>
         <div class="cmd hero-cmd" id="hero-cmd-folder">cd &lt;your-project&gt;
-
 <span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span>
-
 open _sokrates/reports/index.html</div>
         <div class="cmd hero-cmd" id="hero-cmd-repo" style="display: none"><span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeGitRepo -url https://github.com/openai/codex</span>
 
