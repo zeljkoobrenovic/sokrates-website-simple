@@ -83,6 +83,10 @@ docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandsc
                     the generated files owned by you (Docker Desktop on macOS/Windows maps ownership automatically).</li>
                 <li><b>Colima (macOS):</b> only your home folder is mounted into the VM, so keep the project under
                     <span class="inline-code">/Users/&lt;you&gt;</span>.</li>
+                <li><b>Updating:</b> <span class="inline-code">docker run</span> reuses the image already on your machine and never checks for a
+                    newer one. If a command from this site is reported as unknown, run
+                    <span class="inline-code">docker pull ghcr.io/zeljkoobrenovic/sokrates</span> once, or add
+                    <span class="inline-code">--pull always</span> to the run command.</li>
                 <li><b>Versions:</b> <span class="inline-code">:latest</span> tracks the master branch; release tags are available as
                     <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates:&lt;version&gt;</span>. See the
                     <a href="https://github.com/zeljkoobrenovic/sokrates/pkgs/container/sokrates" target="_blank">package page</a>.</li>

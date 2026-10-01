@@ -832,15 +832,19 @@ details.tips[open] summary {
             <button type="button" onclick="showHeroCmd(this, 'org')">A GitHub organization</button>
         </div>
         <div class="cmd hero-cmd" id="hero-cmd-folder">cd &lt;your-project&gt;
+
 <span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span>
+
 open _sokrates/reports/index.html</div>
-        <div class="cmd hero-cmd" id="hero-cmd-repo" style="display: none"><span class="hl">sokrates analyzeGitRepo -url https://github.com/openai/codex</span>
+        <div class="cmd hero-cmd" id="hero-cmd-repo" style="display: none"><span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeGitRepo -url https://github.com/openai/codex</span>
+
 open openai/codex/reports/index.html
-<span class="c"># no clone needed; the result is the OpenAI Codex example below</span></div>
-        <div class="cmd hero-cmd" id="hero-cmd-org" style="display: none"><span class="hl">sokrates analyzeGitHubOrg -org openai</span>
+<span class="c"># no clone needed; the result is the example below</span></div>
+
+        <div class="cmd hero-cmd" id="hero-cmd-org" style="display: none"><span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeGitHubOrg -org openai</span>
+
 open openai/_sokrates_landscape/index.html
-<span class="c"># every repository of the organization, one landscape; the OpenAI example below</span></div>
-        <div class="hero-note" id="hero-note">The command is the same with the JAR; the shorter lines use the <span class="inline-code">sokrates</span> alias from the <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">install guide</a>.</div>
+<span class="c"># every repo of the organization, one landscape; result below</span></div>
         <script>
             function showHeroCmd(button, which) {
                 var boxes = document.getElementsByClassName('hero-cmd');
@@ -1032,6 +1036,10 @@ docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandsc
                     the generated files owned by you (Docker Desktop on macOS/Windows maps ownership automatically).</li>
                 <li><b>Colima (macOS):</b> only your home folder is mounted into the VM, so keep the project under
                     <span class="inline-code">/Users/&lt;you&gt;</span>.</li>
+                <li><b>Updating:</b> <span class="inline-code">docker run</span> reuses the image already on your machine and never checks for a
+                    newer one. If a command from this site is reported as unknown, run
+                    <span class="inline-code">docker pull ghcr.io/zeljkoobrenovic/sokrates</span> once, or add
+                    <span class="inline-code">--pull always</span> to the run command.</li>
                 <li><b>Versions:</b> <span class="inline-code">:latest</span> tracks the master branch; release tags are available as
                     <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates:&lt;version&gt;</span>. See the
                     <a href="https://github.com/zeljkoobrenovic/sokrates/pkgs/container/sokrates" target="_blank">package page</a>.</li>
