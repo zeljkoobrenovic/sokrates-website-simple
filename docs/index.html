@@ -1574,6 +1574,8 @@ sokrates generateReports</div>
         <span class="inline-code">SOKRATES_REPO_URL</span>, <span class="inline-code">SOKRATES_ANALYSIS_FOLDER</span> and friends in its environment.
         <div class="cmd">sokrates <span class="hl">analyzeGitHubOrg -org junit-team -ai claude</span>
 sokrates <span class="hl">analyzeLandscape -urls repos.txt -ai codex -aiPrompt "run a tech stack scan"</span></div>
+        The landscape then aggregates the findings of all its repositories into an <b>AI Insights</b> tab: every finding with its severity,
+        scanner and a deep link to its evidence, searchable across the portfolio, plus a view of what was scanned when.
         It is incremental: a repository whose head commit has not moved since a successful run is skipped (<span class="inline-code">-aiForce</span>
         runs it anyway), and <span class="inline-code">-aiMaxRepos &lt;n&gt;</span> bounds the runs per invocation, so a nightly job works through
         an organization a slice at a time. The agent CLI and the skills must be installed on the machine running Sokrates (the JAR, not the Docker
@@ -2074,7 +2076,7 @@ sokrates <span class="hl">analyzeLandscape -urls repos.txt -ai codex -aiPrompt "
     <div class="report">
         <div class="report-text">
             <h2>Landscapes</h2>
-            <p>All of the above aggregated over many repositories or a whole organization: sizes, languages, people, teams, trends and sub-landscapes.</p>
+            <p>All of the above aggregated over many repositories or a whole organization: sizes, languages, people, teams, trends, sub-landscapes, and the AI findings of every repository in one searchable tab.</p>
             <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank">Live example &nearr;</a>
         </div>
         <a class="report-shot" href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" title="Open the live example">
