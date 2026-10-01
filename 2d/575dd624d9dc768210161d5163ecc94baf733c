@@ -1,0 +1,23 @@
+docs/index.html
+  s_40c0e74316fcc6::t_4deb147ab7314e 882-883,890,2440-2443
+templates/fragments/data.html
+  s_40c0e74316fcc6::t_479b20d8faa2ca 9-12
+templates/fragments/home.html
+  s_40c0e74316fcc6::t_058367e82a4427 29-30,37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2d575dd624d9dc768210161d5163ecc94baf733c",
+  "prompts": {},
+  "sessions": {
+    "s_40c0e74316fcc6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8a859e40-f6c6-4dfa-8fdb-6c295588cf73",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
