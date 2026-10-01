@@ -1,12 +1,35 @@
 <div class="hero">
     <div class="hero-text">
         <div class="hero-title">See what is really in a code base. In one command.</div>
-        <p class="hero-sub">Sokrates turns any git repository into a set of self-contained HTML reports: size and structure,
-            duplication and complexity, components and dependencies, who works on what, and how all of it changes over time.
-            Any language, no setup, free and open source.</p>
-        <div class="cmd">cd &lt;your-project&gt;
+        <p class="hero-sub">Self-contained HTML reports about size, structure, duplication, dependencies, people and trends.
+            From any git repository, in any language. Free and open source.</p>
+        <div class="hero-toggle" role="tablist" aria-label="What to analyze">
+            <button type="button" class="active" onclick="showHeroCmd(this, 'folder')">Your folder</button>
+            <button type="button" onclick="showHeroCmd(this, 'repo')">A repository URL</button>
+            <button type="button" onclick="showHeroCmd(this, 'org')">A GitHub organization</button>
+        </div>
+        <div class="cmd hero-cmd" id="hero-cmd-folder">cd &lt;your-project&gt;
 <span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span>
 open _sokrates/reports/index.html</div>
+        <div class="cmd hero-cmd" id="hero-cmd-repo" style="display: none"><span class="hl">sokrates analyzeGitRepo -url https://github.com/openai/codex</span>
+open openai/codex/reports/index.html
+<span class="c"># no clone needed; the result is the OpenAI Codex example below</span></div>
+        <div class="cmd hero-cmd" id="hero-cmd-org" style="display: none"><span class="hl">sokrates analyzeGitHubOrg -org openai</span>
+open openai/_sokrates_landscape/index.html
+<span class="c"># every repository of the organization, one landscape; the OpenAI example below</span></div>
+        <div class="hero-note" id="hero-note">The command is the same with the JAR; the shorter lines use the <span class="inline-code">sokrates</span> alias from the <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">install guide</a>.</div>
+        <script>
+            function showHeroCmd(button, which) {
+                var boxes = document.getElementsByClassName('hero-cmd');
+                for (var i = 0; i < boxes.length; i++) {
+                    boxes[i].style.display = boxes[i].id === 'hero-cmd-' + which ? 'block' : 'none';
+                }
+                var buttons = button.parentNode.getElementsByTagName('button');
+                for (var j = 0; j < buttons.length; j++) {
+                    buttons[j].className = buttons[j] === button ? 'active' : '';
+                }
+            }
+        </script>
         <p class="hero-links">
             No Docker? <a href="#install-java" onclick="document.getElementById('install_tab').click(); openTrack('java'); return false;">Run the JAR with Java 17+</a>
             &nbsp;&middot;&nbsp; <a href="#install" onclick="document.getElementById('install_tab').click(); return false;">Step-by-step guide</a>
@@ -24,32 +47,30 @@ open _sokrates/reports/index.html</div>
     <div class="feature-grid">
         <div class="feature">
             <div class="feature-title">Size &amp; structure</div>
-            <div>Lines of code per scope, language and folder; file sizes, age and freshness; zoomable maps of the whole tree.</div>
+            <div>Lines of code per scope, language and folder; file size, age and freshness.</div>
         </div>
         <div class="feature">
             <div class="feature-title">Duplication &amp; complexity</div>
-            <div>Duplicated blocks across files and components; unit size and conditional complexity, with the risky code listed.</div>
+            <div>Duplicated blocks, unit size and conditional complexity, with the risky code listed.</div>
         </div>
         <div class="feature">
             <div class="feature-title">Components &amp; dependencies</div>
-            <div>Logical decompositions you define in one JSON file, with dependency graphs between components and files that change together.</div>
+            <div>Components you define in one JSON file, their dependencies, and files that change together.</div>
         </div>
         <div class="feature">
             <div class="feature-title">People &amp; teams</div>
-            <div>Who contributes where and how much, knowledge concentration, team topologies, bots and AI co-authored commits.</div>
+            <div>Who works where, knowledge concentration, team topologies, bots and AI co-authored commits.</div>
         </div>
         <div class="feature">
             <div class="feature-title">Trends</div>
-            <div>Commits, churn and contributors per year, month, week and day; what is active, what is legacy.</div>
+            <div>Commits, churn and contributors over time; what is active, what is legacy.</div>
         </div>
         <div class="feature">
             <div class="feature-title">Landscapes &amp; AI insights</div>
-            <div>Aggregate many repositories, or whole GitHub and GitLab organizations, into portfolio views. Let an AI coding agent refine the analysis and explain it.</div>
+            <div>Portfolio views over many repositories or whole organizations; AI agents that refine and explain the analysis.</div>
         </div>
     </div>
-    <p style="margin-bottom: 0">The <a href="#features" onclick="document.getElementById('features_tab').click(); return false;">Features</a> tab
-        describes every report; the <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">Landscapes</a> and
-        <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a> tabs cover the last two.</p>
+    <p style="margin-bottom: 0">Every report, with a screenshot: <a href="#features" onclick="document.getElementById('features_tab').click(); return false;">Features</a>.</p>
 </div>
 
 <div class="card">
@@ -61,7 +82,8 @@ open _sokrates/reports/index.html</div>
                 <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/html/index.html" target="_blank" style="text-decoration: none">
                     <div><img src="assets/logos/codex-logo.png" style="height: 90px; padding: 4px"></div>
                     <div style="font-size: 140%; font-weight: bold">OpenAI Codex</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>1.1</b> MLOC, <b>500+</b> contributors, <b>9K</b> commits (with AI insights)</div>
+                    <div class="card-cmd">analyzeGitRepo -url https://github.com/openai/codex</div>
+                    <div style="margin-top: 8px; font-size: 90%"><b>1.1</b> MLOC, <b>500+</b> contributors, <b>9K</b> commits (with AI insights)</div>
                 </a>
             </div>
         </div>
@@ -71,35 +93,30 @@ open _sokrates/reports/index.html</div>
                 <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
                     <div><img src="assets/logos/openai.svg" style="height: 90px; padding: 4px"></div>
                     <div style="font-size: 140%; font-weight: bold">OpenAI's OSS projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors</div>
+                    <div class="card-cmd">analyzeGitHubOrg -org openai</div>
+                    <div style="margin-top: 8px; font-size: 90%"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors</div>
                 </a>
             </div>
             <div class="section example-card">
                 <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
                     <div><img src="assets/logos/anthropics.png" style="height: 90px; padding: 4px"></div>
                     <div style="font-size: 140%; font-weight: bold">Anthropic's OSS projects</div>
-                    <div style="margin-top: 8px; font-size: 90%; color: black"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors</div>
+                    <div style="margin-top: 8px; font-size: 90%"><b>13</b> repos, <b>300</b> KLOC, <b>688</b> contributors</div>
                 </a>
             </div>
         </div>
     </div>
-    <p style="margin-bottom: 0">Dozens more &mdash; from single libraries to the Linux kernel and the Apache Software Foundation &mdash; on the
-        <a href="#examples" onclick="document.getElementById('examples_tab').click(); return false;">Examples</a> tab.</p>
+    <p style="margin-bottom: 0">Dozens more on the <a href="#examples" onclick="document.getElementById('examples_tab').click(); return false;">Examples</a> tab.</p>
 </div>
 
 <div class="card">
     <h1>Why Sokrates</h1>
     <ul style="padding-left: 20px">
-        <li><b>Show the code, skip the interviews.</b> A pragmatic, inexpensive way to get rich facts about any software system:
-            the analysis runs on the source and the git history, nothing else is needed.</li>
-        <li><b>Polyglot by design.</b> Forty-plus languages out of the box; everything else still gets size, duplication and history reports.
-            It borrows from <a href="https://queue.acm.org/detail.cfm?id=945136" target="_blank">code spelunking</a> and
-            <a href="https://en.wikipedia.org/wiki/Grep" target="_blank">grep</a>: structure on top of regex searches, instead of per-language parsers.</li>
-        <li><b>Reports you can hand over.</b> Static HTML that opens from disk or any web server, no database, no service to run.</li>
-        <li><b>Scales from one repo to an organization.</b> The same reports aggregate into landscapes with sub-landscapes, team views and trends.</li>
-        <li><b>Open source, MIT.</b> Built by <a href="https://zeljkoobrenovic.com" target="_blank">Željko Obrenović</a> as one of the tools behind
-            <a target="_blank" href="https://grounded-architecture.io">Grounded Architecture</a> and its
-            <a target="_blank" href="https://grounded-architecture.io/analytics">lightweight architectural analytics</a>.</li>
+        <li><b>Show the code, skip the interviews.</b> The analysis runs on the source and the git history. Nothing else is needed.</li>
+        <li><b>Polyglot by design.</b> Forty-plus languages in depth, every other text file at the basic level. Structure on top of
+            <a href="https://en.wikipedia.org/wiki/Grep" target="_blank">grep</a>, not a parser per language.</li>
+        <li><b>Reports you can hand over.</b> Static HTML that opens from disk or any web server. From one repository to a whole organization.</li>
     </ul>
-    <p class="quote">"Talk is expensive. Show me the code."</p>
+    <p class="quote">"Talk is expensive. Show me the code." &mdash; <a href="https://zeljkoobrenovic.com" target="_blank">Željko Obrenović</a>,
+        who built Sokrates for <a target="_blank" href="https://grounded-architecture.io">Grounded Architecture</a>.</p>
 </div>
