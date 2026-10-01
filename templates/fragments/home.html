@@ -5,9 +5,9 @@
             From any git repository, in any language. Free and open source.</p>
         <div class="hero-toggle" role="tablist" aria-label="What to analyze">
             <button type="button" class="active" onclick="showHeroCmd(this, 'folder')">Your folder</button>
-            <button type="button" onclick="showHeroCmd(this, 'repo')">A repository URL</button>
-            <button type="button" onclick="showHeroCmd(this, 'org')"><img class="pill-logo" src="assets/logos/github.png" alt="">A GitHub organization</button>
-            <button type="button" onclick="showHeroCmd(this, 'data')">Just the data</button>
+            <button type="button" onclick="showHeroCmd(this, 'repo')">Repository URL</button>
+            <button type="button" onclick="showHeroCmd(this, 'org')">GitHub organization</button>
+            <button type="button" onclick="showHeroCmd(this, 'data')">Just data</button>
         </div>
         <div class="cmd hero-cmd" id="hero-cmd-folder">cd &lt;your-project&gt;
 <span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span>
@@ -25,7 +25,7 @@ open openai/_sokrates_landscape/index.html
 <span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze -dataOnly</span>
 unzip -l _sokrates/reports/data/data.zip
 <span class="c"># no HTML: one data.zip with analysisResults.json (every metric, component, contributor, trend),</span>
-<span class="c"># config.json and the per-scope file lists — for your own tooling, e.g. a Backstage plugin</span></div>
+<span class="c"># config.json and the per-scope file lists — for your own tooling, e.g. a Backstage plugin (see the Data tab)</span></div>
         <script>
             function showHeroCmd(button, which) {
                 var boxes = document.getElementsByClassName('hero-cmd');

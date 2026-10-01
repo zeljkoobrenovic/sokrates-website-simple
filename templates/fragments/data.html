@@ -1,0 +1,106 @@
+<div class="card">
+    <h1>One archive per analysis</h1>
+    <p>Every analysis writes everything it measured into one file, <span class="inline-code">_sokrates/reports/data/data.zip</span>.
+        The HTML reports read from it, a landscape reads only it, and it is the contract for your own tooling &mdash; a Backstage
+        plugin, a dashboard, a CI gate. <span class="inline-code">analyze -dataOnly</span> writes just this archive, no HTML.</p>
+    <div class="cmd">cd &lt;your-project&gt;
+<span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze -dataOnly</span>
+unzip -p _sokrates/reports/data/data.zip analysisResults.json | jq '.metricsList.metrics[] | select(.id == "LINES_OF_CODE_MAIN")'</div>
+    <p>Browse a real one: the <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/data/data-preview.html?entry=analysisResults.json" target="_blank">data preview</a>
+        of the OpenAI Codex analysis shows any entry of its archive in the browser, and the
+        <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/codex/data/data.zip">archive itself</a> downloads as one file.</p>
+</div>
+
+<div class="card">
+    <h1>What is inside</h1>
+    <p>Entry names are paths inside the archive. JSON files are the structured data; the <span class="inline-code">text/</span> folder holds
+        the same facts as plain lists, one item per line, for grep and spreadsheets.</p>
+    <table class="steps data">
+        <tr>
+            <td>analysisResults.json</td>
+            <td>The whole analysis in one document: every metric, the five scopes, components and dependencies, features of interest, file
+                size and history distributions, units, duplication, contributors and their activity over time. The file a landscape reads. Its
+                top-level keys are listed below.</td>
+        </tr>
+        <tr>
+            <td>config.json</td>
+            <td>The configuration the analysis ran with, so the numbers can be reproduced and the scope is explicit.</td>
+        </tr>
+        <tr>
+            <td>files.json, mainFiles.json, testFiles.json, &hellip;</td>
+            <td>One record per file: path, extension, lines of code, the components and features of interest it belongs to.
+                <span class="inline-code">*FilesPaths.json</span> are the plain path lists per scope.</td>
+        </tr>
+        <tr>
+            <td>units.json</td>
+            <td>Every function and method: file, start and end line, lines of code, McCabe complexity, parameters, statements.</td>
+        </tr>
+        <tr>
+            <td>duplicates.json</td>
+            <td>Every duplicated block with all the places it occurs.</td>
+        </tr>
+        <tr>
+            <td>dependencies.json, logical_decompositions.json, concerns.json</td>
+            <td>Dependencies between components, the decompositions with their component definitions, the features of interest.</td>
+        </tr>
+        <tr>
+            <td>contributors.json</td>
+            <td>Every contributor with commits, file updates and lines added and deleted, overall and for the last 30, 90 and 365 days.</td>
+        </tr>
+        <tr>
+            <td>text/aspect_*.txt</td>
+            <td>File lists per scope (<span class="inline-code">aspect_main.txt</span>), per component and per feature of interest.</td>
+        </tr>
+        <tr>
+            <td>text/*WithHistory.txt, text/temporal_dependencies*.txt</td>
+            <td>Files with their commit dates and contributors; pairs of files changed together, overall and per time window.</td>
+        </tr>
+        <tr>
+            <td>text/metrics.txt, controls.txt, units.txt, duplicates.txt</td>
+            <td>The flat versions of the metrics, the goal controls, the units and the duplicates.</td>
+        </tr>
+        <tr>
+            <td>executionTimes.json, text/textualSummary.txt</td>
+            <td>How long each step took, and a short text summary of the analysis.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="card">
+    <h1>analysisResults.json at a glance</h1>
+    <p>The easiest entry point is <span class="inline-code">metricsList.metrics</span>: a flat list of a few hundred
+        <span class="inline-code">{id, value, description}</span> records with stable ids such as
+        <span class="inline-code">LINES_OF_CODE_MAIN</span>, <span class="inline-code">NUMBER_OF_FILES_MAIN</span>,
+        <span class="inline-code">LINES_OF_CODE_MAIN_EXT_JAVA</span>, <span class="inline-code">TEST_VS_MAIN_LINES_OF_CODE_PERCENTAGE</span>,
+        <span class="inline-code">DUPLICATION_NUMBER_OF_DUPLICATED_LINES</span>, <span class="inline-code">NUMBER_OF_CONTRIBUTORS</span>.
+        The other keys hold the structured detail:</p>
+    <table class="steps data">
+        <tr><td>metadata</td><td>Name, description, logo and links of the repository.</td></tr>
+        <tr><td>metricsList</td><td>Every measurement as <span class="inline-code">{id, value, description}</span>.</td></tr>
+        <tr><td>controlResults</td><td>The goals and their controls with the measured value and its traffic-light status.</td></tr>
+        <tr><td>mainAspectAnalysisResults, test…, generated…, buildAndDeploy…, other…</td>
+            <td>Per scope: file count, lines of code, and both per file extension.</td></tr>
+        <tr><td>logicalDecompositionsAnalysisResults</td><td>Per decomposition: the components with their size, and the dependencies between them.</td></tr>
+        <tr><td>concernsAnalysisResults, foundTags</td><td>The features of interest found, and the tags that matched the repository.</td></tr>
+        <tr><td>filesAnalysisResults</td><td>File size distributions overall, per extension and per component; the longest files.</td></tr>
+        <tr><td>filesHistoryAnalysisResults</td><td>File age, freshness, change frequency and contributor-count distributions; files without history.</td></tr>
+        <tr><td>unitsAnalysisResults</td><td>Unit size and conditional complexity risk distributions; the longest and most complex units.</td></tr>
+        <tr><td>duplicationAnalysisResults</td><td>Duplication overall, per component, per feature of interest and per extension; the longest and most frequent duplicates.</td></tr>
+        <tr><td>contributorsAnalysisResults</td><td>Contributors, and commits, file updates, churn and AI co-authored commits per year, month, week and day, also per scope.</td></tr>
+    </table>
+    <p>The shapes are the Java result classes serialized as they are, so a field you see in a report exists in the JSON under the same name.
+        The source of truth is <a href="https://github.com/zeljkoobrenovic/sokrates/tree/master/codeanalyzer/src/main/java/nl/obren/sokrates/sourcecode/analysis/results" target="_blank">the results package</a>.</p>
+</div>
+
+<div class="card">
+    <h1>A landscape's archive</h1>
+    <p>A landscape writes its own <span class="inline-code">_sokrates_landscape/data/data.zip</span>, aggregated over its repositories:</p>
+    <table class="steps data">
+        <tr><td>landscapeAnalysisResults.json</td><td>The totals and the list of repositories with their key numbers; what a parent landscape reads.</td></tr>
+        <tr><td>repositories.json</td><td>One record per repository: metadata, size per scope, languages, activity, contributors, tags.</td></tr>
+        <tr><td>contributors.json, teams.json</td><td>Every contributor and team across repositories, with activity per period and the repositories they work on.</td></tr>
+        <tr><td>files.json</td><td>Every file of every repository with its size and history.</td></tr>
+        <tr><td>ai-insights.json</td><td>The AI scanner findings of all repositories, when any has them.</td></tr>
+        <tr><td>text/&hellip;</td><td>Plain lists: repositories per tag, people with most repositories, shared repositories between people, per time window.</td></tr>
+    </table>
+</div>

@@ -760,3 +760,10 @@ details.tips[open] summary {
     vertical-align: -5px;
     margin-right: 6px;
 }
+
+/* data tab: entry names may wrap, the description keeps most of the width */
+table.steps.data td:first-child {
+    white-space: normal;
+    width: 30%;
+    overflow-wrap: anywhere;
+}

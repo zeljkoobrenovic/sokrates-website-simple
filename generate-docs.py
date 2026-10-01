@@ -15,5 +15,6 @@ with open('docs/index.html', 'w') as html_file:
                     .replace('${import ai-insights.html}', open('templates/fragments/ai-insights.html').read())
                     .replace('${import articles.html}', open('templates/fragments/articles.html').read())
                     .replace('${import features.html}', open('templates/fragments/features.html').read())
+                    .replace('${import data.html}', open('templates/fragments/data.html').read())
                     .replace('${data}', json.dumps(data)))
 
