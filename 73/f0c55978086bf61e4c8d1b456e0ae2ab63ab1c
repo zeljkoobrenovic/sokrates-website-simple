@@ -1,0 +1,23 @@
+docs/index.html
+  s_40c0e74316fcc6::t_fd3123d9bf23b5 1577-1578,2079
+templates/fragments/ai-insights.html
+  s_40c0e74316fcc6::t_b841bb6fa40cac 64-65
+templates/fragments/features.html
+  s_40c0e74316fcc6::t_ff1c667c636032 185
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "73f0c55978086bf61e4c8d1b456e0ae2ab63ab1c",
+  "prompts": {},
+  "sessions": {
+    "s_40c0e74316fcc6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8a859e40-f6c6-4dfa-8fdb-6c295588cf73",
+        "model": "unknown"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
