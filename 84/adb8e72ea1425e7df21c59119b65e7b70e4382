@@ -1,0 +1,21 @@
+docs/index.html
+  s_40c0e74316fcc6::t_9b0394733ad8f1 1044-1049,1072-1074
+templates/fragments/install.html
+  s_40c0e74316fcc6::t_e71ea27210468a 71-76,99-101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "84adb8e72ea1425e7df21c59119b65e7b70e4382",
+  "prompts": {},
+  "sessions": {
+    "s_40c0e74316fcc6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8a859e40-f6c6-4dfa-8fdb-6c295588cf73",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
