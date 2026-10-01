@@ -103,6 +103,12 @@ landscape/
             selection, and <span class="inline-code">-dataOnly</span> keeps only the data. Re-runs reuse every kept configuration and your edits
             of the landscape metadata; <span class="inline-code">-prune</span> removes the analyses of repositories no longer selected. For private
             repositories (and the higher API rate limit) set <span class="inline-code">SOKRATES_GIT_TOKEN</span>.</p>
+        <p style="margin: 4px 0"><span class="inline-code">analyzeGitLabGroup</span> is the same for GitLab groups, with their subgroups, on
+            gitlab.com or a self-hosted instance: <span class="inline-code">-group gitlab-org/ci-cd</span>, or a group URL such as
+            <span class="inline-code">-group https://gitlab.example.com/acme/tools</span> (which also names the instance;
+            <span class="inline-code">-gitlabUrl</span> sets it explicitly). Projects are kept in
+            <span class="inline-code">&lt;group path&gt;/&lt;project path&gt;</span>, so subgroup folders are preserved, and the same filters
+            and switches apply.</p>
     </div>
 
     <div class="example">
