@@ -1,0 +1,29 @@
+docs/index.html
+  s_40c0e74316fcc6::t_fd42d428c6aa57 774-780,847,861-863,881,2428-2537
+generate-docs.py
+  s_40c0e74316fcc6::t_b7baee4496b81d 18
+templates/fragments/data.html
+  s_40c0e74316fcc6::t_122a2648e67ba6 1-106
+templates/fragments/home.html
+  s_40c0e74316fcc6::t_0226d355e217ad 8-10,28
+templates/fragments/style.css
+  s_40c0e74316fcc6::t_275612251686b1 763-769
+templates/index.html
+  s_40c0e74316fcc6::t_7756f602b65e49 78,108-111
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "4b1e046274d37dabfd96bf27c63c97179e4612ca",
+  "prompts": {},
+  "sessions": {
+    "s_40c0e74316fcc6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8a859e40-f6c6-4dfa-8fdb-6c295588cf73",
+        "model": "unknown"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
