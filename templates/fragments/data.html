@@ -21,48 +21,133 @@ unzip -p _sokrates/reports/data/data.zip analysisResults.json | jq '.metricsList
             <td>analysisResults.json</td>
             <td>The whole analysis in one document: every metric, the five scopes, components and dependencies, features of interest, file
                 size and history distributions, units, duplication, contributors and their activity over time. The file a landscape reads. Its
-                top-level keys are listed below.</td>
+                top-level keys are listed below.
+                <details class="tips sample"><summary>sample</summary><pre>{
+  &quot;metadata&quot;: { &quot;name&quot;: &quot;openai/openai-ruby&quot;, &quot;description&quot;: &quot;Official Ruby SDK for the OpenAI API&quot;,
+                &quot;logoLink&quot;: &quot;https://avatars.githubusercontent.com/u/14957082&quot;, &quot;links&quot;: [ { &quot;label&quot;: &quot;GitHub&quot;, &quot;href&quot;: &quot;https://github.com/openai/openai-ruby&quot; } ] },
+  &quot;metricsList&quot;: { &quot;metrics&quot;: [
+    { &quot;id&quot;: &quot;TOTAL_NUMBER_OF_FILES&quot;, &quot;value&quot;: 5317, &quot;description&quot;: &quot;Total number of files in the source folder&quot; },
+    { &quot;id&quot;: &quot;LINES_OF_CODE_MAIN&quot;, &quot;value&quot;: 245331, &quot;description&quot;: null },
+    … 413 more ] },
+  &quot;mainAspectAnalysisResults&quot;: { &quot;filesCount&quot;: 3174, &quot;linesOfCode&quot;: 245331,
+    &quot;linesOfCodePerExtension&quot;: [ { &quot;name&quot;: &quot;rbi&quot;, &quot;value&quot;: 188708 }, { &quot;name&quot;: &quot;rb&quot;, &quot;value&quot;: 55068 }, … ] },
+  &quot;contributorsAnalysisResults&quot;: { &quot;latestCommitDate&quot;: &quot;2026-10-01&quot;, &quot;contributors&quot;: [ … ],
+    &quot;contributorsPerYear&quot;: [ { &quot;timeSlot&quot;: &quot;2025&quot;, &quot;contributorsCount&quot;: 17, &quot;commitsCount&quot;: 476, &quot;fileUpdatesCount&quot;: 24551,
+                               &quot;linesAdded&quot;: 730073, &quot;linesDeleted&quot;: 367022, &quot;aiCoAuthoredCommitsCount&quot;: 1 }, … ] },
+  &quot;duplicationAnalysisResults&quot;: { … }, &quot;unitsAnalysisResults&quot;: { … }, &quot;filesHistoryAnalysisResults&quot;: { … }, …
+}</pre></details>
+            </td>
         </tr>
         <tr>
             <td>config.json</td>
-            <td>The configuration the analysis ran with, so the numbers can be reproduced and the scope is explicit.</td>
+            <td>The configuration the analysis ran with, so the numbers can be reproduced and the scope is explicit.
+                <details class="tips sample"><summary>sample</summary><pre>{
+  &quot;metadata&quot;: { &quot;name&quot;: &quot;openai/openai-ruby&quot;, &quot;description&quot;: &quot;Official Ruby SDK for the OpenAI API&quot;, … },
+  &quot;srcRoot&quot;: &quot;..&quot;,
+  &quot;extensions&quot;: [ &quot;rb&quot;, &quot;rbi&quot;, &quot;rbs&quot;, &quot;yml&quot;, … ],
+  &quot;ignore&quot;: [ { &quot;pathPattern&quot;: &quot;.*/[.]git/.*&quot;, &quot;contentPattern&quot;: &quot;&quot;, &quot;exception&quot;: false, &quot;note&quot;: &quot;&quot; } ],
+  &quot;main&quot;: { &quot;name&quot;: &quot;main&quot;, &quot;sourceFileFilters&quot;: [ { &quot;pathPattern&quot;: &quot;.*&quot;, &quot;contentPattern&quot;: &quot;&quot;, &quot;exception&quot;: false } ] },
+  &quot;test&quot;: { … }, &quot;generated&quot;: { … }, &quot;buildAndDeployment&quot;: { … }, &quot;other&quot;: { … },
+  &quot;logicalDecompositions&quot;: [ { &quot;name&quot;: &quot;primary&quot;, &quot;componentsFolderDepth&quot;: 1, … } ],
+  &quot;concernGroups&quot;: [ … ], &quot;goalsAndControls&quot;: [ … ], &quot;analysis&quot;: { … }
+}</pre></details>
+            </td>
         </tr>
         <tr>
             <td>files.json, mainFiles.json, testFiles.json, &hellip;</td>
             <td>One record per file: path, extension, lines of code, the components and features of interest it belongs to.
-                <span class="inline-code">*FilesPaths.json</span> are the plain path lists per scope.</td>
+                <span class="inline-code">*FilesPaths.json</span> are the plain path lists per scope.
+                <details class="tips sample"><summary>sample</summary><pre>[
+  { &quot;relativePath&quot;: &quot;lib/openai/client.rb&quot;, &quot;extension&quot;: &quot;rb&quot;, &quot;linesOfCode&quot;: 834,
+    &quot;components&quot;: [ &quot;primary::lib&quot; ], &quot;concerns&quot;: [ &quot;::Unclassified&quot; ] },
+  …
+]
+mainFilesPaths.json:  [ &quot;lib/openai.rb&quot;, &quot;lib/openai/client.rb&quot;, … ]</pre></details>
+            </td>
         </tr>
         <tr>
             <td>units.json</td>
-            <td>Every function and method: file, start and end line, lines of code, McCabe complexity, parameters, statements.</td>
+            <td>Every function and method: file, start and end line, lines of code, McCabe complexity, parameters, statements.
+                <details class="tips sample"><summary>sample</summary><pre>[
+  { &quot;shortName&quot;: &quot;initialize&quot;, &quot;longName&quot;: &quot;initialize&quot;, &quot;relativeFileName&quot;: &quot;lib/openai/client.rb&quot;, &quot;fileLinesCount&quot;: 834,
+    &quot;components&quot;: [ &quot;primary::lib&quot; ], &quot;startLine&quot;: 605, &quot;endLine&quot;: 832, &quot;linesOfCode&quot;: 204, &quot;mcCabeIndex&quot;: 55,
+    &quot;numberOfParameters&quot;: 0, &quot;numberOfStatements&quot;: 0 },
+  …
+]</pre></details>
+            </td>
         </tr>
         <tr>
             <td>duplicates.json</td>
-            <td>Every duplicated block with all the places it occurs.</td>
+            <td>Every duplicated block with all the places it occurs.
+                <details class="tips sample"><summary>sample</summary><pre>{ &quot;title&quot;: &quot;Duplication&quot;, &quot;timestamp&quot;: &quot;2026-10-01 20:55:35&quot;, &quot;duplicates&quot;: [
+  { &quot;blockSize&quot;: 157, &quot;duplicatedFileBlocks&quot;: [
+      { &quot;file&quot;: { &quot;relativePath&quot;: &quot;rbi/openai/models/admin/organization/usage_audio_speeches_response.rbi&quot;, &quot;extension&quot;: &quot;rbi&quot;, &quot;linesOfCode&quot;: 897, &quot;components&quot;: [ &quot;primary::rbi&quot; ] },
+        &quot;startLine&quot;: 169, &quot;endLine&quot;: 476, &quot;cleanedStartLine&quot;: 130, &quot;cleanedEndLine&quot;: 286 },
+      { &quot;file&quot;: { &quot;relativePath&quot;: &quot;rbi/openai/models/admin/organization/usage_web_search_calls_response.rbi&quot;, … },
+        &quot;startLine&quot;: 171, &quot;endLine&quot;: 478, … } ] },
+  … ] }</pre></details>
+            </td>
         </tr>
         <tr>
             <td>dependencies.json, logical_decompositions.json, concerns.json</td>
-            <td>Dependencies between components, the decompositions with their component definitions, the features of interest.</td>
+            <td>Dependencies between components, the decompositions with their component definitions, the features of interest.
+                <details class="tips sample"><summary>sample</summary><pre>dependencies.json:  [ { &quot;from&quot;: { &quot;anchor&quot;: &quot;async_websocket.rb&quot;, &quot;codeFragment&quot;: &quot;lib/openai/helpers/.../async_websocket.rb&quot;, &quot;files&quot;: [ … ] },
+                        &quot;to&quot;:   { &quot;anchor&quot;: &quot;OpenAI::Responses::Transports&quot;, &quot;files&quot;: [ … ] }, &quot;fromFiles&quot;: [ { &quot;file&quot;: { … }, &quot;codeFragment&quot;: &quot;&quot; }, … ] }, … ]
+logical_decompositions.json:  [ { &quot;key&quot;: &quot;primary&quot;,
+    &quot;components&quot;: [ { &quot;name&quot;: &quot;lib&quot;, &quot;filesCount&quot;: 1570, &quot;linesOfCode&quot;: 55068, &quot;linesOfCodePerExtension&quot;: [ … ] }, … ],
+    &quot;componentDependencies&quot;: [ { &quot;fromComponent&quot;: &quot;lib&quot;, &quot;toComponent&quot;: &quot;rbi&quot;, &quot;count&quot;: 12 }, … ],
+    &quot;fileCountPerComponent&quot;: [ { &quot;name&quot;: &quot;lib&quot;, &quot;value&quot;: 1570 }, … ] } ]
+concerns.json:  [ { &quot;key&quot;: &quot;general&quot;, &quot;concerns&quot;: [ { &quot;name&quot;: &quot;TODOs&quot;, &quot;filesCount&quot;: 0, &quot;linesOfCode&quot;: 0 }, … ] } ]</pre></details>
+            </td>
         </tr>
         <tr>
             <td>contributors.json</td>
-            <td>Every contributor with commits, file updates and lines added and deleted, overall and for the last 30, 90 and 365 days.</td>
+            <td>Every contributor with commits, file updates and lines added and deleted, overall and for the last 30, 90 and 365 days.
+                <details class="tips sample"><summary>sample</summary><pre>[
+  { &quot;userName&quot;: &quot;Jane Doe&quot;, &quot;email&quot;: &quot;jane@example.com&quot;, &quot;firstCommitDate&quot;: &quot;2024-04-09&quot;, &quot;latestCommitDate&quot;: &quot;2026-09-30&quot;,
+    &quot;commitsCount&quot;: 571, &quot;commitsCount30Days&quot;: 12, &quot;commitsCount90Days&quot;: 40, &quot;fileUpdatesCount30Days&quot;: 310,
+    &quot;linesAdded&quot;: 615296, &quot;linesDeleted&quot;: 221058, &quot;linesAdded30Days&quot;: 8045, &quot;linesDeleted30Days&quot;: 2210, … },
+  …
+]</pre></details>
+            </td>
         </tr>
         <tr>
             <td>text/aspect_*.txt</td>
-            <td>File lists per scope (<span class="inline-code">aspect_main.txt</span>), per component and per feature of interest.</td>
+            <td>File lists per scope (<span class="inline-code">aspect_main.txt</span>), per component and per feature of interest.
+                <details class="tips sample"><summary>sample</summary><pre>Path	Lines of Code
+.github/dependabot.yml	62
+lib/openai.rb	1598
+lib/openai/client.rb	834
+…</pre></details>
+            </td>
         </tr>
         <tr>
             <td>text/*WithHistory.txt, text/temporal_dependencies*.txt</td>
-            <td>Files with their commit dates and contributors; pairs of files changed together, overall and per time window.</td>
+            <td>Files with their commit dates and contributors; pairs of files changed together, overall and per time window.
+                <details class="tips sample"><summary>sample</summary><pre>mainFilesWithHistory.txt (tab-separated):
+path	# lines of code	# active days	days since first update	days since last update	# commits	# commits (30d)	# commits (90d)	# contributors	line churn	…	first updated	last updated	first contributor	…
+lib/openai/client.rb	834	61	540	3	88	4	11	9	4120	…	2024-04-09	2026-09-28	jane@example.com	…
+
+temporal_dependencies.txt:  two paths and the number of commits that changed both, one pair per line</pre></details>
+            </td>
         </tr>
         <tr>
             <td>text/metrics.txt, controls.txt, units.txt, duplicates.txt</td>
-            <td>The flat versions of the metrics, the goal controls, the units and the duplicates.</td>
+            <td>The flat versions of the metrics, the goal controls, the units and the duplicates.
+                <details class="tips sample"><summary>sample</summary><pre>metrics.txt:
+TOTAL_NUMBER_OF_FILES: 5317
+NUMBER_OF_FILES_MAIN: 3174
+LINES_OF_CODE_MAIN: 245331
+LINES_OF_CODE_MAIN_EXT_RBI: 188708
+…</pre></details>
+            </td>
         </tr>
         <tr>
             <td>executionTimes.json, text/textualSummary.txt</td>
-            <td>How long each step took, and a short text summary of the analysis.</td>
+            <td>How long each step took, and a short text summary of the analysis.
+                <details class="tips sample"><summary>sample</summary><pre>[ { &quot;processing&quot;: &quot;everything&quot;, &quot;startMs&quot;: 1790880743715, &quot;endMs&quot;: 1790880963761, &quot;durationMs&quot;: 220046 },
+  { &quot;processing&quot;: &quot;analysis/duplication&quot;, &quot;durationMs&quot;: 52001 }, … ]</pre></details>
+            </td>
         </tr>
     </table>
 </div>
@@ -97,11 +182,43 @@ unzip -p _sokrates/reports/data/data.zip analysisResults.json | jq '.metricsList
     <h1>A landscape's archive</h1>
     <p>A landscape writes its own <span class="inline-code">_sokrates_landscape/data/data.zip</span>, aggregated over its repositories:</p>
     <table class="steps data">
-        <tr><td>landscapeAnalysisResults.json</td><td>The totals and the list of repositories with their key numbers; what a parent landscape reads.</td></tr>
-        <tr><td>repositories.json</td><td>One record per repository: metadata, size per scope, languages, activity, contributors, tags.</td></tr>
-        <tr><td>contributors.json, teams.json</td><td>Every contributor and team across repositories, with activity per period and the repositories they work on.</td></tr>
-        <tr><td>files.json</td><td>Every file of every repository with its size and history.</td></tr>
-        <tr><td>ai-insights.json</td><td>The AI scanner findings of all repositories, when any has them.</td></tr>
+        <tr><td>landscapeAnalysisResults.json</td><td>The totals and the list of repositories with their key numbers; what a parent landscape reads.
+                <details class="tips sample"><summary>sample</summary><pre>{ &quot;repositoriesCount&quot;: 2, &quot;mainLoc&quot;: 302583, &quot;contributorsCount&quot;: 13, &quot;recentContributorsCount&quot;: 4, &quot;commitsCount&quot;: 1328,
+  &quot;commitsCount30Days&quot;: 41, &quot;cIndex30Days&quot;: 3.0, &quot;c2cConnectionsCount30Days&quot;: 6.0, …
+  &quot;repositories&quot;: [ { &quot;name&quot;: &quot;sokrates&quot;, &quot;mainLoc&quot;: 57252, &quot;commitsCount30Days&quot;: 35, … }, … ] }</pre></details>
+            </td></tr>
+        <tr><td>repositories.json</td><td>One record per repository: metadata, size per scope, languages, activity, contributors, tags.
+                <details class="tips sample"><summary>sample</summary><pre>[
+  { &quot;metadata&quot;: { &quot;name&quot;: &quot;openai/openai-ruby&quot;, &quot;description&quot;: &quot;Official Ruby SDK for the OpenAI API&quot;, &quot;logoLink&quot;: &quot;…&quot;, &quot;links&quot;: [ … ] },
+    &quot;latestCommitDate&quot;: &quot;2026-10-01&quot;, &quot;commitsCount&quot;: 964, &quot;commitsCount30Days&quot;: 35, &quot;commitsCount90Days&quot;: 100,
+    &quot;churn&quot;: 562323, &quot;churn30Days&quot;: 14271, &quot;contributors&quot;: [ &quot;jane@example.com&quot;, … ], &quot;contributors30Days&quot;: [ … ],
+    &quot;mainLinesOfCode&quot;: 245331, &quot;testLinesOfCode&quot;: 7345, &quot;mainLang&quot;: &quot;rb&quot;, &quot;langs&quot;: [ &quot;rb&quot;, &quot;rbi&quot;, &quot;yml&quot; ], &quot;tags&quot;: [ … ], … },
+  …
+]</pre></details>
+            </td></tr>
+        <tr><td>contributors.json, teams.json</td><td>Every contributor and team across repositories, with activity per period and the repositories they work on.
+                <details class="tips sample"><summary>sample</summary><pre>[
+  { &quot;contributor&quot;: { &quot;userName&quot;: &quot;Jane Doe&quot;, &quot;email&quot;: &quot;jane@example.com&quot;, &quot;commitsCount&quot;: 670, &quot;commitsCount30Days&quot;: 26, &quot;linesAdded&quot;: 115565, … },
+    &quot;mainLang&quot;: &quot;java&quot;, &quot;langs&quot;: [ &quot;java&quot;, &quot;html&quot; ],
+    &quot;repositories&quot;: [ { &quot;name&quot;: &quot;sokrates&quot;, &quot;firstCommitDate&quot;: &quot;2019-12-13&quot;, &quot;latestCommitDate&quot;: &quot;2026-10-01&quot;,
+                        &quot;commitsCount&quot;: 670, &quot;commits30Days&quot;: 26, &quot;commits90Days&quot;: 64, &quot;commits180Days&quot;: 338 }, … ],
+    &quot;members&quot;: [] },
+  …
+]</pre></details>
+            </td></tr>
+        <tr><td>files.json</td><td>Every file of every repository with its size and history.
+                <details class="tips sample"><summary>sample</summary><pre>[ { &quot;repository&quot;: &quot;sokrates&quot;, &quot;path&quot;: &quot;cli/src/main/java/nl/obren/sokrates/cli/CommandLineInterface.java&quot;, &quot;scope&quot;: &quot;main&quot;,
+    &quot;mainLang&quot;: &quot;java&quot;, &quot;linesOfCode&quot;: 2104, &quot;commitsCount&quot;: 212, &quot;contributorsCount&quot;: 3, &quot;latestCommitDate&quot;: &quot;2026-10-01&quot;, … }, … ]</pre></details>
+            </td></tr>
+        <tr><td>ai-insights.json</td><td>The AI scanner findings of all repositories, when any has them.
+                <details class="tips sample"><summary>sample</summary><pre>{ &quot;repositories&quot;: [ { &quot;name&quot;: &quot;openai/codex&quot;, &quot;insightsUrl&quot;: &quot;../openai/codex/reports/ai-insights/index.html&quot;, &quot;scannedAt&quot;: &quot;2026-08-29&quot;,
+                      &quot;scanners&quot;: [ { &quot;scanner&quot;: &quot;architecture-scan&quot;, &quot;version&quot;: &quot;1.1&quot;, &quot;findings&quot;: 24, &quot;attention&quot;: 5, &quot;summary&quot;: &quot;…&quot; }, … ],
+                      &quot;findingsBySeverity&quot;: { &quot;info&quot;: 279, &quot;low&quot;: 65, &quot;medium&quot;: 23, &quot;high&quot;: 2 }, &quot;findings&quot;: 369, &quot;attention&quot;: 90 } ],
+  &quot;findings&quot;: [ { &quot;repo&quot;: &quot;openai/codex&quot;, &quot;scanner&quot;: &quot;risk-synthesis-scan&quot;, &quot;id&quot;: &quot;risk-synthesis-scan/hotspots/core-plugins-manager&quot;,
+                  &quot;group&quot;: &quot;hotspots&quot;, &quot;title&quot;: &quot;Plugin manager cache-refresh coalescing is hand-rolled concurrent state logic&quot;,
+                  &quot;severity&quot;: &quot;high&quot;, &quot;confidence&quot;: &quot;certain&quot;, &quot;description&quot;: &quot;…&quot;, &quot;recommendation&quot;: &quot;…&quot;, &quot;tags&quot;: [ &quot;rust&quot;, &quot;concurrency&quot; ],
+                  &quot;url&quot;: &quot;../openai/codex/reports/ai-insights/index.html#risk-synthesis-scan%2Fhotspots%2Fcore-plugins-manager&quot; }, … ] }</pre></details>
+            </td></tr>
         <tr><td>text/&hellip;</td><td>Plain lists: repositories per tag, people with most repositories, shared repositories between people, per time window.</td></tr>
     </table>
 </div>

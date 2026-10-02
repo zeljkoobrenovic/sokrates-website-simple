@@ -763,8 +763,34 @@ details.tips[open] summary {
 }
 
 /* data tab: entry names may wrap, the description keeps most of the width */
+table.steps.data {
+    table-layout: fixed;
+    width: 100%;
+}
+
 table.steps.data td:first-child {
     white-space: normal;
-    width: 30%;
+    width: 26%;
     overflow-wrap: anywhere;
+}
+
+table.steps.data td {
+    overflow: hidden;
+}
+
+/* data tab samples */
+details.sample {
+    margin-top: 6px;
+    padding: 4px 10px;
+}
+
+details.sample summary {
+    font-size: 13px;
+}
+
+details.sample pre {
+    margin: 6px 0 4px 0;
+    font-size: 12px;
+    white-space: pre;
+    overflow-x: auto;
 }
