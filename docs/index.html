@@ -1683,6 +1683,12 @@ sokrates <span class="hl">analyzeLandscape -urls repos.txt -ai codex -aiPrompt "
     <h1>The skills</h1>
     <div class="feature-grid">
         <div class="feature">
+            <div class="feature-title">Start here</div>
+            <div>the <span class="inline-code">sokrates</span> skill works out where you are &mdash; no analysis yet, a fresh configuration,
+                findings present, a landscape root &mdash; and routes to the skill that applies. <i>"use the sokrates skill"</i> is the only
+                name you need to remember; it also probes what your Sokrates build can do.</div>
+        </div>
+        <div class="feature">
             <div class="feature-title">Scanners: what the code is</div>
             <div>functionality, domain language, architecture, tech stack</div>
         </div>
@@ -1692,7 +1698,9 @@ sokrates <span class="hl">analyzeLandscape -urls repos.txt -ai codex -aiPrompt "
         </div>
         <div class="feature">
             <div class="feature-title">Scanners: the synthesis</div>
-            <div>risk synthesis of the Sokrates hotspots, maintainability grades per component, evolution as a story; <span class="inline-code">full-scan</span> runs them all</div>
+            <div>risk synthesis of the Sokrates hotspots, maintainability grades per component, evolution as a story; <span class="inline-code">full-scan</span>
+                runs them all. Over a whole landscape, <span class="inline-code">landscape-synthesis-scan</span> tells the portfolio story: where attention
+                concentrates, findings that recur across repositories, coverage gaps, priorities.</div>
         </div>
         <div class="feature">
             <div class="feature-title">Configuration: repository</div>
@@ -1706,7 +1714,14 @@ sokrates <span class="hl">analyzeLandscape -urls repos.txt -ai codex -aiPrompt "
             <div class="feature-title">Improve: act on it, and prove it</div>
             <div><span class="inline-code">sokrates-improve</span> ranks targets from the data (most complex units, costliest duplicated blocks,
                 hotspot files, findings with a recommendation), makes one behaviour-preserving change per branch, re-runs Sokrates and reports
-                before/after numbers. <i>"improve the most complex unit"</i>, <i>"fix the top finding"</i>.</div>
+                before/after numbers. <i>"improve the most complex unit"</i>, <i>"fix the top finding"</i>. Findings are re-checked against the
+                tree without re-running a scanner, so a fix is confirmed in minutes.</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">In CI</div>
+            <div>a <a href="https://github.com/zeljkoobrenovic/sokrates-skills/blob/main/examples/ci/github-actions-ai-insights.yml" target="_blank">ready
+                GitHub Actions workflow</a>: analysis, scan, validation, the Markdown summary in the job summary, a diff against the previous run,
+                and a failing job only when a finding above low is new.</div>
         </div>
         <div class="feature">
             <div class="feature-title">Extending</div>
