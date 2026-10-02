@@ -7,6 +7,20 @@
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129891352-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-129891352-1');
+    </script>
+
     <style>
         :root {
     --bg: #0f1720;
@@ -806,6 +820,7 @@ details.sample pre {
 }
 
     </style>
+
     <script>
         function openTab(evt, cityName) {
             var i, tabcontent, tablinks;
@@ -837,7 +852,9 @@ details.sample pre {
                         var text = box.innerText.replace(/\s*copy$/, '').replace(/\s+$/, '');
                         navigator.clipboard.writeText(text).then(function () {
                             button.textContent = 'copied';
-                            setTimeout(function () { button.textContent = 'copy'; }, 1500);
+                            setTimeout(function () {
+                                button.textContent = 'copy';
+                            }, 1500);
                         });
                     };
                     box.appendChild(button);
@@ -852,7 +869,9 @@ details.sample pre {
                 // The hash also names the tab's content div, so the browser scrolls to it on load
                 // (hiding the header); undo that once the load-time fragment scroll has happened.
                 window.addEventListener('load', function () {
-                    setTimeout(function () { window.scrollTo(0, 0); }, 50);
+                    setTimeout(function () {
+                        window.scrollTo(0, 0);
+                    }, 50);
                 });
             }
         });
