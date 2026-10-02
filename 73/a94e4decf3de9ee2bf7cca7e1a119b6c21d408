@@ -1,0 +1,23 @@
+docs/index.html
+  s_40c0e74316fcc6::t_209fd8e96b81ef 1655-1656,2782-2787
+templates/fragments/ai-skills.html
+  s_40c0e74316fcc6::t_e8fd775c1d2601 65-66
+templates/fragments/release-notes.html
+  s_40c0e74316fcc6::t_28fd2b57ec4534 40-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "73a94e4decf3de9ee2bf7cca7e1a119b6c21d408",
+  "prompts": {},
+  "sessions": {
+    "s_40c0e74316fcc6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8a859e40-f6c6-4dfa-8fdb-6c295588cf73",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
