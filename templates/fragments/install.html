@@ -95,7 +95,8 @@ docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandsc
                     <span class="inline-code">--pull always</span> to the run command.</li>
                 <li><b>Versions:</b> <span class="inline-code">:latest</span> tracks the master branch; release tags are available as
                     <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates:&lt;version&gt;</span>. See the
-                    <a href="https://github.com/zeljkoobrenovic/sokrates/pkgs/container/sokrates" target="_blank">package page</a>.</li>
+                    <a href="https://github.com/zeljkoobrenovic/sokrates/pkgs/container/sokrates" target="_blank">package page</a>; behaviour changes are
+                    listed under <a href="#release_notes" onclick="document.getElementById('release_notes_tab').click(); return false;">Release notes</a>.</li>
                 <li><b>Memory:</b> a run that ends in <span class="inline-code">OutOfMemoryError: Java heap space</span>, or stops in the middle
                     without a message, needs a bigger Docker VM (see the note above); an explicit heap,
                     <span class="inline-code">-e JAVA_TOOL_OPTIONS=-Xmx6g</span>, overrides the 75% rule but cannot exceed what the VM has.</li>

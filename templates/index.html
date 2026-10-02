@@ -95,6 +95,7 @@
             <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">Examples</button>
             <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">Features</button>
             <button id="data_tab" class="tablinks" onclick="openTab(event, 'data')">Data</button>
+            <button id="release_notes_tab" class="tablinks" onclick="openTab(event, 'release_notes')">Release notes</button>
             <!--button id="articles_tab" class="tablinks" onclick="openTab(event, 'articles')">Articles</button-->
         </nav>
     </div>
@@ -126,6 +127,10 @@
 
     <div id="data" class="tabcontent">
         ${import data.html}
+    </div>
+
+    <div id="release_notes" class="tabcontent">
+        ${import release-notes.html}
     </div>
 
     <div id="articles" class="tabcontent">

@@ -891,6 +891,7 @@ details.sample pre {
             <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">Examples</button>
             <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">Features</button>
             <button id="data_tab" class="tablinks" onclick="openTab(event, 'data')">Data</button>
+            <button id="release_notes_tab" class="tablinks" onclick="openTab(event, 'release_notes')">Release notes</button>
             <!--button id="articles_tab" class="tablinks" onclick="openTab(event, 'articles')">Articles</button-->
         </nav>
     </div>
@@ -1131,7 +1132,8 @@ docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeLandsc
                     <span class="inline-code">--pull always</span> to the run command.</li>
                 <li><b>Versions:</b> <span class="inline-code">:latest</span> tracks the master branch; release tags are available as
                     <span class="inline-code">ghcr.io/zeljkoobrenovic/sokrates:&lt;version&gt;</span>. See the
-                    <a href="https://github.com/zeljkoobrenovic/sokrates/pkgs/container/sokrates" target="_blank">package page</a>.</li>
+                    <a href="https://github.com/zeljkoobrenovic/sokrates/pkgs/container/sokrates" target="_blank">package page</a>; behaviour changes are
+                    listed under <a href="#release_notes" onclick="document.getElementById('release_notes_tab').click(); return false;">Release notes</a>.</li>
                 <li><b>Memory:</b> a run that ends in <span class="inline-code">OutOfMemoryError: Java heap space</span>, or stops in the middle
                     without a message, needs a bigger Docker VM (see the note above); an explicit heap,
                     <span class="inline-code">-e JAVA_TOOL_OPTIONS=-Xmx6g</span>, overrides the 75% rule but cannot exceed what the VM has.</li>
@@ -2708,6 +2710,61 @@ LINES_OF_CODE_MAIN_EXT_RBI: 188708
             </td></tr>
         <tr><td>text/&hellip;</td><td>Plain lists: repositories per tag, people with most repositories, shared repositories between people, per time window.</td></tr>
     </table>
+</div>
+
+    </div>
+
+    <div id="release_notes" class="tabcontent">
+        <div class="card">
+    <h1>Release notes</h1>
+    <p>Behaviour changes that can affect an existing analysis, newest first. The Docker image's
+        <span class="inline-code">:latest</span> and the <span class="inline-code">master</span> branch carry everything under the most recent
+        date; the full list lives in <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/CHANGELOG.md" target="_blank">CHANGELOG.md</a>.</p>
+</div>
+
+<div class="card">
+    <h1>2 October 2026</h1>
+
+    <h2>Path patterns match the path below the source root</h2>
+    <p>A filter's <span class="inline-code">pathPattern</span> &mdash; in <span class="inline-code">ignore</span>, the scope rules
+        (<span class="inline-code">test</span>, <span class="inline-code">generated</span>, <span class="inline-code">buildAndDeployment</span>,
+        <span class="inline-code">other</span>), decomposition filters and features of interest &mdash; is now matched against the file's path
+        <b>below the source root, with a leading slash</b>: <span class="inline-code">/src/app/service.py</span>. Before, it was matched against the
+        whole path as Sokrates loaded it, source root included.</p>
+    <table class="steps data">
+        <tr>
+            <td>Why</td>
+            <td>With an absolute source root (Docker's <span class="inline-code">/code</span>, any absolute <span class="inline-code">-srcRoot</span>)
+                the folders <i>above</i> the repository were part of every match. A repository checked out under a <span class="inline-code">tests</span>,
+                <span class="inline-code">docs</span>, <span class="inline-code">build</span> or <span class="inline-code">generated</span> folder had all its
+                files classified by that folder's name, and an ignore rule like <span class="inline-code">.*/docs/.*</span> could silently empty the analysis.</td>
+        </tr>
+        <tr>
+            <td>What stays the same</td>
+            <td>Every pattern written the documented way, starting with <span class="inline-code">.*</span> and naming folders inside the repository
+                (<span class="inline-code">.*/[Tt]ests/.*</span>, <span class="inline-code">.*[.]sql</span>, <span class="inline-code">.*/src/main/.*</span>),
+                matches exactly as before, also on top-level folders thanks to the leading slash. Folder-based components are unaffected.</td>
+        </tr>
+        <tr>
+            <td>What to check</td>
+            <td>A pattern that deliberately named a folder above the repository &mdash; <span class="inline-code">.*/code/src/.*</span> written against
+                Docker's <span class="inline-code">/code</span> &mdash; no longer matches; drop the prefix: <span class="inline-code">.*/src/.*</span>.
+                The <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">sokrates-skills</a> configuration scripts follow the
+                new rule from the same date.</td>
+        </tr>
+    </table>
+
+    <h2>The analysis output is always ignored</h2>
+    <p><span class="inline-code">init</span> now writes the ignore rules for <span class="inline-code">_sokrates/</span>,
+        <span class="inline-code">_sokrates_landscape/</span>, the git export text files and <span class="inline-code">sokrates_*.json</span> into every new
+        <span class="inline-code">config.json</span>, also when nothing matches them yet &mdash; on a first analysis the output does not exist. Older
+        configurations get the same rules in memory when the reports are generated; the file itself is not modified. Before, a second run of a
+        fresh configuration counted the first run's reports as main code.</p>
+
+    <h2>A relative <span class="inline-code">-confFile</span> analyzes the repository</h2>
+    <p><span class="inline-code">generateReports -confFile _sokrates/config.json</span>, run from the repository root, resolved the default
+        <span class="inline-code">srcRoot</span> <span class="inline-code">..</span> against the working directory's parent and analyzed that folder.
+        It now resolves to the repository.</p>
 </div>
 
     </div>
