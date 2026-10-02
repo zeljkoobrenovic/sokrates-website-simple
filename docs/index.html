@@ -1623,16 +1623,20 @@ sokrates <span class="hl">analyze</span></div>
         </li>
         <li>
             <div class="step-title">Refine the configuration, by asking</div>
-            <div class="step-body">In the project folder, ask your AI tool: <i>"check the Sokrates configuration of this repository"</i>,
-                <i>"define meaningful components"</i>, <i>"which features of interest should Sokrates track here?"</i>,
-                <i>"merge duplicate contributors"</i>. Each skill previews its effect on the real tree before Sokrates runs. Then
-                <span class="inline-code">sokrates generateReports</span>.</div>
+            <div class="step-body">Open your agentic CLI of choice &mdash; Claude Code, Codex, Gemini CLI, Cursor &mdash; in the project folder and ask:
+                <i>"check the Sokrates configuration of this repository"</i>, <i>"define meaningful components"</i>,
+                <i>"which features of interest should Sokrates track here?"</i>, <i>"merge duplicate contributors"</i>. The agent picks the matching
+                skill; each skill previews its effect on the real tree before Sokrates runs. Then <span class="inline-code">sokrates generateReports</span>.</div>
         </li>
         <li>
             <div class="step-title">Ask for insights</div>
-            <div class="step-body"><i>"run a tech stack scan"</i>, <i>"explain the risks in this codebase"</i>, <i>"what does this software do?"</i>,
-                <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all fifteen. Every scanner reads the Sokrates data first and
-                spends its reading where the numbers point.</div>
+            <div class="step-body">In the same chat: <i>"run a tech stack scan"</i>, <i>"explain the risks in this codebase"</i>,
+                <i>"what does this software do?"</i>, <i>"how did this codebase evolve?"</i>, or <i>"run a full scan"</i> for all fifteen. Every scanner
+                reads the Sokrates data first and spends its reading where the numbers point. The same works headless, from a script or CI:</div>
+            <div class="cmd">claude -p "run a tech stack scan"            <span class="c"># Claude Code</span>
+codex exec "run a tech stack scan"          <span class="c"># Codex CLI</span>
+gemini -p "run a tech stack scan" --yolo    <span class="c"># Gemini CLI</span>
+sokrates analyze <span class="hl">-ai claude</span>                   <span class="c"># or let Sokrates run the agent right after each analysis</span></div>
         </li>
         <li>
             <div class="step-title">Open the explorer, and put it in the report</div>
