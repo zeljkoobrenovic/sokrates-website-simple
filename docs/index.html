@@ -1587,7 +1587,8 @@ sokrates <span class="hl">analyzeLandscape</span></div>
         <h1 style="font-size: 32px; margin-top: 8px">Let an AI agent read the analysis</h1>
         <p class="hero-sub">Sokrates measures. The <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">sokrates-skills</a>
             add what only a reader can add: what the code is, what it depends on, where the real risks are, how it got here. Fifteen scanners
-            write findings with verifiable evidence; six configuration skills tune Sokrates before it runs.</p>
+            write findings with verifiable evidence, six configuration skills tune Sokrates before it runs, and an improve skill acts on
+            what was found and proves the effect with the same numbers.</p>
         <p class="hero-links">Works with Claude Code, Codex CLI, Gemini CLI, Cursor, Copilot and any tool that loads
             <a href="https://agentskills.io" target="_blank">Agent Skills</a>. MIT.</p>
     </div>
@@ -1689,6 +1690,12 @@ sokrates <span class="hl">analyzeLandscape -urls repos.txt -ai codex -aiPrompt "
         <div class="feature">
             <div class="feature-title">Configuration: landscape</div>
             <div>landscape config, virtual sub-landscapes; the same checkers across many repositories</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">Improve: act on it, and prove it</div>
+            <div><span class="inline-code">sokrates-improve</span> ranks targets from the data (most complex units, costliest duplicated blocks,
+                hotspot files, findings with a recommendation), makes one behaviour-preserving change per branch, re-runs Sokrates and reports
+                before/after numbers. <i>"improve the most complex unit"</i>, <i>"fix the top finding"</i>.</div>
         </div>
         <div class="feature">
             <div class="feature-title">Extending</div>
