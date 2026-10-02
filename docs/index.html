@@ -2754,6 +2754,22 @@ LINES_OF_CODE_MAIN_EXT_RBI: 188708
         </tr>
     </table>
 
+    <h2>Dependencies declared for what the code uses</h2>
+    <p>Build and dependency hygiene, found by running the sokrates-skills tech-stack scanner on Sokrates itself. No report,
+        data format or command changes.</p>
+    <ul>
+        <li><b>Jackson is declared directly</b> (<span class="inline-code">jackson-databind</span> 2.19.1, the version resolved before).
+            The Jersey module that carried it transitively is gone &mdash; nothing used Jersey, so the fat jars no longer ship it.</li>
+        <li><b>One Log4j version</b> for API and core; <span class="inline-code">slf4j-simple</span> is replaced by
+            <span class="inline-code">log4j-slf4j2-impl</span>, so JGit logs through the same Log4j backend and configuration.</li>
+        <li><b>Java 17 API enforced at compile time</b> with <span class="inline-code">maven.compiler.release</span>, so a build on a
+            newer JDK cannot link against APIs missing on a 17 runtime. The bytecode level is unchanged.</li>
+        <li><span class="inline-code">commons-cli</span> is declared where it is used (<span class="inline-code">cli</span>), and the
+            assembly plugin version is pinned so both fat jars are assembled the same way everywhere.</li>
+        <li><b>The 3D views load a pinned x3dom</b> (1.8.3 from jsDelivr) instead of an unversioned demo URL. Reports generated earlier
+            keep the old URL until regenerated.</li>
+    </ul>
+
     <h2>The analysis output is always ignored</h2>
     <p><span class="inline-code">init</span> now writes the ignore rules for <span class="inline-code">_sokrates/</span>,
         <span class="inline-code">_sokrates_landscape/</span>, the git export text files and <span class="inline-code">sokrates_*.json</span> into every new
