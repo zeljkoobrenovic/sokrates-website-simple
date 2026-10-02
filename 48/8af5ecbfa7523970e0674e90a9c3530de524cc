@@ -1,0 +1,23 @@
+docs/index.html
+  s_40c0e74316fcc6::t_252ff5cb418837 776-780,783,787-807,2485-2500,2504-2515,2520-2527,2531-2538,2542-2550,2554-2562,2566-2573,2577-2583,2587-2593,2597-2604,2608-2611,2646-2682
+templates/fragments/data.html
+  s_40c0e74316fcc6::t_7f1cae5fa6c043 24-39,43-54,59-66,70-77,81-89,93-101,105-112,116-122,126-132,136-143,147-150,185-221
+templates/fragments/style.css
+  s_40c0e74316fcc6::t_05930fec5ab838 766-770,773,776-796
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "488af5ecbfa7523970e0674e90a9c3530de524cc",
+  "prompts": {},
+  "sessions": {
+    "s_40c0e74316fcc6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8a859e40-f6c6-4dfa-8fdb-6c295588cf73",
+        "model": "unknown"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
