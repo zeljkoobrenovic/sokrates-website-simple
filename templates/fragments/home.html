@@ -9,21 +9,21 @@
             <button type="button" onclick="showHeroCmd(this, 'org')">GitHub organization</button>
             <button type="button" onclick="showHeroCmd(this, 'data')">Just data</button>
         </div>
-        <div class="cmd hero-cmd" id="hero-cmd-folder">cd &lt;your-project&gt;
-<span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span>
+        <div class="cmd hero-cmd" id="hero-cmd-folder">cd &lt;your-project&gt;<br>
+<span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze</span><br>
 open _sokrates/reports/index.html</div>
         <div class="cmd hero-cmd" id="hero-cmd-repo" style="display: none"><span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeGitRepo -url https://github.com/openai/codex</span>
 
-open openai/codex/reports/index.html
+open openai/codex/reports/index.html<br>
 <span class="c"># no clone needed; the result is the example below</span></div>
 
         <div class="cmd hero-cmd" id="hero-cmd-org" style="display: none"><span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyzeGitHubOrg -org openai</span>
 
-open openai/_sokrates_landscape/index.html
+open openai/_sokrates_landscape/index.html<br>
 <span class="c"># every repo of the organization, one landscape; result below</span></div>
-        <div class="cmd hero-cmd" id="hero-cmd-data" style="display: none">cd &lt;your-project&gt;
-<span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze -dataOnly</span>
-unzip -l _sokrates/reports/data/data.zip
+        <div class="cmd hero-cmd" id="hero-cmd-data" style="display: none">cd &lt;your-project&gt;<br>
+<span class="hl">docker run --rm -v "$(pwd):/code" ghcr.io/zeljkoobrenovic/sokrates analyze -dataOnly</span><br>
+unzip -l _sokrates/reports/data/data.zip<br>
 <span class="c"># no HTML: one data.zip with analysisResults.json (every metric, component, contributor, trend),</span>
 <span class="c"># config.json and the per-scope file lists — for your own tooling, e.g. a Backstage plugin (see the Data tab)</span></div>
         <div class="hero-note" id="hero-data-note" style="display: none">Browse a real archive: the
