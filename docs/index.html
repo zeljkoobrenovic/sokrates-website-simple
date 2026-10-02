@@ -863,6 +863,7 @@ details.sample pre {
         });
         window.addEventListener('DOMContentLoaded', function () {
             var tab = location.hash.replace('#', '');
+            if (tab === 'ai_insights') tab = 'ai_skills';   // the tab's old name, kept working for existing links
             var btn = tab && document.getElementById(tab + '_tab');
             if (btn) {
                 btn.click();
@@ -887,7 +888,7 @@ details.sample pre {
             <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">Home</button>
             <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">Install &amp; use</button>
             <button id="landscapes_tab" class="tablinks" onclick="openTab(event, 'landscapes')">Landscapes</button>
-            <button id="ai_insights_tab" class="tablinks" onclick="openTab(event, 'ai_insights')">AI insights</button>
+            <button id="ai_skills_tab" class="tablinks" onclick="openTab(event, 'ai_skills')">AI skills</button>
             <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">Examples</button>
             <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">Features</button>
             <button id="data_tab" class="tablinks" onclick="openTab(event, 'data')">Data</button>
@@ -977,7 +978,7 @@ unzip -l _sokrates/reports/data/data.zip
             <div>Commits, churn and contributors over time; what is active, what is legacy.</div>
         </div>
         <div class="feature">
-            <div class="feature-title">Landscapes &amp; AI insights</div>
+            <div class="feature-title">Landscapes &amp; AI skills</div>
             <div>Portfolio views over many repositories or whole organizations; AI agents that refine and explain the analysis.</div>
         </div>
     </div>
@@ -1230,7 +1231,7 @@ sokrates analyze</div>
         <b>Next:</b> look at the reports, edit <span class="inline-code">_sokrates/config.json</span> (scope, components, features of interest
         &mdash; see <a href="#configure" onclick="document.getElementById('configure').scrollIntoView(); return false;">Configure the analysis</a> below) and run
         <span class="inline-code">analyze</span> again &mdash; or let an AI coding agent do that for you
-        (<a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>).
+        (<a href="#ai_skills" onclick="document.getElementById('ai_skills_tab').click(); return false;">AI skills</a>).
         Many repositories, or a whole GitHub or GitLab organization? See
         <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">Landscapes</a>.
     </div>
@@ -1268,7 +1269,7 @@ sokrates analyze</div>
     <p><b>The workflow is iterative:</b> run <span class="inline-code">analyze</span>, look at the reports, edit
         <span class="inline-code">_sokrates/config.json</span> (scope, logical decompositions, features of interest, goals and controls
         &mdash; see <a href="#configure" onclick="document.getElementById('configure').scrollIntoView(); return false;">Configure the analysis</a> below), and
-        run <span class="inline-code">analyze</span> again. The <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>
+        run <span class="inline-code">analyze</span> again. The <a href="#ai_skills" onclick="document.getElementById('ai_skills_tab').click(); return false;">AI skills</a>
         tab shows how to let an AI coding agent refine the configuration and explain the results.</p>
     <p>Options (all optional): <span class="inline-code">-srcRoot &lt;folder&gt;</span> analyzes another folder than the current one,
         <span class="inline-code">-name</span>/<span class="inline-code">-description</span> label the report,
@@ -1314,7 +1315,7 @@ sokrates analyze</div>
     </table>
     <p>Every key, with defaults and examples, for the repository configuration, the landscape files and the custom conventions:
         <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank"><b>the configuration manual</b></a>.
-        Rather not edit JSON by hand? The <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>
+        Rather not edit JSON by hand? The <a href="#ai_skills" onclick="document.getElementById('ai_skills_tab').click(); return false;">AI skills</a>
         skills let an AI coding agent write and check the configuration for you.</p>
 </div>
 
@@ -1586,7 +1587,7 @@ sokrates <span class="hl">analyzeLandscape</span></div>
 
     </div>
 
-    <div id="ai_insights" class="tabcontent">
+    <div id="ai_skills" class="tabcontent">
         <div class="hero">
     <div class="hero-text">
         <h1 style="font-size: 32px; margin-top: 8px">Let an AI agent read the analysis</h1>
@@ -2149,7 +2150,7 @@ sokrates <span class="hl">analyzeLandscape -urls repos.txt -ai codex -aiPrompt "
     </div>
     <div class="report">
         <div class="report-text">
-            <h2>AI insights</h2>
+            <h2>AI skills</h2>
             <p>Findings an AI coding agent writes on top of the analysis: what the software does, its architecture, risks and history, each with verifiable evidence.</p>
             <a href="https://zeljkoobrenovic.github.io/sokrates-skills/examples/codex/ai-insights/" target="_blank">Live example &nearr;</a>
         </div>

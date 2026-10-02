@@ -67,6 +67,7 @@
         });
         window.addEventListener('DOMContentLoaded', function () {
             var tab = location.hash.replace('#', '');
+            if (tab === 'ai_insights') tab = 'ai_skills';   // the tab's old name, kept working for existing links
             var btn = tab && document.getElementById(tab + '_tab');
             if (btn) {
                 btn.click();
@@ -91,7 +92,7 @@
             <button id="home_tab" class="tablinks active" onclick="openTab(event, 'home')">Home</button>
             <button id="install_tab" class="tablinks" onclick="openTab(event, 'install')">Install &amp; use</button>
             <button id="landscapes_tab" class="tablinks" onclick="openTab(event, 'landscapes')">Landscapes</button>
-            <button id="ai_insights_tab" class="tablinks" onclick="openTab(event, 'ai_insights')">AI insights</button>
+            <button id="ai_skills_tab" class="tablinks" onclick="openTab(event, 'ai_skills')">AI skills</button>
             <button id="examples_tab" class="tablinks" onclick="openTab(event, 'examples')">Examples</button>
             <button id="features_tab" class="tablinks" onclick="openTab(event, 'features')">Features</button>
             <button id="data_tab" class="tablinks" onclick="openTab(event, 'data')">Data</button>
@@ -113,8 +114,8 @@
         ${import landscapes.html}
     </div>
 
-    <div id="ai_insights" class="tabcontent">
-        ${import ai-insights.html}
+    <div id="ai_skills" class="tabcontent">
+        ${import ai-skills.html}
     </div>
 
     <div id="examples" class="tabcontent">

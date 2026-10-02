@@ -12,7 +12,7 @@ with open('docs/index.html', 'w') as html_file:
                     .replace('${import examples.html}', open('templates/fragments/examples.html').read())
                     .replace('${import install.html}', open('templates/fragments/install.html').read())
                     .replace('${import landscapes.html}', open('templates/fragments/landscapes.html').read())
-                    .replace('${import ai-insights.html}', open('templates/fragments/ai-insights.html').read())
+                    .replace('${import ai-skills.html}', open('templates/fragments/ai-skills.html').read())
                     .replace('${import articles.html}', open('templates/fragments/articles.html').read())
                     .replace('${import features.html}', open('templates/fragments/features.html').read())
                     .replace('${import data.html}', open('templates/fragments/data.html').read())
