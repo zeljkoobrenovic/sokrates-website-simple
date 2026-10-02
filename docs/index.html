@@ -1394,7 +1394,7 @@ Usage: java -jar sokrates.jar &lt;command> &lt;options>
 
 Help: java -jar sokrates.jar &lt;command> -help
 
-Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, updateLandscape, analyzeGitHubOrg, analyzeGitLabGroup, updateLandscapePeopleConfigByUserName, updatePeopleConfigByUserName, updateConfig, addCustomTab, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
+Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, updateLandscape, analyzeGitHubOrg, analyzeGitLabGroup, updateLandscapePeopleConfigByUserName, updatePeopleConfigByUserName, updateConfig, addCustomTab, installSkills, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
 
 * analyze: One-shot analysis: extracts the git history (when the source root is a git repository), creates the analysis configuration if none exists (init), and generates the reports. The recommended way to get a first report: run it from the root of the code base without any options.
    - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-dataOnly] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-skipGitHistory] [-postAnalysis &lt;command>] [-ai &lt;claude|codex|gemini>] [-aiPrompt &lt;text>] [-aiMaxRepos &lt;count>] [-aiForce] [-date &lt;arg>] [-timeout &lt;arg>] [-help]
@@ -1431,6 +1431,9 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
 
 * addCustomTab: Adds a custom iframe tab to the repository report configuration (config.json customTabs). If a custom tab with the same label already exists, it is overwritten instead of added.
    - options: [-confFile &lt;arg>] [-label &lt;arg>] [-iframeLink &lt;arg>] [-help]
+
+* installSkills: Installs the sokrates-skills (the AI agent skills that configure Sokrates, scan an analysis and act on it; https://github.com/zeljkoobrenovic/sokrates-skills) for the agent CLIs: clones or updates the skills repository into a cache folder and links every skill into ~/.claude/skills (Claude Code) and ~/.agents/skills (Codex, Gemini CLI, Cursor, Copilot, ...), or into the folders given with -target, or with -project into the current project's .claude/skills and .agents/skills. Re-run to update. -ai claude|codex|gemini works best with these installed.
+   - options: [-source &lt;gitUrl|folder>] [-ref &lt;branch|tag>] [-target &lt;folder>] [-project] [-copy] [-cacheFolder &lt;folder>] [-listOnly] [-help]
 
 * extractGitHistory: Extract a git history in a format used by Sokrates and saves it in the git-history.txt file
    - options: [-analysisRoot &lt;arg>] [-help]
@@ -1605,11 +1608,12 @@ sokrates <span class="hl">analyzeLandscape</span></div>
     <ol class="steps-list">
         <li>
             <div class="step-title">Install the skills</div>
-            <div class="cmd">git clone https://github.com/zeljkoobrenovic/sokrates-skills.git
-cd sokrates-skills
-<span class="hl">./install.sh</span>            <span class="c"># → ~/.claude/skills and ~/.agents/skills, for every tool at once</span>
-./install.sh --project  <span class="c"># → the current project instead, shareable via git</span></div>
-            <div class="step-body">Python 3.9+ for the scripts, nothing else. <span class="inline-code">git pull</span> updates every tool.</div>
+            <div class="cmd"><span class="hl">sokrates installSkills</span>            <span class="c"># → ~/.claude/skills and ~/.agents/skills, for every tool at once</span>
+sokrates installSkills -project   <span class="c"># → the current project instead, shareable via git</span></div>
+            <div class="step-body">Sokrates clones the <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">skills repository</a>
+                into <span class="inline-code">~/.sokrates/skills</span> and links every skill; re-run to update. Python 3.9+ for the scripts, nothing else.
+                Without Sokrates on the PATH: <span class="inline-code">java -jar sokrates-cli.jar installSkills</span>, or clone the repository and run its
+                <span class="inline-code">install.sh</span>.</div>
         </li>
         <li>
             <div class="step-title">Analyze the project</div>
@@ -2753,6 +2757,15 @@ LINES_OF_CODE_MAIN_EXT_RBI: 188708
                 new rule from the same date.</td>
         </tr>
     </table>
+
+    <h2><span class="inline-code">installSkills</span>: the AI skills installed by Sokrates itself</h2>
+    <p><span class="inline-code">sokrates installSkills</span> clones the
+        <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">sokrates-skills</a> repository into
+        <span class="inline-code">~/.sokrates/skills</span> (no git binary needed) and links every skill into the agents' skills folders:
+        <span class="inline-code">~/.claude/skills</span> for Claude Code, <span class="inline-code">~/.agents/skills</span> for Codex, Gemini CLI, Cursor and
+        Copilot. <span class="inline-code">-project</span> installs into the current project instead, <span class="inline-code">-target</span> anywhere else,
+        <span class="inline-code">-copy</span> copies instead of linking. Re-running updates. An <span class="inline-code">-ai</span> run whose agent lacks the
+        skills now says so in the log.</p>
 
     <h2>Dependencies declared for what the code uses</h2>
     <p>Build and dependency hygiene, found by running the sokrates-skills tech-stack scanner on Sokrates itself. No report,

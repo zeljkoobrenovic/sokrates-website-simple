@@ -19,11 +19,12 @@
     <ol class="steps-list">
         <li>
             <div class="step-title">Install the skills</div>
-            <div class="cmd">git clone https://github.com/zeljkoobrenovic/sokrates-skills.git
-cd sokrates-skills
-<span class="hl">./install.sh</span>            <span class="c"># → ~/.claude/skills and ~/.agents/skills, for every tool at once</span>
-./install.sh --project  <span class="c"># → the current project instead, shareable via git</span></div>
-            <div class="step-body">Python 3.9+ for the scripts, nothing else. <span class="inline-code">git pull</span> updates every tool.</div>
+            <div class="cmd"><span class="hl">sokrates installSkills</span>            <span class="c"># → ~/.claude/skills and ~/.agents/skills, for every tool at once</span>
+sokrates installSkills -project   <span class="c"># → the current project instead, shareable via git</span></div>
+            <div class="step-body">Sokrates clones the <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">skills repository</a>
+                into <span class="inline-code">~/.sokrates/skills</span> and links every skill; re-run to update. Python 3.9+ for the scripts, nothing else.
+                Without Sokrates on the PATH: <span class="inline-code">java -jar sokrates-cli.jar installSkills</span>, or clone the repository and run its
+                <span class="inline-code">install.sh</span>.</div>
         </li>
         <li>
             <div class="step-title">Analyze the project</div>

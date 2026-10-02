@@ -37,6 +37,15 @@
         </tr>
     </table>
 
+    <h2><span class="inline-code">installSkills</span>: the AI skills installed by Sokrates itself</h2>
+    <p><span class="inline-code">sokrates installSkills</span> clones the
+        <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">sokrates-skills</a> repository into
+        <span class="inline-code">~/.sokrates/skills</span> (no git binary needed) and links every skill into the agents' skills folders:
+        <span class="inline-code">~/.claude/skills</span> for Claude Code, <span class="inline-code">~/.agents/skills</span> for Codex, Gemini CLI, Cursor and
+        Copilot. <span class="inline-code">-project</span> installs into the current project instead, <span class="inline-code">-target</span> anywhere else,
+        <span class="inline-code">-copy</span> copies instead of linking. Re-running updates. An <span class="inline-code">-ai</span> run whose agent lacks the
+        skills now says so in the log.</p>
+
     <h2>Dependencies declared for what the code uses</h2>
     <p>Build and dependency hygiene, found by running the sokrates-skills tech-stack scanner on Sokrates itself. No report,
         data format or command changes.</p>

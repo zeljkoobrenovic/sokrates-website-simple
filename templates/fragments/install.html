@@ -357,7 +357,7 @@ Usage: java -jar sokrates.jar &lt;command> &lt;options>
 
 Help: java -jar sokrates.jar &lt;command> -help
 
-Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, updateLandscape, analyzeGitHubOrg, analyzeGitLabGroup, updateLandscapePeopleConfigByUserName, updatePeopleConfigByUserName, updateConfig, addCustomTab, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
+Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, updateLandscape, analyzeGitHubOrg, analyzeGitLabGroup, updateLandscapePeopleConfigByUserName, updatePeopleConfigByUserName, updateConfig, addCustomTab, installSkills, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
 
 * analyze: One-shot analysis: extracts the git history (when the source root is a git repository), creates the analysis configuration if none exists (init), and generates the reports. The recommended way to get a first report: run it from the root of the code base without any options.
    - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-dataOnly] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-skipGitHistory] [-postAnalysis &lt;command>] [-ai &lt;claude|codex|gemini>] [-aiPrompt &lt;text>] [-aiMaxRepos &lt;count>] [-aiForce] [-date &lt;arg>] [-timeout &lt;arg>] [-help]
@@ -394,6 +394,9 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
 
 * addCustomTab: Adds a custom iframe tab to the repository report configuration (config.json customTabs). If a custom tab with the same label already exists, it is overwritten instead of added.
    - options: [-confFile &lt;arg>] [-label &lt;arg>] [-iframeLink &lt;arg>] [-help]
+
+* installSkills: Installs the sokrates-skills (the AI agent skills that configure Sokrates, scan an analysis and act on it; https://github.com/zeljkoobrenovic/sokrates-skills) for the agent CLIs: clones or updates the skills repository into a cache folder and links every skill into ~/.claude/skills (Claude Code) and ~/.agents/skills (Codex, Gemini CLI, Cursor, Copilot, ...), or into the folders given with -target, or with -project into the current project's .claude/skills and .agents/skills. Re-run to update. -ai claude|codex|gemini works best with these installed.
+   - options: [-source &lt;gitUrl|folder>] [-ref &lt;branch|tag>] [-target &lt;folder>] [-project] [-copy] [-cacheFolder &lt;folder>] [-listOnly] [-help]
 
 * extractGitHistory: Extract a git history in a format used by Sokrates and saves it in the git-history.txt file
    - options: [-analysisRoot &lt;arg>] [-help]
