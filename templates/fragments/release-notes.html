@@ -37,6 +37,12 @@
         </tr>
     </table>
 
+    <h2><span class="inline-code">-ai</span> asks for a basic scan by default</h2>
+    <p>The default prompt of <span class="inline-code">-ai claude|codex|gemini</span> now asks the skills' entry skill for a <b>basic</b> scan
+        &mdash; the six descriptive scanners that answer "what is this codebase" &mdash; validated and rendered, and tells the agent not to change
+        source files. Before it asked for a full scan, all seventeen scanners, hours per repository. <span class="inline-code">-aiPrompt "run a full scan"</span>
+        restores it; <span class="inline-code">-aiPrompt</span> takes any request.</p>
+
     <h2><span class="inline-code">installSkills</span>: the AI skills installed by Sokrates itself</h2>
     <p><span class="inline-code">sokrates installSkills</span> clones the
         <a href="https://github.com/zeljkoobrenovic/sokrates-skills" target="_blank">sokrates-skills</a> repository into

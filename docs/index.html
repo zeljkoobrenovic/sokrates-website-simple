@@ -1652,7 +1652,8 @@ sokrates generateReports</div>
         <span class="inline-code">analyzeGitRepo</span>, <span class="inline-code">analyzeLandscape -urls</span>,
         <span class="inline-code">analyzeGitHubOrg</span> and <span class="inline-code">analyzeGitLabGroup</span> runs that agent in headless mode
         inside each clone, right after the Sokrates analysis and before the clone is deleted; its findings are kept with the analysis.
-        <span class="inline-code">-aiPrompt</span> changes the prompt (default <i>run a full scan</i>), and
+        <span class="inline-code">-aiPrompt</span> changes the prompt (the default asks the <span class="inline-code">sokrates</span> skill for a
+        basic scan, validated and rendered; <i>"run a full scan"</i> for all scanners), and
         <span class="inline-code">-postAnalysis "&lt;command&gt;"</span> runs any command instead, with
         <span class="inline-code">SOKRATES_REPO_URL</span>, <span class="inline-code">SOKRATES_ANALYSIS_FOLDER</span> and friends in its environment.
         <div class="cmd">sokrates <span class="hl">analyzeGitHubOrg -org junit-team -ai claude</span>
@@ -2777,6 +2778,12 @@ LINES_OF_CODE_MAIN_EXT_RBI: 188708
                 new rule from the same date.</td>
         </tr>
     </table>
+
+    <h2><span class="inline-code">-ai</span> asks for a basic scan by default</h2>
+    <p>The default prompt of <span class="inline-code">-ai claude|codex|gemini</span> now asks the skills' entry skill for a <b>basic</b> scan
+        &mdash; the six descriptive scanners that answer "what is this codebase" &mdash; validated and rendered, and tells the agent not to change
+        source files. Before it asked for a full scan, all seventeen scanners, hours per repository. <span class="inline-code">-aiPrompt "run a full scan"</span>
+        restores it; <span class="inline-code">-aiPrompt</span> takes any request.</p>
 
     <h2><span class="inline-code">installSkills</span>: the AI skills installed by Sokrates itself</h2>
     <p><span class="inline-code">sokrates installSkills</span> clones the
