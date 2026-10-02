@@ -7,15 +7,16 @@
             <div class="examples-group">
                 <div class="section example-card">
                     <a href="https://d3axxy9bcycpv7.cloudfront.net/openai/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                        <div><img src="assets/logos/openai.svg" style="height: 60px; padding: 4px"></div>
+                        <div><img src="assets/logos/openai.svg" style="height: 80px; padding: 4px"></div>
                         <div style="font-size: 125%; font-weight: bold">OpenAI's OSS projects</div>
                         <div style="margin-top: 6px; font-size: 90%"><b>77</b> repos, <b>2.4</b> MLOC, <b>2,000</b> contributors</div>
                     </a>
                 </div>
                 <div class="section example-card">
-                    <a href="https://d3axxy9bcycpv7.cloudfront.net/asf/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
-                        <div style="font-size: 125%; font-weight: bold; padding-top: 22px">Apache Software Foundation</div>
-                        <div style="margin-top: 6px; font-size: 90%">hundreds of repositories, a sub-landscape per project</div>
+                    <a href="https://d3axxy9bcycpv7.cloudfront.net/anthropics/_sokrates_landscape/index.html" target="_blank" style="text-decoration: none">
+                        <div><img src="assets/logos/anthropics.png" style="height: 80px; padding: 4px"></div>
+                        <div style="font-size: 125%; font-weight: bold">Anthropics's OSS projects</div>
+                        <div style="margin-top: 6px; font-size: 90%"><b>62</b> repos, <b>2</b> MLOC, <b>3,400</b> contributors</div>
                     </a>
                 </div>
             </div>
@@ -60,8 +61,10 @@ landscape/
   junit-team/repos.txt                        <span class="c"># the selected repositories</span>
   junit-team/junit4/config.json + reports/
   hamcrest/...</div>
-            <div class="step-body">The repositories are listed through the API and the landscape takes its name, description, logo and link from the
-                organization's profile. Forks and archived repositories are skipped unless asked for; <span class="inline-code">-pushedWithinDays</span>,
+            <div class="step-body">The repositories are listed through the API; the landscape takes its name, description, logo and link from the
+                organization's profile, and every repository report takes its description and logo from the listing (a GitLab project without an
+                avatar shows its group's) &mdash; only fields you have not set yourself, so your edits survive re-runs. Forks and archived
+                repositories are skipped unless asked for; <span class="inline-code">-pushedWithinDays</span>,
                 name patterns and <span class="inline-code">-maxRepos</span> narrow the selection, <span class="inline-code">-listOnly</span> previews it
                 without cloning, <span class="inline-code">-prune</span> drops repositories no longer selected. Private repositories: set
                 <span class="inline-code">SOKRATES_GIT_TOKEN</span>.</div>
