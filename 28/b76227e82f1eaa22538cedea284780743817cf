@@ -1,0 +1,16 @@
+docs/index.html
+  h_32d60cd4daf66e 10-23,823,855-857,872-874
+templates/index.html
+  h_32d60cd4daf66e 10-23,27,59-61,76-78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "28b76227e82f1eaa22538cedea284780743817cf",
+  "prompts": {},
+  "humans": {
+    "h_32d60cd4daf66e": {
+      "author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
