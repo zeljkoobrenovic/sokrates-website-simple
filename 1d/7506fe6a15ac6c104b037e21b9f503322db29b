@@ -1,0 +1,21 @@
+docs/index.html
+  s_96ca349cadeb3e::t_d26b36ff048b46 2756-2760
+templates/fragments/release-notes.html
+  s_96ca349cadeb3e::t_5d57f051b010aa 11-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1d7506fe6a15ac6c104b037e21b9f503322db29b",
+  "prompts": {},
+  "sessions": {
+    "s_96ca349cadeb3e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ab257b52-3f95-493b-821e-4d238c9931c7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
