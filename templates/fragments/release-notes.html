@@ -6,6 +6,42 @@
 </div>
 
 <div class="card">
+    <h1>4 October 2026</h1>
+
+    <h2>File Size report: large files that change often</h2>
+    <p>The File Size report has a new section, <b>Large Files That Change Often</b>. To change a file, an AI coding agent (or a person) has to
+        read it, so a big file that changes often is paid for on every change, while a big file nobody touches costs nothing. The table lists the
+        main files read most for the changes of the past year (lines &times; changes) with their lines, the tokens to read them, their changes,
+        the lines edited per change and the lines read per line changed. <b>Highlights</b> gets a matching <i>Changes in large files</i> tile
+        (the share of changes that touched a file over 2,000 lines) and, only when there are such files, a short <i>Large files that change often</i>
+        list below "Where to look first".</p>
+    <table class="steps data">
+        <tr>
+            <td>Configure</td>
+            <td>The new <span class="inline-code">analysis.fileReadsForChanges</span> key:
+                <span class="inline-code">enabled</span> (<span class="inline-code">true</span>; <span class="inline-code">false</span> hides the section, the tile and the list),
+                <span class="inline-code">windowDays</span> (<span class="inline-code">365</span>; <span class="inline-code">0</span> = the whole history),
+                <span class="inline-code">maxFiles</span> (<span class="inline-code">20</span>),
+                <span class="inline-code">largeFileLines</span> (<span class="inline-code">2000</span>, what counts as large on Highlights) and
+                <span class="inline-code">tokensPerLineMin</span>/<span class="inline-code">tokensPerLineMax</span>
+                (<span class="inline-code">7</span>/<span class="inline-code">14</span>, the range behind "tokens to read").</td>
+        </tr>
+        <tr>
+            <td>What to check</td>
+            <td>Nothing: new configurations get the key from <span class="inline-code">init</span>, older ones use the defaults
+                (<span class="inline-code">updateConfig</span> writes them in). Without git history the section is not shown.</td>
+        </tr>
+    </table>
+
+    <h2>File Complexity report</h2>
+    <p>A new <b>File Complexity</b> report bands the main files by the sum of the McCabe indexes of their units, with the overall profile,
+        the profile per extension and per component, and the most complex files; the Structure page gets a matching Complexity tab.
+        Only files with units are classified. The bands come from the new <span class="inline-code">analysis.fileComplexityThresholds</span>
+        (default 25/50/125/250); the older <span class="inline-code">fileConditionalComplexityThresholds</span> key, which nothing read, is ignored
+        and can be deleted.</p>
+</div>
+
+<div class="card">
     <h1>2 October 2026</h1>
 
     <h2>Path patterns match the path below the source root</h2>
