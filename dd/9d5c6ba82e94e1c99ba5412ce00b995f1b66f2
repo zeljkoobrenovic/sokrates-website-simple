@@ -1,0 +1,23 @@
+docs/assets/conf/standard_analysis_conventions.json
+  s_5026482126c219::t_9b92cda2e4c46f 1238
+docs/index.html
+  s_5026482126c219::t_328658cd022866 2753-2770
+templates/fragments/release-notes.html
+  s_5026482126c219::t_bca5ea2592b82b 8-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dd9d5c6ba82e94e1c99ba5412ce00b995f1b66f2",
+  "prompts": {},
+  "sessions": {
+    "s_5026482126c219": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "02d24a13-bc18-4f57-8e09-809e545be12d",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
