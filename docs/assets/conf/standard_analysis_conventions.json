@@ -1235,6 +1235,7 @@
     "saveCodeFragments" : true,
     "maxLineLength" : 1000,
     "maxTemporalDependenciesDepthDays" : 365,
+    "maxFilesPerCommitForTemporalDependencies" : 100,
     "locDuplicationThreshold" : 10000000,
     "minDuplicationBlockLoc" : 6,
     "maxTopListSize" : 50,

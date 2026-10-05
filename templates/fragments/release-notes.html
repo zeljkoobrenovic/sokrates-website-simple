@@ -6,6 +6,24 @@
 </div>
 
 <div class="card">
+    <h1>5 October 2026</h1>
+
+    <h2>Temporal dependencies: very large commits are left out, and the analysis uses much less memory</h2>
+    <p>Commits that touch more than 100 main files are no longer counted in the temporal (changed-together) file dependencies. A commit with N
+        files produces N×(N−1)/2 file pairs, so one mass edit, such as reformatting or a license header update, could add millions of pairs and
+        gigabytes of memory while saying little about which files are coupled. The limit is the new <span class="inline-code">analysis</span>
+        setting <span class="inline-code">maxFilesPerCommitForTemporalDependencies</span> (default <span class="inline-code">100</span>;
+        <span class="inline-code">0</span> or less turns it off). The log says how many commits were left out per window.</p>
+    <p>Independently of the limit, building the file pairs and the file dependency force graphs now needs far less memory (in a test with 4.5
+        million pairs, peak heap fell from about 6.4 GB to about 1.1 GB), and pairs with the same number of shared commits are listed in a fixed
+        order instead of a different one on each run.</p>
+    <p>What stays the same: the windows, the reports, the <span class="inline-code">temporal_dependencies*.txt</span> exports and the force graphs
+        (still the first 10,000 links, with the same counts). What to check: in a repository with commits that touch more than 100 main files, the
+        pair counts and the component dependencies in the temporal views drop. Set
+        <span class="inline-code">maxFilesPerCommitForTemporalDependencies</span> to <span class="inline-code">0</span> to get the old numbers.</p>
+</div>
+
+<div class="card">
     <h1>4 October 2026</h1>
 
     <h2>Commits explorer: the columns on the right stay visible; one-line page titles</h2>
