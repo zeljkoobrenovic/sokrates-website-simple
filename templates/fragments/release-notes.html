@@ -8,6 +8,31 @@
 <div class="card">
     <h1>5 October 2026</h1>
 
+    <h2>AI Insights in the repository report</h2>
+    <p>When a repository's <span class="inline-code">reports/ai-insights/</span> holds findings of the sokrates-skills AI scanners, the repository report now shows
+        them itself: the sidebar gets an "AI Insights" group (Overview, Attention Items and the basic scanners) and an "AI Deep Dives" group
+        (the evaluative scanners), between the analyses and Index. Each item opens a page in the report's style that follows the light/dark
+        theme, with the same search, filters and evidence as the sokrates-skills explorer, but without a second menu. With
+        <span class="inline-code">-postAnalysis</span> / <span class="inline-code">-ai</span>, the reports are generated once more after the agent changed the findings, so the new
+        findings show up in the same run. For <span class="inline-code">analyzeGitRepo</span> and landscapes, the findings of earlier runs are kept: before, a re-run
+        that skipped the agent (unchanged repository) replaced <span class="inline-code">reports/</span> and lost them.</p>
+    <p>What stays the same: sokrates-skills still writes its standalone <span class="inline-code">reports/ai-insights/index.html</span>, and the landscape's AI
+        Insights tab still links findings there. What to check: a custom tab added with
+        <span class="inline-code">addCustomTab -label "AI Insights*" -iframeLink "../ai-insights/index.html"</span> (as the skills used to suggest) is left out
+        while the report shows the findings itself; you can remove it from <span class="inline-code">customTabs</span> in <span class="inline-code">config.json</span>.</p>
+
+    <h2>Landscape: "At a Glance" and a new "Structure" page</h2>
+    <p>In the landscape report's sidebar, Overview is now called At a Glance, as in the repository report, and a new Structure page follows
+        it. Structure holds the "Repositories Size Distribution" and the repositories circles chart (size = main lines of code, color = main
+        language), which moved there from At a Glance. Activity now comes before Repositories, and Sub-Landscapes has a new icon so it doesn't
+        share one with Structure. Links to <span class="inline-code">index.html#overview</span> still open At a Glance; the configured
+        <span class="inline-code">iFramesAtStart</span> / <span class="inline-code">iFrames</span> stay on At a Glance.</p>
+
+    <h2>Files and units explorers show files like the Highlights tab</h2>
+    <p>In the files and units explorers, a file now shows as on the Highlights tab: the file name first, with the folder (ending in "/") in
+        smaller grey text underneath, and the full path on hover. Before, the folder came first and the two explorers styled the name
+        differently. The files explorer's name link no longer has the "↗" marker; the unit name links in the units explorer keep theirs.</p>
+
     <h2>Temporal dependencies: very large commits are left out, and the analysis uses much less memory</h2>
     <p>Commits that touch more than 100 main files are no longer counted in the temporal (changed-together) file dependencies. A commit with N
         files produces N×(N−1)/2 file pairs, so one mass edit, such as reformatting or a license header update, could add millions of pairs and
