@@ -8,6 +8,17 @@
 <div class="card">
     <h1>5 October 2026</h1>
 
+    <h2>Commits explorer: read size per commit</h2>
+    <p>The commits explorer has a new "read size*" column: the lines of code that the files a commit changed have now, summed. It is an
+        indication (hence the asterisk): roughly what reading those files takes, for example as the token reads of an AI agent working on such
+        a change. A file that is deleted, or not analyzed now, counts 0. The column sorts like the others; hover over it for the explanation.</p>
+
+    <h2>Landscape AI Insights link to the repository reports</h2>
+    <p>In the landscape's AI Insights tab, a finding, a scanner and a repository now open the repository report's own AI Insights pages: a
+        finding opens its scanner's page in the report, with the finding expanded. Before, they opened the standalone sokrates-skills explorer
+        (<span class="inline-code">reports/ai-insights/index.html</span>). Repository reports generated before the report rendered the findings itself keep the old
+        links. A finding id with a space now links correctly (it was encoded as "+", which the explorer did not decode).</p>
+
     <h2>Report sidebar: sections open and close</h2>
     <p>In the repository and landscape reports, each section of the sidebar (At a Glance, Explorers, Analyses, AI Insights, …) now opens and
         closes with a click on its title. All sections are open by default; the closed ones are remembered in the browser and stay closed on
@@ -21,8 +32,7 @@
         <span class="inline-code">-postAnalysis</span> / <span class="inline-code">-ai</span>, the reports are generated once more after the agent changed the findings, so the new
         findings show up in the same run. For <span class="inline-code">analyzeGitRepo</span> and landscapes, the findings of earlier runs are kept: before, a re-run
         that skipped the agent (unchanged repository) replaced <span class="inline-code">reports/</span> and lost them.</p>
-    <p>What stays the same: sokrates-skills still writes its standalone <span class="inline-code">reports/ai-insights/index.html</span>, and the landscape's AI
-        Insights tab still links findings there. What to check: a custom tab added with
+    <p>What stays the same: sokrates-skills still writes its standalone <span class="inline-code">reports/ai-insights/index.html</span>. What to check: a custom tab added with
         <span class="inline-code">addCustomTab -label "AI Insights*" -iframeLink "../ai-insights/index.html"</span> (as the skills used to suggest) is left out
         while the report shows the findings itself; you can remove it from <span class="inline-code">customTabs</span> in <span class="inline-code">config.json</span>.</p>
 
