@@ -2753,6 +2753,13 @@ LINES_OF_CODE_MAIN_EXT_RBI: 188708
 <div class="card">
     <h1>5 October 2026</h1>
 
+    <h2>Commits explorer: churn vs. read size timeline</h2>
+    <p>The commits explorer has a new "show timeline" button (after "show files map"; off by default, and the choice is remembered). Just above
+        the commit table, the timeline shows, per day, week or month (depending on the period shown), the churn (lines added + deleted) and the
+        read size* of the listed commits, as two rows of bars on one time axis with the latest period on the left. Each row has its own scale,
+        since the read size is usually much larger than the churn; hovering over a period shows both numbers and their ratio, and clicking it
+        shows only that period's commits. The timeline follows the search, the date range and "hide bots".</p>
+
     <h2>Commits explorer: filter by date</h2>
     <p>The commits explorer can now show only the commits of a period: pick a "from" and/or "to" date (both inclusive) under the search box,
         or a preset (past 30, 90 or 180 days, past year; these end at the latest commit in the history, not today). The date range works
