@@ -8,6 +8,9 @@
 <div class="card">
     <h1>5 October 2026</h1>
 
+    <h2>AI Cost Estimator*: lines read, experimental label</h2>
+    <p>The AI Cost Estimator shows its line inputs side by side: a "lines read" column (the total lines of the edited files, per session, before amplification) next to the churned lines in the task-type and task tables, and <code>read_lines</code> in the tasks CSV. The page is now labelled "AI Cost Estimator*": the asterisk marks it as an experimental heuristic.</p>
+
     <h2>AI Cost Estimator: analyzed scopes and total lines; leaner rule-of-thumb estimates</h2>
     <p>The AI Cost Estimator counts only the analyzed scopes (main, test, build &amp; deployment, other): generated code, files in no scope and unanalyzed extensions are left out, while deleted files of analyzed extensions still count. It reads each edited file's total lines, comments and blank lines included, as an agent reads the whole file. Its top is now one row (filter, period, Assumptions), with the prices and priors in a grouped panel. The rule-of-thumb estimates on the repository and landscape At a Glance pages keep only the rebuild value and the maintenance effort: AI token costs now live on the AI Cost Estimator page.</p>
 
