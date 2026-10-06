@@ -1,0 +1,16 @@
+docs/index.html
+  h_32d60cd4daf66e 1784-1944,1946-2003
+templates/fragments/examples.html
+  h_32d60cd4daf66e 35-195,197-254
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "573344ce7ff4354f75ad5e177d69226ca6f1c08a",
+  "prompts": {},
+  "humans": {
+    "h_32d60cd4daf66e": {
+      "author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
