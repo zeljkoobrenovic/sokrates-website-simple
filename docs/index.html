@@ -2753,6 +2753,9 @@ LINES_OF_CODE_MAIN_EXT_RBI: 188708
 <div class="card">
     <h1>6 October 2026</h1>
 
+    <h2>AI Cost Estimator*: a simpler model, shown as a diagram</h2>
+    <p>The AI Cost Estimator's model is simpler: every agent step re-sends the context, so a session costs about steps × average context (mostly at cache prices) plus its output. It has 10 assumption ranges instead of 14 (one read amplification, no separate exploration reads, one write overhead, output per step), plus a debugging factor (1.5–4×) for the steps of fix tasks, since a small fix often follows reproduce, run and inspect loops that git does not show, and tool output per step now reaches 3,000 tokens (test runs, build logs, stack traces). A "Model" button next to "Assumptions" opens the model as a left-to-right diagram with the current values and labelled arrows, and "How it works" ends with a further-reading link to martinfowler.com.</p>
+
     <h2>Landscape: AI Cost Estimator*</h2>
     <p>Landscapes have an "AI Cost Estimator*" page too (sidebar: Insights): the same estimate over the tasks of all repositories, with a repository column, a "By repository" table (each repository links to its own estimator) and the repository in the search and the tasks CSV. Every analysis, also with <span class="inline-code">-dataOnly</span>, now stores its estimator data as <span class="inline-code">aiCostEstimator.json</span> in <span class="inline-code">data/data.zip</span>, which the landscape reads; repositories analyzed by an older version are left out until they are re-analyzed. Big landscapes keep the newest 50,000 tasks.</p>
 </div>
