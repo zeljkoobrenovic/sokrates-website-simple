@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Support Sokrates</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Help keep Sokrates free, independent, and open source. Sponsor its development, maintenance, testing, and documentation through GitHub Sponsors.">
+    <link rel="canonical" href="https://www.sokrates.dev/support/">
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <style>
+        :root {
+    --bg: #0f1720;
+    --bg-2: #161f2a;
+    --bg-3: #1d2834;
+    --line: #28343f;
+    --ink: #e8eef4;
+    --ink-2: #aab7c4;
+    --ink-3: #7b8896;
+    --accent: #8fc1f2;
+    --accent-strong: #c2dffb;
+    --accent-soft: rgba(143, 193, 242, 0.12);
+    --code-bg: #0a1017;
+    --code-fg: #e8edf2;
+    --code-comment: #7f93a8;
+    --code-hl: #ffd166;
+    --plate: #ffffff;
+    --radius: 6px;
+    --font: "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: auto;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+a:hover {
+    color: var(--accent-strong);
+}
+
+h1, h2, h3, h4 {
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 16px 0;
+}
+
+h1 {
+    font-size: 26px;
+}
+
+h2 {
+    font-size: 21px;
+    margin-top: 22px;
+}
+
+h3 {
+    font-size: 17px;
+    margin-top: 18px;
+}
+
+p {
+    margin: 0 0 12px 0;
+}
+
+p, li {
+    max-width: 78ch;
+}
+
+ul, ol {
+    padding-left: 22px;
+    margin: 0 0 12px 0;
+}
+
+li {
+    margin-bottom: 4px;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* ---------- page frame ---------- */
+
+.page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px 40px 24px;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: rgba(15, 23, 32, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+}
+
+.site-header-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 28px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.brand img {
+    height: 34px;
+    width: 34px;
+    background-color: var(--plate);
+    border-radius: 8px;
+    padding: 3px;
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-left: auto;
+}
+
+.site-nav button, .site-nav a {
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink-2);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 10px 12px 8px 12px;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+}
+
+.site-nav a {
+    line-height: normal;
+    text-decoration: none;
+}
+
+.site-nav button:hover, .site-nav a:hover {
+    color: var(--ink);
+    background-color: var(--bg-2);
+}
+
+.site-nav button:focus-visible, .site-nav a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+.site-nav button.active, .site-nav a[aria-current="page"] {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+.tabcontent {
+    display: none;
+    padding-top: 16px;
+}
+
+.site-footer {
+    border-top: 1px solid var(--line);
+    margin-top: 64px;
+    padding-top: 24px;
+    font-size: 14px;
+    color: var(--ink-3);
+}
+
+.site-footer a {
+    color: var(--ink-2);
+}
+
+/* ---------- support ---------- */
+
+.support-content {
+    max-width: 760px;
+}
+
+.support-intro {
+    padding: 56px 0 28px 0;
+}
+
+.support-content h2 {
+    margin-top: 0;
+}
+
+.support-action {
+    margin: 24px 0 12px 0;
+}
+
+.sponsor-link {
+    display: inline-block;
+    background-color: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 10px 18px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.sponsor-link:hover {
+    background-color: var(--bg-3);
+}
+
+.sponsor-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.support-note {
+    font-size: 15px;
+    color: var(--ink-2);
+}
+
+/* ---------- content blocks shared by the tabs ---------- */
+
+/* a section of a tab: whitespace and a hairline, not a box */
+.card {
+    padding: 44px 0 36px 0;
+    border-top: 1px solid var(--line);
+}
+
+.card:first-of-type {
+    border-top: none;
+    padding-top: 16px;
+}
+
+/* a tile that is a link target (examples, sub-pages): stays white on the dark page, like a card on a table */
+.section {
+    display: inline-block;
+    vertical-align: top;
+    background-color: var(--plate) !important;
+    color: #1b2430;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px;
+    margin: 0 12px 14px 0 !important; /* the tiles carry inline 50px bottom margins from the old layout */
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.section:hover {
+    border-color: var(--accent);
+}
+
+.section a {
+    color: #2b5a8c;
+}
+
+.section h2, .section h3 {
+    color: #1b2430;
+}
+
+.section .inline-code {
+    background-color: #f4f6f8;
+    border-color: #dfe4ea;
+    color: #1b2430;
+}
+
+/* an example box inside a tab (install examples) */
+.example {
+    margin: 12px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background-color: var(--bg-2);
+    padding: 12px 14px;
+    overflow: hidden;
+}
+
+.note {
+    background-color: var(--bg-2);
+    border-left: 3px solid var(--accent);
+    padding: 8px 12px;
+    margin: 10px 0;
+    font-size: 15px;
+}
+
+.inline-code {
+    font-family: var(--mono);
+    font-size: 0.92em;
+    background-color: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0 5px;
+    color: var(--ink);
+}
+
+.cmd {
+    position: relative;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--code-fg);
+    background-color: var(--code-bg);
+    border-radius: var(--radius);
+    padding: 12px 64px 12px 14px;
+    margin: 8px 0 12px 0;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.cmd .hl {
+    color: var(--code-hl);
+    background-color: rgba(255, 209, 102, 0.12);
+    border-radius: 3px;
+    padding: 1px 4px;
+    margin-left: -4px;
+}
+
+.cmd .c {
+    color: var(--code-comment);
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--ink-2);
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    color: var(--ink);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+pre {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.5;
+    background-color: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    overflow-x: auto;
+    color: var(--code-fg);
+}
+
+table.steps td {
+    vertical-align: top;
+    padding: 6px 12px 6px 0;
+}
+
+table.steps td:first-child {
+    white-space: nowrap;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+}
+
+/* ---------- home ---------- */
+
+.hero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 36px;
+    align-items: flex-start;
+    padding: 56px 0 28px 0;
+}
+
+.hero-text {
+    flex: 1 1 400px;
+    max-width: 560px;
+    min-width: 0;
+}
+
+.hero-title {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px 0;
+}
+
+.hero-sub {
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 56ch;
+    margin: 0 0 18px 0;
+}
+
+.hero-links {
+    font-size: 15px;
+    color: var(--ink-2);
+    margin: 0;
+}
+
+.hero-shot {
+    flex: 1 1 380px;
+    max-width: 580px;
+    min-width: 0;
+    text-decoration: none;
+    color: var(--ink-3);
+}
+
+.hero-shot img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.shot-caption {
+    font-size: 13.5px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 28px 40px;
+    margin: 12px 0 20px 0;
+}
+
+.feature {
+    font-size: 15px;
+    color: var(--ink-2);
+}
+
+.feature-title {
+    font-size: 16.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+}
+
+.examples-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-bottom: 8px;
+}
+
+.examples-group {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.examples-label {
+    font-size: 14px;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+}
+
+.example-card {
+    width: 300px;
+    height: 270px;
+    margin: 0 10px 0 0;
+}
+
+.hero .cmd {
+    font-size: 13px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.quote {
+    font-style: italic;
+    color: var(--ink-3);
+    margin: 14px 0 0 0;
+}
+
+/* ---------- install: tracks and checklist ---------- */
+
+.track-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 14px 0 12px 0;
+}
+
+.track-btn {
+    flex: 1 1 200px;
+    min-width: 200px;
+    font-family: inherit;
+    color: var(--ink);
+    text-align: left;
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+.track-btn:hover {
+    border-color: var(--accent);
+}
+
+.track-btn.active {
+    border-color: var(--accent);
+    background-color: var(--accent-soft);
+}
+
+.track-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.track-sub {
+    color: var(--ink-2);
+    font-size: 13.5px;
+    margin-top: 2px;
+}
+
+.track-panel {
+    display: none;
+    background-color: var(--bg-2);
+    border-radius: 8px;
+    padding: 24px 24px 16px 24px;
+}
+
+.track-panel.active {
+    display: block;
+}
+
+.steps-list {
+    list-style: none;
+    counter-reset: step;
+    padding: 0;
+    margin: 0 0 8px 0;
+}
+
+.steps-list > li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 44px;
+    margin: 0 0 24px 0;
+    max-width: none;
+}
+
+.steps-list > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.step-title {
+    font-weight: 600;
+    font-size: 16.5px;
+    line-height: 30px;
+}
+
+.step-body {
+    color: var(--ink-2);
+    font-size: 15px;
+    margin: 2px 0 4px 0;
+    max-width: 78ch;
+}
+
+.track-panel .cmd {
+    background-color: var(--code-bg);
+}
+
+details.tips {
+    margin: 8px 0 4px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 8px 14px;
+    background-color: var(--bg);
+}
+
+details.tips summary {
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 15px;
+}
+
+details.tips[open] summary {
+    margin-bottom: 8px;
+}
+
+.next-steps {
+    margin: 16px 0 0 0;
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background-color: var(--accent-soft);
+    max-width: 100ch;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 720px) {
+    body {
+        font-size: 15.5px;
+    }
+
+    .page, .site-header-inner {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .site-header-inner {
+        gap: 4px 12px;
+    }
+
+    .site-nav {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .site-nav button, .site-nav a {
+        font-size: 13.5px;
+        padding: 6px 8px;
+    }
+
+    .hero {
+        padding-top: 18px;
+        gap: 22px;
+    }
+
+    .support-intro {
+        padding-top: 28px;
+    }
+
+    .hero-title {
+        font-size: 30px;
+    }
+
+    .hero-sub {
+        font-size: 16.5px;
+    }
+
+    .section {
+        margin-right: 0;
+        width: 100% !important;
+    }
+
+    .hide-on-mobile {
+        display: none;
+    }
+}
+
+/* ---------- features: one report per block, screenshot beside the words ---------- */
+
+.report {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 48px;
+    align-items: flex-start;
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+}
+
+.report:first-of-type {
+    border-top: none;
+    padding-top: 16px;
+}
+
+.report-text {
+    flex: 1 1 280px;
+    max-width: 380px;
+    min-width: 0;
+}
+
+.report-text h2 {
+    margin-top: 0;
+    font-size: 22px;
+}
+
+.report-text p {
+    color: var(--ink-2);
+    font-size: 15.5px;
+}
+
+.report-shot {
+    flex: 2 1 420px;
+    min-width: 0;
+    max-width: 720px;
+    display: block;
+}
+
+.report-shot img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.report-shot:hover img {
+    border-color: var(--accent);
+}
+
+.languages table {
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.languages th, .languages td {
+    text-align: left;
+    padding: 6px 14px 6px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+}
+
+.languages th {
+    color: var(--ink-3);
+    font-weight: 500;
+}
+
+/* hero: what to analyze */
+.hero-toggle {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.hero-toggle button {
+    font-family: inherit;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    background-color: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 12px;
+    cursor: pointer;
+}
+
+.hero-toggle button:hover {
+    color: var(--ink);
+    border-color: var(--ink-3);
+}
+
+.hero-toggle button.active {
+    color: var(--bg);
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.hero-note {
+    font-size: 13.5px;
+    color: var(--ink-3);
+    margin: -4px 0 14px 0;
+}
+
+.card-cmd {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: #4a5560;
+    margin-top: 4px;
+    overflow-wrap: anywhere;
+}
+
+.hero .example-card {
+    width: 250px;
+}
+
+/* small brand marks on the install tracks and the hero pill: white tiles, like the logo in the header */
+.track-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    background-color: var(--plate);
+    border-radius: 8px;
+    padding: 4px;
+    vertical-align: middle;
+    margin: -4px 12px 0 0;
+}
+
+.pill-logo {
+    width: 20px;
+    height: 20px;
+    background-color: var(--plate);
+    border-radius: 5px;
+    padding: 3px;
+    vertical-align: -5px;
+    margin-right: 6px;
+}
+
+/* data tab: entry names may wrap, the description keeps most of the width */
+table.steps.data {
+    table-layout: fixed;
+    width: 100%;
+}
+
+table.steps.data td:first-child {
+    white-space: normal;
+    width: 26%;
+    overflow-wrap: anywhere;
+}
+
+table.steps.data td {
+    overflow: hidden;
+}
+
+/* data tab samples */
+details.sample {
+    margin-top: 6px;
+    padding: 4px 10px;
+}
+
+details.sample summary {
+    font-size: 13px;
+}
+
+details.sample pre {
+    margin: 6px 0 4px 0;
+    font-size: 12px;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <div class="site-header-inner">
+        <a class="brand" href="../">
+            <img src="../assets/logo.png" alt=""> Sokrates
+        </a>
+        <nav class="site-nav" aria-label="Sections">
+            <a href="../#home">Home</a>
+            <a href="../#install">Install &amp; use</a>
+            <a href="../#landscapes">Landscapes</a>
+            <a href="../#ai_skills">AI skills</a>
+            <a href="../#examples">Examples</a>
+            <a href="../#features">Features</a>
+            <a href="../#data">Data</a>
+            <a href="../#release_notes">Release notes</a>
+            <a href="./" aria-current="page">Support</a>
+        </nav>
+    </div>
+</header>
+<main class="page">
+    <article class="support-content">
+        <header class="support-intro">
+            <h1 class="hero-title">Support Sokrates</h1>
+            <p class="hero-sub">Help keep Sokrates free, independent, and available to everyone.</p>
+            <p>If Sokrates helps you better understand your code, please consider supporting its development.</p>
+            <p class="support-action"><a class="sponsor-link" href="https://github.com/sponsors/zeljkoobrenovic">Sponsor Sokrates on GitHub</a></p>
+            <p class="support-note">Individual and corporate sponsorships are welcome, whether one-time or monthly.</p>
+        </header>
+
+        <section class="card" aria-labelledby="sponsorship-work">
+            <h2 id="sponsorship-work">What sponsorship makes possible</h2>
+            <p>Maintaining Sokrates takes time. Your support helps sustain the work behind the tool:</p>
+            <ul>
+                <li><strong>Development and maintenance:</strong> improving the analysis, fixing bugs, and preparing releases.</li>
+                <li><strong>Testing and compatibility:</strong> keeping Sokrates useful across languages, platforms, and evolving codebases.</li>
+                <li><strong>Documentation and examples:</strong> helping developers, architects, and engineering teams get more from their reports.</li>
+            </ul>
+        </section>
+
+        <section class="card" aria-labelledby="open-source">
+            <h2 id="open-source">Free and open source for everyone</h2>
+            <p>Sokrates is available under the <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/LICENSE">MIT license</a>.
+                Individuals, teams, and commercial organizations can all use it.</p>
+            <p>Sokrates will remain free and open source. Sponsorship is entirely voluntary.</p>
+            <p class="support-note">Contributions go to Željko Obrenović through his GitHub Sponsors profile and support his open-source work, including Sokrates.</p>
+        </section>
+    </article>
+    <footer class="site-footer">
+    <p>Sokrates is free and open source (MIT). Help sustain its development by <a href="../support/">sponsoring the project</a>.</p>
+    <a href="https://github.com/zeljkoobrenovic/sokrates" target="_blank" rel="noopener">github.com/zeljkoobrenovic/sokrates</a> &nbsp;&middot;&nbsp;
+    <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank" rel="noopener">configuration manual</a> &nbsp;&middot;&nbsp;
+    built by <a href="https://zeljkoobrenovic.com" target="_blank" rel="noopener">Željko Obrenović</a>
+</footer>
+
+</main>
+</body>
+</html>

@@ -145,7 +145,7 @@ img {
     margin-left: auto;
 }
 
-.site-nav button {
+.site-nav button, .site-nav a {
     font-family: inherit;
     font-size: 14.5px;
     font-weight: 500;
@@ -158,17 +158,22 @@ img {
     border-radius: 4px 4px 0 0;
 }
 
-.site-nav button:hover {
+.site-nav a {
+    line-height: normal;
+    text-decoration: none;
+}
+
+.site-nav button:hover, .site-nav a:hover {
     color: var(--ink);
     background-color: var(--bg-2);
 }
 
-.site-nav button:focus-visible {
+.site-nav button:focus-visible, .site-nav a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: -2px;
 }
 
-.site-nav button.active {
+.site-nav button.active, .site-nav a[aria-current="page"] {
     color: var(--accent);
     border-bottom-color: var(--accent);
 }
@@ -187,6 +192,48 @@ img {
 }
 
 .site-footer a {
+    color: var(--ink-2);
+}
+
+/* ---------- support ---------- */
+
+.support-content {
+    max-width: 760px;
+}
+
+.support-intro {
+    padding: 56px 0 28px 0;
+}
+
+.support-content h2 {
+    margin-top: 0;
+}
+
+.support-action {
+    margin: 24px 0 12px 0;
+}
+
+.sponsor-link {
+    display: inline-block;
+    background-color: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 10px 18px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.sponsor-link:hover {
+    background-color: var(--bg-3);
+}
+
+.sponsor-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.support-note {
+    font-size: 15px;
     color: var(--ink-2);
 }
 
@@ -596,7 +643,7 @@ details.tips[open] summary {
         width: 100%;
     }
 
-    .site-nav button {
+    .site-nav button, .site-nav a {
         font-size: 13.5px;
         padding: 6px 8px;
     }
@@ -604,6 +651,10 @@ details.tips[open] summary {
     .hero {
         padding-top: 18px;
         gap: 22px;
+    }
+
+    .support-intro {
+        padding-top: 28px;
     }
 
     .hero-title {

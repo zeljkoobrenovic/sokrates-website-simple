@@ -98,6 +98,7 @@
             <button id="data_tab" class="tablinks" onclick="openTab(event, 'data')">Data</button>
             <button id="release_notes_tab" class="tablinks" onclick="openTab(event, 'release_notes')">Release notes</button>
             <!--button id="articles_tab" class="tablinks" onclick="openTab(event, 'articles')">Articles</button-->
+            <a href="support/">Support</a>
         </nav>
     </div>
 </header>
@@ -138,12 +139,7 @@
         ${import articles.html}
     </div>
 
-    <footer class="site-footer">
-        Sokrates is free and open source (MIT) &nbsp;&middot;&nbsp;
-        <a href="https://github.com/zeljkoobrenovic/sokrates" target="_blank">github.com/zeljkoobrenovic/sokrates</a> &nbsp;&middot;&nbsp;
-        <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank">configuration manual</a> &nbsp;&middot;&nbsp;
-        built by <a href="https://zeljkoobrenovic.com" target="_blank">Željko Obrenović</a>
-    </footer>
+    ${import footer.html}
 </main>
 </body>
 </html>

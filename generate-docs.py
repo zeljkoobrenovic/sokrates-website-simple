@@ -1,5 +1,6 @@
 import json
 import datetime
+from pathlib import Path
 
 data = json.load(open('data/projects.json'))
 date_string = datetime.date.today().strftime('%Y-%m-%d')
@@ -17,5 +18,15 @@ with open('docs/index.html', 'w') as html_file:
                     .replace('${import features.html}', open('templates/fragments/features.html').read())
                     .replace('${import data.html}', open('templates/fragments/data.html').read())
                     .replace('${import release-notes.html}', open('templates/fragments/release-notes.html').read())
+                    .replace('${import footer.html}', open('templates/fragments/footer.html').read())
+                    .replace('${site-root}', '.')
                     .replace('${data}', json.dumps(data)))
+
+Path('docs/support').mkdir(parents=True, exist_ok=True)
+with open('docs/support/index.html', 'w') as html_file:
+    template = open('templates/support.html').read()
+    html_file.write(template
+                    .replace('${import style.css}', open('templates/fragments/style.css').read())
+                    .replace('${import footer.html}', open('templates/fragments/footer.html').read())
+                    .replace('${site-root}', '..'))
 
