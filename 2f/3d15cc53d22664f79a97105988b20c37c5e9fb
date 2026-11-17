@@ -1,0 +1,35 @@
+docs/support/index.html
+  s_108590e9a04276::t_ab36863e5a8bf9 1-7,9-919
+  s_108590e9a04276::t_987051e490bbaa 8
+templates/fragments/footer.html
+  s_108590e9a04276::t_1b0d8d977b9082 1-6
+generate-docs.py
+  s_108590e9a04276::t_1b0d8d977b9082 3,21-22,25-31
+  s_108590e9a04276::t_cdd324f2b46af7 32
+templates/support.html
+  s_108590e9a04276::t_dbd3c59d0f0ebd 8
+  s_108590e9a04276::t_1b0d8d977b9082 1-7,9-66
+docs/index.html
+  s_108590e9a04276::t_ab36863e5a8bf9 172,185-190,195,200,222-263,670,680-683,948,3107-3112
+templates/fragments/style.css
+  s_108590e9a04276::t_1b0d8d977b9082 148,161-166,171,176,198-239,646,656-657
+  s_108590e9a04276::t_2a69b438c58537 658-659
+templates/index.html
+  s_108590e9a04276::t_1b0d8d977b9082 101,142
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2f3d15cc53d22664f79a97105988b20c37c5e9fb",
+  "prompts": {},
+  "sessions": {
+    "s_108590e9a04276": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1eb70-ca1f-7c92-9b43-c935cd1119ab",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
