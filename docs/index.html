@@ -1282,7 +1282,7 @@ sokrates analyze</div>
         <b>Next:</b> look at the reports, edit <span class="inline-code">_sokrates/config.json</span> (scope, components, features of interest
         &mdash; see <a href="#configure" onclick="document.getElementById('configure').scrollIntoView(); return false;">Configure the analysis</a> below) and run
         <span class="inline-code">analyze</span> again &mdash; or let an AI coding agent do that for you
-        (<a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>).
+        (<a href="#ai_skills" onclick="document.getElementById('ai_skills_tab').click(); return false;">AI insights</a>).
         Many repositories, or a whole GitHub or GitLab organization? See
         <a href="#landscapes" onclick="document.getElementById('landscapes_tab').click(); return false;">Landscapes</a>.
     </div>
@@ -1320,7 +1320,7 @@ sokrates analyze</div>
     <p><b>The workflow is iterative:</b> run <span class="inline-code">analyze</span>, look at the reports, edit
         <span class="inline-code">_sokrates/config.json</span> (scope, logical decompositions, features of interest, goals and controls
         &mdash; see <a href="#configure" onclick="document.getElementById('configure').scrollIntoView(); return false;">Configure the analysis</a> below), and
-        run <span class="inline-code">analyze</span> again. The <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>
+        run <span class="inline-code">analyze</span> again. The <a href="#ai_skills" onclick="document.getElementById('ai_skills_tab').click(); return false;">AI insights</a>
         tab shows how to let an AI coding agent refine the configuration and explain the results.</p>
     <p>Options (all optional): <span class="inline-code">-srcRoot &lt;folder&gt;</span> analyzes another folder than the current one,
         <span class="inline-code">-name</span>/<span class="inline-code">-description</span> label the report,
@@ -1372,7 +1372,7 @@ sokrates analyze</div>
     </table>
     <p>Every key, with defaults and examples, for the repository configuration, the landscape files and the custom conventions:
         <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/configuration.md" target="_blank"><b>the configuration manual</b></a>.
-        Rather not edit JSON by hand? The <a href="#ai_insights" onclick="document.getElementById('ai_insights_tab').click(); return false;">AI insights</a>
+        Rather not edit JSON by hand? The <a href="#ai_skills" onclick="document.getElementById('ai_skills_tab').click(); return false;">AI insights</a>
         skills let an AI coding agent write and check the configuration for you.</p>
 </div>
 
@@ -1443,16 +1443,69 @@ sokrates <span class="hl">analyze -conventionsFile analysis_conventions.json</sp
     </div>
 </div>
 
+<div class="card" id="serve">
+    <h1>Serve the analyses to tools and AI agents (REST API and MCP)</h1>
+    <p><span class="inline-code">serve</span> makes the analyses in a folder (one repository, a landscape, or many) available
+        read-only: a <b>REST API</b> under <span class="inline-code">/api/v1</span>, an <b>MCP</b> endpoint (Model Context Protocol) for
+        AI agents at <span class="inline-code">/mcp</span>, and the HTML reports under <span class="inline-code">/reports/</span>. It reads
+        the analyses as they are, so there is no database to fill, and a new <span class="inline-code">analyze</span> or
+        <span class="inline-code">analyzeLandscape</span> run shows up without a restart. Run it on your own infrastructure, next to
+        the analyses.</p>
+
+    <div class="example">
+        <b>Start a server</b> (this machine only by default):
+        <div class="cmd">sokrates <span class="hl">serve -root ~/landscapes/acme -port 8080</span>
+curl http://localhost:8080/api/v1                     <span class="c"># the list of endpoints</span>
+curl "http://localhost:8080/api/v1/overview?landscape=."
+
+<span class="c"># on a server or in Docker: every interface, a bearer token, no names or emails</span>
+docker run --rm -p 8080:8080 -e SOKRATES_SERVER_TOKEN=change-me -v "$(pwd):/code" \
+    ghcr.io/zeljkoobrenovic/sokrates <span class="hl">serve -host 0.0.0.0 -hidePeople</span></div>
+    </div>
+
+    <div class="example">
+        <b>Connect an AI agent</b> (Claude Code shown; any MCP client works), to a running server or started on demand over stdio:
+        <div class="cmd">claude mcp add --transport http sokrates http://localhost:8080/mcp
+<span class="c"># or in .mcp.json, without a server running:</span>
+{ "mcpServers": { "sokrates": { "command": "java",
+    "args": ["-jar", "/path/to/sokrates.jar", "serve", "-root", "/path/to/analyses", "-mcpStdio"] } } }</div>
+        <p style="margin: 4px 0">Then ask in plain words: <i>"Which of our repositories are hardest to change?"</i>,
+            <i>"Who knows the Terraform code across the organization?"</i>, <i>"Where should we start refactoring payments?"</i>.</p>
+    </div>
+
+    <table>
+        <tr><th>MCP tool</th><th>REST</th><th>Answers</th></tr>
+        <tr><td>get_landscape_overview</td><td>/api/v1/overview</td><td>A portfolio at a glance: repository counts and activity, size per scope and language, ease-of-change grades, duplication, people, AI findings, the largest, most active and lowest-scoring repositories.</td></tr>
+        <tr><td>list_landscapes, list_repositories</td><td>/api/v1/landscapes, /api/v1/repositories</td><td>What is there; repositories filtered with the landscape search syntax (<span class="inline-code">mainLang:java;includesLang:tf;payments</span>) and sorted by size, activity, score or findings.</td></tr>
+        <tr><td>get_repository</td><td>/api/v1/repository</td><td>One repository: size, languages, duplication, file and unit size and complexity profiles, ease-of-change scores with sub-scores, activity, components.</td></tr>
+        <tr><td>get_hotspots</td><td>/api/v1/repository/hotspots</td><td>The files to look at first, ranked as the report's Highlights tab: complexity × days changed in the past year.</td></tr>
+        <tr><td>who_knows</td><td>/api/v1/repository/experts, /api/v1/experts</td><td>Who changed a file, folder, component or language, in one repository or across a landscape, and how much of the past year's work one person did (a knowledge risk when high).</td></tr>
+        <tr><td>get_contributors, get_dependencies</td><td>/api/v1/repository/contributors, /api/v1/repository/dependencies</td><td>A repository's contributors with their activity; the dependencies between its components, cycles marked.</td></tr>
+        <tr><td>search_findings</td><td>/api/v1/findings</td><td>The <a href="#ai_skills" onclick="document.getElementById('ai_skills_tab').click(); return false;">AI insights</a> findings of one repository, a landscape or all, most severe first.</td></tr>
+    </table>
+
+    <p><b>People.</b> Contributors are the people the analysis identified; in a landscape, a person's addresses are merged by its
+        <span class="inline-code">config-people.json</span> (build it with <span class="inline-code">updateLandscapePeopleConfigByUserName</span>),
+        so they are one person in every answer. With <span class="inline-code">-hidePeople</span> every person becomes a stable pseudonym
+        (<span class="inline-code">person-3f9a2c…</span>), emails in findings are redacted and the HTML reports are not served; the
+        questions about knowledge and bus factor still work. Options: <span class="inline-code">-root</span>,
+        <span class="inline-code">-port</span>, <span class="inline-code">-host</span>, <span class="inline-code">-token</span>
+        (or <span class="inline-code">SOKRATES_SERVER_TOKEN</span>), <span class="inline-code">-mcpStdio</span>,
+        <span class="inline-code">-hidePeople</span>. All endpoints and parameters:
+        <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/docs/server.md" target="_blank">docs/server.md</a>.</p>
+</div>
+
 <div class="card">
     <h1>Command line reference</h1>
     <p>Every command prints its options with <span class="inline-code">-help</span>. Without arguments, Sokrates prints this overview:</p>
     <div class="example">
 <pre style="">
+
 Usage: java -jar sokrates.jar &lt;command> &lt;options>
 
 Help: java -jar sokrates.jar &lt;command> -help
 
-Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, updateLandscape, analyzeGitHubOrg, analyzeGitLabGroup, updateLandscapePeopleConfigByUserName, updatePeopleConfigByUserName, updateConfig, addCustomTab, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
+Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, updateLandscape, analyzeGitHubOrg, analyzeGitLabGroup, updateLandscapePeopleConfigByUserName, updatePeopleConfigByUserName, updateConfig, addCustomTab, installSkills, serve, extractGitHistory, createConventionsFile, exportStandardConventions, extractGitSubHistory
 
 * analyze: One-shot analysis: extracts the git history (when the source root is a git repository), creates the analysis configuration if none exists (init), and generates the reports. The recommended way to get a first report: run it from the root of the code base without any options.
    - options: [-srcRoot &lt;arg>] [-confFile &lt;arg>] [-outputFolder &lt;arg>] [-dataOnly] [-conventionsFile &lt;arg>] [-name &lt;arg>] [-description &lt;arg>] [-logoLink &lt;arg>] [-addLink &lt;arg>] [-skipGitHistory] [-postAnalysis &lt;command>] [-ai &lt;claude|codex|gemini>] [-aiPrompt &lt;text>] [-aiMaxRepos &lt;count>] [-aiForce] [-date &lt;arg>] [-timeout &lt;arg>] [-help]
@@ -1489,6 +1542,12 @@ Commands: analyze, analyzeGitRepo, init, generateReports, analyzeLandscape, upda
 
 * addCustomTab: Adds a custom iframe tab to the repository report configuration (config.json customTabs). If a custom tab with the same label already exists, it is overwritten instead of added.
    - options: [-confFile &lt;arg>] [-label &lt;arg>] [-iframeLink &lt;arg>] [-help]
+
+* installSkills: Installs the sokrates-skills (the AI agent skills that configure Sokrates, scan an analysis and act on it; https://github.com/zeljkoobrenovic/sokrates-skills) for the agent CLIs: clones or updates the skills repository into a cache folder and links every skill into ~/.claude/skills (Claude Code) and ~/.agents/skills (Codex, Gemini CLI, Cursor, Copilot, ...), or into the folders given with -target, or with -project into the current project's .claude/skills and .agents/skills. Re-run to update. -ai claude|codex|gemini works best with these installed.
+   - options: [-source &lt;gitUrl|folder>] [-ref &lt;branch|tag>] [-target &lt;folder>] [-project] [-copy] [-cacheFolder &lt;folder>] [-listOnly] [-help]
+
+* serve: Serves the Sokrates analyses found under -root (repository analyses and landscapes, as written by analyze, analyzeGitRepo and analyzeLandscape) read-only: a REST API under /api/v1, a Model Context Protocol endpoint at /mcp, and the HTML reports under /reports/. With -mcpStdio it speaks MCP on stdin/stdout instead (for a local agent: "command": "java", "args": ["-jar", "&lt;sokrates jar>", "serve", "-root", "&lt;folder>", "-mcpStdio"]). Reads the analyses as they are (data/data.zip, reports/ai-insights/*.json) and picks up new runs without a restart.
+   - options: [-root &lt;arg>] [-port &lt;arg>] [-host &lt;arg>] [-token &lt;arg>] [-mcpStdio] [-hidePeople] [-help]
 
 * extractGitHistory: Extract a git history in a format used by Sokrates and saves it in the git-history.txt file
    - options: [-analysisRoot &lt;arg>] [-help]
@@ -1630,6 +1689,16 @@ sokrates <span class="hl">analyzeLandscape</span></div>
     { "metadata": { "name": "Mobile" },   "includeRepoNamePatterns": [".*-(ios|android)"] }
   ]
 }</div>
+</div>
+
+<div class="card">
+    <h1>Ask it</h1>
+    <p>Besides the HTML report, a landscape folder can be served to tools and AI agents with
+        <span class="inline-code">sokrates serve -root &lt;landscape folder&gt;</span>: a read-only REST API and an MCP endpoint
+        answering portfolio questions (an overview of the landscape, which repositories are hardest to change, who knows a component
+        or a language across all repositories, with people merged by the landscape's <span class="inline-code">config-people.json</span>).
+        See <a href="#serve" onclick="document.getElementById('install_tab').click(); setTimeout(function(){document.getElementById('serve').scrollIntoView();}, 50); return false;">Serve the analyses</a>
+        on the Install &amp; use tab.</p>
 </div>
 
 <div class="card">
@@ -2691,12 +2760,23 @@ lib/openai/client.rb	834
         </tr>
         <tr>
             <td>text/*WithHistory.txt, text/temporal_dependencies*.txt</td>
-            <td>Files with their commit dates and contributors; pairs of files changed together, overall and per time window.
+            <td>Files with their commit dates and contributors (the last column, the days changed in the past 365 days, is what the Highlights tab ranks hotspots by); pairs of files changed together, overall and per time window.
                 <details class="tips sample"><summary>sample</summary><pre>mainFilesWithHistory.txt (tab-separated):
-path	# lines of code	# active days	days since first update	days since last update	# commits	# commits (30d)	# commits (90d)	# contributors	line churn	…	first updated	last updated	first contributor	…
-lib/openai/client.rb	834	61	540	3	88	4	11	9	4120	…	2024-04-09	2026-09-28	jane@example.com	…
+path	# lines of code	# active days	days since first update	days since last update	# commits	# commits (30d)	# commits (90d)	# contributors	line churn	…	first updated	last updated	first contributor	…	# active days (365d)
+lib/openai/client.rb	834	61	540	3	88	4	11	9	4120	…	2024-04-09	2026-09-28	jane@example.com	…	23
 
 temporal_dependencies.txt:  two paths and the number of commits that changed both, one pair per line</pre></details>
+            </td>
+        </tr>
+        <tr>
+            <td>text/mainFileContributors.txt</td>
+            <td>Who changed each main file: one line per file and contributor, most active in the past year first, with the
+                identities the analysis resolved (ignore, anonymize and people rules applied). Bulk commits touching more than 300 main
+                files (copyright years, formatting) are left out. The basis of the server's <i>who knows</i>.
+                <details class="tips sample"><summary>sample</summary><pre>path	contributor	# commits	# commits (365d)	first commit	last commit
+lib/openai/client.rb	jane@example.com	41	9	2024-04-09	2026-09-28
+lib/openai/client.rb	sam@example.com	12	0	2024-06-02	2025-03-14
+…</pre></details>
             </td>
         </tr>
         <tr>
@@ -2799,6 +2879,39 @@ LINES_OF_CODE_MAIN_EXT_RBI: 188708
     <p>Behaviour changes that can affect an existing analysis, newest first. The Docker image's
         <span class="inline-code">:latest</span> and the <span class="inline-code">master</span> branch carry everything under the most recent
         date; the full list lives in <a href="https://github.com/zeljkoobrenovic/sokrates/blob/master/CHANGELOG.md" target="_blank">CHANGELOG.md</a>.</p>
+</div>
+
+<div class="card">
+    <h1>25 November 2026</h1>
+
+    <h2>Serve the analyses: a REST API and an MCP server</h2>
+    <p>A new command, <span class="inline-code">serve</span>, makes the analyses in a folder available to tools and AI agents,
+        read-only: a REST API under <span class="inline-code">/api/v1</span>, an MCP endpoint at <span class="inline-code">/mcp</span>
+        (or over stdio with <span class="inline-code">-mcpStdio</span>) and the HTML reports. It reads the analyses as they are, with no
+        database, and picks up new runs without a restart. Agents get a landscape overview, repository summaries, hotspots (ranked as the
+        Highlights tab), contributors, <i>who knows</i> a file, component or language (in one repository or across a landscape),
+        component dependencies and the AI findings. It listens on this machine only unless <span class="inline-code">-host</span> says
+        otherwise; <span class="inline-code">-token</span> requires a bearer token, and <span class="inline-code">-hidePeople</span>
+        replaces every person by a stable pseudonym and stops serving the reports. See
+        <a href="#serve" onclick="document.getElementById('install_tab').click(); setTimeout(function(){document.getElementById('serve').scrollIntoView();}, 50); return false;">Serve the analyses</a>.</p>
+
+    <h2>Data: who changed each file, and days changed in the past year</h2>
+    <p><span class="inline-code">data.zip</span> has a new entry, <span class="inline-code">text/mainFileContributors.txt</span>: who
+        changed each main file, with commits overall and in the past 365 days. Bulk commits touching more than 300 main files, such as
+        copyright-year updates, are left out, so one such commit does not make its author the expert of every file. The
+        <span class="inline-code">*FilesWithHistory.txt</span> files gain a last column, <span class="inline-code"># active days (365d)</span>,
+        the days a file changed in the past year; the existing columns are unchanged. Re-analyze to get them.</p>
+
+    <h2><span class="inline-code">data.zip</span> no longer grows with every re-run</h2>
+    <p>Each run into an existing reports folder packed the previous run's data preview, which embeds that run's whole archive, into the
+        new <span class="inline-code">data.zip</span>, so the archive nested every earlier one (Sokrates' own had grown to 686 MB). An
+        oversized <span class="inline-code">data.zip</span> shrinks on the next run (here to 1.4 MB).</p>
+
+    <h2>Analyses made from a URL apply their kept <span class="inline-code">config-people.json</span></h2>
+    <p><span class="inline-code">analyzeGitRepo</span>, <span class="inline-code">analyzeLandscape -urls</span>,
+        <span class="inline-code">analyzeGitHubOrg</span> and <span class="inline-code">analyzeGitLabGroup</span> analyze a fresh clone each
+        time. They reused a kept <span class="inline-code">config.json</span>, but not a <span class="inline-code">config-people.json</span>
+        next to it, so these repositories could not merge a person's addresses in their own reports. Both are reused now.</p>
 </div>
 
 <div class="card">

@@ -6,6 +6,39 @@
 </div>
 
 <div class="card">
+    <h1>25 November 2026</h1>
+
+    <h2>Serve the analyses: a REST API and an MCP server</h2>
+    <p>A new command, <span class="inline-code">serve</span>, makes the analyses in a folder available to tools and AI agents,
+        read-only: a REST API under <span class="inline-code">/api/v1</span>, an MCP endpoint at <span class="inline-code">/mcp</span>
+        (or over stdio with <span class="inline-code">-mcpStdio</span>) and the HTML reports. It reads the analyses as they are, with no
+        database, and picks up new runs without a restart. Agents get a landscape overview, repository summaries, hotspots (ranked as the
+        Highlights tab), contributors, <i>who knows</i> a file, component or language (in one repository or across a landscape),
+        component dependencies and the AI findings. It listens on this machine only unless <span class="inline-code">-host</span> says
+        otherwise; <span class="inline-code">-token</span> requires a bearer token, and <span class="inline-code">-hidePeople</span>
+        replaces every person by a stable pseudonym and stops serving the reports. See
+        <a href="#serve" onclick="document.getElementById('install_tab').click(); setTimeout(function(){document.getElementById('serve').scrollIntoView();}, 50); return false;">Serve the analyses</a>.</p>
+
+    <h2>Data: who changed each file, and days changed in the past year</h2>
+    <p><span class="inline-code">data.zip</span> has a new entry, <span class="inline-code">text/mainFileContributors.txt</span>: who
+        changed each main file, with commits overall and in the past 365 days. Bulk commits touching more than 300 main files, such as
+        copyright-year updates, are left out, so one such commit does not make its author the expert of every file. The
+        <span class="inline-code">*FilesWithHistory.txt</span> files gain a last column, <span class="inline-code"># active days (365d)</span>,
+        the days a file changed in the past year; the existing columns are unchanged. Re-analyze to get them.</p>
+
+    <h2><span class="inline-code">data.zip</span> no longer grows with every re-run</h2>
+    <p>Each run into an existing reports folder packed the previous run's data preview, which embeds that run's whole archive, into the
+        new <span class="inline-code">data.zip</span>, so the archive nested every earlier one (Sokrates' own had grown to 686 MB). An
+        oversized <span class="inline-code">data.zip</span> shrinks on the next run (here to 1.4 MB).</p>
+
+    <h2>Analyses made from a URL apply their kept <span class="inline-code">config-people.json</span></h2>
+    <p><span class="inline-code">analyzeGitRepo</span>, <span class="inline-code">analyzeLandscape -urls</span>,
+        <span class="inline-code">analyzeGitHubOrg</span> and <span class="inline-code">analyzeGitLabGroup</span> analyze a fresh clone each
+        time. They reused a kept <span class="inline-code">config.json</span>, but not a <span class="inline-code">config-people.json</span>
+        next to it, so these repositories could not merge a person's addresses in their own reports. Both are reused now.</p>
+</div>
+
+<div class="card">
     <h1>6 October 2026</h1>
 
     <h2>AI Cost Estimator*: an educational tool</h2>

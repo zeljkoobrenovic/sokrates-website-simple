@@ -123,12 +123,23 @@ lib/openai/client.rb	834
         </tr>
         <tr>
             <td>text/*WithHistory.txt, text/temporal_dependencies*.txt</td>
-            <td>Files with their commit dates and contributors; pairs of files changed together, overall and per time window.
+            <td>Files with their commit dates and contributors (the last column, the days changed in the past 365 days, is what the Highlights tab ranks hotspots by); pairs of files changed together, overall and per time window.
                 <details class="tips sample"><summary>sample</summary><pre>mainFilesWithHistory.txt (tab-separated):
-path	# lines of code	# active days	days since first update	days since last update	# commits	# commits (30d)	# commits (90d)	# contributors	line churn	…	first updated	last updated	first contributor	…
-lib/openai/client.rb	834	61	540	3	88	4	11	9	4120	…	2024-04-09	2026-09-28	jane@example.com	…
+path	# lines of code	# active days	days since first update	days since last update	# commits	# commits (30d)	# commits (90d)	# contributors	line churn	…	first updated	last updated	first contributor	…	# active days (365d)
+lib/openai/client.rb	834	61	540	3	88	4	11	9	4120	…	2024-04-09	2026-09-28	jane@example.com	…	23
 
 temporal_dependencies.txt:  two paths and the number of commits that changed both, one pair per line</pre></details>
+            </td>
+        </tr>
+        <tr>
+            <td>text/mainFileContributors.txt</td>
+            <td>Who changed each main file: one line per file and contributor, most active in the past year first, with the
+                identities the analysis resolved (ignore, anonymize and people rules applied). Bulk commits touching more than 300 main
+                files (copyright years, formatting) are left out. The basis of the server's <i>who knows</i>.
+                <details class="tips sample"><summary>sample</summary><pre>path	contributor	# commits	# commits (365d)	first commit	last commit
+lib/openai/client.rb	jane@example.com	41	9	2024-04-09	2026-09-28
+lib/openai/client.rb	sam@example.com	12	0	2024-06-02	2025-03-14
+…</pre></details>
             </td>
         </tr>
         <tr>

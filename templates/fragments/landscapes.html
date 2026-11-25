@@ -123,6 +123,16 @@ sokrates <span class="hl">analyzeLandscape</span></div>
 </div>
 
 <div class="card">
+    <h1>Ask it</h1>
+    <p>Besides the HTML report, a landscape folder can be served to tools and AI agents with
+        <span class="inline-code">sokrates serve -root &lt;landscape folder&gt;</span>: a read-only REST API and an MCP endpoint
+        answering portfolio questions (an overview of the landscape, which repositories are hardest to change, who knows a component
+        or a language across all repositories, with people merged by the landscape's <span class="inline-code">config-people.json</span>).
+        See <a href="#serve" onclick="document.getElementById('install_tab').click(); setTimeout(function(){document.getElementById('serve').scrollIntoView();}, 50); return false;">Serve the analyses</a>
+        on the Install &amp; use tab.</p>
+</div>
+
+<div class="card">
     <h1>Publish</h1>
     <p>Everything is static HTML. Copy the root folder, repositories plus <span class="inline-code">_sokrates_landscape/</span>, to any static host
         &mdash; S3 and CloudFront, GitHub Pages, an internal web server &mdash; and all links keep working. Viewers need internet access for the
