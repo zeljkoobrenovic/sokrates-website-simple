@@ -1,0 +1,27 @@
+docs/index.html
+  s_af96378a829e3d::t_6a6e22bf8914a5 1285,1323,1375,1446-1497,1503,1508,1546-1551,1694-1703,2763,2765-2766,2771-2781,2884-2916
+templates/fragments/data.html
+  s_af96378a829e3d::t_f002e273e4b857 126,128-129,134-144
+templates/fragments/install.html
+  s_af96378a829e3d::t_2c33ad801aff4d 195,233,285,356-407,413,418,456-461
+templates/fragments/landscapes.html
+  s_af96378a829e3d::t_9933ff044257f0 125-134
+templates/fragments/release-notes.html
+  s_af96378a829e3d::t_eca8010434df8c 7-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "56f47ce0f664a586f10b063078c6b25579f5b809",
+  "prompts": {},
+  "sessions": {
+    "s_af96378a829e3d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cf2cb69b-6e18-48c4-8cc2-70522e54aa55",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zeljko Obrenovic <zeljkoobrenovic@yahoo.com>"
+    }
+  }
+}
